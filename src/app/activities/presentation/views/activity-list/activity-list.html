@@ -2,27 +2,27 @@
   <div class="page-container">
 
     <div class="page-header">
-      <h2>Activities</h2>
+      <h2>{{ 'activities.title' | translate }}</h2>
       <div class="header-line"></div>
     </div>
 
     <!-- Filtros -->
     <div class="filters-bar">
       <div class="filter-tabs">
-        @for (filter of filters; track filter) {
+        @for (filter of filters; track filter.key) {
           <button
             class="filter-tab"
-            [class.active]="selectedFilter() === filter"
-            (click)="setFilter(filter)">
-            {{ filter }}
+            [class.active]="selectedFilter() === filter.key"
+            (click)="setFilter(filter.key)">
+            {{ filter.label | translate }}
           </button>
         }
       </div>
       <div class="filters-right">
-        <span class="count-label">Mostrando {{ filteredActivities.length }} actividades</span>
+        <span class="count-label">{{ 'activities.showing' | translate:{ count: filteredActivities.length } }}</span>
         <button class="filter-btn">
           <mat-icon>filter_list</mat-icon>
-          Filtrar
+          {{ 'activities.filter-btn' | translate }}
         </button>
       </div>
     </div>
@@ -45,7 +45,7 @@
       @if (!loading && filteredActivities.length === 0 && !error) {
         <div class="empty-row">
           <mat-icon>event_note</mat-icon>
-          <p>No hay actividades registradas.</p>
+          <p>{{ 'activities.no-activities' | translate }}</p>
         </div>
       }
 
@@ -53,11 +53,11 @@
         <table class="activities-table">
           <thead>
           <tr>
-            <th>ACTIVIDAD</th>
-            <th>CATEGORÍA</th>
-            <th>FECHA Y HORA</th>
-            <th>ESTADO</th>
-            <th>ACCIONES</th>
+            <th>{{ 'activities.columns.activity' | translate }}</th>
+            <th>{{ 'activities.columns.category' | translate }}</th>
+            <th>{{ 'activities.columns.datetime' | translate }}</th>
+            <th>{{ 'activities.columns.status' | translate }}</th>
+            <th>{{ 'activities.columns.actions' | translate }}</th>
           </tr>
           </thead>
           <tbody>
@@ -68,12 +68,12 @@
                     <mat-icon>event</mat-icon>
                   </div>
                   <span class="activity-name" (click)="openDetail(activity)">
-                    {{ activity.type }}
+                    {{ 'activities.types.' + activity.type.toLowerCase() | translate }}
                   </span>
                 </td>
                 <td>
                   <span class="category-chip {{ activity.type.toLowerCase() }}">
-                    {{ getTypeLabel(activity.type) }}
+                    {{ 'activities.types.' + activity.type.toLowerCase() | translate }}
                   </span>
                 </td>
                 <td class="date-cell">
@@ -82,7 +82,7 @@
                 </td>
                 <td>
                   <span class="status-chip {{ activity.status.toLowerCase() }}">
-                    {{ getStatusLabel(activity.status) }}
+                    {{ 'activities.status.' + activity.status.toLowerCase() | translate }}
                   </span>
                 </td>
                 <td class="actions-cell">
@@ -103,7 +103,7 @@
     <!-- FAB Add New -->
     <button class="fab-add" (click)="openAddModal()">
       <mat-icon>add</mat-icon>
-      Add New
+      {{ 'activities.add-new' | translate }}
     </button>
 
     <!-- Modal Detalle -->
@@ -111,37 +111,41 @@
       <div class="modal-overlay" (click)="closeDetail()">
         <div class="modal" (click)="$event.stopPropagation()">
           <div class="modal-header">
-            <h3>Activity details</h3>
+            <h3>{{ 'activities.detail.title' | translate }}</h3>
             <button mat-icon-button (click)="closeDetail()">
               <mat-icon>close</mat-icon>
             </button>
           </div>
           <div class="modal-body">
-            <p class="modal-label">NAME OF THE ACTIVITY</p>
-            <h2 class="modal-title">{{ selectedActivity()!.type }}</h2>
+            <p class="modal-label">{{ 'activities.detail.name-label' | translate }}</p>
+            <h2 class="modal-title">
+              {{ 'activities.types.' + selectedActivity()!.type.toLowerCase() | translate }}
+            </h2>
             <div class="modal-row">
               <div>
-                <p class="modal-label">DATE AND TIME</p>
+                <p class="modal-label">{{ 'activities.detail.date-label' | translate }}</p>
                 <p class="modal-value">
                   <mat-icon>calendar_today</mat-icon>
                   {{ selectedActivity()!.loggedAt | date:'MM/dd/yyyy' }} at {{ selectedActivity()!.loggedAt | date:'hh:mm a' }}
                 </p>
               </div>
               <div>
-                <p class="modal-label">CATEGORY</p>
+                <p class="modal-label">{{ 'activities.detail.category-label' | translate }}</p>
                 <span class="category-chip {{ selectedActivity()!.type.toLowerCase() }}">
-                  {{ getTypeLabel(selectedActivity()!.type) }}
+                  {{ 'activities.types.' + selectedActivity()!.type.toLowerCase() | translate }}
                 </span>
               </div>
             </div>
-            <p class="modal-label">DESCRIPCIÓN</p>
+            <p class="modal-label">{{ 'activities.detail.description-label' | translate }}</p>
             <p class="modal-desc">{{ selectedActivity()!.notes }}</p>
           </div>
           <div class="modal-footer">
-            <button class="btn-cancel" (click)="closeDetail()">Cerrar</button>
+            <button class="btn-cancel" (click)="closeDetail()">
+              {{ 'activities.detail.close' | translate }}
+            </button>
             <button class="btn-primary" (click)="openEditModal(selectedActivity()!)">
               <mat-icon>edit</mat-icon>
-              Edit activity
+              {{ 'activities.detail.edit' | translate }}
             </button>
           </div>
         </div>
@@ -154,46 +158,51 @@
         <div class="modal" (click)="$event.stopPropagation()">
           <div class="modal-header">
             <div>
-              <h3>Add activity</h3>
-              <p class="modal-subtitle">Set up a new activity for the residents' calendar.</p>
+              <h3>{{ 'activities.add.title' | translate }}</h3>
+              <p class="modal-subtitle">{{ 'activities.add.subtitle' | translate }}</p>
             </div>
             <button mat-icon-button (click)="closeAddModal()">
               <mat-icon>close</mat-icon>
             </button>
           </div>
           <div class="modal-body">
-            <label class="form-label">Activity name</label>
-            <input class="form-input" [(ngModel)]="formName" placeholder="e.g. Morning Painting Workshop" />
+            <label class="form-label">{{ 'activities.add.name' | translate }}</label>
+            <input class="form-input" [(ngModel)]="formName"
+                   [placeholder]="'activities.add.name-placeholder' | translate" />
 
-            <label class="form-label">Activity description</label>
+            <label class="form-label">{{ 'activities.add.description' | translate }}</label>
             <textarea class="form-textarea" [(ngModel)]="formNotes" rows="4"
-                      placeholder="Detail the objectives and materials needed for this session..."></textarea>
+                      [placeholder]="'activities.add.description-placeholder' | translate"></textarea>
 
             <div class="form-row">
               <div class="form-col">
-                <label class="form-label">Date</label>
+                <label class="form-label">{{ 'activities.add.date' | translate }}</label>
                 <input class="form-input" type="date" [(ngModel)]="formDate" />
               </div>
               <div class="form-col">
-                <label class="form-label">Hour</label>
+                <label class="form-label">{{ 'activities.add.hour' | translate }}</label>
                 <input class="form-input" type="time" [(ngModel)]="formTime" />
               </div>
             </div>
 
-            <label class="form-label">Category</label>
+            <label class="form-label">{{ 'activities.add.category' | translate }}</label>
             <div class="category-chips">
               @for (type of activityTypes; track type) {
                 <button class="category-select-chip"
                         [class.selected]="formType === type"
                         (click)="formType = type">
-                  {{ getTypeLabel(type) }}
+                  {{ 'activities.types.' + type.toLowerCase() | translate }}
                 </button>
               }
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn-cancel" (click)="closeAddModal()">Cancel</button>
-            <button class="btn-primary" (click)="saveActivity()">Save activity</button>
+            <button class="btn-cancel" (click)="closeAddModal()">
+              {{ 'activities.add.cancel' | translate }}
+            </button>
+            <button class="btn-primary" (click)="saveActivity()">
+              {{ 'activities.add.save' | translate }}
+            </button>
           </div>
         </div>
       </div>
@@ -205,45 +214,50 @@
         <div class="modal" (click)="$event.stopPropagation()">
           <div class="modal-header">
             <div>
-              <h3>Update activity</h3>
-              <p class="modal-subtitle">Set up a new activity for the residents' calendar.</p>
+              <h3>{{ 'activities.edit.title' | translate }}</h3>
+              <p class="modal-subtitle">{{ 'activities.edit.subtitle' | translate }}</p>
             </div>
             <button mat-icon-button (click)="closeEditModal()">
               <mat-icon>close</mat-icon>
             </button>
           </div>
           <div class="modal-body">
-            <label class="form-label">Activity name</label>
-            <input class="form-input" [(ngModel)]="formName" placeholder="e.g. Morning Painting Workshop" />
+            <label class="form-label">{{ 'activities.add.name' | translate }}</label>
+            <input class="form-input" [(ngModel)]="formName"
+                   [placeholder]="'activities.add.name-placeholder' | translate" />
 
-            <label class="form-label">Activity description</label>
+            <label class="form-label">{{ 'activities.add.description' | translate }}</label>
             <textarea class="form-textarea" [(ngModel)]="formNotes" rows="4"></textarea>
 
             <div class="form-row">
               <div class="form-col">
-                <label class="form-label">Date</label>
+                <label class="form-label">{{ 'activities.add.date' | translate }}</label>
                 <input class="form-input" type="date" [(ngModel)]="formDate" />
               </div>
               <div class="form-col">
-                <label class="form-label">Hour</label>
+                <label class="form-label">{{ 'activities.add.hour' | translate }}</label>
                 <input class="form-input" type="time" [(ngModel)]="formTime" />
               </div>
             </div>
 
-            <label class="form-label">Category</label>
+            <label class="form-label">{{ 'activities.add.category' | translate }}</label>
             <div class="category-chips">
               @for (type of activityTypes; track type) {
                 <button class="category-select-chip"
                         [class.selected]="formType === type"
                         (click)="formType = type">
-                  {{ getTypeLabel(type) }}
+                  {{ 'activities.types.' + type.toLowerCase() | translate }}
                 </button>
               }
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn-cancel" (click)="closeEditModal()">Cancel</button>
-            <button class="btn-primary" (click)="saveActivity()">Update Activity</button>
+            <button class="btn-cancel" (click)="closeEditModal()">
+              {{ 'activities.edit.cancel' | translate }}
+            </button>
+            <button class="btn-primary" (click)="saveActivity()">
+              {{ 'activities.edit.save' | translate }}
+            </button>
           </div>
         </div>
       </div>

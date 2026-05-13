@@ -7,6 +7,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { ActivitiesStore } from '../../../application/activities.store';
 import { Activity, ActivityType, ActivityStatus } from '../../../domain/model/activity.entity';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-activity-list',
@@ -17,7 +18,8 @@ import { Activity, ActivityType, ActivityStatus } from '../../../domain/model/ac
     FormsModule,
     MatIcon,
     MatIconButton,
-    LayoutNursingHome
+    LayoutNursingHome,
+    TranslatePipe
   ],
   templateUrl: './activity-list.html',
   styleUrl: './activity-list.css'
@@ -30,7 +32,13 @@ export class ActivityList implements OnInit {
   showAddModal = signal<boolean>(false);
   showEditModal = signal<boolean>(false);
 
-  filters = ['Todas', 'Recreativas', 'Médicas', 'Físicas', 'Sociales'];
+  filters = [
+    { key: 'Todas', label: 'activities.filters.all' },
+    { key: 'Recreativas', label: 'activities.filters.recreational' },
+    { key: 'Médicas', label: 'activities.filters.medical' },
+    { key: 'Físicas', label: 'activities.filters.physical' },
+    { key: 'Sociales', label: 'activities.filters.social' }
+  ];
 
   activityTypes: ActivityType[] = ['MEAL', 'BATH', 'RISK_PROFILE'];
 
