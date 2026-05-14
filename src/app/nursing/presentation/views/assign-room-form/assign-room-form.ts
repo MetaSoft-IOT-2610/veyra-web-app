@@ -6,7 +6,6 @@ import {AssignRoomCommand} from '../../../domain/model/assign-room.command';
 import {TranslatePipe} from '@ngx-translate/core';
 import {MatCard} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
-import {LayoutNursingHome} from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import {MatIcon} from '@angular/material/icon';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatOption, MatSelect} from '@angular/material/select';
@@ -23,9 +22,7 @@ import {MatOption, MatSelect} from '@angular/material/select';
     MatSelect,
     MatOption,
     MatError,
-    MatButton,
-    LayoutNursingHome
-  ],
+    MatButton],
   templateUrl: './assign-room-form.html',
   styleUrl: './assign-room-form.css'
 })

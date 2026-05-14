@@ -2,7 +2,6 @@ import {Component, computed, inject, signal, ViewChild} from '@angular/core';
 import {NursingStore} from '../../../application/nursing.store';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
-import {LayoutNursingHome} from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {
   MatCell,
@@ -22,7 +21,6 @@ import {MatIcon} from '@angular/material/icon';
 @Component({
   selector: 'app-medical-record-list',
   imports: [
-    LayoutNursingHome,
     MatButton,
     MatCell,
     MatCellDef,

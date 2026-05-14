@@ -4,7 +4,6 @@ import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartType } from 'chart.js';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { AnalyticsStore } from '../../../application/analytics.store';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect } from '@angular/material/select';
@@ -31,7 +30,6 @@ interface ExpandedChart {
     MatCardContent,
     MatDivider,
     BaseChartDirective,
-    LayoutNursingHome,
     MatFormField,
     MatLabel,
     MatSelect,

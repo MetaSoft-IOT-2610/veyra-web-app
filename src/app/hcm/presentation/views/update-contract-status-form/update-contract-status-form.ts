@@ -1,5 +1,4 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {LayoutNursingHome} from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HcmStore} from '../../../application/hcm.store';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -14,7 +13,6 @@ import {MatOption, MatSelect} from '@angular/material/select';
 @Component({
   selector: 'app-update-contract-status-form',
   imports: [
-    LayoutNursingHome,
     MatButton,
     MatIcon,
     ReactiveFormsModule,

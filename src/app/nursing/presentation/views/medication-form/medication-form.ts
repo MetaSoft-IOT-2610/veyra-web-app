@@ -3,7 +3,6 @@ import { MatOption, provideNativeDateAdapter } from '@angular/material/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NursingStore } from '../../../application/nursing.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
@@ -20,7 +19,6 @@ import { MatSelect } from '@angular/material/select';
   selector: 'app-medication-form',
   standalone: true,
   imports: [
-    LayoutNursingHome,
     TranslatePipe,
     MatError,
     MatProgressSpinner,

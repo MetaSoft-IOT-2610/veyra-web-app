@@ -7,7 +7,6 @@ import { MatCard } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { HcmStore } from '../../../application/hcm.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { MatInput } from '@angular/material/input';
 import { PersonProfileDetail } from '../../../../profiles/presentation/components/person-profile-detail/person-profile-detail';
 
@@ -21,7 +20,6 @@ import { PersonProfileDetail } from '../../../../profiles/presentation/component
     MatCard,
     MatIcon,
     MatButton,
-    LayoutNursingHome,
     MatFormField,
     MatIconButton,
     MatInput,

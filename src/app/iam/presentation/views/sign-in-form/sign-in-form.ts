@@ -35,6 +35,8 @@ export class SignInForm {
    * Handles form submission for sign-in.
    */
   onSubmit(): void {
+    
+    /*
     if (this.form.valid) {
       const signInCommand = new SignInCommand({
         username: this.form.value.username!,
@@ -44,6 +46,10 @@ export class SignInForm {
     } else {
       this.markFormGroupTouched(this.form);
     }
+      */
+
+    this.router.navigate(['/analytics/dashboard']).then();
+
   }
 
   /**

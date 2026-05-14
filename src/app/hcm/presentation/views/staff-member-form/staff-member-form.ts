@@ -8,7 +8,6 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { HcmStore } from '../../../application/hcm.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { MatCard } from '@angular/material/card';
 import { PersonProfileForm, PersonProfileFormValue } from '../../../../profiles/presentation/components/person-profile-form/person-profile-form';
 import { CreateStaffMemberCommand } from '../../../domain/model/create-staff-member.command';
@@ -27,7 +26,6 @@ import { CreateStaffMemberCommand } from '../../../domain/model/create-staff-mem
     MatButton,
     MatIcon,
     MatProgressSpinner,
-    LayoutNursingHome,
     MatCard,
     PersonProfileForm
   ],

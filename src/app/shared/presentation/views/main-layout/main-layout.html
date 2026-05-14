@@ -1,8 +1,8 @@
 <mat-toolbar color="primary" class="toolbar">
-  <button mat-icon-button (click)="drawer.toggle()">
+  <button mat-icon-button type="button" (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <img src="/images/shared/veyra-logo.png" alt="veyra-logo" >
+  <img src="/images/shared/veyra-logo.png" alt="veyra-logo">
   <span class="toolbar-title">Veyra</span>
   <span class="spacer"></span>
   <app-authentication-section/>
@@ -11,13 +11,11 @@
 
 <div class="layout-body">
   <mat-sidenav-container class="sidenav-container">
-    <!-- SIDENAV -->
     <mat-sidenav
       #drawer
       [mode]="sidenavMode"
       [opened]="sidenavOpened">
 
-      <!-- Logo Section -->
       <div class="logo-section">
         <div class="logo-wrapper">
           <div class="logo-icon">
@@ -29,7 +27,6 @@
         </div>
       </div>
 
-      <!-- Navigation Menu -->
       <nav class="nav-menu">
         @for (option of options; track option.link) {
           <div
@@ -52,7 +49,6 @@
         }
       </nav>
 
-      <!-- Footer Section -->
       <div class="sidenav-footer">
         <div class="footer-content">
           <div class="footer-info">
@@ -66,13 +62,11 @@
       </div>
     </mat-sidenav>
 
-    <!-- MAIN CONTENT -->
     <mat-sidenav-content>
       <div class="content-wrapper">
-        <ng-content></ng-content>
+        <router-outlet/>
       </div>
     </mat-sidenav-content>
 
   </mat-sidenav-container>
 </div>
-
