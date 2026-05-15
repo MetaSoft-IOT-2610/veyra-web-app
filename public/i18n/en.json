@@ -31,7 +31,13 @@
     "resident": "Residents",
     "staff": "Staff",
     "care-management": "Care Management",
-    "room": "Rooms"
+    "room": "Rooms",
+    "hide-menu": "Hide menu",
+    "show-menu": "Show menu",
+    "open-menu": "Open menu",
+    "language": "Interface language",
+    "lang-es": "Spanish",
+    "lang-en": "English"
   },
   "page-not-found": {
     "title": "Page not found",
@@ -40,6 +46,15 @@
   },
   "toolbar": {
     "logoAlt": "logo"
+  },
+  "iam": {
+    "profile": "Profile",
+    "sign-out": "Sign out",
+    "user-menu": "Account menu",
+    "role": {
+      "admin-support": "Administrative support",
+      "user": "User"
+    }
   },
   "welcome": {
     "title": "We care for those<br>you love, inform those<br>who wait",

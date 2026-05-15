@@ -1,74 +1,112 @@
-<mat-toolbar color="primary" class="toolbar">
-  <button mat-icon-button type="button" (click)="drawer.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <img src="/images/shared/veyra-logo.png" alt="veyra-logo">
-  <span class="toolbar-title">Veyra</span>
-  <span class="spacer"></span>
-  @if (showIamToolbar) {
-    <app-authentication-section/>
+<div class="app-shell">
+  @if (sidenavMode === 'over' && !sidenavOpened) {
+    <button
+      type="button"
+      class="mobile-sidenav-reopen"
+      (click)="openMobileDrawer()"
+      [attr.aria-label]="'nav.open-menu' | translate">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
   }
-  <app-language-switcher></app-language-switcher>
-</mat-toolbar>
 
-<div class="layout-body">
-  <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-container #shell class="app-sidenav-shell" [autosize]="true">
     <mat-sidenav
       #drawer
+      class="app-sidenav"
+      [class.collapsed]="sidenavMode === 'side' && navCollapsed()"
       [mode]="sidenavMode"
-      [opened]="sidenavOpened">
+      [opened]="sidenavOpened"
+      (openedChange)="onSidenavOpenedChange($event)">
 
-      <div class="logo-section">
-        <div class="logo-wrapper">
-          <div class="logo-icon">
-            <mat-icon>local_hospital</mat-icon>
-          </div>
-          <div class="logo-text">
-            <h2>{{ "nav.care-management" | translate }}</h2>
+      <div class="sidenav-inner">
+        <div class="logo-section">
+          <a routerLink="/home" class="logo-wrapper brand-link" [attr.title]="'Veyra'">
+            <img class="brand-logo" src="/images/shared/veyra-logo.png" alt="Veyra" />
+            <div class="logo-text">
+              <h2 class="brand-title">Veyra</h2>
+            </div>
+          </a>
+        </div>
+
+        <nav class="nav-menu">
+          @for (option of options; track option.link) {
+            <div
+              class="nav-item"
+              [class.active]="isActive(option.link)"
+              [matTooltip]="option.label | translate"
+              matTooltipPosition="right"
+              (click)="navigateTo(option.link)">
+
+              <div class="nav-icon-wrapper" [style.background-color]="option.color + '20'">
+                <mat-icon [style.color]="option.color">{{ option.icon }}</mat-icon>
+              </div>
+
+              <span class="nav-label">{{ option.label | translate }}</span>
+
+              @if (isActive(option.link)) {
+                <div class="active-indicator"></div>
+              }
+            </div>
+          }
+        </nav>
+
+        <div class="sidenav-footer">
+          <div class="footer-content">
+            <div class="footer-info">
+              <mat-icon>code</mat-icon>
+              <div class="footer-text">
+                <span class="company-name">MetaSoft</span>
+                <span class="copyright">© {{ getCurrentYear() }}</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <nav class="nav-menu">
-        @for (option of options; track option.link) {
-          <div
-            class="nav-item"
-            [class.active]="isActive(option.link)"
-            [matTooltip]="option.label | translate"
-            matTooltipPosition="right"
-            (click)="navigateTo(option.link)">
-
-            <div class="nav-icon-wrapper" [style.background-color]="option.color + '20'">
-              <mat-icon [style.color]="option.color">{{ option.icon }}</mat-icon>
-            </div>
-
-            <span class="nav-label">{{ option.label | translate }}</span>
-
-            @if (isActive(option.link)) {
-              <div class="active-indicator"></div>
-            }
-          </div>
-        }
-      </nav>
-
-      <div class="sidenav-footer">
-        <div class="footer-content">
-          <div class="footer-info">
-            <mat-icon>code</mat-icon>
-            <div class="footer-text">
-              <span class="company-name">MetaSoft</span>
-              <span class="copyright">© {{ getCurrentYear() }}</span>
-            </div>
-          </div>
+        <div class="sidenav-toggle-zone">
+          @if (sidenavMode === 'side') {
+            <button
+              mat-stroked-button
+              type="button"
+              class="toggle-menu-btn"
+              [class.toggle-menu-btn--icon-only]="navCollapsed()"
+              [matTooltip]="navCollapsed() ? ('nav.show-menu' | translate) : ('nav.hide-menu' | translate)"
+              matTooltipPosition="right"
+              (click)="toggleDesktopNav()">
+              <mat-icon>{{ navCollapsed() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+              @if (!navCollapsed()) {
+                <span>{{ 'nav.hide-menu' | translate }}</span>
+              }
+            </button>
+          } @else {
+            <button
+              mat-stroked-button
+              type="button"
+              class="toggle-menu-btn toggle-menu-btn--full"
+              (click)="closeMobileDrawer()">
+              <mat-icon>chevron_left</mat-icon>
+              <span>{{ 'nav.hide-menu' | translate }}</span>
+            </button>
+          }
         </div>
       </div>
     </mat-sidenav>
 
-    <mat-sidenav-content>
-      <div class="content-wrapper">
-        <router-outlet/>
+    <mat-sidenav-content class="main-with-toolbar">
+      <mat-toolbar class="toolbar">
+        <span class="spacer"></span>
+        @if (showIamToolbar) {
+          <app-authentication-section/>
+        }
+        <app-language-switcher></app-language-switcher>
+      </mat-toolbar>
+
+      <div class="content-scroll">
+        <div class="content-wrapper">
+          <div class="main-route-host">
+            <router-outlet/>
+          </div>
+        </div>
       </div>
     </mat-sidenav-content>
-
   </mat-sidenav-container>
 </div>

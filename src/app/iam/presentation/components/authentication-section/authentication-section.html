@@ -1,6 +1,42 @@
-@if(store.isSignedIn()){
-  <button mat-button>Welcome, {{ store.currentUsername() }}</button> |
-  <button mat-button (click)="performSignOut()">Sign-Out</button>
+@if (store.isSignedIn()) {
+  <button
+    type="button"
+    class="user-menu-trigger"
+    [matMenuTriggerFor]="userMenu"
+    [attr.aria-label]="'iam.user-menu' | translate"
+    aria-haspopup="menu">
+    <span class="user-menu-trigger__avatar" aria-hidden="true">
+      <mat-icon>person</mat-icon>
+    </span>
+    <span class="user-menu-trigger__text">
+      <span class="user-menu-trigger__name">{{ store.currentUsername() }}</span>
+      <span class="user-menu-trigger__role">{{ roleSubtitleKey | translate }}</span>
+    </span>
+    <mat-icon class="user-menu-trigger__chevron" aria-hidden="true">expand_more</mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false" panelClass="user-profile-menu-panel">
+    <ng-template matMenuContent>
+      <div class="user-panel-header">
+        <span class="user-panel-header__avatar" aria-hidden="true">
+          <mat-icon>person</mat-icon>
+        </span>
+        <div class="user-panel-header__meta">
+          <div class="user-panel-header__name">{{ store.currentUsername() }}</div>
+          <div class="user-panel-header__role">{{ roleSubtitleKey | translate }}</div>
+        </div>
+      </div>
+      <mat-divider class="user-panel-divider"></mat-divider>
+      <button mat-menu-item type="button" (click)="openProfile()">
+        <mat-icon class="user-panel-item-icon">person_outline</mat-icon>
+        <span>{{ 'iam.profile' | translate }}</span>
+      </button>
+      <button mat-menu-item type="button" (click)="performSignOut()">
+        <mat-icon class="user-panel-item-icon">logout</mat-icon>
+        <span>{{ 'iam.sign-out' | translate }}</span>
+      </button>
+    </ng-template>
+  </mat-menu>
 } @else {
   <section class="auth-container">
     <div class="register-section">
@@ -8,6 +44,7 @@
         mat-stroked-button
         color="primary"
         class="register-btn"
+        type="button"
         (click)="performSignIn()">
         SIGN-IN
       </button>
@@ -16,6 +53,7 @@
         mat-stroked-button
         color="primary"
         class="register-btn"
+        type="button"
         (click)="performSignUpUser()">
         CREATE USER
       </button>
@@ -24,6 +62,7 @@
         mat-stroked-button
         color="accent"
         class="register-btn admin-btn"
+        type="button"
         (click)="performSignUpAdmin()">
         CREATE ADMIN
       </button>

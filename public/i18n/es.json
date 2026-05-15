@@ -31,7 +31,13 @@
     "resident": "Residentes",
     "staff": "Personal",
     "care-management": "Gestión de la atención",
-    "room": "Habitaciones"
+    "room": "Habitaciones",
+    "hide-menu": "Ocultar menú",
+    "show-menu": "Mostrar menú",
+    "open-menu": "Abrir menú",
+    "language": "Idioma de la interfaz",
+    "lang-es": "Español",
+    "lang-en": "English"
   },
   "page-not-found": {
     "title": "Página no encontrada",
@@ -40,6 +46,15 @@
   },
   "toolbar": {
     "logoAlt": "logo"
+  },
+  "iam": {
+    "profile": "Perfil",
+    "sign-out": "Cerrar sesión",
+    "user-menu": "Menú de cuenta",
+    "role": {
+      "admin-support": "Soporte administrativo",
+      "user": "Usuario"
+    }
   },
   "welcome": {
     "title": "Cuidamos a quienes<br>amas, informamos a<br>quienes esperan",

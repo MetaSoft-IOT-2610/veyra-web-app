@@ -2,3 +2,107 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*
+ * Vistas hijas del shell (router bajo MainLayout): el host se inserta junto a
+ * <router-outlet> y por encapsulación no recibe estilos del layout; aquí se
+ * fuerza contención (min-width: 0) para que flex/grid no desborden el ancho útil.
+ */
+app-main-layout .main-route-host > :not(router-outlet) {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Contenedores típicos de listas/tablas bajo el main */
+app-main-layout .main-route-host > :not(router-outlet) .list-container,
+app-main-layout .main-route-host > :not(router-outlet) .table-container,
+app-main-layout .main-route-host > :not(router-outlet) .content-with-toolbar {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+app-main-layout .main-route-host > :not(router-outlet) .table-container .table {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Menú de cuenta (MatMenu se renderiza en overlay, fuera del encapsulado del layout) */
+.user-profile-menu-panel .mat-mdc-menu-content {
+  padding: 0;
+}
+
+.user-profile-menu-panel .user-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px 14px;
+  background: #fafbfc;
+}
+
+.user-profile-menu-panel .user-panel-header__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #70b1e6;
+  flex-shrink: 0;
+}
+
+.user-profile-menu-panel .user-panel-header__avatar mat-icon {
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+  color: #fff;
+}
+
+.user-profile-menu-panel .user-panel-header__meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-profile-menu-panel .user-panel-header__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0d2e73;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-profile-menu-panel .user-panel-header__role {
+  font-size: 12px;
+  font-weight: 500;
+  color: #5f6368;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-profile-menu-panel .user-panel-divider {
+  margin: 0;
+}
+
+.user-profile-menu-panel .mat-mdc-menu-item .mat-icon.user-panel-item-icon {
+  margin-right: 12px;
+  color: #0d2e73;
+}
+
+.user-profile-menu-panel .mat-mdc-menu-item {
+  min-height: 48px;
+}
+
+.user-profile-menu-panel .mat-mdc-menu-panel {
+  min-width: 260px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(13, 46, 115, 0.15);
+}
