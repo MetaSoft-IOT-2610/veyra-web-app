@@ -30,6 +30,10 @@ const relativeList = () =>
 const relativeForm = () =>
   import('./views/relative-form/relative-form').then(m => m.RelativeForm);
 
+const residentMonitoring = () =>
+  import('./views/resident-monitoring-page/resident-monitoring-page')
+    .then(m => m.ResidentMonitoringPage);
+
 const baseTitle = 'Veyra';
 const nursingRoutes: Routes = [
   { path: 'nursing-homes/new',                  loadComponent: nursingHomeForm,       title: `New Nursing Home | ${baseTitle}` },
@@ -48,7 +52,7 @@ const nursingRoutes: Routes = [
   { path: 'devices',                            loadComponent: deviceList,            title: `Devices | ${baseTitle}` },
   { path: 'relatives',                          loadComponent: relativeList,          title: `Relatives | ${baseTitle}` },
   { path: 'relatives/new',                      loadComponent: relativeForm,          title: `New Relative | ${baseTitle}` },
-
+  { path: 'my-patients', loadComponent: residentMonitoring, title: `My Patients | ${baseTitle}` },
 ];
 
 export { nursingRoutes };
