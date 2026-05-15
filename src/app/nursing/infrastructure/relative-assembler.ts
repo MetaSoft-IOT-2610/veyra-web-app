@@ -4,22 +4,28 @@ import {RelativeResource, RelativeResponse} from './relative-response';
 
 export class RelativeAssembler implements BaseAssembler<Relative,RelativeResource,RelativeResponse>{
   toResourceFromEntity(entity: Relative): RelativeResource {
-    return {
+    const resource: any = {
       id: entity.id,
-      name: entity.name,
+      firstName: entity.firstName,
+      lastName: entity.lastName,
       email: entity.email,
       residentId: entity.residentId
-    } as RelativeResource;
+    };
+    resource['nursing-homeId'] = entity.nursingHomeId;
+    return resource as RelativeResource;
   }
   toEntitiesFromResponse(response: RelativeResponse): Relative[] {
     return response.relative.map(relative => this.toEntityFromResource(relative));
   }
   toEntityFromResource(resource: RelativeResource): Relative {
+    const apiResource: any = resource;
     return new Relative({
       id: resource.id,
-      name: resource.name,
+      firstName: resource.firstName,
+      lastName: resource.lastName,
       email: resource.email,
-      residentId: resource.residentId
+      residentId: resource.residentId,
+      nursingHomeId: Number(apiResource['nursing-homeId'] ?? 0)
     });
   }
 }

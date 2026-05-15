@@ -2,11 +2,11 @@ import {BaseResource, BaseResponse} from '../../shared/infrastructure/base-respo
 
 export interface RelativeResource extends BaseResource{
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   residentId: number;
-
-
+  'nursing-homeId'?: number | string;
 }
 
 export interface RelativeResponse extends BaseResponse {
