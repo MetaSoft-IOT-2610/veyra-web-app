@@ -7,9 +7,8 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/core';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { ActivitiesStore } from '../../../application/activities.store';
 import { Activity, ActivityType, ActivityStatus } from '../../../domain/model/activity.entity';
 
@@ -29,8 +28,8 @@ import { Activity, ActivityType, ActivityStatus } from '../../../domain/model/ac
     MatSelect,
     MatOption,
     MatButton,
-    MatIcon,
-    LayoutNursingHome
+    MatIconButton,
+    MatIcon
   ],
   templateUrl: './activity-form.html',
   styleUrl: './activity-form.css'

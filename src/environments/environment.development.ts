@@ -3,8 +3,8 @@ export const environment = {
   /** Si es false, el `MainLayout` no muestra botones SIGN-IN / registro en toolbar; con sesión activa sí se muestra el menú de cuenta. */
   showIamToolbar: false,
   /**
-   * Si no hay sesión válida en `localStorage`, `IamStore` aplica usuario/roles por defecto (solo desarrollo).
-   * Pon en `false` para probar como invitado sin menú de cuenta.
+   * Si no hay sesión válida en `localStorage`, aplica usuario de desarrollo **solo al entrar al layout
+   * con sidebar** (`MainLayout`), no en `/home` ni otras rutas públicas.
    */
   fallbackDevUserSession: true,
   platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
@@ -43,4 +43,10 @@ export const environment = {
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
   platformProviderPersonProfilesEndpointPath: '/person-profiles',
+
+  // Activities Bounded Context
+  platformProviderActivitiesEndpointPath: '/activities',
+
+  // Alerts Bounded Context
+  platformProviderAlertsEndpointPath: '/alerts',
 };

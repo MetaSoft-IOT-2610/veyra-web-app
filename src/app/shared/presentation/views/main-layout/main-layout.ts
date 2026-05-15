@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -32,7 +32,7 @@ import { environment } from '../../../../../environments/environment';
   templateUrl: './main-layout.html',
   styleUrls: ['./main-layout.css']
 })
-export class MainLayout implements AfterViewInit {
+export class MainLayout implements OnInit, AfterViewInit {
   private readonly iamStore = inject(IamStore);
 
   /** Si es true, toolbar muestra IAM completo (login/registro). Si es false, solo con sesión activa (perfil / salir). */
@@ -60,6 +60,8 @@ export class MainLayout implements AfterViewInit {
     { label: 'nav.resident', icon: 'person', link: '/nursing/residents', color: '#5FC2BA' },
     { label: 'nav.staff', icon: 'group', link: '/hcm/staff', color: '#5FC2BA' },
     { label: 'nav.room', icon: 'meeting_room', link: '/nursing/rooms', color: '#5FC2BA' },
+    { label: 'nav.activities', icon: 'event_note', link: '/activities', color: '#5FC2BA' },
+    { label: 'nav.alerts', icon: 'notifications_active', link: '/alerts', color: '#5FC2BA' },
   ];
 
   constructor(
@@ -77,6 +79,10 @@ export class MainLayout implements AfterViewInit {
       }
       this.scheduleDrawerMarginRecalc();
     });
+  }
+
+  ngOnInit(): void {
+    this.iamStore.tryApplyDevFallbackSession();
   }
 
   ngAfterViewInit(): void {

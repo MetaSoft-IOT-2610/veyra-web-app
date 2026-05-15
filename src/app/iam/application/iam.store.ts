@@ -47,6 +47,13 @@ export class IamStore {
     this.currentUserIdSignal.set(null);
     this.currentRolesSignal.set([]);
     this.rehydrateSessionFromStorage();
+  }
+
+  /**
+   * Sesión simulada en desarrollo: llamar solo desde el shell autenticado (`MainLayout`),
+   * no al arrancar la app, para que rutas públicas como `/home` sigan mostrando SIGN-IN / registro.
+   */
+  tryApplyDevFallbackSession(): void {
     if (environment.fallbackDevUserSession && !this.isSignedInSignal()) {
       this.applyDefaultDevUserSession();
     }
