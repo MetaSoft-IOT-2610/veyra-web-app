@@ -7,10 +7,8 @@ import { SignUpCommand } from '../domain/model/sign-up.command';
 import { CreateAdministratorCommand } from '../domain/model/create-administrator.command';
 
 /**
- * Estado de sesión en memoria (`isSignedIn`, usuario) + token en `localStorage` tras login exitoso.
- * `currentToken` solo expone el token si `isSignedIn` es true (tras F5 con token guardado pero
- * señal en false, la UI cree que no hay sesión y el interceptor no envía Bearer — conviene
- * rehidratar en el constructor o con `APP_INITIALIZER`).
+ * Estado de sesión en memoria (`isSignedIn`, usuario, roles) + token en `localStorage` tras login.
+ * Tras F5, `rehydrateSessionFromStorage()` restaura sesión si existen `token`, `username` y `userId`.
  *
  * MEJORA — Expiración / 401 (coordinar con `authenticationInterceptor`):
  * - Añadir `readonly sessionExpired = signal(false)` (o `overlayVisible`).

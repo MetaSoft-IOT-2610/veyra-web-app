@@ -50,33 +50,54 @@
           }
         </nav>
 
-        <div class="sidenav-footer">
-          <div class="footer-content">
-            <div class="footer-info">
-              <mat-icon>code</mat-icon>
-              <div class="footer-text">
-                <span class="company-name">MetaSoft</span>
-                <span class="copyright">© {{ getCurrentYear() }}</span>
+        <footer class="sidenav-footer" role="contentinfo">
+          @if (sidenavMode === 'side' && navCollapsed()) {
+            <div
+              class="footer-compact"
+              matTooltip="MetaSoft"
+              matTooltipPosition="right"
+              aria-label="MetaSoft">
+              <span class="footer-compact__icon-wrap" aria-hidden="true">
+                <mat-icon>code</mat-icon>
+              </span>
+            </div>
+          } @else {
+            <div class="footer-panel">
+              <div class="footer-panel__icon-wrap" aria-hidden="true">
+                <mat-icon>code</mat-icon>
+              </div>
+              <div class="footer-panel__text">
+                <span class="footer-panel__brand">MetaSoft</span>
+                <span class="footer-panel__copy">© {{ getCurrentYear() }}</span>
               </div>
             </div>
-          </div>
-        </div>
+          }
+        </footer>
 
         <div class="sidenav-toggle-zone">
           @if (sidenavMode === 'side') {
-            <button
-              mat-stroked-button
-              type="button"
-              class="toggle-menu-btn"
-              [class.toggle-menu-btn--icon-only]="navCollapsed()"
-              [matTooltip]="navCollapsed() ? ('nav.show-menu' | translate) : ('nav.hide-menu' | translate)"
-              matTooltipPosition="right"
-              (click)="toggleDesktopNav()">
-              <mat-icon>{{ navCollapsed() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
-              @if (!navCollapsed()) {
+            @if (navCollapsed()) {
+              <button
+                mat-icon-button
+                type="button"
+                class="toggle-expand-icon-btn"
+                [matTooltip]="'nav.show-menu' | translate"
+                matTooltipPosition="right"
+                (click)="toggleDesktopNav()">
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            } @else {
+              <button
+                mat-stroked-button
+                type="button"
+                class="toggle-menu-btn"
+                [matTooltip]="'nav.hide-menu' | translate"
+                matTooltipPosition="right"
+                (click)="toggleDesktopNav()">
+                <mat-icon>chevron_left</mat-icon>
                 <span>{{ 'nav.hide-menu' | translate }}</span>
-              }
-            </button>
+              </button>
+            }
           } @else {
             <button
               mat-stroked-button

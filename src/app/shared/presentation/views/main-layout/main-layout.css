@@ -295,62 +295,107 @@ mat-sidenav.app-sidenav.collapsed .nav-label {
   border-radius: 2px 0 0 2px;
 }
 
-/* Footer (MetaSoft arriba; “Ocultar menú” va debajo en .sidenav-toggle-zone) */
+/* Footer de marca (MetaSoft) */
 .sidenav-footer {
   flex-shrink: 0;
   margin-top: auto;
-  padding: 16px 12px 8px;
-  border-top: 1px solid #e8eaed;
-  background: #fafbfc;
-  margin-inline: 0;
+  padding: 10px 10px 8px;
+  border-top: 1px solid #e4e8ec;
+  background: linear-gradient(180deg, #f9fafc 0%, #eef1f5 100%);
 }
 
-.footer-content {
-  padding: 8px 12px;
-  opacity: 1;
-  transition: opacity 0.2s ease;
-}
-
-mat-sidenav.app-sidenav.collapsed .footer-content {
-  display: none;
-}
-
-mat-sidenav.app-sidenav.collapsed .sidenav-footer {
-  min-height: 0;
-  padding: 8px 8px 0;
-  border-top: none;
-}
-
-.footer-info {
+.footer-panel {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #5f6368;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(13, 46, 115, 0.08);
+  box-shadow: 0 1px 2px rgba(13, 46, 115, 0.04);
 }
 
-.footer-info mat-icon {
+.footer-panel__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: rgba(112, 177, 230, 0.14);
+  color: #5a9dd4;
+}
+
+.footer-panel__icon-wrap mat-icon {
   font-size: 22px;
   width: 22px;
   height: 22px;
   color: #70b1e6;
 }
 
-.footer-text {
+.footer-panel__text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  white-space: nowrap;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.25;
 }
 
-.company-name {
+.footer-panel__brand {
   font-size: 14px;
   font-weight: 700;
+  letter-spacing: 0.02em;
   color: #0d2e73;
 }
 
-.copyright {
-  font-size: 12px;
+.footer-panel__copy {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   color: #80868b;
+  text-transform: none;
+}
+
+/* Rail colapsado: solo icono centrado con tooltip */
+.footer-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0 8px;
+  cursor: default;
+}
+
+.footer-compact__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(112, 177, 230, 0.14);
+  border: 1px solid rgba(13, 46, 115, 0.06);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-compact:hover .footer-compact__icon-wrap {
+  background: rgba(112, 177, 230, 0.22);
+  transform: scale(1.04);
+}
+
+.footer-compact__icon-wrap mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #70b1e6;
+}
+
+mat-sidenav.app-sidenav.collapsed .sidenav-footer {
+  min-height: 0;
+  padding: 8px 6px 6px;
+  border-top: 1px solid #e8eaed;
 }
 
 /* Toggle: en sidebar colapsado el botón flecha queda centrado */
@@ -387,12 +432,24 @@ mat-sidenav.app-sidenav.collapsed .sidenav-toggle-zone {
   height: 20px;
 }
 
-.toggle-menu-btn--icon-only {
+/* Colapsado: icon-button (MDC) centra el icono; estilo acorde al stroked del expandido */
+.toggle-expand-icon-btn {
+  margin: 0 auto;
   width: 44px !important;
-  min-width: 44px !important;
-  height: 44px;
+  height: 44px !important;
   padding: 0 !important;
-  margin: 0;
+  border: 1px solid #dadce0 !important;
+  border-radius: 10px !important;
+  color: #0d2e73 !important;
+  background: #fff !important;
+  box-sizing: border-box;
+}
+
+.toggle-expand-icon-btn mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
 }
 
 .toggle-menu-btn--full {
