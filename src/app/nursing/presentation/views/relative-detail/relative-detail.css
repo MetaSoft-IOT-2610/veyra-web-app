@@ -1,0 +1,224 @@
+/* 1. CRÍTICO: Evita que los paddings rompan el ancho del contenedor */
+.custom-detail-container,
+.custom-detail-container * {
+  box-sizing: border-box;
+}
+
+/* Contenedor principal */
+.custom-detail-container {
+  width: 100%;
+  /* Eliminamos el min-width para que se adapte al ancho del modal */
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Banner Superior */
+.header-banner {
+  background-color: #e1f0f8;
+  padding: 20px 32px;
+  border-bottom: 1px solid #c9e3f1;
+}
+
+.name-tag {
+  background-color: #ffffff;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #0d2344;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Cuerpo del Modal */
+.body-content {
+  padding: 32px;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0d2344;
+  margin-top: 0;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #64b7c6;
+}
+
+/* Sección de Formulario + Cuadro Verde */
+.setup-section {
+  display: flex;
+  gap: 32px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.form-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0; /* Evita que el flexbox crezca infinitamente */
+}
+
+.field-row {
+  display: flex;
+  gap: 16px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.field-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.field-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fcfcfc;
+  transition: all 0.2s;
+}
+
+.field-group input:focus {
+  outline: none;
+  border-color: #64b7c6;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(100, 183, 198, 0.1);
+}
+
+.field-group input.readonly {
+  background-color: transparent;
+  border-color: transparent;
+  padding-left: 0;
+  font-weight: 500;
+  color: #2c3e50;
+  cursor: default;
+}
+
+/* Cuadro Informativo Verde */
+.secure-setup-box {
+  flex: 0.8;
+  background-color: #f0fdf4;
+  border: 1px solid #dcfce7;
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  min-width: 250px;
+  align-items: flex-start;
+}
+
+.shield-icon {
+  color: #16a34a;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  font-family: 'Material Icons', 'Material Symbols Outlined' !important;
+  flex-shrink: 0; /* CRÍTICO: Evita que el texto aplaste al ícono y lo cubra */
+}
+
+.secure-text strong {
+  display: block;
+  color: #166534;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.secure-text p strong{
+  margin: 0;
+  color: #15803d;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Divisor */
+.section-divider {
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  margin: 35px 0;
+}
+
+/* Caja de Residente */
+.resident-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px solid #edf2f7;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  width: 100%;
+}
+
+.resident-info strong {
+  display: block;
+  color: #0d2344;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.resident-info span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.btn-change-resident {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #64b7c6;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-change-resident:hover {
+  background-color: #f1f5f9;
+  border-color: #64b7c6;
+}
+
+/* Footer / Botones */
+.footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 20px 32px;
+  background-color: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+}
+
+.footer-actions button {
+  min-width: 100px;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: none;
+}

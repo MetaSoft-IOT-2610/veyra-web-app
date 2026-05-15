@@ -1,0 +1,70 @@
+<div class="custom-detail-container" [formGroup]="form">
+
+  <div class="header-banner">
+    <div class="name-tag">
+      {{ form.get('firstName')?.value || relative?.firstName }} {{ form.get('lastName')?.value || relative?.lastName }}
+    </div>
+  </div>
+
+  <div class="body-content">
+
+    <h3 class="section-title">{{'relatives.form.account-setup' | translate}}
+    </h3>
+
+    <div class="setup-section">
+      <div class="form-fields">
+        <div class="field-row">
+          <div class="field-group">
+            <label>{{'relatives.form.name' | translate}}</label>
+            <input type="text" formControlName="firstName" [readonly]="!editing()" [class.readonly]="!editing()">
+          </div>
+          <div class="field-group">
+            <label>{{'relatives.form.last-name' | translate}}</label>
+            <input type="text" formControlName="lastName" [readonly]="!editing()" [class.readonly]="!editing()">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>{{'relatives.form.email' | translate}}</label>
+          <input type="email" formControlName="email" [readonly]="!editing()" [class.readonly]="!editing()">
+        </div>
+      </div>
+
+      <div class="secure-setup-box">
+        <mat-icon class="shield-icon">security</mat-icon>
+        <div class="secure-text">
+          <strong>{{'relatives.form.account-setup' | translate}}</strong>
+          <p>{{'relatives.form.secure-self-setup-description' | translate}}</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h3 class="section-title">
+      <mat-icon class="link-icon">link</mat-icon>
+      {{'relatives.form.resident-association' | translate}}
+    </h3>
+
+    <div class="field-group">
+      <label>      {{'relatives.form.linked-resident' | translate}}
+      </label>
+      <div class="resident-box">
+        <div class="resident-info">
+          <strong>María Ríos</strong> <span>Room 105 • Admitted Jan 2024</span>
+        </div>
+        <button type="button" class="btn-change-resident" *ngIf="editing()">      {{'relatives.buttons.change-resident' | translate}}
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-actions">
+    <button mat-button *ngIf="!editing()" (click)="onClose()">Close</button>
+    <button mat-raised-button color="primary" *ngIf="!editing()" (click)="startEdit()">Edit</button>
+
+    <button mat-button *ngIf="editing()" (click)="cancelEdit()">Cancel</button>
+    <button mat-raised-button color="primary" *ngIf="editing()" (click)="onSave()">Save</button>
+  </div>
+</div>
