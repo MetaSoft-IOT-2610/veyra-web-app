@@ -375,5 +375,59 @@
       "not-found-message": "No se pudo encontrar la información del miembro del personal solicitado",
       "no-staff": "No hay miembros del personal registrados."
     }
+  },
+"tracking": {
+    "devices": {
+      "list": {
+        "title": "Lista de Dispositivos",
+        "search-placeholder": "Buscar ID de dispositivo...",
+        "register-btn": "Registrar Dispositivo",
+        "empty-vital-signs": "No hay dispositivos de signos vitales registrados.",
+        "empty-gps": "No hay dispositivos GPS registrados.",
+        "showing": "Mostrando",
+        "devices": "dispositivos"
+      },
+      "tabs": {
+        "vital-signs": "Signos Vitales",
+        "gps": "GPS"
+      },
+      "columns": {
+        "device-id": "ID Dispositivo",
+        "assigned-by": "Asignado Por",
+        "assigned-at": "Asignado En",
+        "status": "Estado",
+        "actions": "Acciones"
+      },
+      "status": {
+        "ACTIVE": "Activo",
+        "INACTIVE": "Inactivo",
+        "LOW_BATTERY": "Batería Baja"
+      },
+      "type": {
+        "VITAL_SIGNS": "Rastreador de Signos Vitales",
+        "GPS": "Rastreador GPS"
+      },
+      "actions": {
+        "edit": "Editar dispositivo",
+        "delete": "Eliminar dispositivo"
+      },
+      "dialog": {
+        "title": "Registrar Nuevo Dispositivo",
+        "edit-title": "Editar Dispositivo",
+        "hint": "Ingrese el código de identificación de hardware que se encuentra en la parte posterior del rastreador.",
+        "device-id": "ID del Dispositivo",
+        "device-id-placeholder": "ej. BAND-008",
+        "device-type": "Tipo de Dispositivo",
+        "device-type-placeholder": "Seleccionar tipo de hardware...",
+        "cancel": "Cancelar",
+        "save": "Guardar Dispositivo"
+      },
+      "error": {
+        "device-id-required": "El ID del dispositivo es obligatorio",
+        "device-type-required": "El tipo de dispositivo es obligatorio"
+      }
+    }
   }
 }
+
+

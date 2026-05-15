@@ -374,5 +374,59 @@
       "not-found-message": "Could not find the requested staff member information",
       "no-staff": "No staff members registered."
     }
+  },
+
+"tracking": {
+    "devices": {
+      "list": {
+        "title": "List of Devices",
+        "search-placeholder": "Search device ID...",
+        "register-btn": "Register Device",
+        "empty-vital-signs": "No vital signs devices registered.",
+        "empty-gps": "No GPS devices registered.",
+        "showing": "Showing",
+        "devices": "devices"
+      },
+      "tabs": {
+        "vital-signs": "Vital Signs",
+        "gps": "GPS"
+      },
+      "columns": {
+        "device-id": "Device ID",
+        "assigned-by": "Assigned By",
+        "assigned-at": "Assigned At",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "status": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive",
+        "LOW_BATTERY": "Low Battery"
+      },
+      "type": {
+        "VITAL_SIGNS": "Vital Signs Tracker",
+        "GPS": "GPS Tracker"
+      },
+      "actions": {
+        "edit": "Edit device",
+        "delete": "Delete device"
+      },
+      "dialog": {
+        "title": "Register New Device",
+        "edit-title": "Edit Device",
+        "hint": "Enter the hardware identification code found on the back of the tracker.",
+        "device-id": "Device ID",
+        "device-id-placeholder": "e.g. BAND-008",
+        "device-type": "Device Type",
+        "device-type-placeholder": "Select hardware type...",
+        "cancel": "Cancel",
+        "save": "Save Device"
+      },
+      "error": {
+        "device-id-required": "Device ID is required",
+        "device-type-required": "Device type is required"
+      }
+    }
   }
 }
+
