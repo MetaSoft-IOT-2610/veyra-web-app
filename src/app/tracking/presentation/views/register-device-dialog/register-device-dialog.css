@@ -1,0 +1,98 @@
+.dialog-container {
+  min-width: 420px;
+  max-width: 500px;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 24px 0;
+  position: relative;
+}
+
+.dialog-icon {
+  color: #66B3AD;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0d2e73;
+  flex: 1;
+  padding: 0;
+}
+
+.close-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  color: #666;
+}
+
+.dialog-hint {
+  color: #666;
+  font-size: 0.875rem;
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.required {
+  color: #e53935;
+  margin-left: 2px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 12px 24px 20px;
+}
+
+.dialog-actions button[mat-stroked-button] {
+  border-color: #ccc;
+  color: #555;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0 20px;
+}
+
+.save-btn {
+  background-color: #66B3AD !important;
+  color: white !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  padding: 0 24px !important;
+}
+
+.save-btn:disabled {
+  background-color: #ccc !important;
+}
