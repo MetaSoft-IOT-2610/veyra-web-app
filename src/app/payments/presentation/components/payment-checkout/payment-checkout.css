@@ -1,26 +1,23 @@
+/* Contenedor principal alineado con las pantallas anteriores */
 .checkout-container {
+  min-height: 100vh;
   display: flex;
   gap: 30px;
-  padding: 40px;
+  padding: 50px 20px;
   justify-content: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  background: #f8fdfc;
+  background: linear-gradient(to bottom, #ffffff 0%, #f3faff 40%, #dff1ff 100%);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-.checkout-card {
-  background: white;
-  padding: 25px;
-  border-radius: 14px;
-  width: 420px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  border: 1px solid #e8f7f5;
-}
 
 .section-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  color: #157a74;
-  margin-bottom: 20px;
+  color: #0066a1; /* Azul principal de Veyra */
+  margin-top: 0;
+  margin-bottom: 25px;
   text-align: left;
 }
 
@@ -28,30 +25,35 @@
 .form-label {
   display: block;
   font-weight: 600;
-  color: #14504e;
-  margin-bottom: 5px;
-  margin-top: 15px;
+  color: #404040;
+  margin-bottom: 8px;
+  margin-top: 18px;
+  font-size: 14px;
 }
 
 .form-input {
   width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #bde7e2;
-  background: #f7fffe;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #cce0ef;
+  background: #f8fbff;
   font-size: 15px;
-  transition: border 0.2s ease;
+  color: #333;
+  box-sizing: border-box; /* Previene que los inputs se salgan del contenedor */
+  transition: all 0.2s ease;
 }
 
 .form-input:focus {
-  border: 1px solid #36b5ae;
+  border: 1px solid #0066a1;
+  background: #ffffff;
   outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 102, 161, 0.1);
 }
 
 /* Rows */
 .row {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
 
 .col {
@@ -61,67 +63,189 @@
 /* Buttons */
 .pay-button {
   width: 100%;
-  padding: 13px;
-  margin-top: 10px;
-  background: #3cb371;
+  padding: 14px;
+  margin-top: 30px;
+  background: #12a18d; /* Verde agua de Veyra */
   border: none;
   color: white;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 17px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.2s ease;
+  transition: background 0.3s ease;
 }
 
 .pay-button:hover {
-  background: #2e965c;
+  background: #0e8574; /* Tono ligeramente más oscuro al pasar el mouse */
 }
 
+/* UX: El botón de cancelar ahora es secundario (outline) para no confundir al usuario */
 .cancel-button {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background: #4ec7e8;
-  border: none;
-  color: white;
-  border-radius: 8px;
+  padding: 14px;
+  margin-top: 12px;
+  background: transparent;
+  border: 2px solid #cce0ef;
+  color: #0066a1;
+  border-radius: 12px;
   font-size: 16px;
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .cancel-button:hover {
-  background: #36a8c7;
+  background: #f3faff;
+  border-color: #0066a1;
 }
 
-/* Summary */
-.summary-card {
-  border-left: 5px solid #3cb371;
-}
-
-.summary-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  font-size: 16px;
-}
 
 .summary-item.total {
-  font-weight: bold;
-  font-size: 18px;
-  margin-top: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #e5f0f9;
 }
 
 .label {
-  color: #14504e;
+  color: #666666;
 }
 
 .value {
-  color: #157a74;
+  color: #004c75;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .error-text {
   color: #d9534f;
-  margin-top: 10px;
+  margin-top: 15px;
+  font-size: 14px;
   font-weight: 600;
+  text-align: center;
+}
+
+
+/* =========================================
+   Contenedores Principales
+   ========================================= */
+.checkout-container {
+  min-height: 100vh;
+  display: flex;
+  padding: 50px 20px;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(to bottom, #ffffff 0%, #f3faff 40%, #dff1ff 100%);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.checkout-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 860px; /* Limita el ancho al tamaño exacto de las dos tarjetas + el espacio */
+}
+
+.cards-grid {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Permite que colapsen en pantallas móviles */
+}
+
+.back-btn-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #0066a1;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.back-btn:hover {
+  color: #12a18d;
+}
+
+.checkout-container {
+  min-height: 100vh;
+  display: flex;
+  padding: 50px 20px;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(to bottom, #ffffff 0%, #f3faff 40%, #dff1ff 100%);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.checkout-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px; /* Aumentamos un poco el margen general */
+  margin: 0 auto;
+}
+
+/* 🔥 Solución definitiva: CSS Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 350px; /* El formulario toma el resto del espacio (1fr) y el resumen mide 350px */
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* =========================================
+   Botón de Regreso
+   ========================================= */
+.back-btn-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #0066a1;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.back-btn:hover {
+  color: #12a18d;
+}
+
+/* =========================================
+   Tarjetas
+   ========================================= */
+.checkout-card {
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  width: 100%; /* Dejamos que el Grid controle el ancho */
+  box-sizing: border-box;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+  border: 1px solid #e5f0f9;
+}
+
+.summary-card {
+  width: 100%; /* Dejamos que el Grid controle el ancho */
+  border-top: 6px solid #12a18d;
+  border-left: 1px solid #e5f0f9;
 }

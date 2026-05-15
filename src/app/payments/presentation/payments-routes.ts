@@ -17,6 +17,10 @@ const paymentCheckout = () =>
   import('./components/payment-checkout/payment-checkout')
     .then(m => m.PaymentCheckoutPage);
 
+const paymentConfirmed = () =>
+  import('./components/payment-confirmed/payment-confirmed')
+    .then(m => m.PaymentConfirmed);
+
 const baseTitle = 'Veyra';
 
 export const paymentsRoutes: Routes = [
@@ -39,5 +43,11 @@ export const paymentsRoutes: Routes = [
     path: 'checkout/:type/:cycle',
     loadComponent: paymentCheckout,
     title: `Checkout | ${baseTitle}`
+  },
+
+  {
+    path: 'confirmed',
+    loadComponent: paymentConfirmed,
+    title: `Success | ${baseTitle}`
   }
 ];

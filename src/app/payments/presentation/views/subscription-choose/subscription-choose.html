@@ -1,39 +1,87 @@
 <div class="choose-container">
 
-  <h1 class="title">
-    Choose the right plan for your care needs
-  </h1>
+  <!-- Header -->
+  <div class="header-section">
+    <span class="badge">Pricing</span>
+    <h1 class="main-title">Choose your plan</h1>
+    <p class="main-subtitle">Simple, transparent pricing. Cancel anytime.</p>
 
-  <p class="subtitle">
-    Select between monthly or yearly plans designed for Families and Nursing Homes.
-  </p>
+    <div class="toggle-container">
+      <span [class.active]="!isAnnual">Monthly</span>
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="isAnnual" />
+        <span class="slider-toggle"></span>
+      </label>
+      <span [class.active]="isAnnual">
+        Annual <span class="save-tag">Save 15%</span>
+      </span>
+    </div>
+  </div>
 
-  <div class="plans-grid">
+  <!-- Bento Grid -->
+  <div class="bento-grid">
 
-    <!-- FAMILY PLAN -->
-    <div class="plan-card">
-      <h2>Family Plan</h2>
-      <p class="price">$30 <span>/ month</span></p>
-      <p class="price yearly">$300 <span>/ year (15% OFF)</span></p>
+    <!-- Tarjeta Familiar -->
+    <div class="bento-item family-card" (click)="goToFamilyPlan()">
+      <div class="card-content">
+        <div class="top-row">
+          <div class="icon-box">
+            <i class="fa-solid fa-house-chimney-user"></i>
+          </div>
+          <span class="plan-label">Family</span>
+        </div>
 
-      <button class="details-btn"
-              onclick="window.location.href='/payments/plans/family'">
-        View details
-      </button>
+        <div class="mid-row">
+          <h3>Care at home, together.</h3>
+          <p>One account for the whole family. Full visibility, shared caregiving, zero chaos.</p>
+        </div>
+
+        <div class="bottom-row">
+          <div class="price-block">
+            <span class="amount">${{ isAnnual ? '25' : '30' }}</span>
+            <span class="period">/ month</span>
+            <div class="billed-note" *ngIf="isAnnual">Billed as $300/year</div>
+          </div>
+          <button class="action-arrow" aria-label="Select family plan">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- NURSING HOME PLAN -->
-    <div class="plan-card">
-      <h2>Nursing Home Plan</h2>
-      <p class="price">$300 <span>/ month</span></p>
-      <p class="price yearly">$3000 <span>/ year (15% OFF)</span></p>
+    <!-- Tarjeta Institucional -->
+    <div class="bento-item nursing-card" (click)="goToNursingPlan()">
+      <div class="card-content">
+        <div class="top-row">
+          <div class="icon-box">
+            <i class="fa-solid fa-hospital-user"></i>
+          </div>
+          <span class="plan-label">Institutional</span>
+          <span class="popular-tag">Most popular</span>
+        </div>
 
-      <button class="details-btn"
-              onclick="window.location.href='/payments/plans/nursing-home'">
-        View details
-      </button>
+        <div class="mid-row">
+          <h3>Built for care teams.</h3>
+          <p>Full clinical workflow, staff management, and reporting for nursing homes and care facilities.</p>
+        </div>
+
+        <div class="bottom-row">
+          <div class="price-block">
+            <span class="amount">${{ isAnnual ? '75' : '90' }}</span>
+            <span class="period">/ month</span>
+            <div class="billed-note" *ngIf="isAnnual">Billed as $900/year</div>
+          </div>
+          <button class="cta-btn">Get started</button>
+        </div>
+      </div>
     </div>
 
   </div>
+
+  <!-- Footer trust -->
+  <p class="trust-note">
+    <i class="fa-solid fa-shield-halved"></i>
+    Secure checkout &nbsp;·&nbsp; Cancel anytime &nbsp;·&nbsp; No hidden fees
+  </p>
 
 </div>

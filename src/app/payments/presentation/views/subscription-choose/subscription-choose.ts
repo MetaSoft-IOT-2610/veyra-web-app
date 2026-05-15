@@ -1,13 +1,26 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  standalone: true,
   selector: 'app-subscription-choose',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './subscription-choose.html',
   styleUrls: ['./subscription-choose.css']
 })
 export class SubscriptionChoosePage {
-  constructor() {
-    console.log("Subscription Choose Page loaded");
+
+  isAnnual = false;
+
+  constructor(private router: Router) {}
+
+  goToFamilyPlan() {
+    this.router.navigate(['/payments/plans/family']);
+  }
+
+  goToNursingPlan() {
+    this.router.navigate(['/payments/plans/nursing-home']);
   }
 }
