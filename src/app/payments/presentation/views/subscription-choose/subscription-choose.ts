@@ -1,23 +1,26 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  standalone: true,
   selector: 'app-subscription-choose',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './subscription-choose.html',
   styleUrls: ['./subscription-choose.css']
 })
 export class SubscriptionChoosePage {
-  isAnnual: boolean = false;
+
+  isAnnual = false;
 
   constructor(private router: Router) {}
 
-  togglePeriod() {
-    this.isAnnual = !this.isAnnual;
+  goToFamilyPlan() {
+    this.router.navigate(['/payments/plans/family']);
   }
 
-  goToPlan(type: 'family' | 'nursing-home') {
-    const cycle = this.isAnnual ? 'annual' : 'monthly';
-    this.router.navigate(['/payments/plans', type === 'family' ? 'family' : 'nursing-home']);
+  goToNursingPlan() {
+    this.router.navigate(['/payments/plans/nursing-home']);
   }
 }
