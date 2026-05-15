@@ -9,7 +9,6 @@ import { DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInput } from '@angular/material/input';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { NursingStore } from '../../../application/nursing.store';
 
 @Component({
@@ -25,7 +24,6 @@ import { NursingStore } from '../../../application/nursing.store';
     DatePipe,
     MatTableModule,
     MatPaginatorModule,
-    LayoutNursingHome,
     MatFormField,
     MatInput,
     MatLabel,

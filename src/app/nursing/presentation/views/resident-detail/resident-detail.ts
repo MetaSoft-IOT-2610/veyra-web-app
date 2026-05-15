@@ -5,7 +5,6 @@ import { MatButton, MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatError } from '@angular/material/form-field';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NursingStore } from '../../../application/nursing.store';
 import { PersonProfileDetail } from '../../../../profiles/presentation/components/person-profile-detail/person-profile-detail';
@@ -21,7 +20,6 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatProgressSpinner,
     MatError,
     MatFabButton,
-    LayoutNursingHome,
     TranslatePipe,
     PersonProfileDetail,
     ReactiveFormsModule

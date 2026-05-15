@@ -1,5 +1,4 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { HcmStore } from '../../../application/hcm.store';
@@ -14,7 +13,6 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-contract-list',
   imports: [
-    LayoutNursingHome,
     MatButton,
     MatCell,
     MatCellDef,

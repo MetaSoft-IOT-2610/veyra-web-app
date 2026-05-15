@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './shared/presentation/views/home/home';
+import { MainLayout } from './shared/presentation/views/main-layout/main-layout';
 
 const pageNotFound = () =>
   import('./shared/presentation/views/page-not-found/page-not-found').then(m => m.PageNotFound);
@@ -13,18 +14,21 @@ const hcmRoutes = () =>
   import('./hcm/presentation/hcm-routes').then(m => m.hcmRoutes);
 const paymentsRoutes = () =>
   import('./payments/presentation/payments-routes').then(m => m.paymentsRoutes);
-const activitiesRoutes = () =>
-  import('./activities/presentation/activities-routes').then(m => m.activitiesRoutes);
+
 const baseTitle = 'Veyra';
 export const routes: Routes = [
-  { path: 'home',        component: Home,             title:`Home | ${baseTitle}` },
-  { path: 'activities', loadChildren: activitiesRoutes },
-  { path: 'iam',         loadChildren: iamRoutes },
-  { path: 'analytics',   loadChildren: analyticsRoutes },
-  { path: 'nursing',     loadChildren: nursingRoutes },
-  { path: 'hcm',         loadChildren: hcmRoutes },
-  { path: 'payments',    loadChildren: paymentsRoutes },
-  { path: 'activities', loadChildren: activitiesRoutes },
-  { path: '',            redirectTo: '/home',         pathMatch:'full' },
-  { path: '**',          loadComponent: pageNotFound, title:`Page Not Found | ${baseTitle}`}
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: Home, title: `Home | ${baseTitle}` },
+  { path: 'iam', loadChildren: iamRoutes },
+  {
+    path: '',
+    component: MainLayout,
+    children: [
+      { path: 'analytics', loadChildren: analyticsRoutes },
+      { path: 'nursing', loadChildren: nursingRoutes },
+      { path: 'hcm', loadChildren: hcmRoutes },
+      { path: 'payments', loadChildren: paymentsRoutes },
+    ],
+  },
+  { path: '**', loadComponent: pageNotFound, title: `Page Not Found | ${baseTitle}` },
 ];

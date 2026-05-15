@@ -1,5 +1,4 @@
 import {Component, inject} from '@angular/core';
-import {LayoutNursingHome} from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HcmStore} from '../../../application/hcm.store';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -19,7 +18,6 @@ import {DatePipe} from '@angular/common';
   selector: 'app-contract-form',
   standalone: true,
   imports: [
-    LayoutNursingHome,
     ReactiveFormsModule,
     MatIcon,
     MatCard,

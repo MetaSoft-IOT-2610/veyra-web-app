@@ -1,6 +1,49 @@
-@if(store.isSignedIn()){
-  <button mat-button>Welcome, {{ store.currentUsername() }}</button> |
-  <button mat-button (click)="performSignOut()">Sign-Out</button>
+@if (store.isSignedIn()) {
+  <div class="user-account">
+    <button
+      type="button"
+      class="user-menu-trigger"
+      [matMenuTriggerFor]="userMenu"
+      [attr.aria-label]="'iam.user-menu' | translate"
+      aria-haspopup="menu">
+      <span class="user-menu-trigger__avatar" aria-hidden="true">
+        <mat-icon>person</mat-icon>
+      </span>
+      <span class="user-menu-trigger__text">
+        <span class="user-menu-trigger__name">{{ store.currentUsername() }}</span>
+        <span class="user-menu-trigger__role">{{ roleSubtitleKey | translate }}</span>
+      </span>
+      <mat-icon class="user-menu-trigger__chevron" aria-hidden="true">expand_more</mat-icon>
+    </button>
+
+    <mat-menu #userMenu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false" panelClass="user-profile-menu-panel">
+      <ng-template matMenuContent>
+        <div class="veyra-user-account-menu">
+          <header class="user-panel-header">
+            <span class="user-panel-header__avatar" aria-hidden="true">
+              <mat-icon class="user-panel-header__avatar-icon">person</mat-icon>
+            </span>
+            <div class="user-panel-header__meta">
+              <div class="user-panel-header__name">{{ store.currentUsername() }}</div>
+              <div class="user-panel-header__role">{{ roleSubtitleKey | translate }}</div>
+            </div>
+          </header>
+          <mat-divider class="user-panel-divider" role="separator"></mat-divider>
+          <div class="user-panel-actions">
+            <button mat-menu-item type="button" class="user-panel-item" (click)="openProfile()">
+              <mat-icon class="user-panel-item-icon">person_outline</mat-icon>
+              <span class="user-panel-item-label">{{ 'iam.profile' | translate }}</span>
+            </button>
+            <mat-divider class="user-panel-divider user-panel-divider--between" role="separator"></mat-divider>
+            <button mat-menu-item type="button" class="user-panel-item user-panel-item--sign-out" (click)="performSignOut()">
+              <mat-icon class="user-panel-item-icon">logout</mat-icon>
+              <span class="user-panel-item-label">{{ 'iam.sign-out' | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </mat-menu>
+  </div>
 } @else {
   <section class="auth-container">
     <div class="register-section">
@@ -8,6 +51,7 @@
         mat-stroked-button
         color="primary"
         class="register-btn"
+        type="button"
         (click)="performSignIn()">
         SIGN-IN
       </button>
@@ -16,6 +60,7 @@
         mat-stroked-button
         color="primary"
         class="register-btn"
+        type="button"
         (click)="performSignUpUser()">
         CREATE USER
       </button>
@@ -24,6 +69,7 @@
         mat-stroked-button
         color="accent"
         class="register-btn admin-btn"
+        type="button"
         (click)="performSignUpAdmin()">
         CREATE ADMIN
       </button>

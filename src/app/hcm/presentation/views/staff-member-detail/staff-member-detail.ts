@@ -6,7 +6,6 @@ import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatError } from '@angular/material/form-field';
 import { HcmStore } from '../../../application/hcm.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PersonProfileDetail } from '../../../../profiles/presentation/components/person-profile-detail/person-profile-detail';
 
@@ -20,7 +19,6 @@ import { PersonProfileDetail } from '../../../../profiles/presentation/component
     MatProgressSpinner,
     MatError,
     MatFabButton,
-    LayoutNursingHome,
     TranslatePipe,
     PersonProfileDetail
   ],

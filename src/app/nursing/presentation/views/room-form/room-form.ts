@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NursingStore } from '../../../application/nursing.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { MatIcon } from '@angular/material/icon';
 import { CreateRoomCommand } from '../../../domain/model/create-room.command';
 import { MatCard } from '@angular/material/card';
@@ -23,7 +22,6 @@ import { MatOption, MatSelect } from '@angular/material/select';
     MatButtonModule,
     ReactiveFormsModule,
     TranslatePipe,
-    LayoutNursingHome,
     MatIcon,
     MatCard,
     MatOption,

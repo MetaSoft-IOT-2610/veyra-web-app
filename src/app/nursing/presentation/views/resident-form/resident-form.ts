@@ -6,7 +6,6 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { MatCard } from '@angular/material/card';
 import { NursingStore } from '../../../application/nursing.store';
 import { PersonProfileForm, PersonProfileFormValue } from '../../../../profiles/presentation/components/person-profile-form/person-profile-form';
@@ -25,7 +24,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     MatError,
     MatButton,
     MatIcon,
-    LayoutNursingHome,
     MatCard,
     MatLabel,
     PersonProfileForm

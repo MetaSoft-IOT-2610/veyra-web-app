@@ -32,8 +32,12 @@
     "staff": "Staff",
     "care-management": "Care Management",
     "room": "Rooms",
-    "activities": "Activities",
-    "relatives": "Relatives"
+    "hide-menu": "Hide menu",
+    "show-menu": "Show menu",
+    "open-menu": "Open menu",
+    "language": "Interface language",
+    "lang-es": "Spanish",
+    "lang-en": "English"
   },
   "page-not-found": {
     "title": "Page not found",
@@ -42,6 +46,17 @@
   },
   "toolbar": {
     "logoAlt": "logo"
+  },
+  "iam": {
+    "profile": "Profile",
+    "sign-out": "Sign out",
+    "user-menu": "Account menu",
+    "role": {
+      "admin-support": "Administrative support",
+      "admin-support-panel": "Administrative support",
+      "user": "User",
+      "user-panel": "User"
+    }
   },
   "welcome": {
     "title": "We care for those<br>you love, inform those<br>who wait",
@@ -376,64 +391,5 @@
       "not-found-message": "Could not find the requested staff member information",
       "no-staff": "No staff members registered."
     }
-  },
-  "activities": {
-    "title": "Activities",
-    "filters": {
-      "all": "All",
-      "recreational": "Recreational",
-      "medical": "Medical",
-      "physical": "Physical",
-      "social": "Social"
-    },
-    "showing": "Showing {{ count }} activities",
-    "no-activities": "No activities registered.",
-    "columns": {
-      "activity": "ACTIVITY",
-      "category": "CATEGORY",
-      "datetime": "DATE AND TIME",
-      "status": "STATUS",
-      "actions": "ACTIONS"
-    },
-    "status": {
-      "pending": "Scheduled",
-      "in_progress": "In progress",
-      "completed": "Completed"
-    },
-    "types": {
-      "meal": "Medical",
-      "bath": "Physical",
-      "risk_profile": "Recreational"
-    },
-    "detail": {
-      "title": "Activity details",
-      "name-label": "NAME OF THE ACTIVITY",
-      "date-label": "DATE AND TIME",
-      "category-label": "CATEGORY",
-      "description-label": "DESCRIPTION",
-      "close": "Close",
-      "edit": "Edit activity"
-    },
-    "add": {
-      "title": "Add activity",
-      "subtitle": "Set up a new activity for the residents' calendar.",
-      "name": "Activity name",
-      "name-placeholder": "e.g. Morning Painting Workshop",
-      "description": "Activity description",
-      "description-placeholder": "Detail the objectives and materials needed for this session...",
-      "date": "Date",
-      "hour": "Hour",
-      "category": "Category",
-      "save": "Save activity",
-      "cancel": "Cancel"
-    },
-    "edit": {
-      "title": "Update activity",
-      "subtitle": "Set up a new activity for the residents' calendar.",
-      "save": "Update Activity",
-      "cancel": "Cancel"
-    },
-    "add-new": "Add New",
-    "filter-btn": "Filter"
   }
 }
