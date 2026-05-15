@@ -12,6 +12,17 @@
   color: #0d2e73;
 }
 
+.section-container {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  margin: 24px 40px 16px 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0d2e73;
+}
+
 .search-container {
   margin-right: 40px;
 }
@@ -57,7 +68,9 @@
 }
 
 /* Table Styling */
-.rooms-table {
+.rooms-table,
+.allergies-table,
+.vital-signs-table {
   width: 100%;
   background: white;
 }
@@ -220,7 +233,9 @@
     overflow-x: auto;
   }
 
-  .rooms-table {
+  .rooms-table,
+  .allergies-table,
+  .vital-signs-table {
     min-width: 800px;
   }
 }
@@ -234,6 +249,10 @@
 @media (max-width: 768px) {
   .title {
     font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
   }
 
   .content-with-toolbar {
@@ -263,6 +282,10 @@
 @media (max-width: 480px) {
   .title {
     font-size: 1.75rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
   }
 
   .search-container mat-form-field {
@@ -295,6 +318,10 @@
     font-size: 1.5rem;
   }
 
+  .section-title {
+    font-size: 1.1rem;
+  }
+
   .floating-actions {
     bottom: 12px;
     right: 12px;
@@ -312,7 +339,10 @@
     padding: 6px 8px !important;
   }
 
-  .rooms-table {
-    min-width: 700px;
+  .rooms-table,
+  .allergies-table,
+  .vital-signs-table {
+    width: 100%;
+    background: white;
   }
 }

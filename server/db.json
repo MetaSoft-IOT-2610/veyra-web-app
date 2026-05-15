@@ -1,11 +1,113 @@
 {
   "contracts": [],
   "staff": [],
-  "nursing-homes": [],
-  "residents": [],
-  "rooms": [],
+  "nursing-homes": [
+    {
+      "id": 0,
+      "name": "Veyra Nursing Home",
+      "address": "Av. Primavera 123, Lima"
+    }
+  ],
+  "residents": [
+    {
+      "id": 1,
+      "fullName": "María Fernández",
+      "age": 77,
+      "roomId": 1,
+      "nursingHomeId": 0
+    },
+    {
+      "id": 2,
+      "fullName": "Carlos Ramírez",
+      "age": 82,
+      "roomId": 2,
+      "nursingHomeId": 0
+    }
+  ],
+  "rooms": [
+    {
+      "id": 1,
+      "nursingHomeId": 0,
+      "number": "A-101",
+      "status": "Occupied"
+    },
+    {
+      "id": 2,
+      "nursingHomeId": 0,
+      "number": "A-102",
+      "status": "Occupied"
+    }
+  ],
   "business-profiles": [],
   "person-profiles": [],
   "medications": [],
-  "activities": []
+  "activities": [],
+  "devices": [],
+  "relatives": [],
+
+  "allergies": [
+    {
+      "id": 1,
+      "residentId": 1,
+      "allergen": "Penicillin",
+      "reaction": "Skin rash",
+      "severity": "High",
+      "diagnosedAt": "2025-04-10",
+      "notes": "Avoid penicillin-based medication."
+    },
+    {
+      "id": 2,
+      "residentId": 1,
+      "allergen": "Peanuts",
+      "reaction": "Breathing difficulty",
+      "severity": "Critical",
+      "diagnosedAt": "2024-11-20",
+      "notes": "Requires immediate medical attention in case of exposure."
+    },
+    {
+      "id": 3,
+      "residentId": 2,
+      "allergen": "Dust mites",
+      "reaction": "Sneezing and irritation",
+      "severity": "Medium",
+      "diagnosedAt": "2025-01-18",
+      "notes": "Keep room clean and ventilated."
+    }
+  ],
+
+  "vital-signs": [
+    {
+      "id": 1,
+      "residentId": 1,
+      "temperature": 36.8,
+      "heartRate": 78,
+      "bloodPressure": "120/80",
+      "oxygenSaturation": 98,
+      "respiratoryRate": 16,
+      "registeredAt": "2026-05-15T09:30:00",
+      "status": "Normal"
+    },
+    {
+      "id": 2,
+      "residentId": 1,
+      "temperature": 37.9,
+      "heartRate": 92,
+      "bloodPressure": "135/85",
+      "oxygenSaturation": 95,
+      "respiratoryRate": 20,
+      "registeredAt": "2026-05-15T12:00:00",
+      "status": "Warning"
+    },
+    {
+      "id": 3,
+      "residentId": 2,
+      "temperature": 36.5,
+      "heartRate": 74,
+      "bloodPressure": "118/78",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 15,
+      "registeredAt": "2026-05-15T10:15:00",
+      "status": "Normal"
+    }
+  ]
 }

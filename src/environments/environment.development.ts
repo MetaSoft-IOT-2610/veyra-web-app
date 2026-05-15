@@ -37,6 +37,14 @@ export const environment = {
   platformProviderRoomsEndpointPath: '/rooms',
   platformProviderRelativesEndpointPath: '/relatives',
 
+  // Healt Bounded Context
+  platformProviderAllergiesEndpointPath: '/allergies',
+  platformProviderVitalSignsEndpointPath: '/vital-signs',
+  platformProviderHealthRecordsEndpointPath: '/health-records',
+  platformProviderHealthAlertsEndpointPath: '/health-alerts',
+  platformProviderHealtResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
+  platformProviderHealtResidentVitalSignsEndpointPath: '/residents/{residentId}/vital-signs',
+
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
   platformProviderPersonProfilesEndpointPath: '/person-profiles',

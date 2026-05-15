@@ -1,0 +1,61 @@
+<section class="health-section">
+  <div class="health-section__header">
+    <h2>Vital Signs</h2>
+    <span>Healt BC</span>
+  </div>
+
+  <div *ngIf="isLoading" class="health-message">
+    Loading vital signs...
+  </div>
+
+  <div *ngIf="errorMessage" class="health-message health-message--error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && vitalSigns.length === 0" class="health-message">
+    No vital signs registered for this resident.
+  </div>
+
+  <div *ngIf="!isLoading && vitalSigns.length > 0" class="vital-sign-list">
+    <article *ngFor="let vitalSign of vitalSigns" class="vital-sign-card">
+      <div class="vital-sign-card__top">
+        <h3>{{ vitalSign.status }}</h3>
+        <span [class]="'status status--' + vitalSign.status.toLowerCase()">
+          {{ vitalSign.status }}
+        </span>
+      </div>
+
+      <div class="vital-grid">
+        <div class="vital-item">
+          <span>Temperature</span>
+          <strong>{{ vitalSign.temperature }} °C</strong>
+        </div>
+
+        <div class="vital-item">
+          <span>Heart Rate</span>
+          <strong>{{ vitalSign.heartRate }} bpm</strong>
+        </div>
+
+        <div class="vital-item">
+          <span>Blood Pressure</span>
+          <strong>{{ vitalSign.bloodPressure }}</strong>
+        </div>
+
+        <div class="vital-item">
+          <span>Oxygen Saturation</span>
+          <strong>{{ vitalSign.oxygenSaturation }}%</strong>
+        </div>
+
+        <div class="vital-item">
+          <span>Respiratory Rate</span>
+          <strong>{{ vitalSign.respiratoryRate }}</strong>
+        </div>
+
+        <div class="vital-item">
+          <span>Registered At</span>
+          <strong>{{ vitalSign.registeredAt }}</strong>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

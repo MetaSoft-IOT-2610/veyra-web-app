@@ -1,0 +1,44 @@
+<section class="health-section">
+  <div class="health-section__header">
+    <h2>Allergies</h2>
+    <span>Healt BC</span>
+  </div>
+
+  <div *ngIf="isLoading" class="health-message">
+    Loading allergies...
+  </div>
+
+  <div *ngIf="errorMessage" class="health-message health-message--error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && allergies.length === 0" class="health-message">
+    No allergies registered for this resident.
+  </div>
+
+  <div *ngIf="!isLoading && allergies.length > 0" class="allergy-list">
+    <article *ngFor="let allergy of allergies" class="allergy-card">
+      <div class="allergy-card__top">
+        <h3>{{ allergy.allergen }}</h3>
+        <span [class]="'severity severity--' + allergy.severity.toLowerCase()">
+          {{ allergy.severity }}
+        </span>
+      </div>
+
+      <p>
+        <strong>Reaction:</strong>
+        {{ allergy.reaction }}
+      </p>
+
+      <p>
+        <strong>Diagnosed at:</strong>
+        {{ allergy.diagnosedAt }}
+      </p>
+
+      <p>
+        <strong>Notes:</strong>
+        {{ allergy.notes }}
+      </p>
+    </article>
+  </div>
+</section>
