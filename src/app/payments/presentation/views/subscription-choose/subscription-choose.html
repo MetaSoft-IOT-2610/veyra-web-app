@@ -1,39 +1,58 @@
 <div class="choose-container">
+  <div class="header-section">
+    <span class="badge">Suscripciones Veyra</span>
+    <h1 class="main-title">Eleva el estándar de cuidado</h1>
 
-  <h1 class="title">
-    Choose the right plan for your care needs
-  </h1>
-
-  <p class="subtitle">
-    Select between monthly or yearly plans designed for Families and Nursing Homes.
-  </p>
-
-  <div class="plans-grid">
-
-    <!-- FAMILY PLAN -->
-    <div class="plan-card">
-      <h2>Family Plan</h2>
-      <p class="price">$30 <span>/ month</span></p>
-      <p class="price yearly">$300 <span>/ year (15% OFF)</span></p>
-
-      <button class="details-btn"
-              onclick="window.location.href='/payments/plans/family'">
-        View details
-      </button>
+    <div class="toggle-container">
+      <span [class.active]="!isAnnual">Mensual</span>
+      <label class="switch">
+        <input type="checkbox" (change)="togglePeriod()">
+        <span class="slider round"></span>
+      </label>
+      <span [class.active]="isAnnual">Anual <small class="save-tag">ahorra 15%</small></span>
     </div>
-
-    <!-- NURSING HOME PLAN -->
-    <div class="plan-card">
-      <h2>Nursing Home Plan</h2>
-      <p class="price">$300 <span>/ month</span></p>
-      <p class="price yearly">$3000 <span>/ year (15% OFF)</span></p>
-
-      <button class="details-btn"
-              onclick="window.location.href='/payments/plans/nursing-home'">
-        View details
-      </button>
-    </div>
-
   </div>
 
+  <div class="bento-grid">
+    <div class="bento-item family-card" (click)="goToPlan('family')">
+      <div class="card-content">
+        <div class="top-row">
+          <div class="icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
+          <span class="plan-label">Familiar</span>
+        </div>
+        <div class="mid-row">
+          <h3>Cuidado en el hogar</h3>
+          <p>Visibilidad total para familias que cuidan a sus seres queridos.</p>
+        </div>
+        <div class="bottom-row">
+          <div class="price-display">
+            <span class="amount">${{ isAnnual ? '300' : '30' }}</span>
+            <span class="period">/{{ isAnnual ? 'año' : 'mes' }}</span>
+          </div>
+          <button class="action-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bento-item nursing-card featured" (click)="goToPlan('nursing-home')">
+      <div class="card-content">
+        <div class="top-row">
+          <div class="icon-box"><i class="fa-solid fa-building-shield"></i></div>
+          <span class="plan-label">Institucional</span>
+          <div class="popular-tag">Más potente</div>
+        </div>
+        <div class="mid-row">
+          <h3>Centros de Reposo</h3>
+          <p>Gestión completa de residentes, personal clínico y reportes avanzados de salud.</p>
+        </div>
+        <div class="bottom-row">
+          <div class="price-display">
+            <span class="amount">${{ isAnnual ? '3000' : '300' }}</span>
+            <span class="period">/{{ isAnnual ? 'año' : 'mes' }}</span>
+          </div>
+          <button class="cta-btn">Empezar ahora</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

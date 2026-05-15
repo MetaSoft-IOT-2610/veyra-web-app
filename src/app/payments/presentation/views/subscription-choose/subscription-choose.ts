@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -7,7 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./subscription-choose.css']
 })
 export class SubscriptionChoosePage {
-  constructor() {
-    console.log("Subscription Choose Page loaded");
+  isAnnual: boolean = false;
+
+  constructor(private router: Router) {}
+
+  togglePeriod() {
+    this.isAnnual = !this.isAnnual;
+  }
+
+  goToPlan(type: 'family' | 'nursing-home') {
+    const cycle = this.isAnnual ? 'annual' : 'monthly';
+    this.router.navigate(['/payments/plans', type === 'family' ? 'family' : 'nursing-home']);
   }
 }
