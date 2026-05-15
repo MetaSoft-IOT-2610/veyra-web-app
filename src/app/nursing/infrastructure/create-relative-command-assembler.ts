@@ -5,8 +5,11 @@ export class CreateRelativeCommandAssembler {
 
   toResourceFromEntity(command: CreateRelativeCommand): RelativeCommandResource {
     return {
-      name: command.name,
-      email: command.email
+      firstName: command.firstName,
+      lastName: command.lastName,
+      email: command.email,
+      // Use a safe cast to avoid TS errors if the class does not expose the property
+      residentId: (command as any).residentId
     } as RelativeCommandResource;
   }
 }

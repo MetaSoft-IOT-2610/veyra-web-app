@@ -7,8 +7,7 @@ import {CreateRelativeCommand} from '../domain/model/create-relative.command';
 import {Relative} from '../domain/model/relative.entity';
 import {CreateRelativeCommandAssembler} from './create-relative-command-assembler';
 
-const relativeCommandEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderResidentRelativesEndpointPath}`;
-const relativeEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderRelativesEndpointPath}`;
+const relativeCommandEndpointUrl = `${environment.platformProviderFakeApiBaseUrl}${environment.platformProviderNursingHomeRelativesEndpointPath}`;
 
 export class CreateRelativeCommandApiEndpoint extends ErrorHandlingEnabledBaseType {
   private readonly relativeAssembler = new RelativeAssembler();
@@ -18,22 +17,26 @@ export class CreateRelativeCommandApiEndpoint extends ErrorHandlingEnabledBaseTy
     super();
   }
 
-  //POST: /api/v1/residents/{residentId}/relatives
-  create(residentId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative>{
+  //POST: /api/v1/nursing-homes/{nursingHomeId}/relatives
+  create(nursingHomeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
     const resource = this.relativeCommandAssembler.toResourceFromEntity(createRelativeCommand);
-    const url = relativeCommandEndpointUrl.replace('{residentId}', residentId.toString());
-    return this.http.post<Relative>(url, resource).pipe(map(createdRelative => this.relativeAssembler.toEntityFromResource(createdRelative)),
-    catchError(this.handleError('Failed to create relative')));
+    const url = relativeCommandEndpointUrl.replace('{nursingHomeId}', nursingHomeId.toString());
+    const payload = { ...resource, 'nursing-homeId': nursingHomeId };
+    return this.http.post<Relative>(url, payload).pipe(
+      map(createdRelative => this.relativeAssembler.toEntityFromResource(createdRelative)),
+      catchError(this.handleError('Failed to create relative'))
+    );
   }
 
-
-  //UPDATE /api/v1/residents/{residentId}/relatives/{relativeId}
-  update(residentId: number, relativeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative>{
+  //UPDATE /api/v1/nursing-homes/{nursingHomeId}/relatives/{relativeId}
+  update(nursingHomeId: number, relativeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
     const resource = this.relativeCommandAssembler.toResourceFromEntity(createRelativeCommand);
-    const url = relativeEndpointUrl.replace('{residentId}', residentId.toString()).replace('{relativeId}', relativeId.toString());
-    return this.http.put<Relative>(url, resource).pipe(map(updatedRelative => this.relativeAssembler.toEntityFromResource(updatedRelative)),
-    catchError(this.handleError('Failed to update relative')));
+    const url = `${relativeCommandEndpointUrl}/${relativeId}`.replace('{nursingHomeId}', nursingHomeId.toString());
+    const payload = { ...resource, 'nursing-homeId': nursingHomeId };
+    return this.http.put<Relative>(url, payload).pipe(
+      map(updatedRelative => this.relativeAssembler.toEntityFromResource(updatedRelative)),
+      catchError(this.handleError('Failed to update relative'))
+    );
   }
-
 
 }

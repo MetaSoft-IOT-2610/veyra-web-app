@@ -1,14 +1,18 @@
 export class Relative {
   private _id: number;
-  private _name: string;
+  private _firstName: string;
+  private _lastName: string;
   private _email : string;
   private _residentId: number;
+  private _nursingHomeId: number;
 
-  constructor(relative: { id: number, name: string, email: string, residentId: number }) {
+  constructor(relative: { id: number, firstName: string,lastName:string, email: string, residentId: number, nursingHomeId?: number }) {
     this._id = relative.id;
-    this._name = relative.name;
+    this._firstName = relative.firstName;
+    this._lastName = relative.lastName;
     this._email = relative.email;
     this._residentId = relative.residentId;
+    this._nursingHomeId = relative.nursingHomeId ?? 0;
   }
 
   get id(): number {
@@ -19,12 +23,18 @@ export class Relative {
     this._id = value;
   }
 
-  get name(): string {
-    return this._name;
+  get firstName(): string {
+    return this._firstName;
+  }
+  set firstName(value: string) {
+    this._firstName = value;
   }
 
-  set name(value: string) {
-    this._name = value;
+  get lastName(): string {
+    return this._lastName;
+  }
+  set lastName(value: string) {
+    this._lastName = value;
   }
 
   get email(): string {
@@ -40,6 +50,14 @@ export class Relative {
   }
   set residentId(value: number) {
     this._residentId = value;
+  }
+
+  get nursingHomeId(): number {
+    return this._nursingHomeId;
+  }
+
+  set nursingHomeId(value: number) {
+    this._nursingHomeId = value;
   }
 
 }
