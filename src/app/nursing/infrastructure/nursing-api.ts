@@ -175,12 +175,16 @@ export class NursingApi extends BaseApi{
     return this._vitalSignsApiEndpoint.getAll(residentId);
   }
 
-  createRelative(residentId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
-    return this._createRelativeCommandsApiEndpoint.create(residentId, createRelativeCommand);
+  createRelative(nursingHomeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
+    return this._createRelativeCommandsApiEndpoint.create(nursingHomeId, createRelativeCommand);
   }
 
   getRelativesByNursingHomeId(nursingHomeId: number): Observable<Relative[]> {
     return this._relativeApiEndpoint.getRelativesByNursingHomeId(nursingHomeId);
+  }
+
+  updateRelativeByNursingHomeId(nursingHomeId: number, relativeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
+    return this._createRelativeCommandsApiEndpoint.update(nursingHomeId, relativeId, createRelativeCommand);
   }
 
 }

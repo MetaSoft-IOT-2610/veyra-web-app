@@ -16,6 +16,7 @@ import {CreateAllergyCommand} from '../domain/model/create-allergy.command';
 import {Device} from '../domain/model/device.entity';
 import {VitalSign} from '../domain/model/vital-sign.entity';
 import {Relative} from '../domain/model/relative.entity';
+import {CreateRelativeCommand} from '../domain/model/create-relative.command';
 
 /*
 * @purpose: Manage the state of nursing homes in the application
@@ -44,7 +45,7 @@ export class NursingStore {
   readonly residents = this._residentSignal.asReadonly();
   readonly rooms = this._roomsSignal.asReadonly();
   readonly vitalSigns = this._vitalSignsSignal.asReadonly();
-  readonly relative = this._relativeSignal.asReadonly();
+  readonly relatives = this._relativeSignal.asReadonly();
 
   constructor(private nursingApi: NursingApi) {}
 
@@ -322,6 +323,56 @@ export class NursingStore {
       },
       error: err => {
         this._errorSignal.set(this.formatError(err, 'Failed to load vital signs'));
+        this._loadingSignal.set(false);
+      }
+    });
+  }
+
+  /**
+   * Loads all relatives for a given nursing home ID from the API into the store.
+   * @param nursingHomeID
+   */
+  loadRelativesByNursingHomeId(nursingHomeID: number): void {
+    this._loadingSignal.set(true);
+    this._errorSignal.set(null);
+    this.nursingApi.getRelativesByNursingHomeId(nursingHomeID).pipe().subscribe({
+      next: relatives => {
+        this._relativeSignal.set(relatives);
+        this._loadingSignal.set(false);
+      },
+      error: err => {
+        this._errorSignal.set(this.formatError(err, 'Failed to load relatives'));
+        this._loadingSignal.set(false);
+      }
+    });
+  }
+
+  addRelative(nursingHomeId: number, createRelativeCommand: CreateRelativeCommand): void {
+    this._loadingSignal.set(true);
+    this._errorSignal.set(null);
+    this.nursingApi.createRelative(nursingHomeId, createRelativeCommand).pipe(retry(2)).subscribe({
+      next: createdRelative => {
+        this._relativeSignal.update(relatives => [...relatives, createdRelative]);
+        this._loadingSignal.set(false);
+      },
+      error: err => {
+        this._errorSignal.set(this.formatError(err, 'Failed to create relative'));
+        this._loadingSignal.set(false);
+      }
+    });
+  }
+
+  updateRelative(nursingHomeId: number, relativeId: number, createRelativeCommand: CreateRelativeCommand): void {
+    this._loadingSignal.set(true);
+    this._errorSignal.set(null);
+    this.nursingApi.updateRelativeByNursingHomeId(nursingHomeId, relativeId, createRelativeCommand).pipe(retry(2)).subscribe({
+      next: updatedRelative => {
+        this._relativeSignal.update(relatives =>
+          relatives.map(rel => rel.id === updatedRelative.id ? updatedRelative : rel));
+        this._loadingSignal.set(false);
+      },
+      error: err => {
+        this._errorSignal.set(this.formatError(err, 'Failed to update relative'));
         this._loadingSignal.set(false);
       }
     });
