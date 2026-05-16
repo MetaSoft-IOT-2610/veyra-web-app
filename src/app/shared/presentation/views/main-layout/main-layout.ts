@@ -62,6 +62,9 @@ export class MainLayout implements OnInit, AfterViewInit {
     { label: 'nav.room', icon: 'meeting_room', link: '/nursing/rooms', color: '#5FC2BA' },
     { label: 'nav.activities', icon: 'event_note', link: '/activities', color: '#5FC2BA' },
     { label: 'nav.alerts', icon: 'notifications_active', link: '/alerts', color: '#5FC2BA' },
+    { label: 'nav.activities', icon: 'event_note', link: '/activities', color: '#5FC2BA' },
+    { label: 'nav.alerts', icon: 'notifications_active', link: '/alerts', color: '#5FC2BA' },
+
   ];
 
   constructor(
