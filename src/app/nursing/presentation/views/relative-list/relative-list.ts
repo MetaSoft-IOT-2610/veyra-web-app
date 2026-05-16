@@ -1,5 +1,4 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { Router } from '@angular/router';
 import { NursingStore } from '../../../application/nursing.store';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
@@ -18,7 +17,6 @@ import { Relative } from '../../../domain/model/relative.entity';
   selector: 'app-relative-list',
   standalone: true,
   imports: [
-    LayoutNursingHome,
     MatError,
     MatIcon,
     MatLabel,
@@ -40,7 +38,6 @@ export class RelativeList {
   protected router = inject(Router);
   nursingHomeId: number = Number(localStorage.getItem('nursingHomeId') || 0);
 
-  // Llama a la carga sólo en ngOnInit (no duplicar en constructor)
   ngOnInit() {
     if (this.nursingHomeId) {
       this.store.loadRelativesByNursingHomeId(this.nursingHomeId);

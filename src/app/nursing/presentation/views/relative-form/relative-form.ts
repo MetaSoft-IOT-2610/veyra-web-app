@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { NursingStore } from '../../../application/nursing.store';
 import { ProfilesStore } from '../../../../profiles/application/profiles.store';
 import { Resident } from '../../../domain/model/resident.entity';
@@ -32,7 +31,6 @@ export interface ResidentWithProfile {
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    LayoutNursingHome,
   ],
   templateUrl: './relative-form.html',
   styleUrls: ['./relative-form.css']
