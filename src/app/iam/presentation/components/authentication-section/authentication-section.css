@@ -1,3 +1,111 @@
+/* Paleta alineada con toolbar / language-switcher: fondos claros, #0d2e73 / #5f6368 texto */
+
+:host {
+  display: block;
+}
+
+:host-context(.toolbar) {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+/* ========== Sesión iniciada (toolbar): mismo lenguaje visual que lang-segment ========== */
+.user-account {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.user-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(320px, 100%);
+  padding: 6px 10px 6px 8px;
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  background: #fff;
+  color: #0d2e73;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.2;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.user-menu-trigger:hover {
+  border-color: rgba(112, 177, 230, 0.55);
+  background: rgba(112, 177, 230, 0.06);
+  box-shadow: 0 2px 8px rgba(13, 46, 115, 0.08);
+}
+
+.user-menu-trigger:focus-visible {
+  outline: 2px solid #0d2e73;
+  outline-offset: 2px;
+}
+
+.user-menu-trigger__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #70b1e6;
+  flex-shrink: 0;
+}
+
+.user-menu-trigger__avatar mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #fff;
+}
+
+.user-menu-trigger__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  text-align: left;
+}
+
+.user-menu-trigger__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0d2e73;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-menu-trigger__role {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5f6368;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-menu-trigger__chevron {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #5f6368;
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
+/* ========== Sin sesión (home: columna centrada; toolbar: fila compacta) ========== */
 .auth-container {
   display: flex;
   flex-direction: column;
@@ -6,6 +114,17 @@
   margin-top: 40px;
   max-width: 500px;
   animation: fadeInUp 0.6s ease-out;
+}
+
+:host-context(.toolbar) .auth-container {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 0;
+  max-width: none;
+  width: auto;
+  animation: none;
 }
 
 @keyframes fadeInUp {
@@ -19,7 +138,6 @@
   }
 }
 
-/* Sign In Section */
 .sign-in-section {
   display: flex;
   flex-direction: column;
@@ -61,7 +179,6 @@
   margin-right: 10px;
 }
 
-/* Divider */
 .divider {
   display: flex;
   align-items: center;
@@ -86,19 +203,27 @@
   letter-spacing: 0.5px;
 }
 
-/* Register Section */
 .register-section {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+:host-context(.toolbar) .register-section {
+  width: auto;
+  flex-wrap: nowrap;
+  gap: 8px;
+  justify-content: flex-end;
 }
 
 .register-btn {
   flex: 1;
+  min-width: 120px;
   max-width: 162px;
   height: 50px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   border-radius: 12px;
   border: 2px solid #70b1e6;
@@ -109,6 +234,30 @@
   letter-spacing: 0.5px;
 }
 
+:host-context(.toolbar) .register-btn {
+  flex: 0 0 auto;
+  min-width: auto;
+  max-width: none;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: #dadce0;
+  color: #0d2e73;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+:host-context(.toolbar) .register-btn:hover {
+  border-color: rgba(112, 177, 230, 0.55);
+  background: rgba(112, 177, 230, 0.1);
+  color: #0d2e73;
+  transform: none;
+  box-shadow: 0 1px 4px rgba(13, 46, 115, 0.08);
+}
+
 .register-btn:hover {
   background: #70b1e6;
   color: white;
@@ -116,23 +265,12 @@
   box-shadow: 0 4px 12px rgba(112, 177, 230, 0.3);
 }
 
-/* User Info Section (when signed in) */
-button[mat-button] {
-  color: #0d2e73;
-  font-weight: 600;
-  padding: 0.65rem 1.5rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  font-size: 15px;
-}
-
-button[mat-button]:hover {
-  background-color: rgba(112, 177, 230, 0.1);
-  color: #70b1e6;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
+  .user-menu-trigger__name,
+  .user-menu-trigger__role {
+    max-width: 120px;
+  }
+
   .auth-container {
     gap: 20px;
     margin-top: 36px;
@@ -150,12 +288,12 @@ button[mat-button]:hover {
   }
 
   .register-section {
-    gap: 14px;
+    gap: 10px;
   }
 
   .register-btn {
     height: 48px;
-    font-size: 14px;
+    font-size: 13px;
     max-width: 153px;
   }
 
@@ -163,9 +301,45 @@ button[mat-button]:hover {
     font-size: 14px;
     padding: 0 18px;
   }
+
+  :host-context(.toolbar) .auth-container {
+    margin-top: 0;
+    max-width: none;
+    gap: 8px;
+  }
+
+  :host-context(.toolbar) .register-section {
+    max-width: none;
+  }
+
+  :host-context(.toolbar) .register-btn {
+    height: 38px;
+    font-size: 10px;
+    max-width: none;
+  }
 }
 
 @media (max-width: 480px) {
+  .user-menu-trigger {
+    gap: 8px;
+    padding: 5px 8px 5px 6px;
+  }
+
+  .user-menu-trigger__avatar {
+    width: 34px;
+    height: 34px;
+  }
+
+  .user-menu-trigger__name {
+    font-size: 13px;
+    max-width: 100px;
+  }
+
+  .user-menu-trigger__role {
+    font-size: 9px;
+    max-width: 100px;
+  }
+
   .auth-container {
     gap: 18px;
     margin-top: 32px;
@@ -183,14 +357,26 @@ button[mat-button]:hover {
   }
 
   .register-section {
-    gap: 12px;
+    gap: 8px;
     max-width: 340px;
   }
 
   .register-btn {
     height: 46px;
-    font-size: 13px;
+    font-size: 12px;
     max-width: 164px;
+  }
+
+  :host-context(.toolbar) .auth-container {
+    margin-top: 0;
+    max-width: none;
+  }
+
+  :host-context(.toolbar) .register-btn {
+    height: 36px;
+    font-size: 9px;
+    padding: 0 8px;
+    max-width: none;
   }
 }
 
@@ -216,8 +402,14 @@ button[mat-button]:hover {
     max-width: 154px;
   }
 
-  button[mat-button] {
-    font-size: 14px;
-    padding: 0.5rem 1.25rem;
+  :host-context(.toolbar) .auth-container {
+    margin-top: 0;
+  }
+
+  :host-context(.toolbar) .register-btn {
+    height: 34px;
+    font-size: 8px;
+    padding: 0 6px;
+    max-width: none;
   }
 }

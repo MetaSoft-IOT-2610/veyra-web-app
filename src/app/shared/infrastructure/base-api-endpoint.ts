@@ -13,6 +13,7 @@ import {ErrorHandlingEnabledBaseType} from './error-handling-enabled-base-type';
  * @template TResponse - The response type extending BaseResponse.
  * @template TAssembler - The assembler type extending BaseAssembler.
  */
+
 export abstract class BaseApiEndpoint<
   TEntity extends BaseEntity,
   TResource extends BaseResource,
@@ -37,7 +38,6 @@ export abstract class BaseApiEndpoint<
   getAll() {
     return this.http.get<TResponse | TResource[]>(this.endpointUrl).pipe(
       map(response => {
-        console.log(response);
         if (Array.isArray(response)) {
           return response.map(resource => this.assembler.toEntityFromResource(resource));
         }

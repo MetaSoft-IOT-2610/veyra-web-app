@@ -13,6 +13,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "mock:alerts": "json-server src/app/alerts/server/db.json --routes src/app/alerts/server/routes.json --port 3001",
     "test": "ng test"
   },
   "prettier": {
@@ -29,14 +30,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/cdk": "^20.2.5",
-    "@angular/common": "^20.3.0",
-    "@angular/compiler": "^20.3.0",
-    "@angular/core": "^20.3.0",
-    "@angular/forms": "^20.3.0",
-    "@angular/material": "^20.2.5",
-    "@angular/platform-browser": "^20.3.0",
-    "@angular/router": "^20.3.0",
+    "@angular/cdk": "^20.2.14",
+    "@angular/common": "^20.3.21",
+    "@angular/compiler": "^20.3.21",
+    "@angular/core": "^20.3.21",
+    "@angular/forms": "^20.3.21",
+    "@angular/material": "^20.2.14",
+    "@angular/platform-browser": "^20.3.21",
+    "@angular/router": "^20.3.21",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "chart.js": "^4.3.0",
@@ -46,9 +47,9 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.3.3",
-    "@angular/cli": "^20.3.3",
-    "@angular/compiler-cli": "^20.3.0",
+    "@angular/build": "^20.3.26",
+    "@angular/cli": "^20.3.26",
+    "@angular/compiler-cli": "^20.3.21",
     "@types/jasmine": "~5.1.0",
     "baseline-browser-mapping": "^2.8.32",
     "jasmine-core": "~5.9.0",

@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { Toolbar } from '../../../../shared/presentation/components/toolbar/toolbar';
 import { Router } from '@angular/router';
 import { NursingStore } from '../../../application/nursing.store';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,7 +14,6 @@ import { retry } from 'rxjs';
 @Component({
   selector: 'app-nursing-home-form',
   imports: [
-    Toolbar,
     FormsModule,
     MatButton,
     MatCard,

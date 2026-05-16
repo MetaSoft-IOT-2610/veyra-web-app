@@ -1,48 +1,12 @@
 :host {
   display: inline-block;
+  animation: langFadeIn 0.35s ease-out;
 }
 
-::ng-deep mat-button-toggle-group {
-  border-radius: 10px !important;
-  border: 2px solid #e0e0e0 !important;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-::ng-deep mat-button-toggle-group:hover {
-  border-color: #70b1e6 !important;
-  box-shadow: 0 4px 12px rgba(112, 177, 230, 0.15);
-}
-
-::ng-deep mat-button-toggle {
-  border: none !important;
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  padding: 0.4rem 1rem !important;
-  transition: all 0.3s ease !important;
-  color: #666 !important;
-}
-
-::ng-deep mat-button-toggle:hover {
-  background-color: rgba(112, 177, 230, 0.1) !important;
-}
-
-::ng-deep mat-button-toggle.mat-button-toggle-checked {
-  background: #70b1e6 !important;
-  color: white !important;
-}
-
-::ng-deep .mat-button-toggle-label-content {
-  line-height: 1 !important;
-  padding: 0.3rem 0.6rem !important;
-}
-
-/* Animation */
-@keyframes slideIn {
+@keyframes langFadeIn {
   from {
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateX(-6px);
   }
   to {
     opacity: 1;
@@ -50,29 +14,66 @@
   }
 }
 
-:host {
-  animation: slideIn 0.4s ease-out;
+.lang-segment {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 999px;
+  border: 1px solid #dadce0;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  ::ng-deep mat-button-toggle {
-    font-size: 12px !important;
-    padding: 0.35rem 0.85rem !important;
-  }
+.lang-segment__btn {
+  margin: 0;
+  border: none;
+  background: transparent;
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #5f6368;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  min-width: 44px;
+  line-height: 1.2;
+  font-family: inherit;
+}
 
-  ::ng-deep .mat-button-toggle-label-content {
-    padding: 0.25rem 0.5rem !important;
+.lang-segment__btn + .lang-segment__btn {
+  border-left: 1px solid #e8eaed;
+}
+
+.lang-segment__btn:hover:not(.lang-segment__btn--active) {
+  background: rgba(112, 177, 230, 0.12);
+  color: #0d2e73;
+}
+
+.lang-segment__btn--active {
+  background: #70b1e6;
+  color: #fff;
+}
+
+.lang-segment__btn:focus-visible {
+  outline: 2px solid #0d2e73;
+  outline-offset: 2px;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .lang-segment__btn {
+    padding: 6px 12px;
+    font-size: 11px;
+    min-width: 40px;
   }
 }
 
 @media (max-width: 360px) {
-  ::ng-deep mat-button-toggle {
-    font-size: 11px !important;
-    padding: 0.3rem 0.7rem !important;
-  }
-
-  ::ng-deep .mat-button-toggle-label-content {
-    padding: 0.2rem 0.4rem !important;
+  .lang-segment__btn {
+    padding: 5px 10px;
+    font-size: 10px;
+    min-width: 36px;
   }
 }

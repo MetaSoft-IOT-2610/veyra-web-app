@@ -1,5 +1,9 @@
 export const environment = {
   production: true,
+  /** En producción suele mostrarse la sección IAM del toolbar cuando reactive el login real. */
+  showIamToolbar: true,
+  /** Nunca aplicar sesión simulada en producción. */
+  fallbackDevUserSession: false,
   platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderFakeApiBaseUrl: 'http://localhost:3000/api/v1',
 
@@ -44,5 +48,8 @@ export const environment = {
 
   // Activities Bounded Context
   platformProviderActivitiesEndpointPath: '/activities',
+
+  // Alerts Bounded Context
+  platformProviderAlertsEndpointPath: '/alerts',
 };
 

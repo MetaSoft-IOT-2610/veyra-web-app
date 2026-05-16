@@ -6,7 +6,6 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatCard } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,7 +23,6 @@ import { PersonProfileDetail } from '../../../../profiles/presentation/component
     MatCard,
     MatIcon,
     MatButton,
-    LayoutNursingHome,
     MatFormField,
     MatLabel,
     MatInput,

@@ -46,7 +46,7 @@ mat-spinner {
 /* Info Grid */
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 24px;
   margin: 0 auto 32px auto;
 }
@@ -258,7 +258,7 @@ mat-form-field {
 /* Responsive */
 @media (max-width: 1024px) {
   .info-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   }
 }
 

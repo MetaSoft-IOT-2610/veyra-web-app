@@ -33,7 +33,13 @@
     "care-management": "Care Management",
     "room": "Rooms",
     "activities": "Activities",
-    "relatives": "Relatives"
+    "alerts": "Alerts",
+    "hide-menu": "Hide menu",
+    "show-menu": "Show menu",
+    "open-menu": "Open menu",
+    "language": "Interface language",
+    "lang-es": "Spanish",
+    "lang-en": "English"
   },
   "page-not-found": {
     "title": "Page not found",
@@ -42,6 +48,17 @@
   },
   "toolbar": {
     "logoAlt": "logo"
+  },
+  "iam": {
+    "profile": "Profile",
+    "sign-out": "Sign out",
+    "user-menu": "Account menu",
+    "role": {
+      "admin-support": "Administrative support",
+      "admin-support-panel": "Administrative support",
+      "user": "User",
+      "user-panel": "User"
+    }
   },
   "welcome": {
     "title": "We care for those<br>you love, inform those<br>who wait",
@@ -436,42 +453,53 @@
     "add-new": "Add New",
     "filter-btn": "Filter"
   },
-  "relatives": {
-    "title": "Relatives",
-    "loading": "Loading information...",
-    "no-relatives": "No relatives registered.",
-    "add-relative": "Add relative",
-    "form": {
-      "required": "This field is required",
-      "invalid-email": "Invalid email",
-      "new-title": "New Relative",
-      "personal-info": "Personal Information",
-      "name": "Name",
-      "last-name": "Last Name",
-      "account-setup": "Account Setup",
-      "email": "Email",
-      "email-placeholder": "e.g. ",
-      "name-placeholder": "e.g. ",
-      "secure-self-setup": "Secure Self Setup",
-      "secure-self-setup-description": "An invitation link will be sent to this email for the user to\ncreate their own password.",
-      "resident-association": "Resident Association",
-      "linked-resident": "Linked Resident (Data Access Restriction)",
-      "select-resident": "Select Resident",
-      "unknown-resident": "Unknown Resident",
-      "phone": "Phone",
-      "phone-placeholder": "e.g. 123456789"
+  "alerts": {
+    "title": "Alerts Center",
+    "subtitle": "Monitoring of care staff reports and IoT telemetry.",
+    "filter-btn": "Filter",
+    "mark-all-read": "Mark all as read",
+    "loading": "Loading alerts...",
+    "empty": "No alerts at this time.",
+    "unread": "Unread",
+    "acknowledged": "Acknowledged",
+    "room": "Room",
+    "reported-by": "Reported by",
+    "summary": {
+      "critical": "Critical",
+      "warnings": "Warnings",
+      "reports": "App Reports"
     },
-    "buttons": {
-      "add": "Add New",
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "details": "View details",
-      "edit": "Edit",
-      "go-back": "Go Back",
-      "register": "Register Relative",
-      "search": "Search",
-      "search-info": "Enter the first or last name",
-      "change-resident": "Change Resident"
+    "filter": {
+      "all": "All",
+      "urgent": "Urgent",
+      "warning": "Warning",
+      "info": "Info"
+    },
+    "severity": {
+      "urgent": "Urgent",
+      "warning": "Warning",
+      "info": "Info",
+      "automatic": "Automatic"
+    },
+    "status": {
+      "unread": "Unread",
+      "read": "Read",
+      "acknowledged": "Acknowledged"
+    },
+    "action": {
+      "attend": "Attend Immediately",
+      "view-history": "View History",
+      "view-vitals": "View Vital Signs",
+      "contact-staff": "Contact Staff",
+      "acknowledge": "Acknowledge"
+    },
+    "detail": {
+      "description": "Description",
+      "resident": "Resident",
+      "reported-by": "Reported by",
+      "time": "Time",
+      "status": "Status",
+      "close": "Close"
     }
   }
 }
