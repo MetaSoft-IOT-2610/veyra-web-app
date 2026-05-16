@@ -8,7 +8,7 @@ export const environment = {
   production: true,
   showIamToolbar: true,
   fallbackDevUserSession: false,
-  platformProviderApiBaseUrl: 'REPLACE_WITH_YOUR_PRODUCTION_API_URL',
+  platformProviderApiBaseUrl: 'http://localhost:3000/api/v1',
 
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
@@ -40,7 +40,10 @@ export const environment = {
   platformProviderNursingHomesEndpointPath: '/nursing-homes',
   platformProviderResidentsEndpointPath: '/residents',
   platformProviderRoomsEndpointPath: '/rooms',
+  platformProviderRelativesEndpointPath: '/relatives',
+  platformProviderNursingHomeRelativesEndpointPath: '/nursing-homes/{nursingHomeId}/relatives',
 
+  platformProviderMonitoringResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/doctors/{doctorId}/monitoring-residents',
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
   platformProviderPersonProfilesEndpointPath: '/person-profiles',

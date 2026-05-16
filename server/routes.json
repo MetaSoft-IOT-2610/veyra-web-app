@@ -1,3 +1,18 @@
 {
+  "/api/v1/administrators/:administratorId/nursing-homes": "/administrator-nursing-home",
+  "/api/v1/nursing-homes/:nursingHomeId/doctors/:doctorId/monitoring-residents": "/doctor-monitoring",
+  "/api/v1/nursing-homes/1/analytics/staff-hires": "/analytics-staff-hires",
+  "/api/v1/nursing-homes/1/analytics/staff-terminations": "/analytics-staff-terminations",
+  "/api/v1/nursing-homes/1/analytics/residents-admissions": "/analytics-residents-admissions",
+  "/api/v1/nursing-homes/:nursingHomeId/relatives/:relativeId": "/relatives/:relativeId",
+  "/api/v1/nursing-homes/:nursingHomeId/relatives": "/relatives?nursing-homeId=:nursingHomeId",
+  "/api/v1/nursing-homes/:nursingHomeId/residents": "/residents?nursingHomeId=:nursingHomeId",
+  "/api/v1/nursing-homes/:nursingHomeId/rooms/:residentId": "/residents/:residentId",
+  "/api/v1/nursing-homes/:nursingHomeId/rooms": "/rooms?nursingHomeId=:nursingHomeId",
+  "/api/v1/nursing-homes/:nursingHomeId/staff": "/staff",
+  "/api/v1/residents/:residentId/medications": "/medications?residentId=:residentId",
+  "/api/v1/residents/:residentId/allergies": "/allergies?residentId=:residentId",
+  "/api/v1/residents/:residentId/relatives": "/relatives?residentId=:residentId",
+  "/api/v1/resident/:residentId/vital-signs": "/vital-signs?residentId=:residentId",
   "/api/v1/*": "/$1"
 }

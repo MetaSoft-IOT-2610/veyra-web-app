@@ -1,0 +1,155 @@
+<div class="page-wrapper">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-text">
+      <h1 class="page-title">Resident Management</h1>
+      <mat-divider></mat-divider>
+      <p class="page-subtitle">Real-time vital signs monitoring - Unit 4</p>
+    </div>
+    <div class="header-actions">
+      <button mat-stroked-button class="btn-prescribe">Prescribe</button>
+      <button mat-flat-button color="primary" class="btn-filter">
+        <mat-icon>filter_list</mat-icon>
+        Filter
+      </button>
+    </div>
+  </div>
+
+  <!-- Table Card -->
+  <mat-card class="table-card">
+    <mat-card-header>
+      <mat-card-title>Real-time Telemetry</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <!-- Loading Spinner -->
+      @if (loading()) {
+        <div class="loading-container">
+          <mat-spinner diameter="48"></mat-spinner>
+        </div>
+      }
+
+      <!-- Error Message -->
+      @if (error()) {
+        <div class="error-banner">
+          <mat-icon color="warn">error_outline</mat-icon>
+          <span>{{ error() }}</span>
+        </div>
+      }
+
+      <!-- Table -->
+      @if (!loading() && !error()) {
+        <div class="table-container">
+          <table mat-table [dataSource]="pagedRows()" class="monitoring-table">
+            <!-- Después (correcto - fullName viene de PersonProfile) -->
+            <ng-container matColumnDef="fullName">
+              <th mat-header-cell *matHeaderCellDef>Paciente</th>
+              <td mat-cell *matCellDef="let row">{{ row.fullName }}</td>
+            </ng-container>
+            <ng-container matColumnDef="room">
+              <th mat-header-cell *matHeaderCellDef>Room</th>
+              <td mat-cell *matCellDef="let row">
+                <span class="room-chip">{{ row.roomNumber ?? '—' }}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let row">
+                <span class="status-chip" [ngClass]="getStatusClass(row.status)">
+                  {{ row.status ?? 'Unknown' }}
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="heartRate">
+              <th mat-header-cell *matHeaderCellDef>Heart Rate</th>
+              <td mat-cell *matCellDef="let row">
+                @if (row.heartRate != null) {
+                  <span class="vital-chip" [ngClass]="getHeartRateClass(row.heartRate)">
+                    {{ row.heartRate }} BPM
+                  </span>
+                } @else {
+                  <span class="no-data">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="temperature">
+              <th mat-header-cell *matHeaderCellDef>Temperature</th>
+              <td mat-cell *matCellDef="let row">
+                @if (row.temperature != null) {
+                  {{ row.temperature }}°C
+                } @else {
+                  <span class="no-data">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="oxygen">
+              <th mat-header-cell *matHeaderCellDef>Oxygen</th>
+              <td mat-cell *matCellDef="let row">
+                @if (row.oxygenLevel != null) {
+                  <span class="vital-chip" [ngClass]="getOxygenClass(row.oxygenLevel)">
+                    {{ row.oxygenLevel }}%
+                  </span>
+                } @else {
+                  <span class="no-data">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-stroked-button color="primary" (click)="onSeeResident(row.residentId)">
+                  See
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell empty-state" [attr.colspan]="displayedColumns.length">
+                <mat-icon>people_outline</mat-icon>
+                <p>No residents assigned to this doctor.</p>
+              </td>
+            </tr>
+
+          </table>
+        </div>
+
+        <div class="pagination-bar">
+          <span class="pagination-info">
+            Showing {{ startIndex() + 1 }} to {{ endIndex() }} of {{ totalItems() }} residents
+          </span>
+          <div class="pagination-controls">
+            <button mat-stroked-button
+                    [disabled]="currentPage() === 1"
+                    (click)="changePage(currentPage() - 1)">
+              Previous
+            </button>
+            @for (page of pages(); track page) {
+              <button mat-flat-button
+                      [color]="page === currentPage() ? 'primary' : ''"
+                      (click)="changePage(page)">
+                {{ page }}
+              </button>
+            }
+            <button mat-stroked-button
+                    [disabled]="currentPage() === totalPages()"
+                    (click)="changePage(currentPage() + 1)">
+              Next
+            </button>
+          </div>
+        </div>
+      }
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

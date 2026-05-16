@@ -1,0 +1,204 @@
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.form-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.relative-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.info-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.full-width-card {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Card header */
+.card-header-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 0.25rem;
+}
+
+.card-header-custom h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Colored icon wrappers */
+.icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.icon-wrapper.person   { background-color: #3b82f6; }
+.icon-wrapper.account  { background-color: #8b5cf6; }
+.icon-wrapper.link     { background-color: #14b8a6; }
+
+/* Card body */
+.card-body {
+  padding: 1rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.info-grid-inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1rem;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-row mat-form-field {
+  width: 100%;
+}
+
+/* Secure setup banner */
+.secure-setup-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #166534;
+}
+
+.secure-setup-banner .secure-icon {
+  color: #16a34a;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.secure-setup-banner strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.secure-setup-banner p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #15803d;
+}
+
+/* Section label */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  margin: 0 0 0.5rem;
+}
+
+/* Linked resident card */
+.linked-resident-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  background-color: #fafafa;
+}
+
+.resident-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.resident-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1f2937;
+}
+
+.resident-meta {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Select resident button */
+.select-resident-btn {
+  width: 100%;
+  border-style: dashed !important;
+  color: #6b7280;
+}
+
+/* Resident dropdown */
+.resident-dropdown {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 0.25rem;
+}
+
+.resident-option {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #374151;
+  transition: background-color 0.15s;
+}
+
+.resident-option:hover {
+  background-color: #f3f4f6;
+}
+
+.resident-option.selected {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 500;
+}
+
+/* Spacer & action buttons */
+.space {
+  height: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-bottom: 2rem;
+}

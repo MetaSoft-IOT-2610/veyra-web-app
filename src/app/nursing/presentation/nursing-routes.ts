@@ -25,6 +25,14 @@ const assignRoomForm = () =>
   import('./views/assign-room-form/assign-room-form').then(m => m.AssignRoomForm);
 const deviceList = () =>
   import('./views/device-list/device-list').then(m => m.DeviceList);
+const relativeList = () =>
+  import('./views/relative-list/relative-list').then(m => m.RelativeList);
+const relativeForm = () =>
+  import('./views/relative-form/relative-form').then(m => m.RelativeForm);
+
+const residentMonitoring = () =>
+  import('./views/resident-monitoring-page/resident-monitoring-page')
+    .then(m => m.ResidentMonitoringPage);
 
 const baseTitle = 'Veyra';
 const nursingRoutes: Routes = [
@@ -42,6 +50,9 @@ const nursingRoutes: Routes = [
   { path: 'residents/:id/medications',          loadComponent: medicationList,        title: `Medications | ${baseTitle}` },
   { path: 'residents/:id/medications/new',      loadComponent: medicationForm,        title: `New Medication | ${baseTitle}` },
   { path: 'devices',                            loadComponent: deviceList,            title: `Devices | ${baseTitle}` },
+  { path: 'relatives',                          loadComponent: relativeList,          title: `Relatives | ${baseTitle}` },
+  { path: 'relatives/new',                      loadComponent: relativeForm,          title: `New Relative | ${baseTitle}` },
+  { path: 'my-patients', loadComponent: residentMonitoring, title: `My Patients | ${baseTitle}` },
 ];
 
 export { nursingRoutes };
