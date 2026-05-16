@@ -59,7 +59,7 @@ export class RelativeForm {
 
   constructor() {
 
-    const nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
+    const nursingHomeId = 0;
     if (nursingHomeId) {
       this.nursingStore.loadResidentsByNursingHome(nursingHomeId);
     }
@@ -88,11 +88,6 @@ export class RelativeForm {
       return;
     }
 
-    const nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
-    if (!nursingHomeId) {
-      console.error('Nursing home ID not found in local storage');
-      return;
-    }
 
     const command = new CreateRelativeCommand({
       firstName: this.form.value.firstName,
@@ -103,7 +98,7 @@ export class RelativeForm {
 
     // Pasar nursingHomeId como primer parámetro (el endpoint espera
     // POST /nursing-homes/{nursingHomeId}/relatives)
-    this.nursingStore.addRelative(nursingHomeId, command);
+    this.nursingStore.addRelative(0, command);
     this.router.navigate(['/nursing/relatives']).then();
   }
 

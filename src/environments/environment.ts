@@ -4,7 +4,7 @@ export const environment = {
   showIamToolbar: true,
   /** Nunca aplicar sesión simulada en producción. */
   fallbackDevUserSession: false,
-  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
+  platformProviderApiBaseUrl: 'http://localhost:3000/api/v1',
   platformProviderFakeApiBaseUrl: 'http://localhost:3000/api/v1',
 
   // Analytics Bounded Context
