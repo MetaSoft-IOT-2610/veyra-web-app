@@ -10,8 +10,6 @@ export class ActivityAssembler implements BaseAssembler<Activity, ActivityResour
       healthcareStaffId: resource.healthcareStaffId,
       type: resource.type as ActivityType,
       status: resource.status as ActivityStatus,
-      notes: resource.notes,
-      loggedAt: resource.loggedAt
     });
   }
 
@@ -22,8 +20,6 @@ export class ActivityAssembler implements BaseAssembler<Activity, ActivityResour
       healthcareStaffId: entity.healthcareStaffId,
       type: entity.type,
       status: entity.status,
-      notes: entity.notes,
-      loggedAt: entity.loggedAt
     };
   }
 

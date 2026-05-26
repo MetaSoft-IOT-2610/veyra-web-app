@@ -6,8 +6,6 @@ export interface ActivityResource extends BaseResource {
   healthcareStaffId: number;
   type: string;
   status: string;
-  notes: string;
-  loggedAt: string;
 }
 
 export interface ActivitiesResponse extends BaseResponse {
