@@ -42,7 +42,12 @@ export class ActivityList {
 
   activityTypes: ActivityType[] = ['MEAL', 'BATH', 'RISK_PROFILE'];
 
+  // Form fields
+  formName = '';
+  formNotes = '';
   formType: ActivityType = 'MEAL';
+  formDate = '';
+  formTime = '';
 
   get activities(): Activity[] {
     return this.store.activities();
@@ -68,14 +73,22 @@ export class ActivityList {
   closeDetail() { this.selectedActivity.set(null); }
 
   openAddModal() {
+    this.formName = '';
+    this.formNotes = '';
     this.formType = 'MEAL';
+    this.formDate = '';
+    this.formTime = '';
     this.showAddModal.set(true);
   }
   closeAddModal() { this.showAddModal.set(false); }
 
   openEditModal(activity: Activity) {
     this.selectedActivity.set(null);
+    this.formName = activity.notes;
+    this.formNotes = activity.notes;
     this.formType = activity.type;
+    this.formDate = activity.loggedAt.split('T')[0];
+    this.formTime = activity.loggedAt.split('T')[1]?.slice(0, 5) || '';
     this.showEditModal.set(true);
   }
   closeEditModal() { this.showEditModal.set(false); }
@@ -87,6 +100,8 @@ export class ActivityList {
       healthcareStaffId: Number(localStorage.getItem('staffId')) || 1,
       type: this.formType,
       status: 'PENDING' as ActivityStatus,
+      notes: this.formNotes,
+      loggedAt: `${this.formDate}T${this.formTime}:00`
     });
     this.store.logActivity(activity);
     this.closeAddModal();

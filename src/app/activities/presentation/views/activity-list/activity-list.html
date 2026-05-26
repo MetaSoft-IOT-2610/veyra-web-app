@@ -55,6 +55,7 @@
           <tr>
             <th>{{ 'activities.columns.activity' | translate }}</th>
             <th>{{ 'activities.columns.category' | translate }}</th>
+            <th>{{ 'activities.columns.datetime' | translate }}</th>
             <th>{{ 'activities.columns.status' | translate }}</th>
             <th>{{ 'activities.columns.actions' | translate }}</th>
           </tr>
@@ -67,13 +68,17 @@
                     <mat-icon>event</mat-icon>
                   </div>
                   <span class="activity-name" (click)="openDetail(activity)">
-                    {{ 'activities.types.' + activity.type.toLowerCase() | translate }}
+                    {{ activity.notes }}
                   </span>
                 </td>
                 <td>
                   <span class="category-chip {{ activity.type.toLowerCase() }}">
                     {{ 'activities.types.' + activity.type.toLowerCase() | translate }}
                   </span>
+                </td>
+                <td class="date-cell">
+                  <span>{{ activity.loggedAt | date:'EEEE' }}</span>
+                  <span class="time">{{ activity.loggedAt | date:'hh:mm a' }}</span>
                 </td>
                 <td>
                   <span class="status-chip {{ activity.status.toLowerCase() }}">
@@ -118,12 +123,21 @@
             </h2>
             <div class="modal-row">
               <div>
+                <p class="modal-label">{{ 'activities.detail.date-label' | translate }}</p>
+                <p class="modal-value">
+                  <mat-icon>calendar_today</mat-icon>
+                  {{ selectedActivity()!.loggedAt | date:'MM/dd/yyyy' }} at {{ selectedActivity()!.loggedAt | date:'hh:mm a' }}
+                </p>
+              </div>
+              <div>
                 <p class="modal-label">{{ 'activities.detail.category-label' | translate }}</p>
                 <span class="category-chip {{ selectedActivity()!.type.toLowerCase() }}">
                   {{ 'activities.types.' + selectedActivity()!.type.toLowerCase() | translate }}
                 </span>
               </div>
             </div>
+            <p class="modal-label">{{ 'activities.detail.description-label' | translate }}</p>
+            <p class="modal-desc">{{ selectedActivity()!.notes }}</p>
           </div>
           <div class="modal-footer">
             <button class="btn-cancel" (click)="closeDetail()">
@@ -152,6 +166,25 @@
             </button>
           </div>
           <div class="modal-body">
+            <label class="form-label">{{ 'activities.add.name' | translate }}</label>
+            <input class="form-input" [(ngModel)]="formName"
+                   [placeholder]="'activities.add.name-placeholder' | translate" />
+
+            <label class="form-label">{{ 'activities.add.description' | translate }}</label>
+            <textarea class="form-textarea" [(ngModel)]="formNotes" rows="4"
+                      [placeholder]="'activities.add.description-placeholder' | translate"></textarea>
+
+            <div class="form-row">
+              <div class="form-col">
+                <label class="form-label">{{ 'activities.add.date' | translate }}</label>
+                <input class="form-input" type="date" [(ngModel)]="formDate" />
+              </div>
+              <div class="form-col">
+                <label class="form-label">{{ 'activities.add.hour' | translate }}</label>
+                <input class="form-input" type="time" [(ngModel)]="formTime" />
+              </div>
+            </div>
+
             <label class="form-label">{{ 'activities.add.category' | translate }}</label>
             <div class="category-chips">
               @for (type of activityTypes; track type) {

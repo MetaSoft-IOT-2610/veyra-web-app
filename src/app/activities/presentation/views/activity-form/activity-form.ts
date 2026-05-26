@@ -44,6 +44,7 @@ export class ActivityForm {
   residentId: number = 0;
   healthcareStaffId: number = Number(localStorage.getItem('staffId'));
   type: ActivityType = 'MEAL';
+  notes: string = '';
 
   get loading(): boolean {
     return this.store.loading();
@@ -60,6 +61,8 @@ export class ActivityForm {
       healthcareStaffId: this.healthcareStaffId,
       type: this.type,
       status: 'PENDING' as ActivityStatus,
+      notes: this.notes,
+      loggedAt: new Date().toISOString()
     });
 
     this.store.logActivity(activity);
