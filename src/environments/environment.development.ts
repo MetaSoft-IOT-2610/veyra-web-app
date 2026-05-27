@@ -9,7 +9,6 @@ export const environment = {
   fallbackDevUserSession: true,
 
   platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
-  platformProviderFakeApiBaseUrl: 'https://myfake-api-production.up.railway.app',
 
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
