@@ -6,7 +6,7 @@ const headers = { headers: new HttpHeaders({'Content-Type':'application/json'}) 
 
 @Injectable({ providedIn: 'root' })
 export class PaymentService {
-  stripeURL = 'http://localhost:4200/stripe/'; // adapta si hace falta
+  stripeURL = 'http://localhost:8080/payments/'; // adapta si hace falta
 
   constructor(private http: HttpClient) {}
 

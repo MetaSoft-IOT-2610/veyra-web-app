@@ -4,10 +4,12 @@ import { NgIf } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { PaymentService } from '../../../services/payment.service';
+
 @Component({
   selector: 'payment-checkout',
   templateUrl: './payment-checkout.html',
-  styleUrls: ['./payment-checkout.css'], // <-- ¡Aquí está la línea agregada para enlazar tu CSS!
+  styleUrls: ['./payment-checkout.css'],
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -16,7 +18,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   ]
 })
 export class PaymentCheckoutPage {
-  /** Values passed from route */
   planPrice: number = 0;
   planTitle: string = 'Selected Plan';
   period: string = 'monthly';
@@ -28,13 +29,13 @@ export class PaymentCheckoutPage {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router // <-- Inyectamos el Router aquí
+    private router: Router,
+    private paymentService: PaymentService // <-- 1. Inyectamos tu PaymentService
   ) {
 
-    // Build form
     this.stripeForm = this.fb.group({
       fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]], // <-- Validación de email añadida
+      email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       cardNumber: ['', Validators.required],
       expMonth: ['', Validators.required],
@@ -42,12 +43,10 @@ export class PaymentCheckoutPage {
       cvc: ['', Validators.required]
     });
 
-    // Get URL params dynamically
     this.route.params.subscribe(p => {
       const type = p['type'];
-      this.period = p['cycle'] || 'monthly'; // Valor por defecto
+      this.period = p['cycle'] || 'monthly';
 
-      // Plan title
       this.planTitle =
         type === 'family'
           ? 'Family Plan'
@@ -59,7 +58,6 @@ export class PaymentCheckoutPage {
     });
   }
 
-  /** Pricing logic */
   getPrice(plan: string, period: string): number {
     if (plan === 'Family Plan') {
       return period === 'monthly' ? 30 : 300;
@@ -70,13 +68,10 @@ export class PaymentCheckoutPage {
     return 0;
   }
 
-  /** Cancel button */
   cancel() {
-    // Usar el Router en lugar de history.back() es mejor práctica en Angular (SPA)
     this.router.navigate(['/payments/choose']);
   }
 
-  /** Simulate payment */
   submitPayment() {
     if (this.stripeForm.invalid) {
       this.error = 'Please fill out all required fields correctly.';
@@ -86,10 +81,33 @@ export class PaymentCheckoutPage {
     this.error = null;
     this.isLoading = true;
 
-    // Simula un pequeño retraso de red (1.5s) y luego navega a confirmación
-    setTimeout(() => {
-      this.isLoading = false;
-      this.router.navigate(['/payments/confirmed']);
-    }, 1500);
+    // 2. Preparamos el Data Transfer Object (DTO) que espera tu PaymentService
+    // Nota: En un entorno real, no envías la tarjeta al backend.
+    // Stripe.js genera un 'token' seguro en el frontend que es lo que envías aquí.
+    const paymentDto = {
+      token: 'tok_visa', // Placeholder: Aquí iría el token generado por Stripe Elements
+      amount: this.planPrice,
+      currency: 'USD',
+      description: `Suscripción Veyra: ${this.planTitle} (${this.period})`
+    };
+
+    this.paymentService.pagar(paymentDto).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+
+        console.log('Pago procesado correctamente:', response);
+
+        // Aquí podrías llamar a this.paymentStore.createSubscription() si lo integras después
+
+        this.router.navigate(['/payments/confirmed']);
+      },
+      error: (err) => {
+        this.isLoading = false;
+
+        console.error('Error al procesar el pago:', err);
+
+        this.router.navigate(['/payments/cancelled']);
+      }
+    });
   }
 }
