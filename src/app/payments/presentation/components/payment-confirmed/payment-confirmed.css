@@ -1,89 +1,111 @@
+
+:host {
+  --blue-deep:    #185FA5;
+  --blue-mid:     #378ADD;
+  --blue-light:   #E6F1FB;
+  --green-deep:   #0F6E56;
+  --green-mid:    #1D9E75;
+  --green-light:  #E1F5EE;
+  --text-primary: #0f172a;
+  --text-muted:   #64748b;
+  --border:       rgba(0, 0, 0, 0.08);
+  --surface:      #ffffff;
+  --bg:           #f8fafc;
+  --radius-card:  20px;
+  --radius-sm:    10px;
+  --font-display: 'Sora', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+}
+
 .success-page {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, #ffffff 0%, #f3faff 40%, #dff1ff 100%);
-  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at 50% 0%, var(--green-light) 0%, transparent 60%);
+  font-family: var(--font-body);
   padding: 20px;
 }
 
 .success-card {
-  background: white;
+  background: var(--surface);
   width: 100%;
-  max-width: 500px;
-  padding: 50px 40px;
-  border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(0, 102, 161, 0.12);
+  max-width: 480px;
+  padding: 48px 40px;
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 32px rgba(29, 158, 117, 0.08);
+  border: 1.5px solid var(--border);
   text-align: center;
-  border: 1px solid #e5f0f9;
 }
 
 .icon-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .check-icon {
-  width: 90px;
-  height: 90px;
-  background-color: #12a18d; /* Tu verde agua principal */
-  color: white;
-  font-size: 45px;
+  width: 80px;
+  height: 80px;
+  background-color: var(--green-light);
+  color: var(--green-mid);
+  font-size: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  box-shadow: 0 8px 20px rgba(18, 161, 141, 0.3);
+  box-shadow: 0 0 0 8px rgba(225, 245, 238, 0.5);
 }
 
 .title {
-  color: #0066a1;
-  font-size: 32px;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
 }
 
 .message {
-  color: #555;
-  font-size: 16px;
+  color: var(--text-muted);
+  font-size: 15px;
   line-height: 1.6;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
+
+.message strong { color: var(--text-primary); }
 
 .login-btn {
   width: 100%;
-  padding: 16px;
-  background-color: #0066a1;
+  padding: 14px;
+  background-color: var(--blue-mid);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 18px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 102, 161, 0.2);
+  transition: all 0.25s ease;
 }
 
 .login-btn:hover {
-  background-color: #004c75;
+  background-color: var(--blue-deep);
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 102, 161, 0.3);
+  box-shadow: 0 6px 16px rgba(55, 138, 221, 0.25);
 }
 
 .support-text {
-  margin-top: 25px;
-  font-size: 14px;
-  color: #888;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
 .support-text a {
-  color: #12a18d;
+  color: var(--blue-mid);
   text-decoration: none;
   font-weight: 600;
 }
 
-.support-text a:hover {
-  text-decoration: underline;
-}
+.support-text a:hover { text-decoration: underline; }

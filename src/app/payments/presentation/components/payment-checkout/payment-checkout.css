@@ -1,134 +1,25 @@
-/* Contenedor principal alineado con las pantallas anteriores */
-.checkout-container {
-  min-height: 100vh;
-  display: flex;
-  gap: 30px;
-  padding: 50px 20px;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  background: linear-gradient(to bottom, #ffffff 0%, #f3faff 40%, #dff1ff 100%);
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+:host {
+  --blue-deep:    #185FA5;
+  --blue-mid:     #378ADD;
+  --blue-light:   #E6F1FB;
+  --green-deep:   #0F6E56;
+  --green-mid:    #1D9E75;
+  --green-light:  #E1F5EE;
+  --text-primary: #0f172a;
+  --text-muted:   #64748b;
+  --text-hint:    #94a3b8;
+  --border:       rgba(0, 0, 0, 0.08);
+  --surface:      #ffffff;
+  --bg:           #f8fafc;
+  --radius-card:  20px;
+  --radius-sm:    10px;
+  --font-display: 'Sora', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
 }
-
-
-.section-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #0066a1; /* Azul principal de Veyra */
-  margin-top: 0;
-  margin-bottom: 25px;
-  text-align: left;
-}
-
-/* Inputs */
-.form-label {
-  display: block;
-  font-weight: 600;
-  color: #404040;
-  margin-bottom: 8px;
-  margin-top: 18px;
-  font-size: 14px;
-}
-
-.form-input {
-  width: 100%;
-  padding: 12px 15px;
-  border-radius: 10px;
-  border: 1px solid #cce0ef;
-  background: #f8fbff;
-  font-size: 15px;
-  color: #333;
-  box-sizing: border-box; /* Previene que los inputs se salgan del contenedor */
-  transition: all 0.2s ease;
-}
-
-.form-input:focus {
-  border: 1px solid #0066a1;
-  background: #ffffff;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 102, 161, 0.1);
-}
-
-/* Rows */
-.row {
-  display: flex;
-  gap: 15px;
-}
-
-.col {
-  flex: 1;
-}
-
-/* Buttons */
-.pay-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 30px;
-  background: #12a18d; /* Verde agua de Veyra */
-  border: none;
-  color: white;
-  border-radius: 12px;
-  font-size: 17px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-
-.pay-button:hover {
-  background: #0e8574; /* Tono ligeramente más oscuro al pasar el mouse */
-}
-
-/* UX: El botón de cancelar ahora es secundario (outline) para no confundir al usuario */
-.cancel-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 12px;
-  background: transparent;
-  border: 2px solid #cce0ef;
-  color: #0066a1;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.cancel-button:hover {
-  background: #f3faff;
-  border-color: #0066a1;
-}
-
-
-.summary-item.total {
-  font-weight: 700;
-  font-size: 20px;
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid #e5f0f9;
-}
-
-.label {
-  color: #666666;
-}
-
-.value {
-  color: #004c75;
-  font-weight: 600;
-  text-transform: capitalize;
-}
-
-.error-text {
-  color: #d9534f;
-  margin-top: 15px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-}
-
 
 /* =========================================
-   Contenedores Principales
+   Contenedor Principal
    ========================================= */
 .checkout-container {
   min-height: 100vh;
@@ -136,79 +27,27 @@
   padding: 50px 20px;
   justify-content: center;
   align-items: flex-start;
-  background: linear-gradient(to bottom, #ffffff 0%, #f3faff 40%, #dff1ff 100%);
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 10% 0%,   rgba(29, 158, 117, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 5%,   rgba(24,  95, 165, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(29, 158, 117, 0.05) 0%, transparent 50%);
+  font-family: var(--font-body);
 }
 
 .checkout-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 860px; /* Limita el ancho al tamaño exacto de las dos tarjetas + el espacio */
-}
-
-.cards-grid {
-  display: flex;
-  gap: 30px;
-  align-items: flex-start;
-  flex-wrap: wrap; /* Permite que colapsen en pantallas móviles */
-}
-
-.back-btn-container {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.back-btn {
-  background: none;
-  border: none;
-  color: #0066a1;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0;
-  transition: color 0.2s ease;
-}
-
-.back-btn:hover {
-  color: #12a18d;
-}
-
-.checkout-container {
-  min-height: 100vh;
-  display: flex;
-  padding: 50px 20px;
-  justify-content: center;
-  align-items: flex-start;
-  background: linear-gradient(to bottom, #ffffff 0%, #f3faff 40%, #dff1ff 100%);
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}
-
-.checkout-wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 900px; /* Aumentamos un poco el margen general */
+  max-width: 900px;
   margin: 0 auto;
-}
-
-/* 🔥 Solución definitiva: CSS Grid */
-.cards-grid {
-  display: grid;
-  grid-template-columns: 1fr 350px; /* El formulario toma el resto del espacio (1fr) y el resumen mide 350px */
-  gap: 30px;
-  align-items: flex-start;
 }
 
 /* =========================================
    Botón de Regreso
    ========================================= */
 .back-btn-container {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: flex;
   justify-content: flex-start;
 }
@@ -216,8 +55,9 @@
 .back-btn {
   background: none;
   border: none;
-  color: #0066a1;
-  font-size: 16px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -227,25 +67,157 @@
   transition: color 0.2s ease;
 }
 
-.back-btn:hover {
-  color: #12a18d;
-}
+.back-btn:hover { color: var(--text-primary); }
 
 /* =========================================
-   Tarjetas
+   Layout de Tarjetas
    ========================================= */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 24px;
+  align-items: flex-start;
+}
+
 .checkout-card {
-  background: white;
-  padding: 30px;
-  border-radius: 18px;
-  width: 100%; /* Dejamos que el Grid controle el ancho */
+  background: var(--surface);
+  padding: 32px;
+  border-radius: var(--radius-card);
+  width: 100%;
   box-sizing: border-box;
-  box-shadow: 0 6px 22px rgba(0,0,0,0.08);
-  border: 1px solid #e5f0f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1.5px solid var(--border);
 }
 
 .summary-card {
-  width: 100%; /* Dejamos que el Grid controle el ancho */
-  border-top: 6px solid #12a18d;
-  border-left: 1px solid #e5f0f9;
+  border-top: 4px solid var(--blue-mid);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+/* =========================================
+   Inputs del Formulario
+   ========================================= */
+.form-label {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--blue-mid);
+  background: var(--surface);
+  outline: none;
+  box-shadow: 0 0 0 4px var(--blue-light);
+}
+
+.form-input::placeholder { color: var(--text-hint); }
+
+.row { display: flex; gap: 16px; }
+.col { flex: 1; }
+
+/* =========================================
+   Botones de Acción
+   ========================================= */
+.pay-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 32px;
+  background: var(--blue-mid);
+  border: none;
+  color: white;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.pay-button:hover {
+  background: var(--blue-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(55, 138, 221, 0.25);
+}
+
+.cancel-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  background: transparent;
+  border: 1.5px solid #e2e8f0;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cancel-button:hover {
+  background: #f1f5f9;
+  color: var(--text-primary);
+  border-color: #cbd5e1;
+}
+
+/* =========================================
+   Resumen de Orden
+   ========================================= */
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.label { color: var(--text-muted); }
+.value { color: var(--text-primary); font-weight: 600; text-transform: capitalize; }
+
+.summary-item.total {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.summary-item.total .value { color: var(--blue-mid); font-size: 1.8rem;}
+
+.error-text {
+  color: #ef4444;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .summary-card { order: -1; /* Mueve el resumen arriba en móviles */ }
 }

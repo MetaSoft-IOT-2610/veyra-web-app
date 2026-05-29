@@ -1,38 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
-import { CurrencyPipe } from '@angular/common';
+import { NgIf, CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { PaymentService } from '../../../services/payment.service';
+import { PaymentStore } from '../../../application/payment.store';
 
 @Component({
   selector: 'payment-checkout',
   templateUrl: './payment-checkout.html',
   styleUrls: ['./payment-checkout.css'],
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgIf,
-    CurrencyPipe
-  ]
+  imports: [ReactiveFormsModule, NgIf, CurrencyPipe]
 })
-export class PaymentCheckoutPage {
+export class PaymentCheckoutPage implements OnInit {
   planPrice: number = 0;
   planTitle: string = 'Selected Plan';
-  period: string = 'monthly';
+  period: 'monthly' | 'annual' = 'monthly';
 
   stripeForm: FormGroup;
-  isLoading = false;
   error: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private paymentService: PaymentService // <-- 1. Inyectamos tu PaymentService
+    public store: PaymentStore // 2. Inyectamos el store
   ) {
-
     this.stripeForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -42,29 +34,24 @@ export class PaymentCheckoutPage {
       expYear: ['', Validators.required],
       cvc: ['', Validators.required]
     });
+  }
 
+  ngOnInit() {
     this.route.params.subscribe(p => {
       const type = p['type'];
-      this.period = p['cycle'] || 'monthly';
+      this.period = p['cycle'] === 'annual' ? 'annual' : 'monthly';
 
-      this.planTitle =
-        type === 'family'
-          ? 'Family Plan'
-          : type === 'nursing-home'
-            ? 'Nursing Home Plan'
-            : 'Subscription';
-
+      this.planTitle = type === 'family' ? 'Family Plan' : 'Nursing Home Plan';
       this.planPrice = this.getPrice(this.planTitle, this.period);
+
+      this.store.setBillingCycle(this.period);
+      this.store.selectedPlan = { id: type === 'family' ? 'plan_fam_001' : 'plan_nur_001' } as any;
     });
   }
 
   getPrice(plan: string, period: string): number {
-    if (plan === 'Family Plan') {
-      return period === 'monthly' ? 30 : 300;
-    }
-    if (plan === 'Nursing Home Plan') {
-      return period === 'monthly' ? 300 : 3000;
-    }
+    if (plan === 'Family Plan') return period === 'monthly' ? 30 : 300;
+    if (plan === 'Nursing Home Plan') return period === 'monthly' ? 300 : 3000;
     return 0;
   }
 
@@ -72,42 +59,44 @@ export class PaymentCheckoutPage {
     this.router.navigate(['/payments/choose']);
   }
 
-  submitPayment() {
+  async submitPayment() {
     if (this.stripeForm.invalid) {
       this.error = 'Please fill out all required fields correctly.';
       return;
     }
 
     this.error = null;
-    this.isLoading = true;
+    const formData = this.stripeForm.value;
 
-    // 2. Preparamos el Data Transfer Object (DTO) que espera tu PaymentService
-    // Nota: En un entorno real, no envías la tarjeta al backend.
-    // Stripe.js genera un 'token' seguro en el frontend que es lo que envías aquí.
-    const paymentDto = {
-      token: 'tok_visa', // Placeholder: Aquí iría el token generado por Stripe Elements
-      amount: this.planPrice,
-      currency: 'USD',
-      description: `Suscripción Veyra: ${this.planTitle} (${this.period})`
-    };
+    try {
+      // A. Creamos la cuenta en DB.json
+      await this.store.createAccount({
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        country: "US",
+        role: this.planTitle === 'Family Plan' ? 'family' : 'nursing-home'
+      });
 
-    this.paymentService.pagar(paymentDto).subscribe({
-      next: (response) => {
-        this.isLoading = false;
 
-        console.log('Pago procesado correctamente:', response);
-
-        // Aquí podrías llamar a this.paymentStore.createSubscription() si lo integras después
-
-        this.router.navigate(['/payments/confirmed']);
-      },
-      error: (err) => {
-        this.isLoading = false;
-
-        console.error('Error al procesar el pago:', err);
-
-        this.router.navigate(['/payments/cancelled']);
+      if (this.store.error) {
+        this.error = this.store.error;
+        return;
       }
-    });
+
+      await this.store.createSubscription();
+
+      if (this.store.error) {
+        this.router.navigate(['/payments/cancelled']);
+        return;
+      }
+
+      console.log("¡Pago exitoso!", this.store.subscription);
+      this.router.navigate(['/payments/confirmed']);
+
+    } catch (e) {
+      console.error("Error catastrófico:", e);
+      this.router.navigate(['/payments/cancelled']);
+    }
   }
 }
