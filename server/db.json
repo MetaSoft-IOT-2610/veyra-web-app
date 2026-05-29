@@ -1,26 +1,84 @@
 {
-  "contracts": [
-
+  "contracts": [],
+  "staff": [],
+  "nursing-homes": [],
+  "residents": [],
+  "rooms": [],
+  "business-profiles": [],
+  "person-profiles": [],
+  "medications": [],
+  "plans": [
+    {
+      "id": "plan_fam_001",
+      "name": "Family Plan",
+      "description": "The perfect plan for families looking to oversee and manage the care of their elders at home.",
+      "priceMonthly": 30,
+      "priceAnnual": 300,
+      "discountAnnual": 15,
+      "type": "family",
+      "features": [
+        "One family account with access for multiple caregivers.",
+        "Medication logging with alarm/schedule reminders.",
+        "Detailed daily care history."
+      ]
+    },
+    {
+      "id": "plan_nur_001",
+      "name": "Nursing Home Plan",
+      "description": "A robust and comprehensive solution for care institutions looking to optimize management.",
+      "priceMonthly": 300,
+      "priceAnnual": 3000,
+      "discountAnnual": 15,
+      "type": "nursing-home",
+      "features": [
+        "Unlimited resident registration.",
+        "Medical history and medication management.",
+        "Staff schedule and shift management + attendance tracking."
+      ]
+    }
   ],
-  "staff": [
-
+  "accounts": [
+    {
+      "fullName": "Renzo Miguel Llerena Delgado",
+      "email": "llerenarenzo123@gmail.com",
+      "phone": "+51957236477",
+      "country": "US",
+      "role": "family",
+      "createdAt": "2026-05-29T16:39:29.873Z",
+      "updatedAt": "2026-05-29T16:39:29.873Z",
+      "id": 1
+    },
+    {
+      "fullName": "Renzo Miguel Llerena Delgado",
+      "email": "llerenarenzo123@gmail.com",
+      "phone": "+51957236477",
+      "country": "US",
+      "role": "nursing-home",
+      "createdAt": "2026-05-29T22:52:29.015Z",
+      "updatedAt": "2026-05-29T22:52:29.015Z",
+      "id": 2
+    }
   ],
-  "nursing-homes": [
-
-  ],
-  "residents": [
-
-  ],
-  "rooms": [
-
-  ],
-  "business-profiles": [
-
-  ],
-  "person-profiles": [
-
-  ],
-  "medications": [
-
+  "subscriptions": [
+    {
+      "subscriptionId": "sub_7f9080zqz",
+      "accountId": 1,
+      "planId": "plan_fam_001",
+      "cycle": "monthly",
+      "price": 30,
+      "status": "active",
+      "createdAt": "2026-05-29T16:39:29.885Z",
+      "id": 1
+    },
+    {
+      "subscriptionId": "sub_mqisxu6p7",
+      "accountId": 2,
+      "planId": "plan_nur_001",
+      "cycle": "annual",
+      "price": 300,
+      "status": "active",
+      "createdAt": "2026-05-29T22:52:29.039Z",
+      "id": 2
+    }
   ]
 }
