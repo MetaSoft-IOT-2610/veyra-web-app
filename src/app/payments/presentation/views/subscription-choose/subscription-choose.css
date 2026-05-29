@@ -1,105 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap');
-
-/* =========================================
-   Tokens — aligned to Family Plan palette
-   ========================================= */
-:host {
-  --blue-deep:    #185FA5;
-  --blue-mid:     #378ADD;
-  --blue-light:   #E6F1FB;
-  --green-deep:   #0F6E56;
-  --green-mid:    #1D9E75;
-  --green-light:  #E1F5EE;
-  --text-primary: #0f172a;
-  --text-muted:   #64748b;
-  --text-hint:    #94a3b8;
-  --border:       rgba(0,0,0,0.08);
-  --surface:      #ffffff;
-  --bg:           #f8fafc;
-  --radius-card:  20px;
-  --radius-sm:    10px;
-  --font-display: 'Sora', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
-}
-
-/* =========================================
-   Fondo y Contenedor Principal
-   ========================================= */
 .choose-container {
   min-height: 100vh;
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(circle at 10% 0%,  rgba(29, 158, 117, 0.10) 0%, transparent 40%),
-    radial-gradient(circle at 90% 5%,  rgba(24,  95, 165, 0.10) 0%, transparent 40%),
-    radial-gradient(circle at 50% 100%, rgba(29, 158, 117, 0.06) 0%, transparent 50%);
-  padding: 72px 20px 60px;
+  background-color: #fafafa;
+  padding: 60px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: var(--font-body);
 }
 
-/* =========================================
-   Header
-   ========================================= */
 .header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-bottom: 52px;
+  margin-bottom: 50px;
+}
+
+/* 🔥 Alineación horizontal del título y badge */
+.title-row {
+  display: flex;
+  align-items: flex-end; /* Alinea los textos por su base */
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .badge {
   display: inline-block;
-  background: var(--green-light);
-  color: var(--green-deep);
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 11px;
+  background-color: #f0f8ff;
+  color: #70b1e6;
+  padding: 6px 16px;
+  border-radius: 10px;
   font-weight: 600;
-  letter-spacing: .6px;
+  font-size: 13px;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  border: 1px solid #70b1e6;
+  margin-bottom: 6px; /* Lo sube un poquito para alinearlo con el H1 */
 }
 
 .main-title {
-  font-family: var(--font-display);
-  font-size: 2.6rem;
+  padding-bottom: 4px;
+  border-bottom: 4px solid #66B3AD;
+  font-size: 2.8rem;
   font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -1px;
-  line-height: 1.15;
-  margin: 0 0 10px;
+  color: #0d2e73;
+  margin: 0;
+  line-height: 1;
 }
 
 .main-subtitle {
-  font-size: 15px;
-  color: var(--text-muted);
-  margin: 0 0 28px;
+  font-size: 16px;
+  color: #4f4f4f;
 }
 
-/* Toggle */
+/* Toggle Switch */
 .toggle-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-hint);
+  gap: 15px;
+  margin-top: 30px;
+  font-weight: 600;
+  color: #4f4f4f;
 }
 
-.toggle-container .active {
-  color: var(--text-primary);
-  font-weight: 600;
-}
+.toggle-container .active { color: #0d2e73; }
 
 .save-tag {
-  background: var(--blue-light);
-  color: var(--blue-deep);
+  background: #66B3AD;
+  color: white;
   padding: 2px 8px;
-  border-radius: 20px;
+  border-radius: 6px;
   font-size: 11px;
-  font-weight: 600;
-  margin-left: 4px;
 }
 
 .switch {
@@ -109,20 +80,15 @@
   height: 24px;
 }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-}
+.switch input { opacity: 0; width: 0; height: 0; }
 
 .slider-toggle {
   position: absolute;
   inset: 0;
-  background: #cbd5e1;
+  background: #e0e0e0;
   border-radius: 24px;
   cursor: pointer;
-  transition: background .25s;
+  transition: .3s;
 }
 
 .slider-toggle::before {
@@ -131,46 +97,47 @@
   width: 18px;
   height: 18px;
   left: 3px;
-  top: 3px;
-  background: #fff;
+  bottom: 3px;
+  background: white;
   border-radius: 50%;
-  transition: transform .25s;
-  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  transition: .3s;
 }
 
-.switch input:checked + .slider-toggle {
-  background: var(--blue-mid);
-}
+.switch input:checked + .slider-toggle { background: #70b1e6; }
+.switch input:checked + .slider-toggle::before { transform: translateX(20px); }
 
-.switch input:checked + .slider-toggle::before {
-  transform: translateX(20px);
-}
-
-/* =========================================
-   Bento Grid
-   ========================================= */
+/* Tarjetas (Estilo Staff Card) */
 .bento-grid {
   display: grid;
-  grid-template-columns: 1fr 1.45fr;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
   max-width: 900px;
   width: 100%;
 }
 
-/* =========================================
-   Tarjeta Base
-   ========================================= */
 .bento-item {
-  background: var(--surface);
-  border-radius: var(--radius-card);
+  border-radius: 16px;
   padding: 32px;
-  border: 1.5px solid var(--border);
+  border: 2px solid #e0e0e0;
+  background-color: white;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  transition: transform .25s cubic-bezier(.25,.8,.25,1),
-  box-shadow .25s,
-  border-color .25s;
+}
+
+.bento-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: #70b1e6;
+}
+
+/* Plan Institucional simulando el .selected */
+.nursing-card {
+  border-color: #70b1e6;
+  background-color: #f0f8ff;
+  box-shadow: 0 8px 20px rgba(112, 177, 230, 0.25);
 }
 
 .card-content {
@@ -182,220 +149,113 @@
 .top-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.mid-row {
-  flex-grow: 1;
+.icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border: 2px solid #70b1e6;
+  color: #70b1e6;
+  background: white;
 }
 
-.mid-row h3 {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 700;
-  margin: 0 0 10px;
-  line-height: 1.3;
+.nursing-card .icon-box {
+  background: #70b1e6;
+  color: white;
 }
 
-.mid-row p {
+.plan-label {
+  font-weight: 600;
+  color: #0d2e73;
+  text-transform: uppercase;
   font-size: 14px;
-  line-height: 1.65;
-  margin: 0;
 }
+
+.popular-tag {
+  margin-left: auto;
+  background: #66B3AD;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 10px;
+}
+
+.mid-row { flex-grow: 1; }
+.mid-row h3 {
+  font-size: 1.8rem;
+  color: #0d2e73;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+.mid-row p { color: #4f4f4f; line-height: 1.6; }
 
 .bottom-row {
-  margin-top: 28px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
+  margin-top: 24px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 
-.price-block {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px;
-}
-
 .amount {
-  font-family: var(--font-display);
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  line-height: 1;
+  color: #0d2e73;
 }
+.period { color: #4f4f4f; }
+.billed-note { font-size: 12px; color: #666; margin-top: 4px; }
 
-.period {
-  font-size: 13px;
-}
-
-.billed-note {
-  width: 100%;
-  font-size: 11px;
-  margin-top: 2px;
-  opacity: .7;
-}
-
-.bento-item:active {
-  transform: scale(.98);
-}
-
-/* =========================================
-   Tarjeta Familiar
-   ========================================= */
-.family-card {
-  color: var(--text-primary);
-}
-
-.family-card .icon-box {
-  width: 46px;
-  height: 46px;
-  background: var(--green-light);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: var(--green-mid);
-  flex-shrink: 0;
-}
-
-.family-card .plan-label {
-  font-size: 13px;
+/* Botones */
+.action-arrow, .cta-btn {
+  background-color: white;
+  color: #70b1e6;
+  border: 2px solid #70b1e6;
+  border-radius: 10px;
   font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: .5px;
-}
-
-.family-card .mid-row h3  { color: var(--text-primary); }
-.family-card .mid-row p   { color: var(--text-muted); }
-.family-card .amount       { color: var(--text-primary); }
-.family-card .period       { color: var(--text-muted); }
-
-.action-arrow {
-  width: 42px;
+  transition: all 0.3s ease;
   height: 42px;
-  border-radius: 50%;
-  background: var(--text-primary);
-  color: #fff;
-  border: none;
+  padding: 0 24px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
-  transition: background .2s, transform .2s, box-shadow .2s;
-  flex-shrink: 0;
 }
 
-.family-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--green-mid);
-  box-shadow: 0 16px 40px rgba(29, 158, 117, .12);
+.action-arrow { width: 42px; padding: 0; border-radius: 10px; }
+
+.bento-item:hover .action-arrow, .bento-item:hover .cta-btn {
+  background-color: #70b1e6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(112, 177, 230, 0.3);
 }
 
-.family-card:hover .action-arrow {
-  background: var(--green-mid);
-  transform: translateX(4px);
-  box-shadow: 0 4px 14px rgba(29, 158, 117, .35);
-}
-
-/* =========================================
-   Tarjeta Institucional
-   ========================================= */
-.nursing-card {
-  background: var(--blue-deep);
-  border-color: transparent;
-  color: #fff;
-}
-
-.nursing-card .icon-box {
-  width: 46px;
-  height: 46px;
-  background: rgba(255,255,255,.15);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #fff;
-  flex-shrink: 0;
-}
-
-.nursing-card .plan-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,.65);
-  text-transform: uppercase;
-  letter-spacing: .5px;
-}
-
-.popular-tag {
-  margin-left: auto;
-  background: var(--green-mid);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-
-.nursing-card .mid-row h3 { color: #fff; }
-.nursing-card .mid-row p  { color: rgba(255,255,255,.7); }
-.nursing-card .amount      { color: #fff; }
-.nursing-card .period      { color: rgba(255,255,255,.65); }
-.nursing-card .bottom-row  { border-top-color: rgba(255,255,255,.15); }
-
-.cta-btn {
-  background: #fff;
-  color: var(--blue-deep);
-  border: none;
-  padding: 11px 22px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform .2s, box-shadow .2s;
-  white-space: nowrap;
-}
-
-.nursing-card:hover {
-  transform: translateY(-4px);
-  background: #1254a0;
-  box-shadow: 0 16px 40px rgba(24, 95, 165, .28);
+.nursing-card .cta-btn {
+  background-color: #70b1e6;
+  color: white;
 }
 
 .nursing-card:hover .cta-btn {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  background-color: #0d2e73;
+  border-color: #0d2e73;
 }
 
-/* =========================================
-   Trust footer
-   ========================================= */
 .trust-note {
-  margin-top: 36px;
-  font-size: 12px;
-  color: var(--text-hint);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.trust-note i {
-  color: var(--green-mid);
+  margin-top: 40px;
   font-size: 13px;
+  color: #666;
 }
+.trust-note i { color: #66B3AD; }
 
-/* =========================================
-   Responsive
-   ========================================= */
-@media (max-width: 680px) {
-  .main-title { font-size: 2rem; }
+@media (max-width: 768px) {
   .bento-grid { grid-template-columns: 1fr; }
-  .bento-item { padding: 24px; }
+  .title-row { flex-direction: column; align-items: center; gap: 8px; }
+  .badge { margin-bottom: 0; }
 }
