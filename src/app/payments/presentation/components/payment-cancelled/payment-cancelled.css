@@ -1,0 +1,109 @@
+:host {
+  --blue-deep:    #185FA5;
+  --blue-mid:     #378ADD;
+  --text-primary: #0f172a;
+  --text-muted:   #64748b;
+  --border:       rgba(0, 0, 0, 0.08);
+  --surface:      #ffffff;
+  --bg:           #f8fafc;
+  /* Cancel specific tokens */
+  --red-light:    #fef2f2;
+  --red-mid:      #ef4444;
+  --radius-card:  20px;
+  --radius-sm:    10px;
+  --font-display: 'Sora', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+}
+
+.cancel-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at 50% 0%, var(--red-light) 0%, transparent 60%);
+  font-family: var(--font-body);
+  padding: 20px;
+}
+
+.cancel-card {
+  background: var(--surface);
+  width: 100%;
+  max-width: 480px;
+  padding: 48px 40px;
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 32px rgba(239, 68, 68, 0.08);
+  border: 1.5px solid var(--border);
+  text-align: center;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.cross-icon {
+  width: 80px;
+  height: 80px;
+  background-color: var(--red-light);
+  color: var(--red-mid);
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px rgba(254, 242, 242, 0.5);
+}
+
+.title {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.message {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.message strong { color: var(--text-primary); }
+
+.retry-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.retry-btn:hover {
+  background-color: #f1f5f9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.support-text {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.support-text a {
+  color: var(--blue-mid);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.support-text a:hover { text-decoration: underline; }

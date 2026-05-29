@@ -1,1 +1,23 @@
-<p>payment-cancelled works!</p>
+<div class="cancel-page">
+  <div class="cancel-card">
+    <div class="icon-container">
+      <div class="cross-icon">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+
+    <h1 class="title">Payment Unsuccessful</h1>
+    <p class="message">
+      Your transaction could not be completed. Don't worry, <strong>no charges were made</strong> to your card. Please check your payment details and try again.
+    </p>
+
+    <div class="action-section">
+      <button class="retry-btn" routerLink="/payments/choose">
+        Return to Plans
+      </button>
+      <p class="support-text">
+        Need help? <a href="#">Contact Support</a>
+      </p>
+    </div>
+  </div>
+</div>
