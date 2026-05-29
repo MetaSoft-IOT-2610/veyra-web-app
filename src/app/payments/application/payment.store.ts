@@ -1,8 +1,17 @@
+import { Injectable } from '@angular/core';
 import { PaymentsApi } from "../infrastructure/payments-api";
 import { Plan } from "../domain/model/plan.entity";
 import { Account } from "../domain/model/account.entity";
 import { Subscription } from "../domain/model/subscription.entity";
 
+// Importamos los Assemblers
+import { PlanAssembler } from "../infrastructure/plan-assembler";
+import { AccountAssembler } from "../infrastructure/account-assembler";
+import { SubscriptionAssembler } from "../infrastructure/subscription-assembler";
+
+@Injectable({
+  providedIn: 'root'
+})
 export class PaymentStore {
   private api = new PaymentsApi();
 
@@ -22,7 +31,8 @@ export class PaymentStore {
 
     try {
       const data = await this.api.getAvailablePlans();
-      this.plans = data.map((p) => Plan.fromResponse(p));
+      // Usamos el Assembler para listas
+      this.plans = PlanAssembler.toEntityList(data);
     } catch (e: any) {
       this.error = e.message;
     } finally {
@@ -50,7 +60,8 @@ export class PaymentStore {
 
     try {
       const response = await this.api.createAccount(payload);
-      this.account = Account.fromResponse(response);
+      // Usamos el Assembler
+      this.account = AccountAssembler.toEntity(response);
     } catch (e: any) {
       this.error = e.message;
     } finally {
@@ -74,7 +85,8 @@ export class PaymentStore {
         cycle: this.billingCycle,
       });
 
-      this.subscription = Subscription.fromResponse(response);
+      // Usamos el Assembler
+      this.subscription = SubscriptionAssembler.toEntity(response);
     } catch (e: any) {
       this.error = e.message;
     } finally {
