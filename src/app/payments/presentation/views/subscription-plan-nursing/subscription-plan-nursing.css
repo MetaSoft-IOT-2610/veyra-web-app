@@ -1,47 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap');
-
-/* =========================================
-   Tokens — misma paleta que los otros planes
-   ========================================= */
-:host {
-  --blue-deep:    #185FA5;
-  --blue-mid:     #378ADD;
-  --blue-light:   #E6F1FB;
-  --green-deep:   #0F6E56;
-  --green-mid:    #1D9E75;
-  --green-light:  #E1F5EE;
-  --text-primary: #0f172a;
-  --text-muted:   #64748b;
-  --text-hint:    #94a3b8;
-  --border:       rgba(0, 0, 0, 0.08);
-  --surface:      #ffffff;
-  --bg:           #f8fafc;
-  --radius-card:  20px;
-  --radius-sm:    10px;
-  --font-display: 'Sora', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
-}
-
-/* =========================================
-   Contenedor Principal
-   ========================================= */
 .page-container {
   min-height: 100vh;
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(circle at 10% 0%,   rgba(24,  95, 165, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 90% 5%,   rgba(29, 158, 117, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 50% 100%, rgba(24,  95, 165, 0.06) 0%, transparent 50%);
+  background-color: #fafafa;
   padding: 0 20px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: var(--font-body);
 }
 
-/* =========================================
-   Back button
-   ========================================= */
 .back-btn-container {
   width: 100%;
   max-width: 860px;
@@ -49,353 +14,120 @@
 }
 
 .back-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 0;
-  transition: color .2s;
+  background: none; border: none; color: #4f4f4f;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; gap: 8px; transition: color 0.3s;
 }
 
-.back-btn:hover { color: var(--text-primary); }
+.back-btn:hover { color: #70b1e6; }
 
-/* =========================================
-   Header
-   ========================================= */
 .header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin: 36px 0 44px;
+  margin: 30px 0 40px;
 }
 
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--blue-light);
-  color: var(--blue-deep);
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .6px;
-  text-transform: uppercase;
-  margin-bottom: 18px;
+  display: inline-block; background-color: white; color: #70b1e6;
+  padding: 6px 16px; border-radius: 10px; font-weight: 600; font-size: 12px;
+  text-transform: uppercase; border: 2px solid #70b1e6; margin-bottom: 16px;
 }
 
 .main-title {
-  font-family: var(--font-display);
+  padding-bottom: 12px;
+  border-bottom: 4px solid #66B3AD;
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -1px;
-  line-height: 1.15;
-  margin: 0 0 12px;
+  color: #0d2e73;
+  margin: 0 0 16px;
+  line-height: 1.2; /* <-- Esta línea evita que las letras choquen verticalmente */
 }
 
-.main-subtitle {
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.65;
-  margin: 0;
-}
+.main-subtitle { font-size: 16px; color: #4f4f4f; line-height: 1.6; }
 
-/* =========================================
-   Bento Grid
-   ========================================= */
+/* Grid y Tarjetas */
 .bento-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.45fr;
-  gap: 20px;
-  max-width: 860px;
-  width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  max-width: 860px; width: 100%;
 }
 
-/* =========================================
-   Tarjeta Base
-   ========================================= */
 .bento-item {
-  background: var(--surface);
-  border-radius: var(--radius-card);
-  padding: 32px;
-  border: 1.5px solid var(--border);
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  transition:
-    transform .25s cubic-bezier(.25, .8, .25, 1),
-    box-shadow .25s,
-    border-color .25s;
+  border-radius: 16px; padding: 32px; border: 2px solid #e0e0e0;
+  background-color: white; cursor: pointer; transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); display: flex; flex-direction: column;
 }
 
-.card-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+.bento-item:hover {
+  transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); border-color: #70b1e6;
 }
 
-.top-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
+.annual-card {
+  border-color: #70b1e6; background-color: #f0f8ff; box-shadow: 0 8px 20px rgba(112, 177, 230, 0.25);
 }
+
+.card-content { display: flex; flex-direction: column; height: 100%; }
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
 
 .icon-box {
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid #e0e0e0; color: #4f4f4f; background: white;
 }
 
-.plan-label {
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .5px;
+.annual-card .icon-box { border-color: #70b1e6; color: #70b1e6; }
+
+.plan-label { font-weight: 600; color: #0d2e73; text-transform: uppercase; font-size: 14px; }
+
+.popular-tag {
+  margin-left: auto; background: #66B3AD; color: white;
+  font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 10px;
 }
 
 .mid-row { flex-grow: 1; }
+.mid-row h3 { font-size: 1.5rem; color: #0d2e73; font-weight: 700; margin: 0 0 10px; }
+.mid-row p { color: #4f4f4f; line-height: 1.6; }
 
-.mid-row h3 {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin: 0 0 10px;
-  line-height: 1.3;
+.bottom-row { margin-top: 24px; display: flex; justify-content: space-between; align-items: flex-end; }
+
+.amount { font-size: 2.2rem; font-weight: 700; color: #0d2e73; }
+.period { color: #4f4f4f; }
+.billed-note { font-size: 12px; color: #666; margin-top: 4px; }
+.orig-price { font-size: 13px; text-decoration: line-through; color: #999; margin-left: 6px; }
+
+.action-arrow, .cta-btn {
+  background-color: white; color: #70b1e6; border: 2px solid #70b1e6; border-radius: 10px;
+  font-weight: 600; height: 42px; padding: 0 20px; transition: all 0.3s ease; cursor: pointer;
 }
-
-.mid-row p {
-  font-size: 14px;
-  line-height: 1.65;
-  margin: 0;
-}
-
-.bottom-row {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.price-block {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.amount {
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.period { font-size: 13px; }
-
-.billed-note {
-  width: 100%;
-  font-size: 11px;
-  margin-top: 3px;
-  opacity: .7;
-}
-
-.orig-price {
-  font-size: 12px;
-  text-decoration: line-through;
-  opacity: .45;
-  margin-left: 2px;
-}
-
-.bento-item:active { transform: scale(.98); }
-
-/* =========================================
-   Tarjeta Mensual — acento azul
-   ========================================= */
-.monthly-card { color: var(--text-primary); }
-
-.monthly-card .icon-box {
-  background: var(--blue-light);
-  color: var(--blue-mid);
-}
-
-.monthly-card .plan-label { color: var(--text-muted); }
-.monthly-card .mid-row h3 { color: var(--text-primary); }
-.monthly-card .mid-row p  { color: var(--text-muted); }
-.monthly-card .amount      { color: var(--text-primary); }
-.monthly-card .period      { color: var(--text-muted); }
 
 .action-arrow {
   width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--text-primary);
-  color: #fff;
-  border: none;
-  cursor: pointer;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
-  transition: background .2s, transform .2s, box-shadow .2s;
-  flex-shrink: 0;
 }
 
-.monthly-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--blue-mid);
-  box-shadow: 0 16px 40px rgba(24, 95, 165, .12);
+.bento-item:hover .action-arrow, .bento-item:hover .cta-btn {
+  background-color: #70b1e6; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(112, 177, 230, 0.3);
 }
 
-.monthly-card:hover .action-arrow {
-  background: var(--blue-mid);
-  transform: translateX(4px);
-  box-shadow: 0 4px 14px rgba(55, 138, 221, .35);
-}
+.annual-card .cta-btn { background-color: #70b1e6; color: white; }
+.annual-card:hover .cta-btn { background-color: #0d2e73; border-color: #0d2e73; }
 
-/* =========================================
-   Tarjeta Anual — fondo azul profundo
-   ========================================= */
-.annual-card {
-  background: var(--blue-deep);
-  border-color: transparent;
-  color: #fff;
-}
-
-.annual-card .icon-box {
-  background: rgba(255, 255, 255, .15);
-  color: #fff;
-}
-
-.annual-card .plan-label  { color: rgba(255, 255, 255, .65); }
-.annual-card .mid-row h3  { color: #fff; }
-.annual-card .mid-row p   { color: rgba(255, 255, 255, .7); }
-.annual-card .amount       { color: #fff; }
-.annual-card .period       { color: rgba(255, 255, 255, .65); }
-.annual-card .bottom-row  { border-top-color: rgba(255, 255, 255, .15); }
-.annual-card .billed-note { color: rgba(255, 255, 255, .65); opacity: 1; }
-.annual-card .orig-price  { color: rgba(255, 255, 255, .5); opacity: 1; }
-
-.popular-tag {
-  margin-left: auto;
-  background: var(--green-mid);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-
-.cta-btn {
-  background: #fff;
-  color: var(--blue-deep);
-  border: none;
-  padding: 11px 22px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform .2s, box-shadow .2s;
-  white-space: nowrap;
-}
-
-.annual-card:hover {
-  transform: translateY(-4px);
-  background: #1254a0;
-  box-shadow: 0 16px 40px rgba(24, 95, 165, .28);
-}
-
-.annual-card:hover .cta-btn {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
-}
-
-/* =========================================
-   Features card
-   ========================================= */
+/* Features Card */
 .features-card {
-  max-width: 860px;
-  width: 100%;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-card);
-  padding: 32px;
-  margin-top: 20px;
+  max-width: 860px; width: 100%; background: white;
+  border: 2px solid #e0e0e0; border-radius: 16px; padding: 32px; margin-top: 24px;
 }
 
-.features-title {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 20px;
-}
+.features-title { font-size: 1.2rem; font-weight: 700; color: #0d2e73; margin: 0 0 20px; }
+.feature-list { display: flex; flex-direction: column; gap: 14px; }
+.feat { display: flex; align-items: center; gap: 12px; font-size: 15px; color: #4f4f4f; }
+.feat-icon { color: #70b1e6; font-size: 18px; }
 
-.feature-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.trust-note { margin-top: 30px; font-size: 13px; color: #666; }
+.trust-note i { color: #66B3AD; }
 
-.feat {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.feat-icon {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--blue-light);
-  color: var(--blue-deep);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-/* =========================================
-   Trust footer
-   ========================================= */
-.trust-note {
-  margin-top: 28px;
-  font-size: 12px;
-  color: var(--text-hint);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.trust-note i {
-  color: var(--blue-mid);
-  font-size: 13px;
-}
-
-/* =========================================
-   Responsive
-   ========================================= */
-@media (max-width: 680px) {
-  .main-title    { font-size: 2rem; }
-  .bento-grid    { grid-template-columns: 1fr; }
-  .bento-item    { padding: 24px; }
-  .features-card { padding: 24px; }
-}
+@media (max-width: 768px) { .bento-grid { grid-template-columns: 1fr; } }
