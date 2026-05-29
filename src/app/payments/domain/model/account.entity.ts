@@ -11,17 +11,4 @@ export class Account {
     public createdAt: string,
     public updatedAt: string
   ) {}
-
-  static fromResponse(data: AccountResponse): Account {
-    return new Account(
-      data.id,
-      data.fullName,
-      data.email,
-      data.phone,
-      data.country,
-      data.role,
-      data.createdAt,
-      data.updatedAt
-    );
-  }
 }

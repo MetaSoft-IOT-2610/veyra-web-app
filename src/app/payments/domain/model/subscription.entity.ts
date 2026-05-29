@@ -10,16 +10,4 @@ export class Subscription {
     public status: "active" | "inactive" | "pending",
     public createdAt: string
   ) {}
-
-  static fromResponse(data: SubscriptionResponse): Subscription {
-    return new Subscription(
-      data.subscriptionId,
-      data.accountId,
-      data.planId,
-      data.cycle,
-      data.price,
-      data.status,
-      data.createdAt
-    );
-  }
 }

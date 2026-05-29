@@ -11,17 +11,4 @@ export class Plan {
     public type: "family" | "nursing-home",
     public features: string[]
   ) {}
-
-  static fromResponse(data: PlanResponse): Plan {
-    return new Plan(
-      data.id,
-      data.name,
-      data.description,
-      data.priceMonthly,
-      data.priceAnnual,
-      data.discountAnnual,
-      data.type,
-      data.features
-    );
-  }
 }
