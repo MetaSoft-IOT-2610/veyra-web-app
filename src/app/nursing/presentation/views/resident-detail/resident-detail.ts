@@ -1,11 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { MatCard } from '@angular/material/card';
 import { MatButton, MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatError } from '@angular/material/form-field';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NursingStore } from '../../../application/nursing.store';
 import { PersonProfileDetail } from '../../../../profiles/presentation/components/person-profile-detail/person-profile-detail';
@@ -21,7 +21,6 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatProgressSpinner,
     MatError,
     MatFabButton,
-    LayoutNursingHome,
     TranslatePipe,
     PersonProfileDetail,
     ReactiveFormsModule
@@ -54,26 +53,26 @@ export class ResidentDetail {
       this.residentId.set(id);
 
       if (!id) {
-        this.router.navigate(['/nursing/residents']).then();
+        void this.router.navigate(nursingNav.residents());
       }
     });
   }
 
   goBack() {
-    this.router.navigate(['/nursing/residents']).then();
+    void this.router.navigate(nursingNav.residents());
   }
 
   editResident() {
     const id = this.residentId();
     if (id) {
-      this.router.navigate(['nursing/residents', id, 'edit']).then();
+      void this.router.navigate(nursingNav.residentEdit(id));
     }
   }
 
   viewMedicalHistory() {
     const id = this.residentId();
     if (id) {
-      this.router.navigate(['nursing/residents', id, 'medical-records']).then();
+      void this.router.navigate(nursingNav.medicalRecords(id));
     }
   }
 }

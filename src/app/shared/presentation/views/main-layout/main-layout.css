@@ -1,0 +1,618 @@
+:host {
+  display: block;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.app-shell {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Contenedor Material: sidebar a altura completa + columna derecha (toolbar + contenido) */
+.app-sidenav-shell {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* ==================== TOOLBAR (solo sobre el área a la derecha del sidebar) ==================== */
+.toolbar {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 10px 24px;
+  min-height: 64px;
+  height: auto;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+.toolbar app-language-switcher,
+.toolbar app-authentication-section {
+  flex-shrink: 0;
+}
+
+.toolbar:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-back-btn {
+  margin-right: 8px;
+  flex-shrink: 0;
+  color: #0d2e73;
+}
+
+.toolbar-page-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: min(560px, 55vw);
+  gap: 2px;
+}
+
+.toolbar-page-module {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #0d2e73;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toolbar-page-description {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #5f6368;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .toolbar-page-module {
+    font-size: 1rem;
+  }
+
+  .toolbar-page-description {
+    font-size: 0.75rem;
+  }
+}
+
+.mobile-sidenav-reopen {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+  width: 28px;
+  height: 56px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #dadce0;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0d2e73;
+}
+
+.mobile-sidenav-reopen:hover {
+  background: #e8f4fd;
+}
+
+.mobile-sidenav-reopen mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+/* ==================== SIDENAV ==================== */
+mat-sidenav.app-sidenav {
+  width: 220px;
+  background: #ffffff;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.08);
+  overflow-x: hidden;
+  border-radius: 0;
+  border-right: 1px solid #e8eaed;
+}
+
+mat-sidenav.app-sidenav.collapsed {
+  width: 64px;
+}
+
+.sidenav-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Logo Section */
+.logo-section {
+  padding: 20px 16px;
+  border-bottom: 1px solid #e8eaed;
+  background: #fafbfc;
+  margin: 0;
+}
+
+/* Logo / marca Veyra (sustituye a Care Management; no va en el toolbar) */
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.brand-logo {
+  display: block;
+  height: 42px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.brand-link:hover .brand-logo {
+  transform: scale(1.03);
+}
+
+mat-sidenav.app-sidenav.collapsed .brand-logo {
+  height: 40px;
+  max-width: 56px;
+  margin: 0 auto;
+}
+
+mat-sidenav.app-sidenav.collapsed .logo-wrapper {
+  justify-content: center;
+}
+
+mat-sidenav.app-sidenav.collapsed .brand-link {
+  justify-content: center;
+  width: 100%;
+}
+
+.logo-text {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+mat-sidenav.app-sidenav.collapsed .logo-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.logo-text h2,
+.brand-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #66b3ad;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+/* Navigation Menu */
+.nav-menu {
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+mat-sidenav.app-sidenav.collapsed .nav-item {
+  justify-content: center;
+  padding: 14px 10px;
+  gap: 0;
+}
+
+mat-sidenav.app-sidenav.collapsed .logo-wrapper {
+  justify-content: center;
+}
+
+mat-sidenav.app-sidenav.collapsed .logo-section {
+  padding: 16px 8px 12px;
+}
+
+mat-sidenav.app-sidenav.collapsed .nav-menu {
+  align-items: center;
+  padding: 12px 8px;
+}
+
+mat-sidenav.app-sidenav.collapsed .active-indicator {
+  display: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  color: #5f6368;
+  white-space: nowrap;
+  background: transparent;
+}
+
+.nav-item:hover {
+  background: #f1f3f4;
+  color: #0d2e73;
+}
+
+mat-sidenav.app-sidenav:not(.collapsed) .nav-item:hover {
+  transform: translateX(4px);
+}
+
+.nav-item.active {
+  background: #e8f4fd;
+  color: #70b1e6;
+  font-weight: 600;
+}
+
+.nav-item.active:hover {
+  transform: translateX(4px);
+}
+
+.nav-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.nav-item.active .nav-icon-wrapper {
+  background: rgba(112, 177, 230, 0.1);
+}
+
+.nav-item:hover .nav-icon-wrapper {
+  transform: scale(1.1);
+}
+
+.nav-icon-wrapper mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.nav-label {
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+mat-sidenav.app-sidenav.collapsed .nav-label {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.active-indicator {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: #70b1e6;
+  border-radius: 2px 0 0 2px;
+}
+
+/* Footer de marca (MetaSoft) */
+.sidenav-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 10px 10px 8px;
+  border-top: 1px solid #e4e8ec;
+  background: linear-gradient(180deg, #f9fafc 0%, #eef1f5 100%);
+}
+
+.footer-panel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(13, 46, 115, 0.08);
+  box-shadow: 0 1px 2px rgba(13, 46, 115, 0.04);
+}
+
+.footer-panel__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: rgba(112, 177, 230, 0.14);
+  color: #5a9dd4;
+}
+
+.footer-panel__icon-wrap mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #70b1e6;
+}
+
+.footer-panel__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.footer-panel__brand {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0d2e73;
+}
+
+.footer-panel__copy {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #80868b;
+  text-transform: none;
+}
+
+/* Rail colapsado: solo icono centrado con tooltip */
+.footer-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0 8px;
+  cursor: default;
+}
+
+.footer-compact__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(112, 177, 230, 0.14);
+  border: 1px solid rgba(13, 46, 115, 0.06);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-compact:hover .footer-compact__icon-wrap {
+  background: rgba(112, 177, 230, 0.22);
+  transform: scale(1.04);
+}
+
+.footer-compact__icon-wrap mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #70b1e6;
+}
+
+mat-sidenav.app-sidenav.collapsed .sidenav-footer {
+  min-height: 0;
+  padding: 8px 6px 6px;
+  border-top: 1px solid #e8eaed;
+}
+
+/* Toggle: en sidebar colapsado el botón flecha queda centrado */
+.sidenav-toggle-zone {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 8px 12px 16px;
+  border-top: 1px solid #e8eaed;
+  background: #fafbfc;
+}
+
+mat-sidenav.app-sidenav.collapsed .sidenav-toggle-zone {
+  align-items: center;
+  padding: 8px 8px 14px;
+}
+
+.toggle-menu-btn {
+  width: 100%;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+  border-color: #dadce0 !important;
+  color: #0d2e73 !important;
+  font-weight: 500;
+}
+
+.toggle-menu-btn mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Colapsado: icon-button (MDC) centra el icono; estilo acorde al stroked del expandido */
+.toggle-expand-icon-btn {
+  margin: 0 auto;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  border: 1px solid #dadce0 !important;
+  border-radius: 10px !important;
+  color: #0d2e73 !important;
+  background: #fff !important;
+  box-sizing: border-box;
+}
+
+.toggle-expand-icon-btn mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+}
+
+.toggle-menu-btn--full {
+  width: 100%;
+}
+
+mat-sidenav.app-sidenav.collapsed .nav-item.active:hover {
+  transform: none;
+}
+
+mat-sidenav.app-sidenav.collapsed .nav-item:hover {
+  transform: none;
+}
+
+/* Columna derecha: NO usar width:100% aquí: Material aplica margin-left al drawer en
+   modo "side" y 100% + margen desborda el viewport → toolbar e idiomas cortados a la derecha. */
+mat-sidenav-content.main-with-toolbar {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #f8fafb;
+}
+
+.content-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* Desborde horizontal queda dentro del main (p. ej. tablas anchas) */
+  overflow-x: auto;
+}
+
+.content-wrapper {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* El router inserta el host del componente activo junto a <router-outlet> */
+.main-route-host {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar Styling */
+.nav-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-menu::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.nav-menu::-webkit-scrollbar-thumb {
+  background: rgba(112, 177, 230, 0.5);
+  border-radius: 10px;
+}
+
+.nav-menu::-webkit-scrollbar-thumb:hover {
+  background: #70b1e6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    padding: 0 16px;
+  }
+
+  mat-sidenav.app-sidenav {
+    width: 220px;
+    position: fixed;
+  }
+
+  .content-wrapper {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .toolbar {
+    padding: 0 12px;
+  }
+
+  .content-wrapper {
+    padding: 12px;
+  }
+}

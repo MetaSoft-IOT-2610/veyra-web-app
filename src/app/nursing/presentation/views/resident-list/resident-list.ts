@@ -1,12 +1,12 @@
 import {Component, computed, inject, signal} from '@angular/core';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatCard } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,7 +24,6 @@ import { PersonProfileDetail } from '../../../../profiles/presentation/component
     MatCard,
     MatIcon,
     MatButton,
-    LayoutNursingHome,
     MatFormField,
     MatLabel,
     MatInput,
@@ -80,25 +79,25 @@ export class ResidentList {
   }
 
   assignRoom(id: number) {
-    this.router.navigate(['nursing/residents', id, 'room-assignments', 'new']).then();
+    void this.router.navigate(nursingNav.assignRoom(id));
   }
 
   viewDetails(id: number) {
-    this.router.navigate(['nursing/residents', id, 'show']).then();
+    void this.router.navigate(nursingNav.residentDetail(id));
   }
 
   viewMedications(id: number) {
-    this.router.navigate(['nursing/residents', id, 'medications']).then();
+    void this.router.navigate(nursingNav.medications(id));
   }
 
   editResident(id: number) {
-    this.router.navigate(['nursing/residents', id, 'edit']).then();
+    void this.router.navigate(nursingNav.residentEdit(id));
     if (this.selectedId === id) {
       this.selectedId = null;
     }
   }
 
   navigateToNew(){
-    this.router.navigate(['nursing/residents/new']).then();
+    void this.router.navigate(nursingNav.residentNew());
   }
 }

@@ -1,12 +1,12 @@
 import {Component, computed, inject} from '@angular/core';
 import {NursingStore} from '../../../application/nursing.store';
 import {ActivatedRoute, Router} from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AssignRoomCommand} from '../../../domain/model/assign-room.command';
 import {TranslatePipe} from '@ngx-translate/core';
 import {MatCard} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
-import {LayoutNursingHome} from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import {MatIcon} from '@angular/material/icon';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatOption, MatSelect} from '@angular/material/select';
@@ -23,9 +23,7 @@ import {MatOption, MatSelect} from '@angular/material/select';
     MatSelect,
     MatOption,
     MatError,
-    MatButton,
-    LayoutNursingHome
-  ],
+    MatButton],
   templateUrl: './assign-room-form.html',
   styleUrl: './assign-room-form.css'
 })
@@ -82,14 +80,14 @@ export class AssignRoomForm {
 
       this.store.assignRoom(this.nursingHomeId, this.residentId, assignRoomCommand);
 
-      this.router.navigate(['/nursing/residents']).then();
+      void this.router.navigate(nursingNav.residents());
     } else {
       this.form.markAllAsTouched();
     }
   }
 
   onCancel() {
-    this.router.navigate(['/nursing/residents']).then();
+    void this.router.navigate(nursingNav.residents());
   }
 
   getRoomCapacityInfo(room: any): string {

@@ -1,6 +1,16 @@
 export const environment = {
-  production: true,
-  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
+
+  production: false,
+  /** Si es false, el `MainLayout` no muestra botones SIGN-IN / registro en toolbar; con sesión activa sí se muestra el menú de cuenta. */
+  showIamToolbar: false,
+  /**
+   * Si no hay sesión válida en `localStorage`, aplica usuario de desarrollo **solo al entrar al layout
+   * con sidebar** (`MainLayout`), no en `/home` ni otras rutas públicas.
+   */
+  fallbackDevUserSession: true,
+
+  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderFakeApiBaseUrl: 'https://myfake-api-production.up.railway.app',
 
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
@@ -28,14 +38,24 @@ export const environment = {
   platformProviderNursingHomeResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/residents',
   platformProviderNursingHomeStaffEndpointPath: '/nursing-homes/{nursingHomeId}/staff',
   platformProviderNursingHomeRoomsEndpointPath: '/nursing-homes/{nursingHomeId}/rooms',
+  platformProviderResidentRelativesEndpointPath: '/residents/{residentId}/relatives',
+  platformProviderNursingHomeRelativesEndpointPath: '/nursing-homes/{nursingHomeId}/relatives',
   platformProviderMedicationsEndpointPath:'/medications',
   platformProviderNursingHomesEndpointPath:'/nursing-homes',
   platformProviderResidentsEndpointPath:'/residents',
   platformProviderRoomsEndpointPath: '/rooms',
+  platformProviderRelativesEndpointPath: '/relatives',
+  platformProviderMonitoringResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/doctors/{doctorId}/monitoring-residents',
 
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
   platformProviderPersonProfilesEndpointPath: '/person-profiles',
+
+  // Activities Bounded Context
+  platformProviderActivitiesEndpointPath: '/activities',
+
+  // Alerts Bounded Context
+  platformProviderAlertsEndpointPath: '/alerts',
 
   // Payments Bounded Context
   platformProviderUserSubscriptionsEndpointPath: '/users/{userId}/subscriptions',

@@ -31,7 +31,15 @@
     "resident": "Residentes",
     "staff": "Personal",
     "care-management": "Gestión de la atención",
-    "room": "Habitaciones"
+    "room": "Habitaciones",
+    "activities": "Actividades",
+    "alerts": "Alertas",
+    "hide-menu": "Ocultar menú",
+    "show-menu": "Mostrar menú",
+    "open-menu": "Abrir menú",
+    "language": "Idioma de la interfaz",
+    "lang-es": "Español",
+    "lang-en": "English"
   },
   "page-not-found": {
     "title": "Página no encontrada",
@@ -39,7 +47,19 @@
     "go-home": "Ir al inicio"
   },
   "toolbar": {
-    "logoAlt": "logo"
+    "logoAlt": "logo",
+    "back": "Volver"
+  },
+  "iam": {
+    "profile": "Perfil",
+    "sign-out": "Cerrar sesión",
+    "user-menu": "Menú de cuenta",
+    "role": {
+      "admin-support": "Soporte administrativo",
+      "admin-support-panel": "Soporte Administrativo",
+      "user": "Usuario",
+      "user-panel": "Usuario"
+    }
   },
   "welcome": {
     "title": "Cuidamos a quienes<br>amas, informamos a<br>quienes esperan",
@@ -374,6 +394,114 @@
       "not-found": "Miembro del personal no encontrado",
       "not-found-message": "No se pudo encontrar la información del miembro del personal solicitado",
       "no-staff": "No hay miembros del personal registrados."
+    }
+  },
+  "activities": {
+    "title": "Actividades",
+    "filters": {
+      "all": "Todas",
+      "recreational": "Recreativas",
+      "medical": "Médicas",
+      "physical": "Físicas",
+      "social": "Sociales"
+    },
+    "showing": "Mostrando {{ count }} actividades",
+    "no-activities": "No hay actividades registradas.",
+    "columns": {
+      "activity": "ACTIVIDAD",
+      "category": "CATEGORÍA",
+      "datetime": "FECHA Y HORA",
+      "status": "ESTADO",
+      "actions": "ACCIONES"
+    },
+    "status": {
+      "pending": "Programado",
+      "in_progress": "En curso",
+      "completed": "Completado"
+    },
+    "types": {
+      "meal": "Médica",
+      "bath": "Física",
+      "risk_profile": "Recreativa"
+    },
+    "detail": {
+      "title": "Detalles de actividad",
+      "name-label": "NOMBRE DE LA ACTIVIDAD",
+      "date-label": "FECHA Y HORA",
+      "category-label": "CATEGORÍA",
+      "description-label": "DESCRIPCIÓN",
+      "close": "Cerrar",
+      "edit": "Editar actividad"
+    },
+    "add": {
+      "title": "Agregar actividad",
+      "subtitle": "Configura una nueva actividad para el calendario de residentes.",
+      "name": "Nombre de la actividad",
+      "name-placeholder": "ej. Taller de Pintura Matutino",
+      "description": "Descripción de la actividad",
+      "description-placeholder": "Detalla los objetivos y materiales necesarios...",
+      "date": "Fecha",
+      "hour": "Hora",
+      "category": "Categoría",
+      "save": "Guardar actividad",
+      "cancel": "Cancelar"
+    },
+    "edit": {
+      "title": "Actualizar actividad",
+      "subtitle": "Configura una nueva actividad para el calendario de residentes.",
+      "save": "Actualizar Actividad",
+      "cancel": "Cancelar"
+    },
+    "add-new": "Agregar",
+    "filter-btn": "Filtrar"
+  },
+  "alerts": {
+    "title": "Centro de Alertas",
+    "subtitle": "Monitoreo de reportes del personal de cuidado y telemetría IoT.",
+    "filter-btn": "Filtrar",
+    "mark-all-read": "Marcar todo como leído",
+    "loading": "Cargando alertas...",
+    "empty": "No hay alertas en este momento.",
+    "unread": "No leída",
+    "acknowledged": "Atendida",
+    "room": "Hab.",
+    "reported-by": "Reportado por",
+    "summary": {
+      "critical": "Críticas",
+      "warnings": "Advertencias",
+      "reports": "Reportes de App"
+    },
+    "filter": {
+      "all": "Todas",
+      "urgent": "Urgentes",
+      "warning": "Advertencias",
+      "info": "Informativas"
+    },
+    "severity": {
+      "urgent": "Urgente",
+      "warning": "Advertencia",
+      "info": "Info",
+      "automatic": "Automático"
+    },
+    "status": {
+      "unread": "No leída",
+      "read": "Leída",
+      "acknowledged": "Atendida"
+    },
+    "action": {
+      "attend": "Atender de Inmediato",
+      "view-history": "Ver Historial",
+      "view-vitals": "Ver Signos Vitales",
+      "contact-staff": "Contactar Personal",
+      "acknowledge": "Marcar como atendida"
+    },
+    "detail": {
+      "description": "Descripción",
+      "resident": "Residente",
+      "reported-by": "Reportado por",
+      "time": "Tiempo",
+      "status": "Estado",
+      "close": "Cerrar"
     }
   },
   "payments": {

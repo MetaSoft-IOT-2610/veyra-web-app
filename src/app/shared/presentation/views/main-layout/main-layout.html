@@ -1,0 +1,153 @@
+<div class="app-shell">
+  @if (sidenavMode === 'over' && !sidenavOpened) {
+    <button
+      type="button"
+      class="mobile-sidenav-reopen"
+      (click)="openMobileDrawer()"
+      [attr.aria-label]="'nav.open-menu' | translate">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  }
+
+  <mat-sidenav-container #shell class="app-sidenav-shell" [autosize]="true">
+    <mat-sidenav
+      #drawer
+      class="app-sidenav"
+      [class.collapsed]="sidenavMode === 'side' && navCollapsed()"
+      [mode]="sidenavMode"
+      [opened]="sidenavOpened"
+      (openedChange)="onSidenavOpenedChange($event)">
+
+      <div class="sidenav-inner">
+        <div class="logo-section">
+          <a routerLink="/home" class="logo-wrapper brand-link" [attr.title]="'Veyra'">
+            <img class="brand-logo" src="/images/shared/veyra-logo.png" alt="Veyra" />
+            <div class="logo-text">
+              <h2 class="brand-title">Veyra</h2>
+            </div>
+          </a>
+        </div>
+
+        <nav class="nav-menu">
+          @for (option of options; track option.link) {
+            <div
+              class="nav-item"
+              [class.active]="isActive(option.link)"
+              [matTooltip]="option.label | translate"
+              matTooltipPosition="right"
+              (click)="navigateTo(option.link)">
+
+              <div class="nav-icon-wrapper" [style.background-color]="option.color + '20'">
+                <mat-icon [style.color]="option.color">{{ option.icon }}</mat-icon>
+              </div>
+
+              <span class="nav-label">{{ option.label | translate }}</span>
+
+              @if (isActive(option.link)) {
+                <div class="active-indicator"></div>
+              }
+            </div>
+          }
+        </nav>
+
+        <footer class="sidenav-footer" role="contentinfo">
+          @if (sidenavMode === 'side' && navCollapsed()) {
+            <div
+              class="footer-compact"
+              matTooltip="MetaSoft"
+              matTooltipPosition="right"
+              aria-label="MetaSoft">
+              <span class="footer-compact__icon-wrap" aria-hidden="true">
+                <mat-icon>code</mat-icon>
+              </span>
+            </div>
+          } @else {
+            <div class="footer-panel">
+              <div class="footer-panel__icon-wrap" aria-hidden="true">
+                <mat-icon>code</mat-icon>
+              </div>
+              <div class="footer-panel__text">
+                <span class="footer-panel__brand">MetaSoft</span>
+                <span class="footer-panel__copy">© {{ getCurrentYear() }}</span>
+              </div>
+            </div>
+          }
+        </footer>
+
+        <div class="sidenav-toggle-zone">
+          @if (sidenavMode === 'side') {
+            @if (navCollapsed()) {
+              <button
+                mat-icon-button
+                type="button"
+                class="toggle-expand-icon-btn"
+                [matTooltip]="'nav.show-menu' | translate"
+                matTooltipPosition="right"
+                (click)="toggleDesktopNav()">
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            } @else {
+              <button
+                mat-stroked-button
+                type="button"
+                class="toggle-menu-btn"
+                [matTooltip]="'nav.hide-menu' | translate"
+                matTooltipPosition="right"
+                (click)="toggleDesktopNav()">
+                <mat-icon>chevron_left</mat-icon>
+                <span>{{ 'nav.hide-menu' | translate }}</span>
+              </button>
+            }
+          } @else {
+            <button
+              mat-stroked-button
+              type="button"
+              class="toggle-menu-btn toggle-menu-btn--full"
+              (click)="closeMobileDrawer()">
+              <mat-icon>chevron_left</mat-icon>
+              <span>{{ 'nav.hide-menu' | translate }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-with-toolbar">
+      <mat-toolbar class="toolbar">
+        @if (routeToolbar.showBackButton()) {
+          <button
+            mat-icon-button
+            type="button"
+            class="toolbar-back-btn"
+            (click)="routeToolbar.goBack()"
+            [attr.aria-label]="'toolbar.back' | translate">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        }
+
+        @if (routeToolbar.pageData(); as page) {
+          <div class="toolbar-page-info">
+            <h1 class="toolbar-page-module">{{ page.module }}</h1>
+            @if (page.description) {
+              <p class="toolbar-page-description">{{ page.description }}</p>
+            }
+          </div>
+        }
+
+        <span class="spacer"></span>
+        @if (showAuthenticationInToolbar()) {
+          <app-authentication-section/>
+        }
+        <app-language-switcher></app-language-switcher>
+      </mat-toolbar>
+
+      <div class="content-scroll">
+        <div class="content-wrapper">
+          <div class="main-route-host">
+            <router-outlet/>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

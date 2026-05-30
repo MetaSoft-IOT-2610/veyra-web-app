@@ -36,7 +36,7 @@ mat-spinner {
 /* Cards Grid */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 24px;
   padding-bottom: 140px;
   margin-right: 40px;
@@ -210,7 +210,7 @@ mat-spinner {
   }
 
   .cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: 20px;
   }
 }
@@ -221,7 +221,7 @@ mat-spinner {
   }
 
   .cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
     gap: 16px;
     padding-bottom: 180px;
   }

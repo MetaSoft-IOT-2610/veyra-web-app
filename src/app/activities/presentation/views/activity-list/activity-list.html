@@ -1,0 +1,260 @@
+<div class="page-container">
+
+    <!-- Filtros -->
+    <div class="filters-bar">
+      <div class="filter-tabs">
+        @for (filter of filters; track filter.key) {
+          <button
+            class="filter-tab"
+            [class.active]="selectedFilter() === filter.key"
+            (click)="setFilter(filter.key)">
+            {{ filter.label | translate }}
+          </button>
+        }
+      </div>
+      <div class="filters-right">
+        <span class="count-label">{{ 'activities.showing' | translate:{ count: filteredActivities.length } }}</span>
+        <button class="filter-btn">
+          <mat-icon>filter_list</mat-icon>
+          {{ 'activities.filter-btn' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="table-container">
+      @if (loading) {
+        <div class="spinner-row">
+          <mat-icon class="spin">refresh</mat-icon>
+        </div>
+      }
+
+      @if (error) {
+        <div class="error-row">
+          <mat-icon>error_outline</mat-icon>
+          {{ error }}
+        </div>
+      }
+
+      @if (!loading && filteredActivities.length === 0 && !error) {
+        <div class="empty-row">
+          <mat-icon>event_note</mat-icon>
+          <p>{{ 'activities.no-activities' | translate }}</p>
+        </div>
+      }
+
+      @if (!loading && filteredActivities.length > 0) {
+        <table class="activities-table">
+          <thead>
+          <tr>
+            <th>{{ 'activities.columns.activity' | translate }}</th>
+            <th>{{ 'activities.columns.category' | translate }}</th>
+            <th>{{ 'activities.columns.datetime' | translate }}</th>
+            <th>{{ 'activities.columns.status' | translate }}</th>
+            <th>{{ 'activities.columns.actions' | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (activity of filteredActivities; track activity.id) {
+              <tr>
+                <td class="activity-name-cell">
+                  <div class="activity-icon">
+                    <mat-icon>event</mat-icon>
+                  </div>
+                  <span class="activity-name" (click)="openDetail(activity)">
+                    {{ 'activities.types.' + activity.type.toLowerCase() | translate }}
+                  </span>
+                </td>
+                <td>
+                  <span class="category-chip {{ activity.type.toLowerCase() }}">
+                    {{ 'activities.types.' + activity.type.toLowerCase() | translate }}
+                  </span>
+                </td>
+                <td class="date-cell">
+                  <span>{{ activity.loggedAt | date:'EEEE' }}</span>
+                  <span class="time">{{ activity.loggedAt | date:'hh:mm a' }}</span>
+                </td>
+                <td>
+                  <span class="status-chip {{ activity.status.toLowerCase() }}">
+                    {{ 'activities.status.' + activity.status.toLowerCase() | translate }}
+                  </span>
+                </td>
+                <td class="actions-cell">
+                  <button mat-icon-button class="action-btn edit" (click)="openEditModal(activity)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button class="action-btn delete" (click)="completeActivity(activity.id)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+
+    <!-- FAB Add New -->
+    <button class="fab-add" (click)="openAddModal()">
+      <mat-icon>add</mat-icon>
+      {{ 'activities.add-new' | translate }}
+    </button>
+
+    <!-- Modal Detalle -->
+    @if (selectedActivity()) {
+      <div class="modal-overlay" (click)="closeDetail()">
+        <div class="modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>{{ 'activities.detail.title' | translate }}</h3>
+            <button mat-icon-button (click)="closeDetail()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="modal-label">{{ 'activities.detail.name-label' | translate }}</p>
+            <h2 class="modal-title">
+              {{ 'activities.types.' + selectedActivity()!.type.toLowerCase() | translate }}
+            </h2>
+            <div class="modal-row">
+              <div>
+                <p class="modal-label">{{ 'activities.detail.date-label' | translate }}</p>
+                <p class="modal-value">
+                  <mat-icon>calendar_today</mat-icon>
+                  {{ selectedActivity()!.loggedAt | date:'MM/dd/yyyy' }} at {{ selectedActivity()!.loggedAt | date:'hh:mm a' }}
+                </p>
+              </div>
+              <div>
+                <p class="modal-label">{{ 'activities.detail.category-label' | translate }}</p>
+                <span class="category-chip {{ selectedActivity()!.type.toLowerCase() }}">
+                  {{ 'activities.types.' + selectedActivity()!.type.toLowerCase() | translate }}
+                </span>
+              </div>
+            </div>
+            <p class="modal-label">{{ 'activities.detail.description-label' | translate }}</p>
+            <p class="modal-desc">{{ selectedActivity()!.notes }}</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel" (click)="closeDetail()">
+              {{ 'activities.detail.close' | translate }}
+            </button>
+            <button class="btn-primary" (click)="openEditModal(selectedActivity()!)">
+              <mat-icon>edit</mat-icon>
+              {{ 'activities.detail.edit' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Modal Agregar -->
+    @if (showAddModal()) {
+      <div class="modal-overlay" (click)="closeAddModal()">
+        <div class="modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <div>
+              <h3>{{ 'activities.add.title' | translate }}</h3>
+              <p class="modal-subtitle">{{ 'activities.add.subtitle' | translate }}</p>
+            </div>
+            <button mat-icon-button (click)="closeAddModal()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label class="form-label">{{ 'activities.add.name' | translate }}</label>
+            <input class="form-input" [(ngModel)]="formName"
+                   [placeholder]="'activities.add.name-placeholder' | translate" />
+
+            <label class="form-label">{{ 'activities.add.description' | translate }}</label>
+            <textarea class="form-textarea" [(ngModel)]="formNotes" rows="4"
+                      [placeholder]="'activities.add.description-placeholder' | translate"></textarea>
+
+            <div class="form-row">
+              <div class="form-col">
+                <label class="form-label">{{ 'activities.add.date' | translate }}</label>
+                <input class="form-input" type="date" [(ngModel)]="formDate" />
+              </div>
+              <div class="form-col">
+                <label class="form-label">{{ 'activities.add.hour' | translate }}</label>
+                <input class="form-input" type="time" [(ngModel)]="formTime" />
+              </div>
+            </div>
+
+            <label class="form-label">{{ 'activities.add.category' | translate }}</label>
+            <div class="category-chips">
+              @for (type of activityTypes; track type) {
+                <button class="category-select-chip"
+                        [class.selected]="formType === type"
+                        (click)="formType = type">
+                  {{ 'activities.types.' + type.toLowerCase() | translate }}
+                </button>
+              }
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel" (click)="closeAddModal()">
+              {{ 'activities.add.cancel' | translate }}
+            </button>
+            <button class="btn-primary" (click)="saveActivity()">
+              {{ 'activities.add.save' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Modal Editar -->
+    @if (showEditModal()) {
+      <div class="modal-overlay" (click)="closeEditModal()">
+        <div class="modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <div>
+              <h3>{{ 'activities.edit.title' | translate }}</h3>
+              <p class="modal-subtitle">{{ 'activities.edit.subtitle' | translate }}</p>
+            </div>
+            <button mat-icon-button (click)="closeEditModal()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label class="form-label">{{ 'activities.add.name' | translate }}</label>
+            <input class="form-input" [(ngModel)]="formName"
+                   [placeholder]="'activities.add.name-placeholder' | translate" />
+
+            <label class="form-label">{{ 'activities.add.description' | translate }}</label>
+            <textarea class="form-textarea" [(ngModel)]="formNotes" rows="4"></textarea>
+
+            <div class="form-row">
+              <div class="form-col">
+                <label class="form-label">{{ 'activities.add.date' | translate }}</label>
+                <input class="form-input" type="date" [(ngModel)]="formDate" />
+              </div>
+              <div class="form-col">
+                <label class="form-label">{{ 'activities.add.hour' | translate }}</label>
+                <input class="form-input" type="time" [(ngModel)]="formTime" />
+              </div>
+            </div>
+
+            <label class="form-label">{{ 'activities.add.category' | translate }}</label>
+            <div class="category-chips">
+              @for (type of activityTypes; track type) {
+                <button class="category-select-chip"
+                        [class.selected]="formType === type"
+                        (click)="formType = type">
+                  {{ 'activities.types.' + type.toLowerCase() | translate }}
+                </button>
+              }
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel" (click)="closeEditModal()">
+              {{ 'activities.edit.cancel' | translate }}
+            </button>
+            <button class="btn-primary" (click)="saveActivity()">
+              {{ 'activities.edit.save' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+
+</div>

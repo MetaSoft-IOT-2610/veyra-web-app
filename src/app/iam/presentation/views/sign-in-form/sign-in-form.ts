@@ -2,9 +2,11 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SignInCommand } from '../../../domain/model/sign-in.command';
+import { iamNav } from '../../iam.routes';
+import { analyticsNav } from '../../../../analytics/presentation/analytics-routes';
 import { IamStore } from '../../../application/iam.store';
 import { Toolbar } from '../../../../shared/presentation/components/toolbar/toolbar';
+import { environment } from '../../../../../environments/environment';
 
 /**
  * Component for user sign-in functionality.
@@ -32,9 +34,12 @@ export class SignInForm {
   hidePassword = true;
 
   /**
-   * Handles form submission for sign-in.
+   * Login real: descomenta `store.signIn(...)` y quita el stub.
+   * En no producción, si el formulario es válido, actualiza `localStorage` y rehidrata el store
+   * (nombre del formulario; si no pasas por aquí, `IamStore` puede aplicar usuario por defecto en dev).
    */
   onSubmit(): void {
+    /*
     if (this.form.valid) {
       const signInCommand = new SignInCommand({
         username: this.form.value.username!,
@@ -44,6 +49,21 @@ export class SignInForm {
     } else {
       this.markFormGroupTouched(this.form);
     }
+    */
+
+    if (!this.form.valid) {
+      this.markFormGroupTouched(this.form);
+      return;
+    }
+    if (!environment.production) {
+      const username = this.form.value.username!;
+      localStorage.setItem('token', 'dev');
+      localStorage.setItem('userId', '1');
+      localStorage.setItem('username', username);
+      localStorage.setItem('userRoles', JSON.stringify(['ROLE_USER']));
+      this.store.rehydrateSessionFromStorage();
+    }
+    void this.router.navigate(analyticsNav.dashboard());
   }
 
   /**
@@ -92,14 +112,14 @@ export class SignInForm {
   }
 
   performSignUpUser(): void {
-    this.router.navigate(['/iam/sign-up'], {
+    void this.router.navigate(iamNav.signUp(), {
       queryParams: { role: 'user' }
-    }).then();
+    });
   }
 
   performSignUpAdmin(): void {
-    this.router.navigate(['/iam/sign-up'], {
+    void this.router.navigate(iamNav.signUp(), {
       queryParams: { role: 'admin' }
-    }).then();
+    });
   }
 }

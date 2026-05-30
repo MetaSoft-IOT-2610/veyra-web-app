@@ -1,0 +1,240 @@
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-text">
+      <p class="header-subtitle">{{ 'alerts.subtitle' | translate }}</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-outline" (click)="setFilter(selectedFilter())">
+        <mat-icon>filter_list</mat-icon>
+        {{ 'alerts.filter-btn' | translate }}
+      </button>
+      <button
+        class="btn-primary"
+        [disabled]="store.loading()"
+        (click)="onMarkAllAsRead()">
+        <mat-icon>done_all</mat-icon>
+        {{ 'alerts.mark-all-read' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-row">
+    <div class="summary-card critical">
+      <div class="summary-dot critical-dot"></div>
+      <div class="summary-body">
+        <span class="summary-label">{{ 'alerts.summary.critical' | translate }}</span>
+        <span class="summary-count">{{ store.criticalCount() }}</span>
+      </div>
+    </div>
+    <div class="summary-card warning">
+      <div class="summary-dot warning-dot"></div>
+      <div class="summary-body">
+        <span class="summary-label">{{ 'alerts.summary.warnings' | translate }}</span>
+        <span class="summary-count">{{ store.warningCount() }}</span>
+      </div>
+    </div>
+    <div class="summary-card info">
+      <div class="summary-dot info-dot"></div>
+      <div class="summary-body">
+        <span class="summary-label">{{ 'alerts.summary.reports' | translate }}</span>
+        <span class="summary-count">{{ store.infoCount() }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="filters-bar">
+    @for (filter of filters; track filter.key) {
+      <button
+        class="filter-tab"
+        [class.active]="selectedFilter() === filter.key"
+        (click)="setFilter(filter.key)">
+        {{ filter.labelKey | translate }}
+      </button>
+    }
+  </div>
+
+  <!-- Loading -->
+  @if (store.loading()) {
+    <div class="state-row">
+      <mat-icon class="spin">refresh</mat-icon>
+      <span>{{ 'alerts.loading' | translate }}</span>
+    </div>
+  }
+
+  <!-- Error -->
+  @if (store.error()) {
+    <div class="state-row error-row">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ store.error() }}</span>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (!store.loading() && filteredAlerts().length === 0 && !store.error()) {
+    <div class="empty-state">
+      <mat-icon>notifications_off</mat-icon>
+      <p>{{ 'alerts.empty' | translate }}</p>
+    </div>
+  }
+
+  <!-- Alert Cards -->
+  @if (!store.loading() && filteredAlerts().length > 0) {
+    <div class="alerts-list">
+      @for (alert of filteredAlerts(); track alert.id; let i = $index) {
+        <div
+          class="alert-card"
+          [class.unread]="isUnread(alert)"
+          [class.acknowledged]="isAcknowledged(alert)"
+          [class.urgent]="isUrgent(alert)"
+          [class.warning]="isWarning(alert)"
+          [class.info]="isInfo(alert)">
+
+          <!-- Left accent bar is applied via CSS border-left on the card -->
+
+          <!-- Alert Icon -->
+          <div class="alert-icon-col">
+            <div class="alert-icon" [class]="severityClass(alert.severity)">
+              @if (isUrgent(alert)) { <mat-icon>monitor_heart</mat-icon> }
+              @else if (isWarning(alert)) { <mat-icon>medication</mat-icon> }
+              @else { <mat-icon>sensors</mat-icon> }
+            </div>
+          </div>
+
+          <!-- Alert Body -->
+          <div class="alert-body">
+            <div class="alert-top-row">
+              <span class="alert-title" (click)="openDetail(alert)">{{ alert.title }}</span>
+              <span class="severity-badge" [class]="severityClass(alert.severity)">
+                @if (isUrgent(alert)) { {{ 'alerts.severity.urgent' | translate }} }
+                @else if (isWarning(alert)) { {{ 'alerts.severity.warning' | translate }} }
+                @else if (isAutomatic(alert)) { {{ 'alerts.severity.automatic' | translate }} }
+                @else { {{ 'alerts.severity.info' | translate }} }
+              </span>
+              @if (isUnread(alert)) {
+                <span class="unread-dot" [matTooltip]="'alerts.unread' | translate"></span>
+              }
+              <span class="time-ago">{{ timeAgo(alert.createdAt) }}</span>
+            </div>
+
+            <p class="alert-description">{{ alert.description }}</p>
+
+            <div class="alert-meta">
+              <span class="resident-info">
+                <mat-icon class="meta-icon">person</mat-icon>
+                <strong>{{ alert.residentName }}</strong>
+                @if (alert.roomNumber) {
+                  <span class="room-badge">({{ 'alerts.room' | translate }} {{ alert.roomNumber }})</span>
+                }
+              </span>
+              <span class="meta-divider">|</span>
+              <span class="reporter-info">
+                {{ 'alerts.reported-by' | translate }}: {{ alert.reportedBy }}
+                <em class="source-label">&nbsp;·&nbsp;{{ sourceLabel(alert.source) }}</em>
+              </span>
+            </div>
+          </div>
+
+          <!-- Alert Actions -->
+          <div class="alert-actions">
+            @if (isUrgent(alert) && !isAcknowledged(alert)) {
+              <button class="btn-action urgent-btn" (click)="onAttendImmediately(alert)">
+                {{ 'alerts.action.attend' | translate }}
+              </button>
+              <button class="btn-action outline-btn" (click)="onViewHistory(alert)">
+                {{ 'alerts.action.view-history' | translate }}
+              </button>
+            }
+            @else if (isAutomatic(alert) && !isAcknowledged(alert)) {
+              <button class="btn-action outline-btn" (click)="onViewVitalSigns(alert)">
+                {{ 'alerts.action.view-vitals' | translate }}
+              </button>
+              <button class="btn-action ghost-btn" (click)="onAcknowledge(alert)">
+                {{ 'alerts.action.acknowledge' | translate }}
+              </button>
+            }
+            @else if (!isAcknowledged(alert)) {
+              <button class="btn-action outline-btn" (click)="onContactStaff()">
+                {{ 'alerts.action.contact-staff' | translate }}
+              </button>
+              <button class="btn-action ghost-btn" (click)="onAcknowledge(alert)">
+                {{ 'alerts.action.acknowledge' | translate }}
+              </button>
+            }
+            @else {
+              <span class="acknowledged-label">
+                <mat-icon>check_circle</mat-icon>
+                {{ 'alerts.acknowledged' | translate }}
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Detail Modal -->
+  @if (selectedAlert()) {
+    <div class="modal-overlay" (click)="closeDetail()">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <div class="modal-title-row">
+            <span class="severity-badge" [class]="severityClass(selectedAlert()!.severity)">
+              {{ 'alerts.severity.' + selectedAlert()!.severity.toLowerCase() | translate }}
+            </span>
+            <h3>{{ selectedAlert()!.title }}</h3>
+          </div>
+          <button mat-icon-button (click)="closeDetail()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <p class="modal-label">{{ 'alerts.detail.description' | translate }}</p>
+          <p class="modal-desc">{{ selectedAlert()!.description }}</p>
+
+          <div class="modal-meta-grid">
+            <div class="meta-item">
+              <span class="modal-label">{{ 'alerts.detail.resident' | translate }}</span>
+              <span class="modal-value">{{ selectedAlert()!.residentName }}
+                @if (selectedAlert()!.roomNumber) {
+                  &nbsp;— {{ 'alerts.room' | translate }} {{ selectedAlert()!.roomNumber }}
+                }
+              </span>
+            </div>
+            <div class="meta-item">
+              <span class="modal-label">{{ 'alerts.detail.reported-by' | translate }}</span>
+              <span class="modal-value">{{ selectedAlert()!.reportedBy }} · {{ sourceLabel(selectedAlert()!.source) }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="modal-label">{{ 'alerts.detail.time' | translate }}</span>
+              <span class="modal-value">{{ timeAgo(selectedAlert()!.createdAt) }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="modal-label">{{ 'alerts.detail.status' | translate }}</span>
+              <span class="modal-value status-value" [class]="selectedAlert()!.status.toLowerCase()">
+                {{ 'alerts.status.' + selectedAlert()!.status.toLowerCase() | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-cancel" (click)="closeDetail()">
+            {{ 'alerts.detail.close' | translate }}
+          </button>
+          @if (!isAcknowledged(selectedAlert()!)) {
+            <button class="btn-primary" (click)="onAcknowledge(selectedAlert()!); closeDetail()">
+              <mat-icon>check_circle</mat-icon>
+              {{ 'alerts.action.acknowledge' | translate }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+</div>
