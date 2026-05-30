@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { PaymentsApi } from "../infrastructure/payments-api";
 import { firstValueFrom } from 'rxjs';
 import { Plan } from "../domain/model/plan.entity";
 import { Subscription } from "../domain/model/subscription.entity";
-import { PlanAssembler } from "../infrastructure/plan-assembler";
-import { SubscriptionAssembler } from "../infrastructure/subscription-assembler";
+import { PaymentsApi } from "../infrastructure/payments-api"; // Inyectamos el nuevo Facade
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +17,14 @@ export class PaymentStore {
   isLoading = false;
   error: string | null = null;
 
-  // Inyectamos la API actualizada
   constructor(private api: PaymentsApi) {}
 
   async loadPlans() {
     this.isLoading = true;
     this.error = null;
     try {
-      const data = await firstValueFrom(this.api.getAvailablePlans());
-      this.plans = PlanAssembler.toEntityList(data);
+      // Retorna directamente Plan[] gracias al Assembler interno del endpoint
+      this.plans = await firstValueFrom(this.api.getAvailablePlans());
     } catch (e: any) {
       this.error = e.message;
     } finally {
@@ -43,7 +40,6 @@ export class PaymentStore {
     this.billingCycle = cycle;
   }
 
-  // Ahora recibe el ID del usuario logueado y el token de la tarjeta
   async createSubscription(userId: number, paymentMethodId: string) {
     if (!this.selectedPlan) {
       this.error = "No plan selected.";
@@ -53,21 +49,19 @@ export class PaymentStore {
     this.isLoading = true;
     this.error = null;
 
-    // Mapeamos a los ENUMS exactos de tu backend en Java
     const mappedPlanType = this.selectedPlan.type === 'family' ? 'FAMILY' : 'NURSING_HOME';
     const mappedPeriod = this.billingCycle === 'monthly' ? 'MONTHLY' : 'ANNUALLY';
 
     try {
-      const response = await firstValueFrom(this.api.createSubscription(userId, {
-        planType: mappedPlanType,
-        period: mappedPeriod,
-        paymentMethodId: paymentMethodId
-      }));
-
-      // Si el Assembler requiere ajustes, asegúrate de que coincida con SubscriptionResource
-      this.subscription = SubscriptionAssembler.toEntity(response);
+      // Retorna directamente la entidad Subscription gracias al Assembler
+      this.subscription = await firstValueFrom(
+        this.api.createSubscription(userId, {
+          planType: mappedPlanType,
+          period: mappedPeriod,
+          paymentMethodId: paymentMethodId
+        })
+      );
     } catch (e: any) {
-      // Capturamos errores HTTP del backend (Ej: 400 DuplicateActiveSubscription)
       this.error = e.error?.message || "Error procesando el pago con Stripe.";
     } finally {
       this.isLoading = false;

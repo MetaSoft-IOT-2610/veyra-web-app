@@ -1,17 +1,35 @@
-import { Account } from "../domain/model/account.entity";
-import { AccountResponse } from "./accounts-response";
+import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
+import { Account } from '../domain/model/account.entity';
+import { AccountResource, AccountsResponse } from './accounts-response';
 
-export class AccountAssembler {
-  static toEntity(data: AccountResponse): Account {
+export class AccountAssembler implements BaseAssembler<Account, AccountResource, AccountsResponse> {
+  toEntitiesFromResponse(response: AccountsResponse): Account[] {
+    return response.accounts.map(account => this.toEntityFromResource(account));
+  }
+
+  toEntityFromResource(resource: AccountResource): Account {
     return new Account(
-      data.id,
-      data.fullName,
-      data.email,
-      data.phone,
-      data.country,
-      data.role,
-      data.createdAt,
-      data.updatedAt
+      resource.id.toString(), // Adaptando el number del BaseResource a string temporalmente
+      resource.fullName,
+      resource.email,
+      resource.phone,
+      resource.country,
+      resource.role,
+      resource.createdAt,
+      resource.updatedAt
     );
+  }
+
+  toResourceFromEntity(entity: Account): AccountResource {
+    return {
+      id: Number(entity.id),
+      fullName: entity.fullName,
+      email: entity.email,
+      phone: entity.phone,
+      country: entity.country,
+      role: entity.role,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt
+    } as AccountResource;
   }
 }

@@ -1,55 +1,68 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { BaseApi } from '../../shared/infrastructure/base-api';
 
-export interface CreateSubscriptionDto {
-  planType: string;
-  period: string;
-  paymentMethodId: string;
-}
+// Entidades
+import { Plan } from '../domain/model/plan.entity';
+import { Subscription } from '../domain/model/subscription.entity';
 
+// Endpoints
+import { PlansApiEndpoint } from './plans-api-endpoint';
+import { SubscriptionsApiEndpoint } from './subscriptions-api-endpoint';
+import { AccountsApiEndpoint } from './accounts-api-endpoint';
+
+/**
+ * @purpose: Service to interact with the Payments API
+ * @description: This service provides a centralized facade to access Plans, Subscriptions, and Accounts operations.
+ */
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentsApi {
+export class PaymentsApi extends BaseApi {
 
-  private baseUrl = environment.platformProviderApiBaseUrl;
-
-  constructor(private http: HttpClient) {}
-
-  // Mantenemos los planes estáticos temporalmente ya que no hay endpoint GET /plans
-  getAvailablePlans(): Observable<any[]> {
-    return new Observable(subscriber => {
-      setTimeout(() => {
-        subscriber.next([
-          { id: "plan_fam_001", name: "Family Plan", type: "family" },
-          { id: "plan_nur_001", name: "Nursing Home Plan", type: "nursing-home" }
-        ]);
-        subscriber.complete();
-      }, 500);
-    });
-  }
+  private readonly _plansApiEndpoint: PlansApiEndpoint;
+  private readonly _subscriptionsApiEndpoint: SubscriptionsApiEndpoint;
+  private readonly _accountsApiEndpoint: AccountsApiEndpoint;
 
   /**
-   * Llama a POST /api/v1/users/{userId}/subscriptions
+   * Initializes the Payments API service with the required HTTP client.
+   * @param http - Angular HttpClient used to perform API requests.
    */
-  createSubscription(userId: number, payload: CreateSubscriptionDto): Observable<any> {
-    // Reemplazamos {userId} por el ID real
-    const endpoint = environment.platformProviderUserSubscriptionsEndpointPath
-      .replace('{userId}', userId.toString());
-
-    return this.http.post(`${this.baseUrl}${endpoint}`, payload);
+  constructor(http: HttpClient) {
+    super();
+    this._plansApiEndpoint = new PlansApiEndpoint(http);
+    this._subscriptionsApiEndpoint = new SubscriptionsApiEndpoint(http);
+    this._accountsApiEndpoint = new AccountsApiEndpoint(http);
   }
 
-  /**
-   * Llama a GET /api/v1/users/{userId}/subscriptions/active
-   * (Muy útil para cuando el usuario inicie sesión y quieras ver si ya pagó)
-   */
-  getActiveSubscription(userId: number): Observable<any> {
-    const endpoint = environment.platformProviderUserActiveSubscriptionEndpointPath
-      .replace('{userId}', userId.toString());
+  // ==========================================
+  // PLANS
+  // ==========================================
 
-    return this.http.get(`${this.baseUrl}${endpoint}`);
+  getAvailablePlans(): Observable<Plan[]> {
+    return this._plansApiEndpoint.getAvailablePlans();
   }
+
+  // ==========================================
+  // SUBSCRIPTIONS
+  // ==========================================
+
+  createSubscription(userId: number, payload: { planType: string; period: string; paymentMethodId: string }): Observable<Subscription> {
+    return this._subscriptionsApiEndpoint.createSubscriptionForUser(userId, payload);
+  }
+
+  getActiveSubscription(userId: number): Observable<Subscription> {
+    return this._subscriptionsApiEndpoint.getActiveSubscriptionForUser(userId);
+  }
+
+  // ==========================================
+  // ACCOUNTS
+  // ==========================================
+
+  // Puedes agregar los métodos de cuentas aquí a medida que los necesites
+  // Ejemplo:
+  // getAccountById(accountId: number): Observable<Account> {
+  //   return this._accountsApiEndpoint.getById(accountId);
+  // }
 }
