@@ -374,5 +374,88 @@
       "not-found-message": "Could not find the requested staff member information",
       "no-staff": "No staff members registered."
     }
+  },
+  "payments": {
+    "pricing": "Pricing",
+    "trust-note": "Secure checkout · Cancel anytime · No hidden fees",
+    "choose-plan": {
+      "title": "Choose your plan",
+      "subtitle": "Simple, transparent pricing. Cancel anytime.",
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "save-15": "Save 15%",
+      "most-popular": "Most popular",
+      "billed-as": "Billed as",
+      "per-year": "/year",
+      "per-month": "/ month",
+      "per-mo": "/mo"
+    },
+    "plans": {
+      "family": "Family",
+      "family-plan": "Family Plan",
+      "institutional": "Institutional",
+      "institutional-plan": "Institutional Plan",
+      "family-title": "Care at home, together.",
+      "family-desc": "One account for the whole family. Full visibility, shared caregiving, zero chaos.",
+      "institutional-title": "Built for care teams.",
+      "institutional-desc": "A robust solution for care institutions looking to optimize management, communication, and elevate their standard of care.",
+      "flexible-billing": "Flexible billing",
+      "flexible-family-desc": "Full access, no commitment. Cancel anytime with no penalties.",
+      "flexible-inst-desc": "Full institutional access, no long-term commitment. Cancel anytime.",
+      "best-value": "Best value",
+      "best-value-family-desc": "Everything in monthly, billed once a year. Save $60 compared to monthly.",
+      "best-value-inst-desc": "Everything in monthly, billed once a year. Save $600 compared to monthly.",
+      "get-started": "Get started",
+      "back-to-plans": "Back to Plans",
+      "everything-included": "Everything included"
+    },
+    "features": {
+      "family": {
+        "f1": "One family account with multiple caregiver access",
+        "f2": "Medication reminders & logging",
+        "f3": "Detailed daily care history",
+        "f4": "Mobile & web access",
+        "f5": "Caregiver notes & schedule viewing"
+      },
+      "institutional": {
+        "f1": "Unlimited resident registration",
+        "f2": "Medical history and medication management",
+        "f3": "Multi-user roles (admin, nursing, admin staff)",
+        "f4": "Staff schedule & shift management",
+        "f5": "Attendance tracking & Advanced reports",
+        "f6": "Basic API integration & data export"
+      }
+    },
+    "checkout": {
+      "back": "Back",
+      "title": "Payment Information",
+      "full-name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "card-number": "Card Number",
+      "exp-month": "Exp. Month",
+      "exp-year": "Exp. Year",
+      "cvc": "CVC",
+      "pay-btn": "Pay",
+      "cancel-btn": "Cancel",
+      "summary-title": "Order Summary",
+      "plan": "Plan:",
+      "billing-cycle": "Billing Cycle:",
+      "total": "Total:",
+      "error-form": "Please fill out all required fields correctly."
+    },
+    "success": {
+      "title": "Payment Successful!",
+      "message": "Thank you for choosing <strong>Veyra</strong>. Your subscription has been activated successfully. You can now log in to your account and start managing your care services.",
+      "go-login": "Go to Login",
+      "trouble": "Having trouble?",
+      "support": "Contact Support"
+    },
+    "cancelled": {
+      "title": "Payment Unsuccessful",
+      "message": "Your transaction could not be completed. Don't worry, <strong>no charges were made</strong> to your card. Please check your payment details and try again.",
+      "return-btn": "Return to Plans",
+      "need-help": "Need help?"
+    }
   }
 }

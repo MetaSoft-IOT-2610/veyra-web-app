@@ -375,5 +375,88 @@
       "not-found-message": "No se pudo encontrar la información del miembro del personal solicitado",
       "no-staff": "No hay miembros del personal registrados."
     }
+  },
+  "payments": {
+    "pricing": "Precios",
+    "trust-note": "Pago seguro · Cancela cuando quieras · Sin cargos ocultos",
+    "choose-plan": {
+      "title": "Elige tu plan",
+      "subtitle": "Precios simples y transparentes. Cancela cuando quieras.",
+      "monthly": "Mensual",
+      "annual": "Anual",
+      "save-15": "Ahorra 15%",
+      "most-popular": "Más popular",
+      "billed-as": "Facturado como",
+      "per-year": "/año",
+      "per-month": "/ mes",
+      "per-mo": "/mes"
+    },
+    "plans": {
+      "family": "Familiar",
+      "family-plan": "Plan Familiar",
+      "institutional": "Institucional",
+      "institutional-plan": "Plan Institucional",
+      "family-title": "Cuidado en casa, juntos.",
+      "family-desc": "Una cuenta para toda la familia. Visibilidad total, cuidado compartido, cero caos.",
+      "institutional-title": "Creado para equipos de atención.",
+      "institutional-desc": "Una solución robusta para instituciones de cuidado que buscan optimizar la gestión, comunicación y elevar su estándar de atención.",
+      "flexible-billing": "Facturación flexible",
+      "flexible-family-desc": "Acceso total, sin compromisos. Cancela en cualquier momento sin penalizaciones.",
+      "flexible-inst-desc": "Acceso institucional completo, sin compromisos a largo plazo. Cancela en cualquier momento.",
+      "best-value": "Mejor valor",
+      "best-value-family-desc": "Todo lo del plan mensual, facturado una vez al año. Ahorras $60 en comparación con el pago mensual.",
+      "best-value-inst-desc": "Todo lo del plan mensual, facturado una vez al año. Ahorras $600 en comparación con el pago mensual.",
+      "get-started": "Comenzar",
+      "back-to-plans": "Volver a Planes",
+      "everything-included": "Todo incluido"
+    },
+    "features": {
+      "family": {
+        "f1": "Una cuenta familiar con acceso para múltiples cuidadores",
+        "f2": "Registro y recordatorios de medicamentos",
+        "f3": "Historial detallado de cuidados diarios",
+        "f4": "Acceso web y móvil",
+        "f5": "Notas de cuidadores y visualización de horarios"
+      },
+      "institutional": {
+        "f1": "Registro ilimitado de residentes",
+        "f2": "Historial médico y gestión de medicamentos",
+        "f3": "Roles multi-usuario (administrador, enfermería, personal)",
+        "f4": "Gestión de turnos y horarios del personal",
+        "f5": "Control de asistencia y reportes avanzados",
+        "f6": "Integración API básica y exportación de datos"
+      }
+    },
+    "checkout": {
+      "back": "Volver",
+      "title": "Información de Pago",
+      "full-name": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "card-number": "Número de Tarjeta",
+      "exp-month": "Mes Exp.",
+      "exp-year": "Año Exp.",
+      "cvc": "CVC",
+      "pay-btn": "Pagar",
+      "cancel-btn": "Cancelar",
+      "summary-title": "Resumen de la Orden",
+      "plan": "Plan:",
+      "billing-cycle": "Ciclo de Facturación:",
+      "total": "Total:",
+      "error-form": "Por favor, completa todos los campos requeridos correctamente."
+    },
+    "success": {
+      "title": "¡Pago Exitoso!",
+      "message": "Gracias por elegir <strong>Veyra</strong>. Tu suscripción ha sido activada con éxito. Ya puedes iniciar sesión en tu cuenta y comenzar a gestionar tus servicios de cuidado.",
+      "go-login": "Ir a Iniciar Sesión",
+      "trouble": "¿Tienes problemas?",
+      "support": "Contactar Soporte"
+    },
+    "cancelled": {
+      "title": "Pago Rechazado",
+      "message": "Tu transacción no pudo completarse. No te preocupes, <strong>no se realizaron cargos</strong> a tu tarjeta. Por favor, verifica tus datos de pago e inténtalo de nuevo.",
+      "return-btn": "Volver a los Planes",
+      "need-help": "¿Necesitas ayuda?"
+    }
   }
 }
