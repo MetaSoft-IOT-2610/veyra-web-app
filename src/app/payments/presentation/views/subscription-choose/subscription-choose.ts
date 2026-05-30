@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import {Toolbar} from '../../../../shared/presentation/components/toolbar/toolbar';
 
 @Component({
   selector: 'app-subscription-choose',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslatePipe],
+  imports: [CommonModule, FormsModule, TranslatePipe, Toolbar],
   templateUrl: './subscription-choose.html',
   styleUrls: ['./subscription-choose.css']
 })
