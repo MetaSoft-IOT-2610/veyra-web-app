@@ -3,13 +3,15 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { NgIf, CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentStore } from '../../../application/payment.store';
+import { Toolbar } from '../../../../shared/presentation/components/toolbar/toolbar';
+import { TranslatePipe } from '@ngx-translate/core'; // <-- Importamos el Pipe
 
 @Component({
   selector: 'payment-checkout',
   templateUrl: './payment-checkout.html',
   styleUrls: ['./payment-checkout.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, CurrencyPipe]
+  imports: [ReactiveFormsModule, NgIf, CurrencyPipe, Toolbar, TranslatePipe] // <-- Lo añadimos
 })
 export class PaymentCheckoutPage implements OnInit {
   planPrice: number = 0;
@@ -23,7 +25,7 @@ export class PaymentCheckoutPage implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    public store: PaymentStore // 2. Inyectamos el store
+    public store: PaymentStore
   ) {
     this.stripeForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -61,6 +63,7 @@ export class PaymentCheckoutPage implements OnInit {
 
   async submitPayment() {
     if (this.stripeForm.invalid) {
+      // Este error en duro lo podrías traducir también si lo deseas
       this.error = 'Please fill out all required fields correctly.';
       return;
     }
@@ -69,7 +72,6 @@ export class PaymentCheckoutPage implements OnInit {
     const formData = this.stripeForm.value;
 
     try {
-      // A. Creamos la cuenta en DB.json
       await this.store.createAccount({
         fullName: formData.fullName,
         email: formData.email,
@@ -77,7 +79,6 @@ export class PaymentCheckoutPage implements OnInit {
         country: "US",
         role: this.planTitle === 'Family Plan' ? 'family' : 'nursing-home'
       });
-
 
       if (this.store.error) {
         this.error = this.store.error;

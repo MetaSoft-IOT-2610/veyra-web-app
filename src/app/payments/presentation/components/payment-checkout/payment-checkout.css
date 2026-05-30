@@ -1,11 +1,9 @@
-
 :host {
-  --blue-deep:    #185FA5;
-  --blue-mid:     #378ADD;
-  --blue-light:   #E6F1FB;
-  --green-deep:   #0F6E56;
-  --green-mid:    #1D9E75;
-  --green-light:  #E1F5EE;
+  /* Tokens de color extraídos de tu diseño exacto */
+  --veyra-dark:   #0d2e73;
+  --veyra-teal:   #66B3AD;
+  --veyra-teal-hover: #529d98;
+  --veyra-input:  #eef4ff;
   --text-primary: #0f172a;
   --text-muted:   #64748b;
   --text-hint:    #94a3b8;
@@ -22,16 +20,16 @@
    Contenedor Principal
    ========================================= */
 .checkout-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px); /* Asumiendo que el toolbar mide ~64px */
   display: flex;
   padding: 50px 20px;
   justify-content: center;
   align-items: flex-start;
   background-color: var(--bg);
   background-image:
-    radial-gradient(circle at 10% 0%,   rgba(29, 158, 117, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 90% 5%,   rgba(24,  95, 165, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 50% 100%, rgba(29, 158, 117, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 10% 0%,   rgba(102, 179, 173, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 5%,   rgba(13, 46, 115, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(102, 179, 173, 0.05) 0%, transparent 50%);
   font-family: var(--font-body);
 }
 
@@ -39,7 +37,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -55,10 +53,10 @@
 .back-btn {
   background: none;
   border: none;
-  color: var(--text-muted);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
+  color: var(--veyra-dark);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -67,7 +65,7 @@
   transition: color 0.2s ease;
 }
 
-.back-btn:hover { color: var(--text-primary); }
+.back-btn:hover { color: var(--veyra-teal); }
 
 /* =========================================
    Layout de Tarjetas
@@ -75,31 +73,33 @@
 .cards-grid {
   display: grid;
   grid-template-columns: 1fr 350px;
-  gap: 24px;
+  gap: 32px;
   align-items: flex-start;
 }
 
 .checkout-card {
   background: var(--surface);
-  padding: 32px;
+  padding: 40px;
   border-radius: var(--radius-card);
   width: 100%;
   box-sizing: border-box;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   border: 1.5px solid var(--border);
 }
 
 .summary-card {
-  border-top: 4px solid var(--blue-mid);
+  /* Borde grueso verde agua como en tu imagen */
+  border-top: 6px solid var(--veyra-teal);
+  padding: 32px;
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--veyra-dark);
   margin-top: 0;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 /* =========================================
@@ -111,15 +111,15 @@
   color: var(--text-primary);
   margin-bottom: 8px;
   margin-top: 20px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .form-input {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 16px;
   border-radius: var(--radius-sm);
-  border: 1.5px solid #e2e8f0;
-  background: #f8fafc;
+  border: 1.5px solid #d1d9e6;
+  background: var(--veyra-input); /* Fondo azul clarito de la imagen */
   font-family: var(--font-body);
   font-size: 15px;
   color: var(--text-primary);
@@ -128,10 +128,10 @@
 }
 
 .form-input:focus {
-  border-color: var(--blue-mid);
+  border-color: var(--veyra-teal);
   background: var(--surface);
   outline: none;
-  box-shadow: 0 0 0 4px var(--blue-light);
+  box-shadow: 0 0 0 4px rgba(102, 179, 173, 0.15);
 }
 
 .form-input::placeholder { color: var(--text-hint); }
@@ -144,44 +144,43 @@
    ========================================= */
 .pay-button {
   width: 100%;
-  padding: 14px;
-  margin-top: 32px;
-  background: var(--blue-mid);
+  padding: 16px;
+  margin-top: 36px;
+  background: var(--veyra-teal);
   border: none;
   color: white;
   border-radius: var(--radius-sm);
   font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .pay-button:hover {
-  background: var(--blue-deep);
+  background: var(--veyra-teal-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(55, 138, 221, 0.25);
+  box-shadow: 0 6px 16px rgba(102, 179, 173, 0.25);
 }
 
 .cancel-button {
   width: 100%;
   padding: 14px;
-  margin-top: 12px;
+  margin-top: 16px;
   background: transparent;
-  border: 1.5px solid #e2e8f0;
-  color: var(--text-muted);
+  border: 2px solid #d1d9e6;
+  color: var(--veyra-dark);
   border-radius: var(--radius-sm);
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .cancel-button:hover {
-  background: #f1f5f9;
-  color: var(--text-primary);
-  border-color: #cbd5e1;
+  background: var(--veyra-input);
+  border-color: var(--veyra-dark);
 }
 
 /* =========================================
@@ -195,7 +194,7 @@
 }
 
 .label { color: var(--text-muted); }
-.value { color: var(--text-primary); font-weight: 600; text-transform: capitalize; }
+.value { color: var(--veyra-dark); font-weight: 700; text-transform: capitalize; }
 
 .summary-item.total {
   font-family: var(--font-display);
@@ -203,10 +202,10 @@
   font-size: 1.4rem;
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1.5px solid #e2e8f0;
 }
 
-.summary-item.total .value { color: var(--blue-mid); font-size: 1.8rem;}
+.summary-item.total .value { color: var(--veyra-dark); font-size: 1.8rem;}
 
 .error-text {
   color: #ef4444;
@@ -219,5 +218,6 @@
 /* Responsive */
 @media (max-width: 800px) {
   .cards-grid { grid-template-columns: 1fr; }
-  .summary-card { order: -1; /* Mueve el resumen arriba en móviles */ }
+  .summary-card { order: -1; }
+  .checkout-card { padding: 24px; }
 }

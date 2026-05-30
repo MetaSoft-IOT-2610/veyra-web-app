@@ -1,44 +1,45 @@
+<app-toolbar></app-toolbar>
 <div class="checkout-container">
 
   <div class="checkout-wrapper">
 
     <div class="back-btn-container">
       <button class="back-btn" (click)="cancel()">
-        <i class="fa-solid fa-arrow-left"></i> Back
+        <i class="fa-solid fa-arrow-left"></i> {{ 'payments.checkout.back' | translate }}
       </button>
     </div>
 
     <div class="cards-grid">
 
       <div class="checkout-card">
-        <h2 class="section-title">Payment Information</h2>
+        <h2 class="section-title">{{ 'payments.checkout.title' | translate }}</h2>
 
         <form [formGroup]="stripeForm" (ngSubmit)="submitPayment()">
-          <label class="form-label">Full Name</label>
+          <label class="form-label">{{ 'payments.checkout.full-name' | translate }}</label>
           <input class="form-input" type="text" formControlName="fullName" placeholder="John Doe">
 
-          <label class="form-label">Email</label>
+          <label class="form-label">{{ 'payments.checkout.email' | translate }}</label>
           <input class="form-input" type="email" formControlName="email" placeholder="john@example.com">
 
-          <label class="form-label">Phone</label>
+          <label class="form-label">{{ 'payments.checkout.phone' | translate }}</label>
           <input class="form-input" type="text" formControlName="phone" placeholder="+1 (555) 000-0000">
 
-          <label class="form-label">Card Number</label>
+          <label class="form-label">{{ 'payments.checkout.card-number' | translate }}</label>
           <input class="form-input" type="text" formControlName="cardNumber" placeholder="1234 5678 9012 3456">
 
           <div class="row">
             <div class="col">
-              <label class="form-label">Exp. Month</label>
+              <label class="form-label">{{ 'payments.checkout.exp-month' | translate }}</label>
               <input class="form-input" type="text" formControlName="expMonth" placeholder="MM">
             </div>
 
             <div class="col">
-              <label class="form-label">Exp. Year</label>
+              <label class="form-label">{{ 'payments.checkout.exp-year' | translate }}</label>
               <input class="form-input" type="text" formControlName="expYear" placeholder="YY">
             </div>
 
             <div class="col">
-              <label class="form-label">CVC</label>
+              <label class="form-label">{{ 'payments.checkout.cvc' | translate }}</label>
               <input class="form-input" type="text" formControlName="cvc" placeholder="123">
             </div>
           </div>
@@ -46,32 +47,34 @@
           <p class="error-text" *ngIf="error">{{ error }}</p>
 
           <button class="pay-button" type="submit">
-            Pay {{ planPrice | currency:'USD' }}
+            {{ 'payments.checkout.pay-btn' | translate }} {{ planPrice | currency:'USD' }}
           </button>
 
           <button class="cancel-button" type="button" (click)="cancel()">
-            Cancel
+            {{ 'payments.checkout.cancel-btn' | translate }}
           </button>
         </form>
       </div>
 
       <div class="checkout-card summary-card">
-        <h2 class="section-title">Order Summary</h2>
+        <h2 class="section-title">{{ 'payments.checkout.summary-title' | translate }}</h2>
 
         <div class="summary-item">
-          <span class="label">Plan:</span>
+          <span class="label">{{ 'payments.checkout.plan' | translate }}</span>
           <span class="value">{{ planTitle }}</span>
         </div>
 
         <div class="summary-item">
-          <span class="label">Billing Cycle:</span>
+          <span class="label">{{ 'payments.checkout.billing-cycle' | translate }}</span>
           <span class="value">{{ period }}</span>
         </div>
 
         <div class="summary-item total">
-          <span class="label">Total:</span>
+          <span class="label">{{ 'payments.checkout.total' | translate }}</span>
           <span class="value">{{ planPrice | currency:'USD' }}</span>
         </div>
       </div>
 
-    </div> </div> </div>
+    </div>
+  </div>
+</div>
