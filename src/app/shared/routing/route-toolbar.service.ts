@@ -31,14 +31,26 @@ export class RouteToolbarService {
     this.location.back();
   }
 
+  //stops crashing when refreshing the page
   private readActivePageData(): AppRouteData | null {
-    let route = this.router.routerState.root;
+    let route = this.router.routerState?.root;
+    if (!route) {
+      return null;
+    }
 
     while (route.firstChild) {
       route = route.firstChild;
+      if (!route) {
+        return null;
+      }
     }
 
-    const data = route.snapshot.data as Record<string, unknown>;
+    const snapshot = (route as any).snapshot;
+    if (!snapshot || !snapshot.data) {
+      return null;
+    }
+
+    const data = snapshot.data as Record<string, unknown>;
 
     if (!isAppRouteData(data)) {
       return null;
