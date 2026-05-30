@@ -6,18 +6,16 @@
       </div>
     </div>
 
-    <h1 class="title">Payment Successful!</h1>
-    <p class="message">
-      Thank you for choosing <strong>Veyra</strong>. Your subscription has been activated successfully.
-      You can now log in to your account and start managing your care services.
-    </p>
+    <h1 class="title">{{ 'payments.success.title' | translate }}</h1>
+
+    <p class="message" [innerHTML]="'payments.success.message' | translate"></p>
 
     <div class="action-section">
       <button class="login-btn" (click)="goToLogin()">
-        Go to Login
+        {{ 'payments.success.go-login' | translate }}
       </button>
       <p class="support-text">
-        Having trouble? <a href="#">Contact Support</a>
+        {{ 'payments.success.trouble' | translate }} <a href="#">{{ 'payments.success.support' | translate }}</a>
       </p>
     </div>
   </div>

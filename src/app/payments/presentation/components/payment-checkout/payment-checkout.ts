@@ -63,40 +63,27 @@ export class PaymentCheckoutPage implements OnInit {
 
   async submitPayment() {
     if (this.stripeForm.invalid) {
-      // Este error en duro lo podrías traducir también si lo deseas
       this.error = 'Please fill out all required fields correctly.';
       return;
     }
 
     this.error = null;
-    const formData = this.stripeForm.value;
 
     try {
-      await this.store.createAccount({
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        country: "US",
-        role: this.planTitle === 'Family Plan' ? 'family' : 'nursing-home'
-      });
+      const currentUserId = 1;
+      const stripePaymentMethodId = 'pm_card_visa';
+      await this.store.createSubscription(currentUserId, stripePaymentMethodId);
 
       if (this.store.error) {
         this.error = this.store.error;
         return;
       }
 
-      await this.store.createSubscription();
-
-      if (this.store.error) {
-        this.router.navigate(['/payments/cancelled']);
-        return;
-      }
-
-      console.log("¡Pago exitoso!", this.store.subscription);
+      console.log("¡Suscripción creada en Spring Boot!", this.store.subscription);
       this.router.navigate(['/payments/confirmed']);
 
     } catch (e) {
-      console.error("Error catastrófico:", e);
+      console.error("Error inesperado:", e);
       this.router.navigate(['/payments/cancelled']);
     }
   }

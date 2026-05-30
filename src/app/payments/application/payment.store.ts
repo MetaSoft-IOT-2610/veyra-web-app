@@ -1,37 +1,32 @@
 import { Injectable } from '@angular/core';
 import { PaymentsApi } from "../infrastructure/payments-api";
+import { firstValueFrom } from 'rxjs';
 import { Plan } from "../domain/model/plan.entity";
-import { Account } from "../domain/model/account.entity";
 import { Subscription } from "../domain/model/subscription.entity";
-
-// Importamos los Assemblers
 import { PlanAssembler } from "../infrastructure/plan-assembler";
-import { AccountAssembler } from "../infrastructure/account-assembler";
 import { SubscriptionAssembler } from "../infrastructure/subscription-assembler";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentStore {
-  private api = new PaymentsApi();
 
   plans: Plan[] = [];
   selectedPlan: Plan | null = null;
   billingCycle: "monthly" | "annual" = "monthly";
-
-  account: Account | null = null;
   subscription: Subscription | null = null;
 
   isLoading = false;
   error: string | null = null;
 
+  // Inyectamos la API actualizada
+  constructor(private api: PaymentsApi) {}
+
   async loadPlans() {
     this.isLoading = true;
     this.error = null;
-
     try {
-      const data = await this.api.getAvailablePlans();
-      // Usamos el Assembler para listas
+      const data = await firstValueFrom(this.api.getAvailablePlans());
       this.plans = PlanAssembler.toEntityList(data);
     } catch (e: any) {
       this.error = e.message;
@@ -48,47 +43,32 @@ export class PaymentStore {
     this.billingCycle = cycle;
   }
 
-  async createAccount(payload: {
-    fullName: string;
-    email: string;
-    phone: string;
-    country: string;
-    role: "family" | "nursing-home";
-  }) {
-    this.isLoading = true;
-    this.error = null;
-
-    try {
-      const response = await this.api.createAccount(payload);
-      // Usamos el Assembler
-      this.account = AccountAssembler.toEntity(response);
-    } catch (e: any) {
-      this.error = e.message;
-    } finally {
-      this.isLoading = false;
-    }
-  }
-
-  async createSubscription() {
-    if (!this.account || !this.selectedPlan) {
-      this.error = "No account or plan selected.";
+  // Ahora recibe el ID del usuario logueado y el token de la tarjeta
+  async createSubscription(userId: number, paymentMethodId: string) {
+    if (!this.selectedPlan) {
+      this.error = "No plan selected.";
       return;
     }
 
     this.isLoading = true;
     this.error = null;
 
-    try {
-      const response = await this.api.createSubscription({
-        accountId: this.account.id,
-        planId: this.selectedPlan.id,
-        cycle: this.billingCycle,
-      });
+    // Mapeamos a los ENUMS exactos de tu backend en Java
+    const mappedPlanType = this.selectedPlan.type === 'family' ? 'FAMILY' : 'NURSING_HOME';
+    const mappedPeriod = this.billingCycle === 'monthly' ? 'MONTHLY' : 'ANNUALLY';
 
-      // Usamos el Assembler
+    try {
+      const response = await firstValueFrom(this.api.createSubscription(userId, {
+        planType: mappedPlanType,
+        period: mappedPeriod,
+        paymentMethodId: paymentMethodId
+      }));
+
+      // Si el Assembler requiere ajustes, asegúrate de que coincida con SubscriptionResource
       this.subscription = SubscriptionAssembler.toEntity(response);
     } catch (e: any) {
-      this.error = e.message;
+      // Capturamos errores HTTP del backend (Ej: 400 DuplicateActiveSubscription)
+      this.error = e.error?.message || "Error procesando el pago con Stripe.";
     } finally {
       this.isLoading = false;
     }

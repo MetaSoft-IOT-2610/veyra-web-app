@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment-confirmed',
   standalone: true,
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './payment-confirmed.html',
   styleUrl: './payment-confirmed.css'
 })
