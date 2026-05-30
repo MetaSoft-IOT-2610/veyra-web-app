@@ -1,8 +1,7 @@
-import { PlanResponse } from "../../infrastructure/plans-response";
-
 export class Plan {
   constructor(
-    public id: string,
+    public id: number,
+    public stripePlanId: string,
     public name: string,
     public description: string,
     public priceMonthly: number,

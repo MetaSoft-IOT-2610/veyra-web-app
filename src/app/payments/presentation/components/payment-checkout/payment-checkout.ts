@@ -3,15 +3,14 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { NgIf, CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentStore } from '../../../application/payment.store';
-import { Toolbar } from '../../../../shared/presentation/components/toolbar/toolbar';
-import { TranslatePipe } from '@ngx-translate/core'; // <-- Importamos el Pipe
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'payment-checkout',
   templateUrl: './payment-checkout.html',
   styleUrls: ['./payment-checkout.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, CurrencyPipe, Toolbar, TranslatePipe] // <-- Lo añadimos
+  imports: [ReactiveFormsModule, NgIf, CurrencyPipe, TranslatePipe]
 })
 export class PaymentCheckoutPage implements OnInit {
   planPrice: number = 0;

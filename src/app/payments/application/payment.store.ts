@@ -23,7 +23,6 @@ export class PaymentStore {
     this.isLoading = true;
     this.error = null;
     try {
-      // Retorna directamente Plan[] gracias al Assembler interno del endpoint
       this.plans = await firstValueFrom(this.api.getAvailablePlans());
     } catch (e: any) {
       this.error = e.message;

@@ -9,7 +9,8 @@ export class PlanAssembler implements BaseAssembler<Plan, PlanResource, PlansRes
 
   toEntityFromResource(resource: PlanResource): Plan {
     return new Plan(
-      resource.planId,
+      resource.id,
+      resource.planId, // <-- El string de Stripe
       resource.name,
       resource.description,
       resource.priceMonthly,
@@ -22,7 +23,8 @@ export class PlanAssembler implements BaseAssembler<Plan, PlanResource, PlansRes
 
   toResourceFromEntity(entity: Plan): PlanResource {
     return {
-      planId: entity.id,
+      id: entity.id,
+      planId: entity.stripePlanId, // <-- El string de Stripe
       name: entity.name,
       description: entity.description,
       priceMonthly: entity.priceMonthly,

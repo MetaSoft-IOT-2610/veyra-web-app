@@ -10,7 +10,6 @@ import { PlanAssembler } from './plan-assembler';
 export class PlansApiEndpoint extends BaseApiEndpoint<Plan, PlanResource, PlansResponse, PlanAssembler> {
 
   constructor(http: HttpClient) {
-      // Si tuvieras endpoint real: super(http, `${environment.platformProviderApiBaseUrl}/plans`, new PlanAssembler());
     super(http, '', new PlanAssembler());
   }
 
