@@ -36,4 +36,11 @@ export const environment = {
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
   platformProviderPersonProfilesEndpointPath: '/person-profiles',
+
+  // Payments Bounded Context
+  platformProviderUserSubscriptionsEndpointPath: '/users/{userId}/subscriptions',
+  platformProviderUserActiveSubscriptionEndpointPath: '/users/{userId}/subscriptions/active',
+  platformProviderUserSubscriptionCancelEndpointPath: '/users/{userId}/subscriptions/{subscriptionId}/cancel',
+  platformProviderSubscriptionPaymentsEndpointPath: '/subscriptions/{subscriptionId}/payments',
+  platformProviderPaymentByIdEndpointPath: '/payments/{paymentId}'
 };
