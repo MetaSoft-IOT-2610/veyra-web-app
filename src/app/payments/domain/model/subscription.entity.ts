@@ -1,13 +1,15 @@
-import { SubscriptionResponse } from "../../infrastructure/subscriptions-response";
-
 export class Subscription {
-  constructor(
-    public subscriptionId: string,
-    public accountId: string,
-    public planId: string,
-    public cycle: "monthly" | "annual",
-    public price: number,
-    public status: "active" | "inactive" | "pending",
-    public createdAt: string
-  ) {}
+  id: number;
+  userId: number;
+  planType: string;
+  period: string;
+  status: string;
+
+  constructor(data: { id?: number; userId: number; planType: string; period: string; status?: string }) {
+    this.id = data.id || 0;
+    this.userId = data.userId;
+    this.planType = data.planType;
+    this.period = data.period;
+    this.status = data.status || 'INCOMPLETE';
+  }
 }
