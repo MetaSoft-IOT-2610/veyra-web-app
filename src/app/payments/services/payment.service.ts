@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const BASE_URL = 'http://localhost:8080/api/v1'; // Ajusta el puerto si es necesario
+import { environment } from '../../../environments/environment';
 
 export interface CreateSubscriptionDto {
   planType: string;
@@ -13,26 +12,33 @@ export interface CreateSubscriptionDto {
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentsApi {
+export class PaymentsService {
+
+  private baseUrl = environment.platformProviderApiBaseUrl;
 
   constructor(private http: HttpClient) {}
 
-  // Nota: Como tu backend no tiene un endpoint GET /plans, los mantendremos estáticos
-  // o puedes crear un endpoint en el futuro.
   getAvailablePlans(): Observable<any[]> {
     return new Observable(subscriber => {
       setTimeout(() => {
         subscriber.next([
-          { id: "plan_fam", name: "Family Plan", type: "family" },
-          { id: "plan_nur", name: "Nursing Home Plan", type: "nursing-home" }
+          { id: "plan_fam_001", name: "Family Plan", type: "family" },
+          { id: "plan_nur_001", name: "Nursing Home Plan", type: "nursing-home" }
         ]);
         subscriber.complete();
       }, 500);
     });
   }
 
-  // Llamada REAL a tu UserSubscriptionsController
   createSubscription(userId: number, payload: CreateSubscriptionDto): Observable<any> {
-    return this.http.post(`${BASE_URL}/users/${userId}/subscriptions`, payload);
+    const endpoint = environment.platformProviderUserSubscriptionsEndpointPath
+      .replace('{userId}', userId.toString());
+    return this.http.post(`${this.baseUrl}${endpoint}`, payload);
+  }
+
+  getActiveSubscription(userId: number): Observable<any> {
+    const endpoint = environment.platformProviderUserActiveSubscriptionEndpointPath
+      .replace('{userId}', userId.toString());
+    return this.http.get(`${this.baseUrl}${endpoint}`);
   }
 }
