@@ -84,7 +84,13 @@ export class IamStore {
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('userId');
     const rolesJson = localStorage.getItem('userRoles');
-    if (!token || !username || !userId) {
+
+    // LOG: inspección inicial de storage
+    console.debug('[IamStore] rehydrateSessionFromStorage -> token:', token, 'username:', username, 'userId:', userId, 'roles:', rolesJson);
+
+    // tratar 'null' o cadena vacía como ausente
+    if (!token || token === 'null' || !username || !userId) {
+      console.debug('[IamStore] rehydrate aborted: token/username/userId missing or invalid');
       return;
     }
     let roles: string[] = [];
