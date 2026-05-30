@@ -52,7 +52,7 @@ export const nursingPaths = {
 } as const;
 
 export const nursingNav = {
-  nursingHomeNew: () => ['/nursing', nursingPaths.nursingHomeNew],
+  nursingHomeNew: () => ['/nursing', 'nursing-homes', 'new'],
   residents: () => ['/nursing', nursingPaths.residents],
   residentNew: () => ['/nursing', nursingPaths.residents, 'new'],
   residentDetail: (id: number | string) => ['/nursing', nursingPaths.residents, id, 'show'],
