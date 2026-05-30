@@ -93,7 +93,7 @@ export class PersonProfileForm {
             dni: personProfile.dni,
             firstName: parsed.firstName,
             lastName: parsed.lastName,
-            birthDate: new Date(personProfile.birthDate  + 'T00:00:00'),
+            birthDate: new Date(personProfile.birthDate),
             emailAddress: personProfile.emailAddress,
             street: parsed.street,
             number: parsed.number,
@@ -124,6 +124,10 @@ export class PersonProfileForm {
     }
 
     return rawValue as PersonProfileFormValue;
+  }
+
+  getSelectedFile(): File | null {
+    return this.selectedFile;
   }
 
   private resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<string> {
