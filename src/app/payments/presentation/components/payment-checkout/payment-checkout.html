@@ -1,79 +1,95 @@
 <div class="checkout-container">
-
   <div class="checkout-wrapper">
-
     <div class="back-btn-container">
-      <button class="back-btn" (click)="cancel()">
-        <i class="fa-solid fa-arrow-left"></i> {{ 'payments.checkout.back' | translate }}
+      <button mat-button color="primary" (click)="cancel()">
+        <mat-icon>arrow_back</mat-icon> {{ 'payments.checkout.back' | translate }}
       </button>
     </div>
 
     <div class="cards-grid">
+      <mat-card class="checkout-card">
+        <mat-card-header>
+          <mat-card-title>{{ 'payments.checkout.title' | translate }}</mat-card-title>
+        </mat-card-header>
 
-      <div class="checkout-card">
-        <h2 class="section-title">{{ 'payments.checkout.title' | translate }}</h2>
+        <mat-card-content>
+          <form [formGroup]="stripeForm" (ngSubmit)="submitPayment()" class="stripe-form">
 
-        <form [formGroup]="stripeForm" (ngSubmit)="submitPayment()">
-          <label class="form-label">{{ 'payments.checkout.full-name' | translate }}</label>
-          <input class="form-input" type="text" formControlName="fullName" placeholder="John Doe">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'payments.checkout.full-name' | translate }}</mat-label>
+              <input matInput formControlName="fullName" placeholder="John Doe">
+              <mat-error *ngIf="stripeForm.get('fullName')?.invalid">Required field</mat-error>
+            </mat-form-field>
 
-          <label class="form-label">{{ 'payments.checkout.email' | translate }}</label>
-          <input class="form-input" type="email" formControlName="email" placeholder="john@example.com">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'payments.checkout.email' | translate }}</mat-label>
+              <input matInput type="email" formControlName="email" placeholder="john@example.com">
+              <mat-error *ngIf="stripeForm.get('email')?.invalid">Valid email required</mat-error>
+            </mat-form-field>
 
-          <label class="form-label">{{ 'payments.checkout.phone' | translate }}</label>
-          <input class="form-input" type="text" formControlName="phone" placeholder="+1 (555) 000-0000">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'payments.checkout.phone' | translate }}</mat-label>
+              <input matInput formControlName="phone" placeholder="+1 (555) 000-0000">
+            </mat-form-field>
 
-          <label class="form-label">{{ 'payments.checkout.card-number' | translate }}</label>
-          <input class="form-input" type="text" formControlName="cardNumber" placeholder="1234 5678 9012 3456">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'payments.checkout.card-number' | translate }}</mat-label>
+              <input matInput formControlName="cardNumber" placeholder="1234 5678 9012 3456">
+              <mat-icon matSuffix>credit_card</mat-icon>
+            </mat-form-field>
 
-          <div class="row">
-            <div class="col">
-              <label class="form-label">{{ 'payments.checkout.exp-month' | translate }}</label>
-              <input class="form-input" type="text" formControlName="expMonth" placeholder="MM">
+            <div class="row">
+              <mat-form-field appearance="outline" class="col">
+                <mat-label>{{ 'payments.checkout.exp-month' | translate }}</mat-label>
+                <input matInput formControlName="expMonth" placeholder="MM">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col">
+                <mat-label>{{ 'payments.checkout.exp-year' | translate }}</mat-label>
+                <input matInput formControlName="expYear" placeholder="YY">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col">
+                <mat-label>{{ 'payments.checkout.cvc' | translate }}</mat-label>
+                <input matInput formControlName="cvc" placeholder="123">
+              </mat-form-field>
             </div>
 
-            <div class="col">
-              <label class="form-label">{{ 'payments.checkout.exp-year' | translate }}</label>
-              <input class="form-input" type="text" formControlName="expYear" placeholder="YY">
-            </div>
+            <p class="error-text" *ngIf="error"><mat-icon inline="true">error</mat-icon> {{ error }}</p>
 
-            <div class="col">
-              <label class="form-label">{{ 'payments.checkout.cvc' | translate }}</label>
-              <input class="form-input" type="text" formControlName="cvc" placeholder="123">
+            <div class="form-actions">
+              <button mat-flat-button color="primary" type="submit" class="pay-button" [disabled]="store.isLoading">
+                <mat-spinner *ngIf="store.isLoading" diameter="20"></mat-spinner>
+                <span *ngIf="!store.isLoading">{{ 'payments.checkout.pay-btn' | translate }} {{ planPrice | currency:'USD' }}</span>
+              </button>
+
+              <button mat-stroked-button color="warn" type="button" (click)="cancel()">
+                {{ 'payments.checkout.cancel-btn' | translate }}
+              </button>
             </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="checkout-card summary-card">
+        <mat-card-header>
+          <mat-card-title>{{ 'payments.checkout.summary-title' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="summary-item">
+            <span class="label">{{ 'payments.checkout.plan' | translate }}</span>
+            <span class="value">{{ planTitle }}</span>
           </div>
-
-          <p class="error-text" *ngIf="error">{{ error }}</p>
-
-          <button class="pay-button" type="submit">
-            {{ 'payments.checkout.pay-btn' | translate }} {{ planPrice | currency:'USD' }}
-          </button>
-
-          <button class="cancel-button" type="button" (click)="cancel()">
-            {{ 'payments.checkout.cancel-btn' | translate }}
-          </button>
-        </form>
-      </div>
-
-      <div class="checkout-card summary-card">
-        <h2 class="section-title">{{ 'payments.checkout.summary-title' | translate }}</h2>
-
-        <div class="summary-item">
-          <span class="label">{{ 'payments.checkout.plan' | translate }}</span>
-          <span class="value">{{ planTitle }}</span>
-        </div>
-
-        <div class="summary-item">
-          <span class="label">{{ 'payments.checkout.billing-cycle' | translate }}</span>
-          <span class="value">{{ period }}</span>
-        </div>
-
-        <div class="summary-item total">
-          <span class="label">{{ 'payments.checkout.total' | translate }}</span>
-          <span class="value">{{ planPrice | currency:'USD' }}</span>
-        </div>
-      </div>
-
+          <div class="summary-item">
+            <span class="label">{{ 'payments.checkout.billing-cycle' | translate }}</span>
+            <span class="value">{{ period | titlecase }}</span>
+          </div>
+          <div class="summary-item total">
+            <span class="label">{{ 'payments.checkout.total' | translate }}</span>
+            <span class="value">{{ planPrice | currency:'USD' }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>

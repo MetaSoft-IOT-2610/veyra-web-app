@@ -3,16 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { MatCard } from '@angular/material/card';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import {MatButton, MatFabButton, MatMiniFabButton} from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import {MatRipple} from '@angular/material/core';
 
 @Component({
   selector: 'app-subscription-choose',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslatePipe],
+  imports: [CommonModule, FormsModule, TranslatePipe, MatCard, MatSlideToggle, MatButton, MatIcon, MatMiniFabButton, MatRipple],
   templateUrl: './subscription-choose.html',
   styleUrls: ['./subscription-choose.css']
 })
 export class SubscriptionChoosePage {
-
   isAnnual = false;
 
   constructor(private router: Router) {}

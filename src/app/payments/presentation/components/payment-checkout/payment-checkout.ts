@@ -1,22 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { NgIf, CurrencyPipe } from '@angular/common';
+import { NgIf, CurrencyPipe, TitleCasePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentStore } from '../../../application/payment.store';
 import { TranslatePipe } from '@ngx-translate/core';
+
+import { MatCard } from '@angular/material/card';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'payment-checkout',
   templateUrl: './payment-checkout.html',
   styleUrls: ['./payment-checkout.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, CurrencyPipe, TranslatePipe]
+  imports: [
+    ReactiveFormsModule, NgIf, CurrencyPipe, TranslatePipe, TitleCasePipe,
+    MatCard, MatFormField, MatLabel, MatInput, MatError, MatButton, MatIcon, MatProgressSpinner
+  ]
 })
 export class PaymentCheckoutPage implements OnInit {
+
   planPrice: number = 0;
   planTitle: string = 'Selected Plan';
   period: 'monthly' | 'annual' = 'monthly';
-
   stripeForm: FormGroup;
   error: string | null = null;
 
@@ -41,10 +51,8 @@ export class PaymentCheckoutPage implements OnInit {
     this.route.params.subscribe(p => {
       const type = p['type'];
       this.period = p['cycle'] === 'annual' ? 'annual' : 'monthly';
-
       this.planTitle = type === 'family' ? 'Family Plan' : 'Nursing Home Plan';
       this.planPrice = this.getPrice(this.planTitle, this.period);
-
       this.store.setBillingCycle(this.period);
       this.store.selectedPlan = { id: type === 'family' ? 'plan_fam_001' : 'plan_nur_001' } as any;
     });
@@ -56,34 +64,24 @@ export class PaymentCheckoutPage implements OnInit {
     return 0;
   }
 
-  cancel() {
-    this.router.navigate(['/payments/choose']);
-  }
+  cancel() { this.router.navigate(['/payments/choose']); }
 
   async submitPayment() {
     if (this.stripeForm.invalid) {
+      this.stripeForm.markAllAsTouched();
       this.error = 'Please fill out all required fields correctly.';
       return;
     }
-
     this.error = null;
-
     try {
-      const currentUserId = 1;
-      const stripePaymentMethodId = 'pm_card_visa';
-      await this.store.createSubscription(currentUserId, stripePaymentMethodId);
-
+      await this.store.createSubscription(1, 'pm_card_visa');
       if (this.store.error) {
         this.error = this.store.error;
         return;
       }
-
-      console.log("¡Suscripción creada en Spring Boot!", this.store.subscription);
-      this.router.navigate(['/payments/confirmed']);
-
+      void this.router.navigate(['/payments/confirmed']);
     } catch (e) {
-      console.error("Error inesperado:", e);
-      this.router.navigate(['/payments/cancelled']);
+      void this.router.navigate(['/payments/cancelled']);
     }
   }
 }

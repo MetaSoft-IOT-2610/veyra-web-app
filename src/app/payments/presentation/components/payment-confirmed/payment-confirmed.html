@@ -1,22 +1,21 @@
 <div class="success-page">
-  <div class="success-card">
-    <div class="icon-container">
-      <div class="check-icon">
-        <i class="fa-solid fa-check"></i>
+  <mat-card class="success-card">
+    <mat-card-content>
+      <div class="icon-container">
+        <mat-icon class="check-icon" color="primary">check_circle</mat-icon>
       </div>
-    </div>
 
-    <h1 class="title">{{ 'payments.success.title' | translate }}</h1>
+      <h1 class="title">{{ 'payments.success.title' | translate }}</h1>
+      <p class="message" [innerHTML]="'payments.success.message' | translate"></p>
 
-    <p class="message" [innerHTML]="'payments.success.message' | translate"></p>
-
-    <div class="action-section">
-      <button class="login-btn" (click)="goToLogin()">
-        {{ 'payments.success.go-login' | translate }}
-      </button>
-      <p class="support-text">
-        {{ 'payments.success.trouble' | translate }} <a href="#">{{ 'payments.success.support' | translate }}</a>
-      </p>
-    </div>
-  </div>
+      <div class="action-section">
+        <button mat-flat-button color="primary" class="login-btn" (click)="goToLogin()">
+          {{ 'payments.success.go-login' | translate }}
+        </button>
+        <p class="support-text">
+          {{ 'payments.success.trouble' | translate }} <a mat-button color="accent">{{ 'payments.success.support' | translate }}</a>
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
