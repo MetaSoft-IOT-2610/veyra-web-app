@@ -3,6 +3,7 @@ import { Plan } from '../domain/model/plan.entity';
 import { PlanResource, PlansResponse } from './plans-response';
 
 export class PlanAssembler implements BaseAssembler<Plan, PlanResource, PlansResponse> {
+
   toEntitiesFromResponse(response: PlansResponse): Plan[] {
     return response.plans.map(plan => this.toEntityFromResource(plan));
   }
@@ -10,7 +11,7 @@ export class PlanAssembler implements BaseAssembler<Plan, PlanResource, PlansRes
   toEntityFromResource(resource: PlanResource): Plan {
     return new Plan(
       resource.id,
-      resource.planId, // <-- El string de Stripe
+      resource.planId,
       resource.name,
       resource.description,
       resource.priceMonthly,
@@ -24,7 +25,7 @@ export class PlanAssembler implements BaseAssembler<Plan, PlanResource, PlansRes
   toResourceFromEntity(entity: Plan): PlanResource {
     return {
       id: entity.id,
-      planId: entity.stripePlanId, // <-- El string de Stripe
+      planId: entity.stripePlanId,
       name: entity.name,
       description: entity.description,
       priceMonthly: entity.priceMonthly,
