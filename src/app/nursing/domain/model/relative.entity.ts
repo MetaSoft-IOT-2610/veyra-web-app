@@ -5,14 +5,24 @@ export class Relative {
   private _email : string;
   private _residentId: number;
   private _nursingHomeId: number;
+  private _userId?: number | null;
 
-  constructor(relative: { id: number, firstName: string,lastName:string, email: string, residentId: number, nursingHomeId?: number }) {
+  constructor(relative: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    residentId: number;
+    nursingHomeId: number;
+    userId?: number | null;
+  }) {
     this._id = relative.id;
     this._firstName = relative.firstName;
     this._lastName = relative.lastName;
     this._email = relative.email;
     this._residentId = relative.residentId;
-    this._nursingHomeId = relative.nursingHomeId ?? 0;
+    this._nursingHomeId = relative.nursingHomeId;
+    this._userId = relative.userId ?? null;
   }
 
   get id(): number {
@@ -58,6 +68,14 @@ export class Relative {
 
   set nursingHomeId(value: number) {
     this._nursingHomeId = value;
+  }
+
+  get userId(): number | null {
+    return this._userId??null;
+  }
+
+  set userId(value: number | null) {
+    this._userId = value;
   }
 
 }
