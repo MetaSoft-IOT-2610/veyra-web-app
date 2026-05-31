@@ -8,8 +8,7 @@ export class CreateRelativeCommandAssembler {
       firstName: command.firstName,
       lastName: command.lastName,
       email: command.email,
-      // Use a safe cast to avoid TS errors if the class does not expose the property
-      residentId: (command as any).residentId
+      residentId: command.residentId
     } as RelativeCommandResource;
   }
 }
