@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Plan } from "../domain/model/plan.entity";
 import { Subscription } from "../domain/model/subscription.entity";
-import { PaymentsApi } from "../infrastructure/payments-api"; // Inyectamos el nuevo Facade
+import { PaymentsApi } from "../infrastructure/payments-api";
 
 @Injectable({
   providedIn: 'root'

@@ -14,7 +14,6 @@ export class PaymentConfirmed {
   constructor(private router: Router) {}
 
   goToLogin() {
-    // Redirige al login del IAM
     this.router.navigate(['/iam/sign-in']);
   }
 }
