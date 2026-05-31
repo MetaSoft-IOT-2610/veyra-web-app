@@ -99,9 +99,13 @@ export class RelativeForm {
 
     // Pasar nursingHomeId como primer parámetro (el endpoint espera
     // POST /nursing-homes/{nursingHomeId}/relatives)
-    this.nursingStore.addRelative(0, command);
+    this.nursingStore.addRelative(Number(localStorage.getItem('nursingHomeId')), command)
+
     void this.router.navigate(nursingNav.relatives());
+
   }
+
+
 
   onCancel(): void {
     void this.router.navigate(nursingNav.relatives());

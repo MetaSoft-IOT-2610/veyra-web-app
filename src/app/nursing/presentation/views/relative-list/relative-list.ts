@@ -37,12 +37,12 @@ import { Relative } from '../../../domain/model/relative.entity';
 export class RelativeList {
   readonly store = inject(NursingStore);
   protected router = inject(Router);
-  nursingHomeId: number = Number(localStorage.getItem('nursingHomeId') || 0);
+  nursingHomeId: number = Number(localStorage.getItem('nursingHomeId'));
 
   ngOnInit() {
-    if (this.nursingHomeId) {
+
       this.store.loadRelativesByNursingHomeId(this.nursingHomeId);
-    }
+
   }
 
   selectedId: number | null = null;
