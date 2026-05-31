@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentStore } from '../../../application/payment.store';
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { MatCard } from '@angular/material/card';
+// Angular Material
+import { MatCardModule } from '@angular/material/card';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
@@ -19,7 +20,8 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
   standalone: true,
   imports: [
     ReactiveFormsModule, NgIf, CurrencyPipe, TranslatePipe, TitleCasePipe,
-    MatCard, MatFormField, MatLabel, MatInput, MatError, MatButton, MatIcon, MatProgressSpinner
+    MatCardModule,
+    MatFormField, MatLabel, MatInput, MatError, MatButton, MatIcon, MatProgressSpinner
   ]
 })
 export class PaymentCheckoutPage implements OnInit {
