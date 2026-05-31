@@ -69,8 +69,6 @@ export class MainLayout implements OnInit, AfterViewInit {
     { label: 'nav.room', icon: 'meeting_room', link: `/nursing/${nursingPaths.rooms}`, color: '#5FC2BA' },
     { label: 'nav.activities', icon: 'event_note', link: `/activities${activitiesPaths.list}`, color: '#5FC2BA' },
     { label: 'nav.alerts', icon: 'notifications_active', link: `/alerts${alertsPaths.list}`, color: '#5FC2BA' },
-    { label: 'nav.activities', icon: 'event_note', link: `/activities${activitiesPaths.list}`, color: '#5FC2BA' },
-    { label: 'nav.alerts', icon: 'notifications_active', link: `/alerts${alertsPaths.list}`, color: '#5FC2BA' },
     { label: 'nav.relatives', icon: 'people', link: `/nursing/${nursingPaths.relatives}`, color: '#5FC2BA' },
     { label: 'my-patients', icon: 'favorite', link: `/nursing/${nursingPaths.myPatients}`, color: '#5FC2BA' },
   ];
@@ -93,7 +91,6 @@ export class MainLayout implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.iamStore.tryApplyDevFallbackSession();
   }
 
   ngAfterViewInit(): void {

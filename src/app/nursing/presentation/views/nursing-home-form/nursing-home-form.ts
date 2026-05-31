@@ -94,6 +94,7 @@ export class NursingHomeForm {
       postalCode: nursingHome.postalCode,
       country: nursingHome.country,
       photo: nursingHome.photo,
+      photoFile: this.selectedFile,
       ruc: nursingHome.ruc
     });
 

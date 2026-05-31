@@ -89,6 +89,7 @@ export class ResidentForm {
     }
 
     const personProfile: PersonProfileFormValue | null = this.personProfileForm.getProfileData();
+    const photoFile: File | null = this.personProfileForm.getSelectedFile();
     if (!personProfile) {
       alert("Datos incompletos");
       this.form.markAllAsTouched();
@@ -110,6 +111,7 @@ export class ResidentForm {
       postalCode: personProfile.postalCode,
       country: personProfile.country,
       photo: personProfile.photo,
+      photoFile: photoFile,
       phoneNumber: personProfile.phoneNumber,
       legalRepresentativeFirstName: resident.legalRepresentativeFirstName,
       legalRepresentativeLastName: resident.legalRepresentativeLastName,

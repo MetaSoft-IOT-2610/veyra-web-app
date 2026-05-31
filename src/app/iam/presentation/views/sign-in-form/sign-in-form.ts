@@ -7,6 +7,7 @@ import { analyticsNav } from '../../../../analytics/presentation/analytics-route
 import { IamStore } from '../../../application/iam.store';
 import { Toolbar } from '../../../../shared/presentation/components/toolbar/toolbar';
 import { environment } from '../../../../../environments/environment';
+import {SignInCommand} from '../../../domain/model/sign-in.command';
 
 /**
  * Component for user sign-in functionality.
@@ -39,7 +40,7 @@ export class SignInForm {
    * (nombre del formulario; si no pasas por aquí, `IamStore` puede aplicar usuario por defecto en dev).
    */
   onSubmit(): void {
-    /*
+
     if (this.form.valid) {
       const signInCommand = new SignInCommand({
         username: this.form.value.username!,
@@ -49,18 +50,11 @@ export class SignInForm {
     } else {
       this.markFormGroupTouched(this.form);
     }
-    */
-
     if (!this.form.valid) {
       this.markFormGroupTouched(this.form);
       return;
     }
     if (!environment.production) {
-      const username = this.form.value.username!;
-      localStorage.setItem('token', 'dev');
-      localStorage.setItem('userId', '1');
-      localStorage.setItem('username', username);
-      localStorage.setItem('userRoles', JSON.stringify(['ROLE_USER']));
       this.store.rehydrateSessionFromStorage();
     }
     void this.router.navigate(analyticsNav.dashboard());

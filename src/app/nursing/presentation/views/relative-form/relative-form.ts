@@ -60,9 +60,9 @@ export class RelativeForm {
 
   constructor() {
 
-    const nursingHomeId = 0;
+    const nursingHomeId = localStorage.getItem('nursingHomeId');
     if (nursingHomeId) {
-      this.nursingStore.loadResidentsByNursingHome(nursingHomeId);
+      this.nursingStore.loadResidentsByNursingHome(Number(nursingHomeId));
     }
     this.profilesStore.loadPersonProfiles();
   }

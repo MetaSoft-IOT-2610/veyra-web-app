@@ -77,7 +77,7 @@ export class NursingStore {
     this._errorSignal.set(null);
     this.nursingApi.getNursingHome(administratorId).pipe(retry(2)).subscribe({
       next: nursingHome => {
-        this._nursingHomesSignal.set(nursingHome);
+        this._nursingHomesSignal.set([nursingHome]);  // Cambiar de .set(nursingHome) a .set([nursingHome])
         localStorage.setItem('nursingHomeId', nursingHome.id.toString());
         this._loadingSignal.set(false);
       },

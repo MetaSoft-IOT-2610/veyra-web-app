@@ -13,6 +13,7 @@ export class PersonProfile extends Profile {
     birthDate: Date;
     age: number;
     photo: string;
+    photoFile?: File | null;
     phoneNumber: string;
     emailAddress: string;
     streetAddress: string;
@@ -20,6 +21,7 @@ export class PersonProfile extends Profile {
     super({
       id: personProfile.id,
       photo: personProfile.photo,
+      photoFile: personProfile.photoFile,
       phoneNumber: personProfile.phoneNumber,
       emailAddress: personProfile.emailAddress,
       streetAddress: personProfile.streetAddress
