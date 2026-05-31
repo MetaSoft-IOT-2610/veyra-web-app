@@ -1,6 +1,7 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -88,6 +89,7 @@ export class ResidentForm {
     }
 
     const personProfile: PersonProfileFormValue | null = this.personProfileForm.getProfileData();
+    const photoFile: File | null = this.personProfileForm.getSelectedFile();
     if (!personProfile) {
       alert("Datos incompletos");
       this.form.markAllAsTouched();
@@ -109,6 +111,7 @@ export class ResidentForm {
       postalCode: personProfile.postalCode,
       country: personProfile.country,
       photo: personProfile.photo,
+      photoFile: photoFile,
       phoneNumber: personProfile.phoneNumber,
       legalRepresentativeFirstName: resident.legalRepresentativeFirstName,
       legalRepresentativeLastName: resident.legalRepresentativeLastName,
@@ -124,7 +127,7 @@ export class ResidentForm {
       this.store.createResidentInNursingHome(this.nursingHomeId, createResidentCommand);
     }
 
-    this.router.navigate(['/nursing/residents']).then();
+    void this.router.navigate(nursingNav.residents());
   }
 
   private formatDateToISO(date: Date): string {
@@ -150,6 +153,6 @@ export class ResidentForm {
   }
 
   onCancel(): void {
-    this.router.navigate(['/nursing/residents']).then();
+    void this.router.navigate(nursingNav.residents());
   }
 }

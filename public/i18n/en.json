@@ -23,12 +23,12 @@
   "assignedAt": "Assigned At",
   "status": "Status",
   "no-devices": "No devices available",
-
   "nav": {
     "dashboard": "Dashboard",
     "inventory": "Inventory",
     "device": "Devices",
     "resident": "Residents",
+    "relatives": "Relatives",
     "staff": "Staff",
     "care-management": "Care Management",
     "room": "Rooms",
@@ -47,7 +47,8 @@
     "go-home": "Go Home"
   },
   "toolbar": {
-    "logoAlt": "logo"
+    "logoAlt": "logo",
+    "back": "Back"
   },
   "iam": {
     "profile": "Profile",
@@ -452,6 +453,44 @@
     },
     "add-new": "Add New",
     "filter-btn": "Filter"
+  },
+  "relatives": {
+    "title": "Relatives",
+    "loading": "Loading information...",
+    "no-relatives": "No relatives registered.",
+    "add-relative": "Add relative",
+    "form": {
+      "required": "This field is required",
+      "invalid-email": "Invalid email",
+      "new-title": "New Relative",
+      "personal-info": "Personal Information",
+      "name": "Name",
+      "last-name": "Last Name",
+      "account-setup": "Account Setup",
+      "email": "Email",
+      "email-placeholder": "e.g. ",
+      "name-placeholder": "e.g. ",
+      "secure-self-setup": "Secure Self Setup",
+      "secure-self-setup-description": "An invitation link will be sent to this email for the user to\ncreate their own password.",
+      "resident-association": "Resident Association",
+      "linked-resident": "Linked Resident (Data Access Restriction)",
+      "select-resident": "Select Resident",
+      "unknown-resident": "Unknown Resident",
+      "phone": "Phone",
+      "phone-placeholder": "e.g. 123456789"
+    },
+    "buttons": {
+      "add": "Add New",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "details": "View details",
+      "edit": "Edit",
+      "go-back": "Go Back",
+      "register": "Register Relative",
+      "search": "Search",
+      "search-info": "Enter the first or last name",
+      "change-resident": "Change Resident"
+    }
   },
   "alerts": {
     "title": "Alerts Center",

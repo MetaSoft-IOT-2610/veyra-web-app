@@ -1,5 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import { hcmNav } from '../../hcm-routes';
 import {HcmStore} from '../../../application/hcm.store';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UpdateContractStatusCommand} from '../../../domain/model/update-contract-status.command';
@@ -89,14 +90,14 @@ export class UpdateContractStatusForm implements OnInit {
 
     this.store.updateContractStatus(this.staffMemberId!, this.contractId!, updateContractStatusCommand);
 
-    this.router.navigate(['/hcm/staff', this.staffMemberId!, 'contracts']).then();
+    void this.router.navigate(hcmNav.contracts(this.staffMemberId!));
   }
 
   /**
    * Cancels form and navigates back
    */
   cancel() {
-    this.router.navigate(['/hcm/staff', this.staffMemberId!, 'contracts']).then();
+    void this.router.navigate(hcmNav.contracts(this.staffMemberId!));
   }
 
   /**

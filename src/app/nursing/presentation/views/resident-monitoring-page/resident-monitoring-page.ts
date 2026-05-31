@@ -1,6 +1,7 @@
 import { Component, computed, effect, inject, Injector, OnInit, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -109,7 +110,7 @@ export class ResidentMonitoringPage implements OnInit {
   }
 
   onSeeResident(residentId: number): void {
-    this.router.navigate(['/nursing/residents', residentId, 'show']);
+    void this.router.navigate(nursingNav.residentDetail(residentId));
   }
 
   getStatusClass(status: string | null): string {

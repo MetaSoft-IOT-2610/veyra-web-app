@@ -1,6 +1,7 @@
 import {Component, computed, inject, signal, ViewChild} from '@angular/core';
 import {NursingStore} from '../../../application/nursing.store';
 import {ActivatedRoute, Router} from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {
@@ -83,7 +84,7 @@ export class MedicalRecordList {
       const id = params['id'] ? +params['id'] : null;
       this.residentId.set(id);
       if (!id) {
-        this.router.navigate([`nursing/residents/${this.residentId()}/show`]).then();
+        void this.router.navigate(nursingNav.residents());
         return;
       }
     });
@@ -189,14 +190,17 @@ export class MedicalRecordList {
   }
 
   navigateToNew(id: number) {
-    this.router.navigate(['nursing/residents', id, 'allergies', 'new']).then();
+    void this.router.navigate(nursingNav.allergyNew(id));
   }
 
   navigateToNewVitalSign(id: number) {
-    this.router.navigate(['nursing/residents', id, 'vital-signs', 'new']).then();
+    void this.router.navigate(['nursing/residents', id, 'vital-signs', 'new']);
   }
 
   goBack() {
-    this.router.navigate([`nursing/residents/${this.residentId()}/show`]).then();
+    const id = this.residentId();
+    if (id) {
+      void this.router.navigate(nursingNav.residentDetail(id));
+    }
   }
 }

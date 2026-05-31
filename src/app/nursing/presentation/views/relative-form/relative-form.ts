@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
@@ -59,9 +60,9 @@ export class RelativeForm {
 
   constructor() {
 
-    const nursingHomeId = 0;
+    const nursingHomeId = localStorage.getItem('nursingHomeId');
     if (nursingHomeId) {
-      this.nursingStore.loadResidentsByNursingHome(nursingHomeId);
+      this.nursingStore.loadResidentsByNursingHome(Number(nursingHomeId));
     }
     this.profilesStore.loadPersonProfiles();
   }
@@ -99,10 +100,10 @@ export class RelativeForm {
     // Pasar nursingHomeId como primer parámetro (el endpoint espera
     // POST /nursing-homes/{nursingHomeId}/relatives)
     this.nursingStore.addRelative(0, command);
-    this.router.navigate(['/nursing/relatives']).then();
+    void this.router.navigate(nursingNav.relatives());
   }
 
   onCancel(): void {
-    this.router.navigate(['/nursing/relatives']).then();
+    void this.router.navigate(nursingNav.relatives());
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { paymentsNav } from '../../payments-routes';
 
 @Component({
   selector: 'app-subscription-choose',
@@ -17,10 +18,10 @@ export class SubscriptionChoosePage {
   constructor(private router: Router) {}
 
   goToFamilyPlan() {
-    this.router.navigate(['/payments/plans/family']);
+    void this.router.navigate(paymentsNav.planFamily());
   }
 
   goToNursingPlan() {
-    this.router.navigate(['/payments/plans/nursing-home']);
+    void this.router.navigate(paymentsNav.planNursingHome());
   }
 }

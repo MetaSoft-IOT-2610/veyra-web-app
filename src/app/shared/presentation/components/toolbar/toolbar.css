@@ -39,6 +39,34 @@
   flex: 1 1 auto;
 }
 
+.toolbar-back-btn {
+  margin-right: 8px;
+  flex-shrink: 0;
+  color: #0d2e73;
+}
+
+.toolbar-page-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.toolbar-page-module {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: #0d2e73;
+  line-height: 1.25;
+}
+
+.toolbar-page-description {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #5f6368;
+  line-height: 1.3;
+}
+
 /* Language Switcher Integration */
 ::ng-deep app-language-switcher {
   margin-left: 1rem;

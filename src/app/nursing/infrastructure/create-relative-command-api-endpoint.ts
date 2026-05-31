@@ -7,7 +7,7 @@ import {CreateRelativeCommand} from '../domain/model/create-relative.command';
 import {Relative} from '../domain/model/relative.entity';
 import {CreateRelativeCommandAssembler} from './create-relative-command-assembler';
 
-const relativeCommandEndpointUrl = `${environment.platformProviderFakeApiBaseUrl}${environment.platformProviderNursingHomeRelativesEndpointPath}`;
+const relativeCommandEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderNursingHomeRelativesEndpointPath}`;
 
 export class CreateRelativeCommandApiEndpoint extends ErrorHandlingEnabledBaseType {
   private readonly relativeAssembler = new RelativeAssembler();

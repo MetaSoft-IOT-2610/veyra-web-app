@@ -5,7 +5,6 @@ export const environment = {
   /** Nunca aplicar sesión simulada en producción. */
   fallbackDevUserSession: false,
   platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
-  platformProviderFakeApiBaseUrl: 'https://myfake-api-production.up.railway.app',
 
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',

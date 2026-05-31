@@ -1,7 +1,7 @@
 import { environment } from '../../../environments/environment';
 import { ErrorHandlingEnabledBaseType } from '../../shared/infrastructure/error-handling-enabled-base-type';
 import { CreateNursingHomeCommandAssembler } from './create-nursing-home-command-assembler';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { catchError, map, Observable } from 'rxjs';
 import { NursingHome } from '../domain/model/nursing-home.entity';
 import { CreateNursingHomeCommand } from '../domain/model/create-nursing-home.command';
@@ -21,7 +21,21 @@ export class CreateNursingHomeCommandsApiEndpoint extends ErrorHandlingEnabledBa
   create(administratorId: number, createNursingHomeCommand: CreateNursingHomeCommand): Observable<NursingHome> {
     const resource = this.createNursingHomeCommandAssembler.toResourceFromEntity(createNursingHomeCommand);
     const url = administratorNursingHomesEndpointUrl.replace('{administratorId}', administratorId.toString());
-    return this.http.post<NursingHome>(url, resource).pipe(
+
+
+    const formData = new FormData();
+    Object.keys(resource).forEach(key => {
+      const value = (resource as any)[key];
+      if (key !== 'photo' && value !== null && value !== undefined) {
+        formData.append(key, value.toString());
+      }
+    });
+
+    if (createNursingHomeCommand.photoFile) {
+      formData.append('photo', createNursingHomeCommand.photoFile);
+    }
+
+    return this.http.post<NursingHome>(url, formData).pipe(
       map(createdNursingHome => this.nursingHomeAssembler.toEntityFromResource(createdNursingHome)),
       catchError(this.handleError('Failed to create nursing home'))
     );

@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HcmStore} from '../../../application/hcm.store';
 import {ActivatedRoute, Router} from '@angular/router';
+import { hcmNav } from '../../hcm-routes';
 import {CreateContractCommand} from '../../../domain/model/create-contract.command';
 import {MatCard} from '@angular/material/card';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -96,10 +97,10 @@ export class ContractForm {
 
     this.store.addContract(this.staffMemberId!, contractCommand);
 
-    this.router.navigate(['/hcm/staff']).then();
+    void this.router.navigate(hcmNav.staff());
   }
 
   onCancel(): void {
-    this.router.navigate(['/hcm/staff']).then();
+    void this.router.navigate(hcmNav.staff());
   }
 }

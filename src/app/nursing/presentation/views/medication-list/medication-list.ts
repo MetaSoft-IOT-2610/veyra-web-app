@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatError, MatFormField, MatLabel, MatPrefix, MatSuffix } from '@angular/material/form-field';
@@ -56,7 +57,7 @@ export class MedicationList {
       const id = params['id'] ? +params['id'] : null;
       this.residentId.set(id);
       if (!id) {
-        this.router.navigate(['nursing/residents']).then();
+        void this.router.navigate(nursingNav.residents());
         return;
       }
     });
@@ -112,10 +113,10 @@ export class MedicationList {
   }
 
   navigateToNew(id: number) {
-    this.router.navigate(['nursing/residents', id, 'medications','new']).then();
+    void this.router.navigate(nursingNav.medicationNew(id));
   }
 
   goBack() {
-    this.router.navigate(['/nursing/residents']).then();
+    void this.router.navigate(nursingNav.residents());
   }
 }

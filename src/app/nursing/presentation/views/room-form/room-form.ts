@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -59,10 +60,10 @@ export class RoomForm {
 
     this.store.addRoom(this.nursingHomeId, createRoomCommand);
 
-    this.router.navigate(['/nursing/rooms']).then();
+    void this.router.navigate(nursingNav.rooms());
   }
 
   onCancel(): void {
-    this.router.navigate(['/nursing/rooms']).then();
+    void this.router.navigate(nursingNav.rooms());
   }
 }

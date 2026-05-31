@@ -1,5 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import { appNav } from '../../../routing/app-nav';
 import {TranslatePipe} from '@ngx-translate/core';
 import {MatButton} from '@angular/material/button';
 import {Toolbar} from '../../components/toolbar/toolbar';
@@ -37,6 +38,6 @@ export class PageNotFound implements OnInit {
    * Navigates to the home page.
    */
   protected navigateToHome(): void {
-    this.router.navigate(['home']).then();
+    void this.router.navigate(appNav.home);
   }
 }

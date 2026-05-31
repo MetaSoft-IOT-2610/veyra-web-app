@@ -1,6 +1,7 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { hcmNav } from '../../hcm-routes';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -123,7 +124,7 @@ export class StaffMemberForm {
       this.store.addStaffMember(this.nursingHomeId, staffMemberCommand);
     }
 
-    this.router.navigate(['/hcm/staff']).then();
+    void this.router.navigate(hcmNav.staff());
   }
 
   private formatDateToISO(date: Date): string {
@@ -149,6 +150,6 @@ export class StaffMemberForm {
   }
 
   onCancel(): void {
-    this.router.navigate(['/hcm/staff']).then();
+    void this.router.navigate(hcmNav.staff());
   }
 }

@@ -23,12 +23,12 @@
   "assignedAt": "Asignado en",
   "status": "Estado",
   "no-devices": "No hay dispositivos disponibles",
-
   "nav": {
     "dashboard": "Tablero",
     "inventory": "Inventario",
     "device": "Dispositivos",
     "resident": "Residentes",
+    "relatives": "Familiares",
     "staff": "Personal",
     "care-management": "Gestión de la atención",
     "room": "Habitaciones",
@@ -47,7 +47,8 @@
     "go-home": "Ir al inicio"
   },
   "toolbar": {
-    "logoAlt": "logo"
+    "logoAlt": "logo",
+    "back": "Volver"
   },
   "iam": {
     "profile": "Perfil",
@@ -453,6 +454,44 @@
     },
     "add-new": "Agregar",
     "filter-btn": "Filtrar"
+  },
+  "relatives": {
+    "title": "Familiares",
+    "loading": "Cargando información...",
+    "no-relatives": "No hay familiares registrados.",
+    "add-relative": "Añadir familiar",
+    "form": {
+      "required": "Campo obligatorio",
+      "invalid-email": "Correo electrónico inválido",
+      "new-title": "Nuevo Familiar",
+      "personal-info": "Información Personal",
+      "name": "Nombre",
+      "last-name": "Apellidos",
+      "account-setup": "Configuración de la Cuenta",
+      "email": "Correo electrónico",
+      "email-placeholder": "ej. correo@ejemplo.com",
+      "name-placeholder": "ej. Juan",
+      "secure-self-setup": "Configuración segura por el usuario",
+      "secure-self-setup-description": "Se enviará un enlace de invitación a este correo para que el usuario cree su propia contraseña.",
+      "resident-association": "Asociación de Residente",
+      "linked-resident": "Residente Vinculado (Restricción de acceso a datos)",
+      "select-resident": "Seleccionar residente",
+      "unknown-resident": "Residente desconocido",
+      "phone": "Teléfono",
+      "phone-placeholder": "ej. 123456789"
+    },
+    "buttons": {
+      "add": "Añadir nuevo",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "details": "Ver detalles",
+      "edit": "Editar",
+      "go-back": "Volver",
+      "register": "Registrar familiar",
+      "search": "Buscar",
+      "search-info": "Ingrese el nombre o apellido",
+      "change-resident": "Cambiar residente"
+    }
   },
   "alerts": {
     "title": "Centro de Alertas",

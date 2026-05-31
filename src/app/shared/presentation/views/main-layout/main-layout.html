@@ -114,6 +114,26 @@
 
     <mat-sidenav-content class="main-with-toolbar">
       <mat-toolbar class="toolbar">
+        @if (routeToolbar.showBackButton()) {
+          <button
+            mat-icon-button
+            type="button"
+            class="toolbar-back-btn"
+            (click)="routeToolbar.goBack()"
+            [attr.aria-label]="'toolbar.back' | translate">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        }
+
+        @if (routeToolbar.pageData(); as page) {
+          <div class="toolbar-page-info">
+            <h1 class="toolbar-page-module">{{ page.module }}</h1>
+            @if (page.description) {
+              <p class="toolbar-page-description">{{ page.description }}</p>
+            }
+          </div>
+        }
+
         <span class="spacer"></span>
         @if (showAuthenticationInToolbar()) {
           <app-authentication-section/>

@@ -1,11 +1,29 @@
 import { Routes } from '@angular/router';
+import { definePageRoute } from '../../shared/routing/define-page-route';
 
 const alertsList = () =>
-  import('./views/alerts-list/alerts-list').then(m => m.AlertsList);
+  import('./views/alerts-list/alerts-list').then((m) => m.AlertsList);
 
-const baseTitle = 'Veyra';
+export const alertsPaths = {
+  list: '',
+} as const;
+
+export const alertsNav = {
+  list: () => ['/alerts'],
+} as const;
+
 const alertsRoutes: Routes = [
-  { path: '', loadComponent: alertsList, title: `Alerts | ${baseTitle}` },
+  definePageRoute({
+    path: alertsPaths.list,
+    name: 'alerts.list',
+    loadComponent: alertsList,
+    page: {
+      title: 'Alertas',
+      module: 'Alertas',
+      description: 'Notificaciones y eventos importantes',
+      showBackButton: false,
+    },
+  }),
 ];
 
 export { alertsRoutes };

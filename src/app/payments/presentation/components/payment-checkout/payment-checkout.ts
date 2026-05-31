@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { NgIf } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { paymentsNav } from '../../payments-routes';
 
 @Component({
   selector: 'payment-checkout',
@@ -73,7 +74,7 @@ export class PaymentCheckoutPage {
   /** Cancel button */
   cancel() {
     // Usar el Router en lugar de history.back() es mejor práctica en Angular (SPA)
-    this.router.navigate(['/payments/choose']);
+    void this.router.navigate(paymentsNav.choose());
   }
 
   /** Simulate payment */
@@ -89,7 +90,7 @@ export class PaymentCheckoutPage {
     // Simula un pequeño retraso de red (1.5s) y luego navega a confirmación
     setTimeout(() => {
       this.isLoading = false;
-      this.router.navigate(['/payments/confirmed']);
+      void this.router.navigate(['/payments/confirmed']);
     }, 1500);
   }
 }

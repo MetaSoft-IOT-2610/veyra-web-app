@@ -1,5 +1,6 @@
 import {Component, computed, inject, signal} from '@angular/core';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
@@ -78,25 +79,25 @@ export class ResidentList {
   }
 
   assignRoom(id: number) {
-    this.router.navigate(['nursing/residents', id, 'room-assignments', 'new']).then();
+    void this.router.navigate(nursingNav.assignRoom(id));
   }
 
   viewDetails(id: number) {
-    this.router.navigate(['nursing/residents', id, 'show']).then();
+    void this.router.navigate(nursingNav.residentDetail(id));
   }
 
   viewMedications(id: number) {
-    this.router.navigate(['nursing/residents', id, 'medications']).then();
+    void this.router.navigate(nursingNav.medications(id));
   }
 
   editResident(id: number) {
-    this.router.navigate(['nursing/residents', id, 'edit']).then();
+    void this.router.navigate(nursingNav.residentEdit(id));
     if (this.selectedId === id) {
       this.selectedId = null;
     }
   }
 
   navigateToNew(){
-    this.router.navigate(['nursing/residents/new']).then();
+    void this.router.navigate(nursingNav.residentNew());
   }
 }

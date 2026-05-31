@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { iamNav } from '../../../../iam/presentation/iam.routes';
+import { analyticsNav } from '../../../../analytics/presentation/analytics-routes';
 import { NursingStore } from '../../../application/nursing.store';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -40,7 +42,7 @@ export class NursingHomeForm {
     const adminId = Number(localStorage.getItem('userId'));
 
     if (!adminId) {
-      this.router.navigate(['/iam/sign-in']).then();
+      void this.router.navigate(iamNav.signIn());
       return;
     }
 
@@ -48,7 +50,7 @@ export class NursingHomeForm {
       next: nursingHome => {
         this.store['_nursingHomesSignal'].set(nursingHome);
         localStorage.setItem('nursingHomeId', nursingHome.id.toString());
-        this.router.navigate(['/analytics/dashboard']).then();
+        void this.router.navigate(analyticsNav.dashboard());
       },
       error: err => {
         this.showForm = true;
@@ -92,6 +94,7 @@ export class NursingHomeForm {
       postalCode: nursingHome.postalCode,
       country: nursingHome.country,
       photo: nursingHome.photo,
+      photoFile: this.selectedFile,
       ruc: nursingHome.ruc
     });
 
@@ -103,7 +106,7 @@ export class NursingHomeForm {
         return;
       }
 
-      this.router.navigate(['/analytics/dashboard']).then();
+      void this.router.navigate(analyticsNav.dashboard());
     }, 300);
   }
 

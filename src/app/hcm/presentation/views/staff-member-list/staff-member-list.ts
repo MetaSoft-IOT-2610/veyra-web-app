@@ -9,6 +9,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { HcmStore } from '../../../application/hcm.store';
 import { MatInput } from '@angular/material/input';
 import { PersonProfileDetail } from '../../../../profiles/presentation/components/person-profile-detail/person-profile-detail';
+import { hcmNav } from '../../hcm-routes';
 
 @Component({
   selector: 'app-staff-member-list',
@@ -66,21 +67,21 @@ export class StaffMemberList {
   }
 
   viewDetails(id: number) {
-    this.router.navigate(['hcm/staff', id, 'show']).then();
+    void this.router.navigate(hcmNav.staffDetail(id));
   }
 
   editStaffMember(id: number) {
-    this.router.navigate(['hcm/staff', id, 'edit']).then();
+    void this.router.navigate(hcmNav.staffEdit(id));
     if (this.selectedId === id) {
       this.selectedId = null;
     }
   }
 
   navigateToNew() {
-    this.router.navigate(['hcm/staff/new']).then();
+    void this.router.navigate(hcmNav.staffNew());
   }
 
   navigateToNewContract(id: number) {
-    this.router.navigate(['hcm/staff', id,'contracts', 'new']).then();
+    void this.router.navigate(hcmNav.contractNew(id));
   }
 }

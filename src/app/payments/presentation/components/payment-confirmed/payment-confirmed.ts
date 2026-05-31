@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { iamNav } from '../../../../iam/presentation/iam.routes';
 
 @Component({
   selector: 'app-payment-confirmed',
@@ -14,6 +15,6 @@ export class PaymentConfirmed {
 
   goToLogin() {
     // Redirige al login del IAM
-    this.router.navigate(['/iam/sign-in']);
+    void this.router.navigate(iamNav.signIn());
   }
 }

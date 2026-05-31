@@ -1,14 +1,44 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
+import { definePageRoute } from '../../shared/routing/define-page-route';
 
 const signInForm = () =>
-  import('./views/sign-in-form/sign-in-form').then(m => m.SignInForm);
+  import('./views/sign-in-form/sign-in-form').then((m) => m.SignInForm);
 const signUpForm = () =>
-  import('./views/sign-up-form/sign-up-form').then(m => m.SignUpForm);
+  import('./views/sign-up-form/sign-up-form').then((m) => m.SignUpForm);
 
-const baseTitle = 'Veyra';
+export const iamPaths = {
+  signIn: 'sign-in',
+  signUp: 'sign-up',
+} as const;
+
+export const iamNav = {
+  signIn: () => ['/iam', iamPaths.signIn],
+  signUp: () => ['/iam', iamPaths.signUp],
+} as const;
+
 const iamRoutes: Routes = [
-  { path: 'sign-in', loadComponent: signInForm, title:`Sign In | ${baseTitle}` },
-  { path: 'sign-up', loadComponent: signUpForm, title:`Sign Up | ${baseTitle}` }
+  definePageRoute({
+    path: iamPaths.signIn,
+    name: 'iam.sign-in',
+    loadComponent: signInForm,
+    page: {
+      title: 'Iniciar sesión',
+      module: 'Acceso',
+      description: 'Accede a tu cuenta de Veyra',
+      showBackButton: false,
+    },
+  }),
+  definePageRoute({
+    path: iamPaths.signUp,
+    name: 'iam.sign-up',
+    loadComponent: signUpForm,
+    page: {
+      title: 'Registrarse',
+      module: 'Acceso',
+      description: 'Crea una cuenta nueva en Veyra',
+      showBackButton: true,
+    },
+  }),
 ];
 
 export { iamRoutes };

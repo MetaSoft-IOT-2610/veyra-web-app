@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { MatPaginator } from '@angular/material/paginator';
 import { NursingStore } from '../../../application/nursing.store';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -118,6 +119,6 @@ export class RoomList {
   }
 
   navigateToNew() {
-    this.router.navigate(['nursing/rooms/new']).then();
+    void this.router.navigate(nursingNav.roomNew());
   }
 }

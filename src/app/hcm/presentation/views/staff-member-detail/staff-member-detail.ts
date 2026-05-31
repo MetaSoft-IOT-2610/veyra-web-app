@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { hcmNav } from '../../hcm-routes';
 import { MatCard } from '@angular/material/card';
 import { MatButton, MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -50,26 +51,26 @@ export class StaffMemberDetail {
       this.staffMemberId.set(id);
 
       if (!id) {
-        this.router.navigate(['/hcm/staff']).then();
+        void this.router.navigate(hcmNav.staff());
       }
     });
   }
 
   goBack() {
-    this.router.navigate(['/hcm/staff']).then();
+    void this.router.navigate(hcmNav.staff());
   }
 
   editStaffMember() {
     const id = this.staffMemberId();
     if (id) {
-      this.router.navigate(['hcm/staff', id, 'edit']).then();
+      void this.router.navigate(hcmNav.staffEdit(id));
     }
   }
 
   viewEmploymentRecord() {
     const id = this.staffMemberId();
     if (id) {
-      this.router.navigate(['hcm/staff', id, 'contracts']).then();
+      void this.router.navigate(hcmNav.contracts(id));
     }
   }
 }

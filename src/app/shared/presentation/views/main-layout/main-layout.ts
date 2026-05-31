@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { RouteToolbarService } from '../../../routing/route-toolbar.service';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +13,11 @@ import { LanguageSwitcher } from '../../components/language-switcher/language-sw
 import { AuthenticationSection } from '../../../../iam/presentation/components/authentication-section/authentication-section';
 import { IamStore } from '../../../../iam/application/iam.store';
 import { environment } from '../../../../../environments/environment';
+import { analyticsPaths } from '../../../../analytics/presentation/analytics-routes';
+import { nursingPaths } from '../../../../nursing/presentation/nursing-routes';
+import { hcmPaths } from '../../../../hcm/presentation/hcm-routes';
+import { activitiesPaths } from '../../../../activities/presentation/activities-routes';
+import { alertsPaths } from '../../../../alerts/presentation/alerts-routes';
 
 @Component({
   selector: 'app-main-layout',
@@ -34,6 +40,7 @@ import { environment } from '../../../../../environments/environment';
 })
 export class MainLayout implements OnInit, AfterViewInit {
   private readonly iamStore = inject(IamStore);
+  protected readonly routeToolbar = inject(RouteToolbarService);
 
   /** Si es true, toolbar muestra IAM completo (login/registro). Si es false, solo con sesión activa (perfil / salir). */
   protected readonly showIamToolbar = environment.showIamToolbar;
@@ -55,15 +62,15 @@ export class MainLayout implements OnInit, AfterViewInit {
   readonly navCollapsed = signal(false);
 
   options = [
-    { label: 'nav.dashboard', icon: 'home', link: '/analytics/dashboard', color: '#5FC2BA' },
-    { label: 'nav.device', icon: 'assignment', link: '/nursing/devices', color: '#5FC2BA' },
-    { label: 'nav.resident', icon: 'person', link: '/nursing/residents', color: '#5FC2BA' },
-    { label: 'nav.staff', icon: 'group', link: '/hcm/staff', color: '#5FC2BA' },
-    { label: 'nav.room', icon: 'meeting_room', link: '/nursing/rooms', color: '#5FC2BA' },
-    { label: 'nav.activities', icon: 'event_note', link: '/activities', color: '#5FC2BA' },
-    { label: 'nav.alerts', icon: 'notifications_active', link: '/alerts', color: '#5FC2BA' },
-    { label: 'nav.relatives',  icon: 'people',       link: '/nursing/relatives',    color: '#5FC2BA'},
-    {label: 'my-patients',icon: 'favorite', link: '/nursing/my-patients', color: '#5FC2BA'},
+    { label: 'nav.dashboard', icon: 'home', link: `/analytics/${analyticsPaths.dashboard}`, color: '#5FC2BA' },
+    { label: 'nav.device', icon: 'assignment', link: `/nursing/${nursingPaths.devices}`, color: '#5FC2BA' },
+    { label: 'nav.resident', icon: 'person', link: `/nursing/${nursingPaths.residents}`, color: '#5FC2BA' },
+    { label: 'nav.staff', icon: 'group', link: `/hcm/${hcmPaths.staff}`, color: '#5FC2BA' },
+    { label: 'nav.room', icon: 'meeting_room', link: `/nursing/${nursingPaths.rooms}`, color: '#5FC2BA' },
+    { label: 'nav.activities', icon: 'event_note', link: `/activities${activitiesPaths.list}`, color: '#5FC2BA' },
+    { label: 'nav.alerts', icon: 'notifications_active', link: `/alerts${alertsPaths.list}`, color: '#5FC2BA' },
+    { label: 'nav.relatives', icon: 'people', link: `/nursing/${nursingPaths.relatives}`, color: '#5FC2BA' },
+    { label: 'my-patients', icon: 'favorite', link: `/nursing/${nursingPaths.myPatients}`, color: '#5FC2BA' },
   ];
 
   constructor(
@@ -84,7 +91,6 @@ export class MainLayout implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.iamStore.tryApplyDevFallbackSession();
   }
 
   ngAfterViewInit(): void {

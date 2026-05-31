@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { hcmNav } from '../../hcm-routes';
 import { MatPaginator } from '@angular/material/paginator';
 import { HcmStore } from '../../../application/hcm.store';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -59,7 +60,7 @@ export class ContractList {
       const id = params['id'] ? +params['id'] : null;
       this.staffMemberId.set(id);
       if (!id) {
-        this.router.navigate(['hcm/staff']).then();
+        void this.router.navigate(hcmNav.staff());
         return;
       }
     });
@@ -100,10 +101,10 @@ export class ContractList {
   }
 
   updateStatus(id: number) {
-    this.router.navigate([`/hcm/staff/${this.staffMemberId()}/contracts`, id, 'edit']).then();
+    void this.router.navigate([...hcmNav.contracts(this.staffMemberId()!), id, 'edit']);
   }
 
   goBack() {
-    this.router.navigate([`/hcm/staff/${this.staffMemberId()}/show`]).then();
+    void this.router.navigate(hcmNav.staffDetail(this.staffMemberId()!));
   }
 }

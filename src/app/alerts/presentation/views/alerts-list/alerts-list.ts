@@ -1,6 +1,8 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../../../nursing/presentation/nursing-routes';
+import { hcmNav } from '../../../../hcm/presentation/hcm-routes';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -83,19 +85,19 @@ export class AlertsList implements OnInit {
   }
 
   onAttendImmediately(alert: Alert): void {
-    void this.router.navigate(['/nursing', 'residents', alert.residentId, 'show']);
+    void this.router.navigate(nursingNav.residentDetail(alert.residentId));
   }
 
   onViewHistory(alert: Alert): void {
-    void this.router.navigate(['/nursing', 'residents', alert.residentId, 'medical-records']);
+    void this.router.navigate(nursingNav.medicalRecords(alert.residentId));
   }
 
   onViewVitalSigns(alert: Alert): void {
-    void this.router.navigate(['/nursing', 'residents', alert.residentId, 'medical-records']);
+    void this.router.navigate(nursingNav.medicalRecords(alert.residentId));
   }
 
   onContactStaff(): void {
-    void this.router.navigate(['/hcm', 'staff']);
+    void this.router.navigate(hcmNav.staff());
   }
 
   severityClass(severity: AlertSeverity): string {

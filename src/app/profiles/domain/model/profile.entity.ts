@@ -1,6 +1,7 @@
 export class Profile {
   private _id: number;
   private _photo: string;
+  private _photoFile: File | null = null;
   private _phoneNumber: string;
   private _emailAddress: string;
   private _streetAddress: string;
@@ -8,12 +9,14 @@ export class Profile {
   constructor(profile: {
     id: number;
     photo: string;
+    photoFile?: File | null;
     phoneNumber: string;
     emailAddress: string;
     streetAddress: string;
   }) {
     this._id = profile.id;
     this._photo = profile.photo;
+    this._photoFile = profile.photoFile ?? null;
     this._phoneNumber = profile.phoneNumber;
     this._emailAddress = profile.emailAddress;
     this._streetAddress = profile.streetAddress;
@@ -41,6 +44,14 @@ export class Profile {
 
   set photo(value: string) {
     this._photo = value;
+  }
+
+  get photoFile(): File | null {
+    return this._photoFile;
+  }
+
+  set photoFile(value: File | null) {
+    this._photoFile = value;
   }
 
   get phoneNumber(): string {

@@ -1,6 +1,7 @@
 import {Component, computed, inject} from '@angular/core';
 import {NursingStore} from '../../../application/nursing.store';
 import {ActivatedRoute, Router} from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AssignRoomCommand} from '../../../domain/model/assign-room.command';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -79,14 +80,14 @@ export class AssignRoomForm {
 
       this.store.assignRoom(this.nursingHomeId, this.residentId, assignRoomCommand);
 
-      this.router.navigate(['/nursing/residents']).then();
+      void this.router.navigate(nursingNav.residents());
     } else {
       this.form.markAllAsTouched();
     }
   }
 
   onCancel() {
-    this.router.navigate(['/nursing/residents']).then();
+    void this.router.navigate(nursingNav.residents());
   }
 
   getRoomCapacityInfo(room: any): string {

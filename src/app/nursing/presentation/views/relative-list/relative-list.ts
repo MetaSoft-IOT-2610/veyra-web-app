@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { NursingStore } from '../../../application/nursing.store';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
@@ -86,7 +87,7 @@ export class RelativeList {
   }
 
   createRelative() {
-    this.router.navigate(['/nursing/relatives/new']).then();
+    void this.router.navigate(nursingNav.relativeNew());
   }
 
   trackById(index: number, item: any) {

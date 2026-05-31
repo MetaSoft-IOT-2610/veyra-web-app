@@ -9,6 +9,7 @@ export class BusinessProfile extends Profile {
     businessName: string;
     ruc: string;
     photo: string;
+    photoFile?: File | null;
     phoneNumber: string;
     emailAddress: string;
     streetAddress: string;
@@ -16,6 +17,7 @@ export class BusinessProfile extends Profile {
     super({
       id: businessProfile.id,
       photo: businessProfile.photo,
+      photoFile: businessProfile.photoFile,
       phoneNumber: businessProfile.phoneNumber,
       emailAddress: businessProfile.emailAddress,
       streetAddress: businessProfile.streetAddress

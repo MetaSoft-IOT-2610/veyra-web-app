@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { paymentsNav } from '../../payments-routes';
 
 @Component({
   selector: 'app-subscription-plan-family',
@@ -14,10 +15,10 @@ export class SubscriptionPlanFamily {
   constructor(private router: Router) {}
 
   choosePlan(cycle: 'monthly' | 'annual') {
-    this.router.navigate(['/payments/checkout', 'family', cycle]);
+    void this.router.navigate(paymentsNav.checkout('family', cycle));
   }
 
   goBack() {
-    this.router.navigate(['/payments/choose']);
+    void this.router.navigate(paymentsNav.choose());
   }
 }
