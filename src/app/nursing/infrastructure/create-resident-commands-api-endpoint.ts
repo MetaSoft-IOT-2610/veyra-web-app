@@ -1,5 +1,5 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable, map, catchError } from 'rxjs';
+import { Observable, map, catchError, switchMap } from 'rxjs';
 import { Resident } from '../domain/model/resident.entity';
 import { ResidentAssembler } from './resident-assembler';
 import { environment } from '../../../environments/environment';
@@ -48,6 +48,23 @@ export class CreateResidentCommandsApiEndpoint extends ErrorHandlingEnabledBaseT
 
     if (createResidentCommand.photoFile) {
       formData.append('photo', createResidentCommand.photoFile);
+      return this.http.post<Resident>(url, formData).pipe(
+        map(createdResident => this.residentAssembler.toEntityFromResource(createdResident)),
+        catchError(this.handleError('Failed to create resident'))
+      );
+    } else if (createResidentCommand.photo && createResidentCommand.photo.startsWith('http')) {
+      // Si es URL, descargarla y enviarla como blob
+      return this.http.get(createResidentCommand.photo, { responseType: 'blob' }).pipe(
+        switchMap((blob: Blob) => {
+          formData.append('photo', blob, 'photo.jpg');
+          return this.http.post<Resident>(url, formData);
+        }),
+        map(createdResident => this.residentAssembler.toEntityFromResource(createdResident)),
+        catchError(this.handleError('Failed to create resident'))
+      );
+    } else if (createResidentCommand.photo) {
+      // Si es base64, enviarlo directamente
+      formData.append('photo', createResidentCommand.photo);
     }
 
     return this.http.post<Resident>(url, formData).pipe(
@@ -71,14 +88,35 @@ export class CreateResidentCommandsApiEndpoint extends ErrorHandlingEnabledBaseT
 
     if (createResidentCommand.photoFile) {
       formData.append('photo', createResidentCommand.photoFile);
+      return this.http.put<Resident>(url, formData).pipe(
+        map(updatedResident => this.residentAssembler.toEntityFromResource(updatedResident)),
+        catchError(this.handleError(`Failed to update resident with id ${residentId}`))
+      );
+    } else if (createResidentCommand.photo && createResidentCommand.photo.startsWith('http')) {
+      // Si es URL, descargarla y enviarla como blob
+      return this.downloadPhotoAndUpdate(createResidentCommand.photo, url, formData);
     } else if (createResidentCommand.photo) {
-      // If no new file, we might want to send the existing URL if the backend handles it,
-      // or just skip it if the backend keeps the old one.
-      // Usually, if it's FormData, the backend expects the file part.
-      // If we don't send it, it might be null.
+      // Si es base64, enviarlo directamente
+      formData.append('photo', createResidentCommand.photo);
+      return this.http.put<Resident>(url, formData).pipe(
+        map(updatedResident => this.residentAssembler.toEntityFromResource(updatedResident)),
+        catchError(this.handleError(`Failed to update resident with id ${residentId}`))
+      );
     }
 
+    // Sin foto, no se puede actualizar (backend requiere photo)
     return this.http.put<Resident>(url, formData).pipe(
+      map(updatedResident => this.residentAssembler.toEntityFromResource(updatedResident)),
+      catchError(this.handleError(`Failed to update resident with id ${residentId}`))
+    );
+  }
+
+  private downloadPhotoAndUpdate(photoUrl: string, url: string, formData: FormData): Observable<Resident> {
+    return this.http.get(photoUrl, { responseType: 'blob' }).pipe(
+      switchMap((blob: Blob) => {
+        formData.append('photo', blob, 'photo.jpg');
+        return this.http.put<Resident>(url, formData);
+      }),
       map(updatedResident => this.residentAssembler.toEntityFromResource(updatedResident)),
       catchError(this.handleError('Failed to update resident'))
     );
