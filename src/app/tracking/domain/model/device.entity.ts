@@ -1,45 +1,48 @@
-import { DeviceStatus } from './device-status.enum';
-import { DeviceType } from './device-type.enum';
+import {BaseEntity} from '../../../shared/domain/model/base-entity';
 
-export class Device {
+export class Device implements BaseEntity{
   private _id: number;
-  private _deviceId: string;
-  private _deviceType: DeviceType;
-  private _assignedBy: string;
-  private _assignedAt: string;
-  private _status: DeviceStatus;
-
+  private _deviceType: string;
+  private _status: string;
+   private _residentId: number;
+   private _nursingHomeId: number;
   constructor(device: {
     id: number;
-    deviceId: string;
-    deviceType: DeviceType;
-    assignedBy: string;
-    assignedAt: string;
-    status: DeviceStatus;
+    nursingHomeId: number;
+    deviceType: string;
+    status: string;
+     residentId: number;
   }) {
     this._id = device.id;
-    this._deviceId = device.deviceId;
     this._deviceType = device.deviceType;
-    this._assignedBy = device.assignedBy;
-    this._assignedAt = device.assignedAt;
     this._status = device.status;
+    this._residentId=device.residentId;
+    this._nursingHomeId=device.nursingHomeId;
+
   }
 
   get id(): number { return this._id; }
   set id(value: number) { this._id = value; }
 
-  get deviceId(): string { return this._deviceId; }
-  set deviceId(value: string) { this._deviceId = value; }
 
-  get deviceType(): DeviceType { return this._deviceType; }
-  set deviceType(value: DeviceType) { this._deviceType = value; }
+  get deviceType(): string { return this._deviceType; }
+  set deviceType(value: string) { this._deviceType = value; }
 
-  get assignedBy(): string { return this._assignedBy; }
-  set assignedBy(value: string) { this._assignedBy = value; }
 
-  get assignedAt(): string { return this._assignedAt; }
-  set assignedAt(value: string) { this._assignedAt = value; }
+  get status(): string { return this._status; }
+  set status(value: string) { this._status = value; }
+  get residentId(): number {
+    return this._residentId;
+  }
 
-  get status(): DeviceStatus { return this._status; }
-  set status(value: DeviceStatus) { this._status = value; }
+  set residentId(value: number) {
+    this._residentId = value;
+  }
+  get nursingHomeId(): number {
+    return this._nursingHomeId;
+  }
+
+  set nursingHomeId(value: number) {
+    this._nursingHomeId = value;
+  }
 }

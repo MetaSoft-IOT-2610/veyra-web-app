@@ -1,17 +1,11 @@
-import { DeviceType } from './device-type.enum';
-
 export class CreateDeviceCommand {
-  private _deviceId: string;
-  private _deviceType: DeviceType;
+  private readonly _nursingHomeId: number;
+  private readonly _deviceType: string;
 
-  constructor(command: { deviceId: string; deviceType: DeviceType }) {
-    this._deviceId = command.deviceId;
+  constructor(command: { nursingHomeId: number; deviceType: string }) {
+    this._nursingHomeId = command.nursingHomeId;
     this._deviceType = command.deviceType;
   }
-
-  get deviceId(): string { return this._deviceId; }
-  set deviceId(value: string) { this._deviceId = value; }
-
-  get deviceType(): DeviceType { return this._deviceType; }
-  set deviceType(value: DeviceType) { this._deviceType = value; }
+  get nursingHomeId(): number { return this._nursingHomeId; }
+  get deviceType(): string { return this._deviceType; }
 }

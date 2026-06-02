@@ -1,5 +1,5 @@
 export enum DeviceStatus {
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
-  LOW_BATTERY = 'LOW_BATTERY'
+  AVAILABLE = 'AVAILABLE',
+  ASSIGNED = 'ASSIGNED',
+  disabled  = 'DISABLED'
 }
