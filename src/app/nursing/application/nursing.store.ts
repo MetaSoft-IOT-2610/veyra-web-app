@@ -365,10 +365,10 @@ export class NursingStore {
     });
   }
 
-  updateRelative(nursingHomeId: number, relativeId: number, createRelativeCommand: CreateRelativeCommand): void {
+  updateRelative(relativeId: number, createRelativeCommand: CreateRelativeCommand): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.nursingApi.updateRelativeByNursingHomeId(nursingHomeId, relativeId, createRelativeCommand).pipe(retry(2)).subscribe({
+    this.nursingApi.updateRelativeByNursingHomeId(relativeId, createRelativeCommand).pipe(retry(2)).subscribe({
       next: updatedRelative => {
         this._relativeSignal.update(relatives =>
           relatives.map(rel => rel.id === updatedRelative.id ? updatedRelative : rel));

@@ -185,8 +185,8 @@ export class NursingApi extends BaseApi{
     return this._relativeApiEndpoint.getRelativesByNursingHomeId(nursingHomeId);
   }
 
-  updateRelativeByNursingHomeId(nursingHomeId: number, relativeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
-    return this._createRelativeCommandsApiEndpoint.update(nursingHomeId, relativeId, createRelativeCommand);
+  updateRelativeByNursingHomeId(relativeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
+    return this._createRelativeCommandsApiEndpoint.update(relativeId, createRelativeCommand);
   }
 
   getMonitoringResidentsByDoctor(nursingHomeId: number, doctorId: number): Observable<MonitoringResidents[]> {
