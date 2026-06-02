@@ -75,7 +75,7 @@ export class RelativeList {
 
     ref.afterClosed().subscribe((result: CreateRelativeCommand | undefined) => {
       if (result) {
-        this.store.updateRelative(this.nursingHomeId, relative.id, result);
+        this.store.updateRelative(relative.id, result);
       }
     });
   }
