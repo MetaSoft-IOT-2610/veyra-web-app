@@ -1,16 +1,25 @@
 import {BaseEntity} from '../../../shared/domain/model/base-entity';
 
 export class Device implements BaseEntity{
+  get macAddress(): string {
+    return this._macAddress;
+  }
+
+  set macAddress(value: string) {
+    this._macAddress = value;
+  }
   private _id: number;
   private _deviceType: string;
   private _status: string;
    private _residentId: number;
    private _nursingHomeId: number;
+   private _macAddress:string;
   constructor(device: {
     id: number;
     nursingHomeId: number;
     deviceType: string;
     status: string;
+    macAddress:string;
      residentId: number;
   }) {
     this._id = device.id;
@@ -18,6 +27,7 @@ export class Device implements BaseEntity{
     this._status = device.status;
     this._residentId=device.residentId;
     this._nursingHomeId=device.nursingHomeId;
+    this._macAddress=device.macAddress;
 
   }
 
