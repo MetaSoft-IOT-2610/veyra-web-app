@@ -6,7 +6,7 @@
       <div class="header-line"></div>
     </div>
 
-    <!-- Filtros -->
+    <!-- Filter -->
     <div class="filters-bar">
       <div class="filter-tabs">
         @for (filter of filters; track filter.key) {
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <!-- Tabla -->
+    <!-- Table -->
     <div class="table-container">
       @if (loading) {
         <div class="spinner-row">
@@ -56,36 +56,66 @@
             <th>{{ 'activities.columns.activity' | translate }}</th>
             <th>{{ 'activities.columns.category' | translate }}</th>
             <th>{{ 'activities.columns.status' | translate }}</th>
+            <th>{{ 'activities.columns.recurring' | translate }}</th>
             <th>{{ 'activities.columns.actions' | translate }}</th>
           </tr>
           </thead>
           <tbody>
             @for (activity of filteredActivities; track activity.id) {
               <tr>
+                <!-- Activity -->
                 <td class="activity-name-cell">
                   <div class="activity-icon">
                     <mat-icon>event</mat-icon>
                   </div>
                   <span class="activity-name" (click)="openDetail(activity)">
-                    {{ 'activities.types.' + activity.type.toLowerCase() | translate }}
+                    {{ activity.title }}
                   </span>
                 </td>
+
+                <!-- Category -->
                 <td>
                   <span class="category-chip {{ activity.type.toLowerCase() }}">
                     {{ 'activities.types.' + activity.type.toLowerCase() | translate }}
                   </span>
                 </td>
+
+                <!-- Status -->
                 <td>
                   <span class="status-chip {{ activity.status.toLowerCase() }}">
                     {{ 'activities.status.' + activity.status.toLowerCase() | translate }}
                   </span>
                 </td>
+
+                <!-- Recurrence -->
+                <td>
+                  @if (activity.isRecurring) {
+                    <div class="recurring-cell">
+                      <mat-icon class="recurring-icon">repeat</mat-icon>
+                      <span class="recurring-days">
+                        @for (day of activity.recurringDays; track day) {
+                          <span class="day-badge">
+                            {{ 'activities.days.' + (day?.toLowerCase() ?? '') | translate }}
+                          </span>
+                        }
+                      </span>
+                    </div>
+                  } @else {
+                    <span class="no-recurring">—</span>
+                  }
+                </td>
+
+                <!-- Actions -->
                 <td class="actions-cell">
-                  <button mat-icon-button class="action-btn edit" (click)="openEditModal(activity)">
+                  <button mat-icon-button class="action-btn edit"
+                          (click)="openEditModal(activity)"
+                          [title]="'activities.actions.edit' | translate">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button mat-icon-button class="action-btn complete" (click)="completeActivity(activity.id)">
-                    <mat-icon>check_circle</mat-icon>
+                  <button mat-icon-button class="action-btn delete"
+                          (click)="openDeleteConfirm(activity.id)"
+                          [title]="'activities.actions.delete' | translate">
+                    <mat-icon>delete</mat-icon>
                   </button>
                 </td>
               </tr>
@@ -101,7 +131,7 @@
       {{ 'activities.add-new' | translate }}
     </button>
 
-    <!-- Modal Detalle -->
+    <!-- Detail Modal -->
     @if (selectedActivity()) {
       <div class="modal-overlay" (click)="closeDetail()">
         <div class="modal" (click)="$event.stopPropagation()">
@@ -113,9 +143,7 @@
           </div>
           <div class="modal-body">
             <p class="modal-label">{{ 'activities.detail.name-label' | translate }}</p>
-            <h2 class="modal-title">
-              {{ 'activities.types.' + selectedActivity()!.type.toLowerCase() | translate }}
-            </h2>
+            <h2 class="modal-title">{{ selectedActivity()!.title }}</h2>
             <div class="modal-row">
               <div>
                 <p class="modal-label">{{ 'activities.detail.category-label' | translate }}</p>
@@ -123,7 +151,25 @@
                   {{ 'activities.types.' + selectedActivity()!.type.toLowerCase() | translate }}
                 </span>
               </div>
+              <div>
+                <p class="modal-label">{{ 'activities.detail.status-label' | translate }}</p>
+                <span class="status-chip {{ selectedActivity()!.status.toLowerCase() }}">
+                  {{ 'activities.status.' + selectedActivity()!.status.toLowerCase() | translate }}
+                </span>
+              </div>
             </div>
+            @if (selectedActivity()!.isRecurring) {
+              <div class="modal-recurring">
+                <p class="modal-label">{{ 'activities.detail.recurring-label' | translate }}</p>
+                <div class="recurring-days-detail">
+                  @for (recurDay of selectedActivity()!.recurringDays; track recurDay) {
+                    <span class="day-badge">
+                      {{ 'activities.days.' + (recurDay?.toLowerCase() ?? '') | translate }}
+                    </span>
+                  }
+                </div>
+              </div>
+            }
           </div>
           <div class="modal-footer">
             <button class="btn-cancel" (click)="closeDetail()">
@@ -138,7 +184,7 @@
       </div>
     }
 
-    <!-- Modal Agregar / Editar -->
+    <!-- Add / Edit Modal -->
     @if (showAddModal() || showEditModal()) {
       <div class="modal-overlay" (click)="showEditModal() ? closeEditModal() : closeAddModal()">
         <div class="modal" (click)="$event.stopPropagation()">
@@ -152,6 +198,16 @@
             </button>
           </div>
           <div class="modal-body">
+
+            <!-- Title -->
+            <label class="form-label">{{ 'activities.add.title-field' | translate }}</label>
+            <input
+              class="form-input"
+              type="text"
+              [(ngModel)]="formTitle"
+              [placeholder]="'activities.add.title-placeholder' | translate" />
+
+            <!-- Category -->
             <label class="form-label">{{ 'activities.add.category' | translate }}</label>
             <div class="category-chips">
               @for (type of activityTypes; track type) {
@@ -162,13 +218,67 @@
                 </button>
               }
             </div>
+
+            <!-- Recurrence toggle -->
+            <label class="form-label">{{ 'activities.add.recurring' | translate }}</label>
+            <div class="toggle-row">
+              <button class="toggle-btn"
+                      [class.active]="formIsRecurring"
+                      (click)="formIsRecurring = !formIsRecurring">
+                <mat-icon>{{ formIsRecurring ? 'toggle_on' : 'toggle_off' }}</mat-icon>
+                {{ (formIsRecurring ? 'activities.add.recurring-on' : 'activities.add.recurring-off') | translate }}
+              </button>
+            </div>
+
+            <!-- Recurring days -->
+            @if (formIsRecurring) {
+              <label class="form-label">{{ 'activities.add.recurring-days' | translate }}</label>
+              <div class="days-chips">
+                @for (weekDay of weekDays; track weekDay) {
+                  <button class="day-select-chip"
+                          [class.selected]="isDaySelected(weekDay)"
+                          (click)="toggleDay(weekDay)">
+                    {{ 'activities.days.' + (weekDay?.toLowerCase() ?? '') | translate }}
+                  </button>
+                }
+              </div>
+            }
+
           </div>
           <div class="modal-footer">
             <button class="btn-cancel" (click)="showEditModal() ? closeEditModal() : closeAddModal()">
               {{ (showEditModal() ? 'activities.edit.cancel' : 'activities.add.cancel') | translate }}
             </button>
-            <button class="btn-primary" (click)="saveActivity()">
+            <button class="btn-primary"
+                    (click)="saveActivity()"
+                    [disabled]="!formTitle.trim()">
               {{ (showEditModal() ? 'activities.edit.save' : 'activities.add.save') | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Delete Confirm Modal -->
+    @if (showDeleteConfirm()) {
+      <div class="modal-overlay" (click)="closeDeleteConfirm()">
+        <div class="modal modal-sm" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>{{ 'activities.delete.title' | translate }}</h3>
+            <button mat-icon-button (click)="closeDeleteConfirm()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>{{ 'activities.delete.confirm' | translate }}</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel" (click)="closeDeleteConfirm()">
+              {{ 'activities.delete.cancel' | translate }}
+            </button>
+            <button class="btn-danger" (click)="confirmDelete()">
+              <mat-icon>delete</mat-icon>
+              {{ 'activities.delete.confirm-btn' | translate }}
             </button>
           </div>
         </div>
