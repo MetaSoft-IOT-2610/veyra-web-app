@@ -5,16 +5,19 @@ const deviceList = () =>
   import('./views/device-list/device-list').then(m => m.DeviceList);
 const deviceForm = () =>
   import('./views/device-form/device-form').then(m => m.DeviceForm);
-
+const assignDeviceForm = () =>
+ import('./components/assign-device-form/assign-device-form').then(m => m.AssignDeviceForm);
 export const trackingPaths = {
   devices: 'devices',
   deviceNew: 'devices/new',
+  deviceEdit: 'devices/:id/edit',
   deviceAssign: 'devices/:id/assign',
 } as const;
 
 export const trackingNav = {
   devices: () => ['/tracking', trackingPaths.devices],
   deviceNew: () => ['/tracking', 'devices', 'new'],
+  deviceEdit: (id: number | string) => ['/tracking', 'devices', id, 'edit'],
   deviceAssign: (id: number | string) => ['/tracking', 'devices', id, 'assign'],
 } as const;
 
@@ -42,9 +45,20 @@ const trackingRoutes: Routes = [
     },
   }),
   definePageRoute({
+    path: trackingPaths.deviceEdit,
+    name: 'tracking.devices.edit',
+    loadComponent: deviceForm,
+    page: {
+      title: 'Editar dispositivo',
+      module: 'Tracking',
+      description: 'Editar datos del dispositivo',
+      showBackButton: true,
+    },
+  }),
+  definePageRoute({
     path: trackingPaths.deviceAssign,
     name: 'tracking.devices.assign',
-    loadComponent: deviceForm,
+    loadComponent: assignDeviceForm,
     page: {
       title: 'Asignar dispositivo',
       module: 'Tracking',
