@@ -1,0 +1,17 @@
+<google-map
+  class="map"
+  [center]="location()"
+  [zoom]="zoom"
+  [options]="mapOptions"
+  width="100%"
+  height="100%">
+
+  <map-advanced-marker
+    [position]="location()"
+    [options]="markerOptions"
+    [content]="getMarkerContent()"
+    (mapClick)="openInfo()" />
+
+  <map-info-window />
+
+</google-map>

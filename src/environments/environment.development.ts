@@ -9,7 +9,7 @@ export const environment = {
   fallbackDevUserSession: true,
 
   platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
-
+  platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
   platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-hires',
@@ -29,6 +29,7 @@ export const environment = {
   // Nursing Bounded Context
   platformProviderResidentVitalSigsEndpointPath: '/resident/{residentId}/vital-signs',
   platformProviderDevicesEndpointPath: '/devices',
+  platformProviderNursingHomeDevicesEndpointPath: '/nursing-homes/{nursingHomeId}/devices',
   platformProviderResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
   platformProviderAdministratorNursingHomesEndpointPath: '/administrators/{administratorId}/nursing-homes',
   platformProviderResidentRoomsEndpointPath: '/nursing-homes/{nursingHomeId}/rooms/{residentId}',
@@ -54,4 +55,9 @@ export const environment = {
 
   // Alerts Bounded Context
   platformProviderAlertsEndpointPath: '/alerts',
+
+  //Tracking Bounden Context
+  platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
+  platformProviderWsTrackingTopicPath: '/topic/tracking',
+
 };

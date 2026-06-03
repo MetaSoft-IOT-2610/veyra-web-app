@@ -18,6 +18,7 @@ import { nursingPaths } from '../../../../nursing/presentation/nursing-routes';
 import { hcmPaths } from '../../../../hcm/presentation/hcm-routes';
 import { activitiesPaths } from '../../../../activities/presentation/activities-routes';
 import { alertsPaths } from '../../../../alerts/presentation/alerts-routes';
+import {trackingPaths} from '../../../../tracking/presentation/tracking-routes';
 
 @Component({
   selector: 'app-main-layout',
@@ -63,7 +64,7 @@ export class MainLayout implements OnInit, AfterViewInit {
 
   options = [
     { label: 'nav.dashboard', icon: 'home', link: `/analytics/${analyticsPaths.dashboard}`, color: '#5FC2BA' },
-    { label: 'nav.device', icon: 'assignment', link: `/nursing/${nursingPaths.devices}`, color: '#5FC2BA' },
+    { label: 'nav.device', icon: 'assignment', link: `/tracking/${trackingPaths.devices}`, color: '#5FC2BA' },
     { label: 'nav.resident', icon: 'person', link: `/nursing/${nursingPaths.residents}`, color: '#5FC2BA' },
     { label: 'nav.staff', icon: 'group', link: `/hcm/${hcmPaths.staff}`, color: '#5FC2BA' },
     { label: 'nav.room', icon: 'meeting_room', link: `/nursing/${nursingPaths.rooms}`, color: '#5FC2BA' },
