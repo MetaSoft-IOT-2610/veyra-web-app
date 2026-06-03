@@ -7,8 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
-import {CreateDeviceCommand} from '../../../domain/model/create-device.command';
-import {trackingNav} from '../../tracking-routes';
+import { CreateDeviceCommand } from '../../../domain/model/create-device.command';
+import { UpdateDeviceCommand } from '../../../domain/model/update-device.command';
+import { trackingNav } from '../../tracking-routes';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-device-form',
@@ -17,7 +19,8 @@ import {trackingNav} from '../../tracking-routes';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    TranslatePipe
+    TranslatePipe,
+    MatInput,
   ],
   templateUrl: './device-form.html',
   styleUrl: './device-form.css'
@@ -31,7 +34,14 @@ export class DeviceForm {
   deviceTypes = Object.values(DeviceType);
 
   form = this.fb.group({
-    deviceType: new FormControl<DeviceType | null>(null, { validators: [Validators.required] })
+    deviceType: new FormControl<DeviceType | null>(null, { validators: [Validators.required] }),
+    macAddress: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern('^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$')
+      ]
+    })
   });
 
   isEdit = false;
@@ -49,7 +59,8 @@ export class DeviceForm {
         const device = this.store.getDeviceById(this.deviceId)();
         if (device) {
           this.form.patchValue({
-            deviceType: device.deviceType as DeviceType
+            deviceType: device.deviceType as DeviceType,
+            macAddress: device.macAddress
           });
         }
       }
@@ -59,12 +70,19 @@ export class DeviceForm {
   submit() {
     if (this.form.invalid) return;
 
-    const command = new CreateDeviceCommand({
-      nursingHomeId: this.nursingHomeId,
-      deviceType: this.form.value.deviceType!
-    });
-
-    if (!this.isEdit) {
+    if (this.isEdit && this.deviceId) {
+      const command = new UpdateDeviceCommand({
+        id: this.deviceId,
+        deviceType: this.form.value.deviceType!,
+        macAddress: this.form.value.macAddress!
+      });
+      this.store.updateDevice(command);
+    } else {
+      const command = new CreateDeviceCommand({
+        nursingHomeId: this.nursingHomeId,
+        deviceType: this.form.value.deviceType!,
+        macAddress: this.form.value.macAddress!
+      });
       this.store.addDevice(this.nursingHomeId, command);
     }
 

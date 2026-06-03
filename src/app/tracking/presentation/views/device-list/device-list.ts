@@ -16,6 +16,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import {trackingNav} from '../../tracking-routes';
+import {DeviceStatus} from '../../../domain/model/device-status.enum';
 
 @Component({
   selector: 'app-device-list',
@@ -46,8 +47,9 @@ import {trackingNav} from '../../tracking-routes';
 export class DeviceList implements AfterViewChecked {
   readonly store = inject(TrackingStore);
   protected router = inject(Router);
+  readonly DeviceStatus = DeviceStatus;
 
-  displayedColumns: string[] = [ 'deviceType', 'status', 'actions'];
+  displayedColumns: string[] = ['macAddress','deviceType', 'status', 'actions'];
   nursingHomeId: number = 0;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -73,6 +75,13 @@ export class DeviceList implements AfterViewChecked {
     this.router.navigate(trackingNav.deviceNew()).then();
   }
 
+  editDevice(id: number): void {
+    this.router.navigate(trackingNav.deviceEdit(id)).then();
+  }
+
+  disableDevice(id: number): void {
+    this.store.disableDevice(id);
+  }
   ngAfterViewChecked(): void {
     if (this.dataSource().paginator !== this.paginator) {
       this.dataSource().paginator = this.paginator;
