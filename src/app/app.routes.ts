@@ -16,7 +16,6 @@ const paymentsRoutes = () =>
 const activitiesRoutes = () =>
   import('./activities/presentation/activities-routes').then(m => m.activitiesRoutes);
 const baseTitle = 'Veyra';
-
 export const routes: Routes = [
   { path: 'home',        component: Home,             title:`Home | ${baseTitle}` },
   { path: 'activities', loadChildren: activitiesRoutes },
