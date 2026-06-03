@@ -8,10 +8,11 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/core';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { ActivitiesStore } from '../../../application/activities.store';
-import { Activity, ActivityType, ActivityStatus } from '../../../domain/model/activity.entity';
+import { Activity, ActivityType, ActivityStatus, WeekDay } from '../../../domain/model/activity.entity';
 
 @Component({
   selector: 'app-activity-form',
@@ -29,7 +30,9 @@ import { Activity, ActivityType, ActivityStatus } from '../../../domain/model/ac
     MatSelect,
     MatOption,
     MatButton,
-    MatIcon
+    MatIconButton,
+    MatIcon,
+    MatCheckbox,
   ],
   templateUrl: './activity-form.html',
   styleUrl: './activity-form.css'
@@ -38,30 +41,41 @@ export class ActivityForm {
   protected store = inject(ActivitiesStore);
   private router = inject(Router);
 
-  activityTypes: ActivityType[] = ['MEAL', 'BATH', 'RISK_PROFILE'];
+  activityTypes: ActivityType[] = ['MEAL', 'BATH', 'RISK_PROFILE', 'RECREATIONAL'];
+  weekDays: WeekDay[] = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
-  residentId: number = 0;
-  healthcareStaffId: number = Number(localStorage.getItem('staffId'));
+  title: string = '';
   type: ActivityType = 'MEAL';
-  notes: string = '';
+  isRecurring: boolean = false;
+  recurringDays: WeekDay[] = [];
 
-  get loading(): boolean {
-    return this.store.loading();
+  get loading(): boolean { return this.store.loading(); }
+  get error(): string | null { return this.store.error(); }
+
+  toggleDay(day: WeekDay) {
+    if (this.recurringDays.includes(day)) {
+      this.recurringDays = this.recurringDays.filter(d => d !== day);
+    } else {
+      this.recurringDays = [...this.recurringDays, day];
+    }
   }
 
-  get error(): string | null {
-    return this.store.error();
+  isDaySelected(day: WeekDay): boolean {
+    return this.recurringDays.includes(day);
   }
 
   onSubmit() {
+    if (!this.title.trim()) return;
+
     const activity = new Activity({
       id: 0,
-      residentId: this.residentId,
-      healthcareStaffId: this.healthcareStaffId,
+      residentId: 1,
+      healthcareStaffId: Number(localStorage.getItem('staffId')) || 1,
       type: this.type,
+      title: this.title,
       status: 'PENDING' as ActivityStatus,
-      notes: this.notes,
-      loggedAt: new Date().toISOString()
+      isRecurring: this.isRecurring,
+      recurringDays: this.isRecurring ? [...this.recurringDays] : [],
     });
 
     this.store.logActivity(activity);
