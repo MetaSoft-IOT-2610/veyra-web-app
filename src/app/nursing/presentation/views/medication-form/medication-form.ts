@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { MatOption, provideNativeDateAdapter } from '@angular/material/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { NursingStore } from '../../../application/nursing.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
@@ -20,7 +20,6 @@ import { MatSelect } from '@angular/material/select';
   selector: 'app-medication-form',
   standalone: true,
   imports: [
-    LayoutNursingHome,
     TranslatePipe,
     MatError,
     MatProgressSpinner,
@@ -65,7 +64,7 @@ export class MedicationForm {
       const id = params['id'] ? +params['id'] : null;
       this.residentId = id;
       if (!id) {
-        this.router.navigate(['nursing/medications']).then();
+        void this.router.navigate(nursingNav.residents());
         return;
       }
     });
@@ -95,7 +94,7 @@ export class MedicationForm {
 
     this.store.addMedication(this.residentId!, createMedicationCommand);
 
-    this.router.navigate(['nursing/residents', this.residentId, 'medications']).then();
+    void this.router.navigate(nursingNav.medications(this.residentId!));
   }
 
   private formatDateToISO(date: Date): string {
@@ -109,6 +108,6 @@ export class MedicationForm {
 
 
   onCancel(): void {
-    this.router.navigate(['nursing/residents', this.residentId, 'medications']).then();
+    void this.router.navigate(nursingNav.medications(this.residentId!));
   }
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { ActivitiesStore } from '../../../application/activities.store';
 import { Activity, ActivityType, ActivityStatus, WeekDay } from '../../../domain/model/activity.entity';
@@ -18,7 +18,6 @@ import { TranslatePipe } from '@ngx-translate/core';
     FormsModule,
     MatIcon,
     MatIconButton,
-    LayoutNursingHome,
     TranslatePipe
   ],
   templateUrl: './activity-list.html',

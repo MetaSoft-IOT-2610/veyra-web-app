@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NursingStore } from '../../../application/nursing.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { MatIcon } from '@angular/material/icon';
 import { CreateRoomCommand } from '../../../domain/model/create-room.command';
 import { MatCard } from '@angular/material/card';
@@ -23,7 +23,6 @@ import { MatOption, MatSelect } from '@angular/material/select';
     MatButtonModule,
     ReactiveFormsModule,
     TranslatePipe,
-    LayoutNursingHome,
     MatIcon,
     MatCard,
     MatOption,
@@ -61,10 +60,10 @@ export class RoomForm {
 
     this.store.addRoom(this.nursingHomeId, createRoomCommand);
 
-    this.router.navigate(['/nursing/rooms']).then();
+    void this.router.navigate(nursingNav.rooms());
   }
 
   onCancel(): void {
-    this.router.navigate(['/nursing/rooms']).then();
+    void this.router.navigate(nursingNav.rooms());
   }
 }

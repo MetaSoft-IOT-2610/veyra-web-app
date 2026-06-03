@@ -8,6 +8,7 @@ export class CreateNursingHomeCommand {
   private _postalCode: string;
   private _country: string;
   private _photo: string;
+  private _photoFile: File | null;
   private _ruc: string;
 
   constructor(createNursingHomeCommand: {
@@ -19,6 +20,7 @@ export class CreateNursingHomeCommand {
     postalCode: string;
     country: string;
     photo: string;
+    photoFile?: File | null;
     phoneNumber: string;
     ruc: string;
   }) {
@@ -30,6 +32,7 @@ export class CreateNursingHomeCommand {
     this._postalCode = createNursingHomeCommand.postalCode;
     this._country = createNursingHomeCommand.country;
     this._photo = createNursingHomeCommand.photo;
+    this._photoFile = createNursingHomeCommand.photoFile ?? null;
     this._phoneNumber = createNursingHomeCommand.phoneNumber;
     this._ruc = createNursingHomeCommand.ruc;
   }
@@ -106,6 +109,12 @@ export class CreateNursingHomeCommand {
     this._photo = value;
   }
 
+  get photoFile(): File | null {
+    return this._photoFile;
+  }
+  set photoFile(value: File | null) {
+    this._photoFile = value;
+  }
   get ruc(): string {
     return this._ruc;
   }

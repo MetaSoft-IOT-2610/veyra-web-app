@@ -1,12 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { hcmNav } from '../../hcm-routes';
 import { MatCard } from '@angular/material/card';
 import { MatButton, MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatError } from '@angular/material/form-field';
 import { HcmStore } from '../../../application/hcm.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PersonProfileDetail } from '../../../../profiles/presentation/components/person-profile-detail/person-profile-detail';
 
@@ -20,7 +20,6 @@ import { PersonProfileDetail } from '../../../../profiles/presentation/component
     MatProgressSpinner,
     MatError,
     MatFabButton,
-    LayoutNursingHome,
     TranslatePipe,
     PersonProfileDetail
   ],
@@ -52,26 +51,26 @@ export class StaffMemberDetail {
       this.staffMemberId.set(id);
 
       if (!id) {
-        this.router.navigate(['/hcm/staff']).then();
+        void this.router.navigate(hcmNav.staff());
       }
     });
   }
 
   goBack() {
-    this.router.navigate(['/hcm/staff']).then();
+    void this.router.navigate(hcmNav.staff());
   }
 
   editStaffMember() {
     const id = this.staffMemberId();
     if (id) {
-      this.router.navigate(['hcm/staff', id, 'edit']).then();
+      void this.router.navigate(hcmNav.staffEdit(id));
     }
   }
 
   viewEmploymentRecord() {
     const id = this.staffMemberId();
     if (id) {
-      this.router.navigate(['hcm/staff', id, 'contracts']).then();
+      void this.router.navigate(hcmNav.contracts(id));
     }
   }
 }

@@ -1,12 +1,29 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
+import { definePageRoute } from '../../shared/routing/define-page-route';
 
-// Lazy-loaded components
 const analyticsDashboard = () =>
-  import('./views/analytics-dashboard/analytics-dashboard').then(m => m.AnalyticsDashboard);
+  import('./views/analytics-dashboard/analytics-dashboard').then((m) => m.AnalyticsDashboard);
 
-const baseTitle = 'Veyra';
+export const analyticsPaths = {
+  dashboard: 'dashboard',
+} as const;
+
+export const analyticsNav = {
+  dashboard: () => ['/analytics', analyticsPaths.dashboard],
+} as const;
+
 const analyticsRoutes: Routes = [
-  { path: 'dashboard', loadComponent: analyticsDashboard, title: `Dashboard | ${baseTitle}` }
+  definePageRoute({
+    path: analyticsPaths.dashboard,
+    name: 'analytics.dashboard',
+    loadComponent: analyticsDashboard,
+    page: {
+      title: 'Tablero',
+      module: 'Analítica',
+      description: 'Indicadores y métricas de la residencia',
+      showBackButton: false,
+    },
+  }),
 ];
 
-export {analyticsRoutes};
+export { analyticsRoutes };

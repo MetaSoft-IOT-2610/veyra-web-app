@@ -1,9 +1,9 @@
 import {Component, inject} from '@angular/core';
 import {NursingStore} from '../../../application/nursing.store';
 import {ActivatedRoute, Router} from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CreateAllergyCommand} from '../../../domain/model/create-allergy.command';
-import {LayoutNursingHome} from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import {MatCard} from '@angular/material/card';
 import {MatInput} from '@angular/material/input';
 import {TranslatePipe} from '@ngx-translate/core';
@@ -16,7 +16,6 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-allergy-form',
   imports: [
-    LayoutNursingHome,
     MatCard,
     ReactiveFormsModule,
     MatFormField,
@@ -64,7 +63,7 @@ export class AllergyForm {
       const id = params['id'] ? +params['id'] : null;
       this.residentId = id;
       if (!id) {
-        this.router.navigate(['nursing/residents', id, 'medical-records']).then();
+        void this.router.navigate(nursingNav.residents());
         return;
       }
     });
@@ -91,13 +90,13 @@ export class AllergyForm {
 
     this.store.addAllergy(this.residentId!, createAllergyCommand);
 
-    this.router.navigate(['/nursing/residents', this.residentId!, 'medical-records']).then();
+    void this.router.navigate(nursingNav.medicalRecords(this.residentId!));
   }
 
   /**
    * Cancels form and navigates back
    */
   cancel(): void {
-    this.router.navigate(['/nursing/residents', this.residentId!, 'medical-records']).then();
+    void this.router.navigate(nursingNav.medicalRecords(this.residentId!));
   }
 }

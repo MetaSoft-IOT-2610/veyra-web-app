@@ -1,6 +1,7 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { hcmNav } from '../../hcm-routes';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -8,7 +9,6 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { HcmStore } from '../../../application/hcm.store';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { MatCard } from '@angular/material/card';
 import { PersonProfileForm, PersonProfileFormValue } from '../../../../profiles/presentation/components/person-profile-form/person-profile-form';
 import { CreateStaffMemberCommand } from '../../../domain/model/create-staff-member.command';
@@ -27,7 +27,6 @@ import { CreateStaffMemberCommand } from '../../../domain/model/create-staff-mem
     MatButton,
     MatIcon,
     MatProgressSpinner,
-    LayoutNursingHome,
     MatCard,
     PersonProfileForm
   ],
@@ -125,7 +124,7 @@ export class StaffMemberForm {
       this.store.addStaffMember(this.nursingHomeId, staffMemberCommand);
     }
 
-    this.router.navigate(['/hcm/staff']).then();
+    void this.router.navigate(hcmNav.staff());
   }
 
   private formatDateToISO(date: Date): string {
@@ -151,6 +150,6 @@ export class StaffMemberForm {
   }
 
   onCancel(): void {
-    this.router.navigate(['/hcm/staff']).then();
+    void this.router.navigate(hcmNav.staff());
   }
 }

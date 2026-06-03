@@ -1,0 +1,133 @@
+  <div class="form-wrapper">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="relative-form">
+
+      <!-- Personal Info -->
+      <div class="info-grid">
+        <mat-card class="full-width-card">
+          <div class="card-header-custom">
+            <div class="icon-wrapper person">
+              <mat-icon>person</mat-icon>
+            </div>
+            <h3>{{ 'relatives.form.personal-info' | translate }}</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-grid-inline">
+              <div class="detail-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ 'relatives.form.name' | translate }}</mat-label>
+                  <input matInput formControlName="firstName">
+                  @if (form.get('firstName')?.touched && form.get('firstName')!.hasError('required')) {
+                    <mat-error>{{ 'relatives.form.required' | translate }}</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <div class="detail-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ 'relatives.form.last-name' | translate }}</mat-label>
+                  <input matInput formControlName="lastName">
+                  @if (form.get('lastName')?.touched && form.get('lastName')!.hasError('required')) {
+                    <mat-error>{{ 'relatives.form.required' | translate }}</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Account Setup Method -->
+      <div class="info-grid">
+        <mat-card class="full-width-card">
+          <div class="card-header-custom">
+            <div class="icon-wrapper account">
+              <mat-icon>manage_accounts</mat-icon>
+            </div>
+            <h3>{{ 'relatives.form.account-setup' | translate }}</h3>
+          </div>
+          <div class="card-body">
+            <div class="detail-row">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'relatives.form.email' | translate }}</mat-label>
+                <input matInput formControlName="email" type="email">
+                @if (form.get('email')?.touched && form.get('email')!.hasError('required')) {
+                  <mat-error>{{ 'relatives.form.required' | translate }}</mat-error>
+                }
+                @if (form.get('email')?.touched && form.get('email')!.hasError('email')) {
+                  <mat-error>{{ 'relatives.form.invalid-email' | translate }}</mat-error>
+                }
+              </mat-form-field>
+            </div>
+
+            <div class="secure-setup-banner">
+              <mat-icon class="secure-icon">security</mat-icon>
+              <div>
+                <strong>{{ 'relatives.form.secure-self-setup' | translate }}</strong>
+                <p>{{ 'relatives.form.secure-self-setup-description' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Resident Association -->
+      <div class="info-grid">
+        <mat-card class="full-width-card">
+          <div class="card-header-custom">
+            <div class="icon-wrapper link">
+              <mat-icon>link</mat-icon>
+            </div>
+            <h3>{{ 'relatives.form.resident-association' | translate }}</h3>
+          </div>
+          <div class="card-body">
+            <p class="section-label">{{ 'relatives.form.linked-resident' | translate }}</p>
+
+            @if (selectedEntry()) {
+              <div class="linked-resident-card">
+                <div class="resident-info">
+                  <span class="resident-name">
+                    {{ selectedEntry()!.profile?.fullName ?? ('relatives.form.unknown-resident' | translate) }}
+                  </span>
+                </div>
+                <button mat-button color="primary" type="button" (click)="toggleResidentDropdown()">
+                  {{ 'relatives.buttons.change-resident' | translate }}
+                </button>
+              </div>
+            } @else {
+              <button mat-stroked-button type="button" (click)="toggleResidentDropdown()" class="select-resident-btn">
+                <mat-icon>person_search</mat-icon>
+                {{ 'relatives.form.select-resident' | translate }}
+              </button>
+            }
+
+            @if (showResidentDropdown()) {
+              <div class="resident-dropdown">
+                @for (entry of residentsWithProfiles(); track entry.resident.id) {
+                  <div
+                    class="resident-option"
+                    [class.selected]="selectedEntry()?.resident?.id === entry.resident.id"
+                    (click)="selectEntry(entry)">
+                    {{ entry.profile?.fullName ?? ('relatives.unknown-resident' | translate) }}
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="space"></div>
+
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" type="button" (click)="onCancel()">
+          <mat-icon>cancel</mat-icon>
+          {{ 'relatives.buttons.cancel' | translate }}
+        </button>
+
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>save</mat-icon>
+          {{ 'relatives.buttons.register' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>

@@ -1,13 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { paymentsNav } from '../../payments-routes';
 
 @Component({
   selector: 'payment-checkout',
   templateUrl: './payment-checkout.html',
-  styleUrls: ['./payment-checkout.css'],
+  styleUrls: ['./payment-checkout.css'], // <-- ¡Aquí está la línea agregada para enlazar tu CSS!
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -25,12 +26,16 @@ export class PaymentCheckoutPage {
   isLoading = false;
   error: string | null = null;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router // <-- Inyectamos el Router aquí
+  ) {
 
     // Build form
     this.stripeForm = this.fb.group({
       fullName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]], // <-- Validación de email añadida
       phone: ['', Validators.required],
       cardNumber: ['', Validators.required],
       expMonth: ['', Validators.required],
@@ -41,7 +46,7 @@ export class PaymentCheckoutPage {
     // Get URL params dynamically
     this.route.params.subscribe(p => {
       const type = p['type'];
-      this.period = p['cycle'];
+      this.period = p['cycle'] || 'monthly'; // Valor por defecto
 
       // Plan title
       this.planTitle =
@@ -68,22 +73,24 @@ export class PaymentCheckoutPage {
 
   /** Cancel button */
   cancel() {
-    history.back();
+    // Usar el Router en lugar de history.back() es mejor práctica en Angular (SPA)
+    void this.router.navigate(paymentsNav.choose());
   }
 
   /** Simulate payment */
   submitPayment() {
     if (this.stripeForm.invalid) {
-      this.error = 'Please fill out all fields';
+      this.error = 'Please fill out all required fields correctly.';
       return;
     }
 
     this.error = null;
     this.isLoading = true;
 
+    // Simula un pequeño retraso de red (1.5s) y luego navega a confirmación
     setTimeout(() => {
       this.isLoading = false;
-      alert('Payment simulated successfully!');
+      void this.router.navigate(['/payments/confirmed']);
     }, 1500);
   }
 }

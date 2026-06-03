@@ -1,0 +1,58 @@
+  <div class="search-container">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'Search' | translate }}</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        matInput
+        [placeholder]="'Enter the name' | translate"
+        [value]="searchTerm()"
+        (input)="searchTerm.set($any($event.target).value)"
+        type="text"/>
+      <button *ngIf="searchTerm()" matSuffix mat-icon-button (click)="searchTerm.set('')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <mat-error *ngIf="store.error()" class="error-message">{{ store.error() }}</mat-error>
+
+  <mat-spinner *ngIf="store.loading()" diameter="40"></mat-spinner>
+
+  <div class="cards-grid">
+    <ng-container *ngIf="(filteredRelatives() || []).length > 0; else noResults">
+      <div *ngFor="let relative of filteredRelatives(); trackBy: trackById"
+           class="custom-card"
+           [class.selected]="selectedId === relative.id"
+           (click)="selectRelative(relative.id)">
+
+        <div class="selection-circle"></div>
+
+        <div class="avatar-wrapper">
+          <div class="avatar-background">
+            <mat-icon class="avatar-icon">person</mat-icon>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <span class="info-label">Name:</span>
+          <span class="info-value">{{ relative.firstName }} {{ relative.lastName }}</span>
+        </div>
+
+        <button class="btn-view-details" (click)="openRelativeDetail(relative); $event.stopPropagation()">View Details</button>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <div class="no-results">
+        {{ 'relatives.no-relatives' | translate }}
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="floating-action-container">
+    <button class="btn-add-new" (click)="createRelative()">
+      <mat-icon>add</mat-icon>
+      {{ 'relatives.buttons.add' | translate }}
+    </button>
+  </div>
+

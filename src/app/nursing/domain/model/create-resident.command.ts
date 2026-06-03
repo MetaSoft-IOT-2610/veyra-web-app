@@ -11,6 +11,7 @@ export class CreateResidentCommand {
   private _postalCode: string;
   private _country: string;
   private _photo: string;
+  private _photoFile: File | null;
   private _phoneNumber: string;
 
   private _legalRepresentativeFirstName: string;
@@ -34,6 +35,7 @@ export class CreateResidentCommand {
     postalCode: string;
     country: string;
     photo: string;
+    photoFile?: File | null;
     phoneNumber: string;
 
     legalRepresentativeFirstName: string;
@@ -56,6 +58,7 @@ export class CreateResidentCommand {
     this._postalCode = residentCommand.postalCode;
     this._country = residentCommand.country;
     this._photo = residentCommand.photo;
+    this._photoFile = residentCommand.photoFile ?? null;
     this._phoneNumber = residentCommand.phoneNumber;
 
     this._legalRepresentativeFirstName =
@@ -167,6 +170,14 @@ export class CreateResidentCommand {
 
   set photo(value: string) {
     this._photo = value;
+  }
+
+  get photoFile(): File | null {
+    return this._photoFile;
+  }
+
+  set photoFile(value: File | null) {
+    this._photoFile = value;
   }
 
   get phoneNumber(): string {
