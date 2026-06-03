@@ -379,61 +379,81 @@
   },
   "activities": {
     "title": "Activities",
-    "filters": {
-      "all": "All",
-      "recreational": "Recreational",
-      "medical": "Medical",
-      "physical": "Physical",
-      "social": "Social"
-    },
     "showing": "Showing {{ count }} activities",
     "no-activities": "No activities registered.",
+    "add-new": "Add New",
+    "filter-btn": "Filter",
+    "filters": {
+      "all": "All",
+      "meal": "Meal",
+      "bath": "Bath",
+      "risk-profile": "Risk Profile",
+      "recreational": "Recreational"
+    },
     "columns": {
       "activity": "ACTIVITY",
       "category": "CATEGORY",
-      "datetime": "DATE AND TIME",
       "status": "STATUS",
+      "recurring": "RECURRING",
       "actions": "ACTIONS"
     },
+    "types": {
+      "meal": "Meal",
+      "bath": "Bath",
+      "risk_profile": "Risk Profile",
+      "recreational": "Recreational"
+    },
     "status": {
-      "pending": "Scheduled",
-      "in_progress": "In progress",
+      "pending": "Pending",
+      "in_progress": "In Progress",
       "completed": "Completed"
     },
-    "types": {
-      "meal": "Medical",
-      "bath": "Physical",
-      "risk_profile": "Recreational"
+    "days": {
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
+    },
+    "actions": {
+      "edit": "Edit activity",
+      "delete": "Delete activity"
     },
     "detail": {
       "title": "Activity details",
-      "name-label": "NAME OF THE ACTIVITY",
-      "date-label": "DATE AND TIME",
+      "name-label": "ACTIVITY NAME",
       "category-label": "CATEGORY",
-      "description-label": "DESCRIPTION",
+      "status-label": "STATUS",
+      "recurring-label": "RECURRING DAYS",
       "close": "Close",
       "edit": "Edit activity"
     },
     "add": {
       "title": "Add activity",
       "subtitle": "Set up a new activity for the residents' calendar.",
-      "name": "Activity name",
-      "name-placeholder": "e.g. Morning Painting Workshop",
-      "description": "Activity description",
-      "description-placeholder": "Detail the objectives and materials needed for this session...",
-      "date": "Date",
-      "hour": "Hour",
+      "title-field": "Activity title",
+      "title-placeholder": "Activity title...",
       "category": "Category",
+      "recurring": "Recurring",
+      "recurring-on": "Repeats weekly",
+      "recurring-off": "Does not repeat",
+      "recurring-days": "Repeat on",
       "save": "Save activity",
       "cancel": "Cancel"
     },
     "edit": {
-      "title": "Update activity",
-      "subtitle": "Set up a new activity for the residents' calendar.",
-      "save": "Update Activity",
+      "title": "Edit activity",
+      "subtitle": "Update the activity details.",
+      "save": "Update activity",
       "cancel": "Cancel"
     },
-    "add-new": "Add New",
-    "filter-btn": "Filter"
+    "delete": {
+      "title": "Delete activity",
+      "confirm": "Are you sure you want to delete this activity? This action cannot be undone.",
+      "confirm-btn": "Delete",
+      "cancel": "Cancel"
+    }
   }
 }

@@ -7,5 +7,44 @@
   "business-profiles": [],
   "person-profiles": [],
   "medications": [],
-  "activities": []
+  "activities": [
+    {
+      "id": "1",
+      "residentId": 1,
+      "healthcareStaffId": 1,
+      "type": "MEAL",
+      "title": "Almuerzo residente 1",
+      "status": "PENDING",
+      "isRecurring": false,
+      "recurringDays": []
+    },
+    {
+      "id": "2",
+      "residentId": 1,
+      "healthcareStaffId": 2,
+      "type": "BATH",
+      "title": "Baño matutino",
+      "status": "COMPLETED",
+      "isRecurring": true,
+      "recurringDays": [
+        "MON",
+        "WED",
+        "FRI"
+      ]
+    },
+    {
+      "id": "3",
+      "residentId": 2,
+      "healthcareStaffId": 1,
+      "type": "RECREATIONAL",
+      "title": "trtrtrtrt",
+      "status": "PENDING",
+      "isRecurring": true,
+      "recurringDays": [
+        "TUE",
+        "SAT"
+      ]
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

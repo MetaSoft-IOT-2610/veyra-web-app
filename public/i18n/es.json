@@ -380,61 +380,81 @@
   },
   "activities": {
     "title": "Actividades",
-    "filters": {
-      "all": "Todas",
-      "recreational": "Recreativas",
-      "medical": "Médicas",
-      "physical": "Físicas",
-      "social": "Sociales"
-    },
     "showing": "Mostrando {{ count }} actividades",
     "no-activities": "No hay actividades registradas.",
+    "add-new": "Agregar",
+    "filter-btn": "Filtrar",
+    "filters": {
+      "all": "Todas",
+      "meal": "Alimentación",
+      "bath": "Higiene",
+      "risk-profile": "Evaluación",
+      "recreational": "Recreativa"
+    },
     "columns": {
       "activity": "ACTIVIDAD",
       "category": "CATEGORÍA",
-      "datetime": "FECHA Y HORA",
       "status": "ESTADO",
+      "recurring": "RECURRENCIA",
       "actions": "ACCIONES"
     },
+    "types": {
+      "meal": "Alimentación",
+      "bath": "Higiene",
+      "risk_profile": "Evaluación de riesgo",
+      "recreational": "Recreativa"
+    },
     "status": {
-      "pending": "Programado",
+      "pending": "Pendiente",
       "in_progress": "En curso",
       "completed": "Completado"
     },
-    "types": {
-      "meal": "Médica",
-      "bath": "Física",
-      "risk_profile": "Recreativa"
+    "days": {
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mié",
+      "thu": "Jue",
+      "fri": "Vie",
+      "sat": "Sáb",
+      "sun": "Dom"
+    },
+    "actions": {
+      "edit": "Editar actividad",
+      "delete": "Eliminar actividad"
     },
     "detail": {
-      "title": "Detalles de actividad",
+      "title": "Detalles de la actividad",
       "name-label": "NOMBRE DE LA ACTIVIDAD",
-      "date-label": "FECHA Y HORA",
       "category-label": "CATEGORÍA",
-      "description-label": "DESCRIPCIÓN",
+      "status-label": "ESTADO",
+      "recurring-label": "DÍAS DE RECURRENCIA",
       "close": "Cerrar",
       "edit": "Editar actividad"
     },
     "add": {
       "title": "Agregar actividad",
       "subtitle": "Configura una nueva actividad para el calendario de residentes.",
-      "name": "Nombre de la actividad",
-      "name-placeholder": "ej. Taller de Pintura Matutino",
-      "description": "Descripción de la actividad",
-      "description-placeholder": "Detalla los objetivos y materiales necesarios...",
-      "date": "Fecha",
-      "hour": "Hora",
+      "title-field": "Título de la actividad",
+      "title-placeholder": "Título de la actividad...",
       "category": "Categoría",
+      "recurring": "Recurrencia",
+      "recurring-on": "Se repite semanalmente",
+      "recurring-off": "No se repite",
+      "recurring-days": "Repetir los días",
       "save": "Guardar actividad",
       "cancel": "Cancelar"
     },
     "edit": {
-      "title": "Actualizar actividad",
-      "subtitle": "Configura una nueva actividad para el calendario de residentes.",
-      "save": "Actualizar Actividad",
+      "title": "Editar actividad",
+      "subtitle": "Actualiza los detalles de la actividad.",
+      "save": "Actualizar actividad",
       "cancel": "Cancelar"
     },
-    "add-new": "Agregar",
-    "filter-btn": "Filtrar"
+    "delete": {
+      "title": "Eliminar actividad",
+      "confirm": "¿Estás seguro de que deseas eliminar esta actividad? Esta acción no se puede deshacer.",
+      "confirm-btn": "Eliminar",
+      "cancel": "Cancelar"
+    }
   }
 }
