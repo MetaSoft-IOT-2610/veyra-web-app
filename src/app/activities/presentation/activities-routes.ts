@@ -1,3 +1,15 @@
+/**
+ * Route configuration for the Activities bounded context.
+ *
+ * Exports:
+ * - {@link activitiesRoutes} - Lazy-loaded route array consumed by the root router
+ * - {@link activitiesPaths} - Typed path constants for type-safe URL construction
+ * - {@link activitiesNav} - Factory functions for programmatic navigation
+ *
+ * Routes:
+ * - `/activities`     → ActivityList  (list and manage all activities)
+ * - `/activities/new` → ActivityForm  (create a new activity)
+ */
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
 
@@ -7,11 +19,13 @@ const activityList = () =>
 const activityForm = () =>
   import('./views/activity-form/activity-form').then((m) => m.ActivityForm);
 
+/** Typed path constants for the Activities bounded context routes. */
 export const activitiesPaths = {
   list: '',
   new: 'new',
 } as const;
 
+/** Factory functions for programmatic navigation within Activities. */
 export const activitiesNav = {
   list: () => ['/activities'],
   new: () => ['/activities', activitiesPaths.new],
@@ -23,9 +37,9 @@ const activitiesRoutes: Routes = [
     name: 'activities.list',
     loadComponent: activityList,
     page: {
-      title: 'Actividades',
-      module: 'Actividades',
-      description: 'Registro y seguimiento de actividades',
+      title: 'Activities',
+      module: 'Activities',
+      description: 'Record and track resident care activities',
       showBackButton: false,
     },
   }),
@@ -34,9 +48,9 @@ const activitiesRoutes: Routes = [
     name: 'activities.new',
     loadComponent: activityForm,
     page: {
-      title: 'Registrar actividad',
-      module: 'Actividades',
-      description: 'Anota una nueva actividad realizada',
+      title: 'Log Activity',
+      module: 'Activities',
+      description: 'Register a new care activity for a resident',
       showBackButton: true,
     },
   }),
