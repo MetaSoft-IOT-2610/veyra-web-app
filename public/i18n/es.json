@@ -402,6 +402,13 @@
     "no-activities": "No hay actividades registradas.",
     "add-new": "Agregar",
     "filter-btn": "Filtrar",
+    "status-filters": {
+      "label": "Filtrar por estado",
+      "all": "Todos los estados",
+      "pending": "Pendiente",
+      "in-progress": "En progreso",
+      "completed": "Completado"
+    },
     "filters": {
       "all": "Todas",
       "meal": "Alimentación",
