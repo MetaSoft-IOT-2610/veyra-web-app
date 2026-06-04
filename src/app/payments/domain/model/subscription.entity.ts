@@ -1,4 +1,7 @@
-export class Subscription {
+import {BaseEntity} from '../../../shared/domain/model/base-entity';
+
+
+export class Subscription implements BaseEntity {
   private _id: number;
   private _userId: number;
   private _planType: string;

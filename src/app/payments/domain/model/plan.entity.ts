@@ -1,4 +1,6 @@
-export class Plan {
+import {BaseEntity} from '../../../shared/domain/model/base-entity';
+
+export class Plan implements BaseEntity{
   private _id: number;
   private _stripePlanId: string;
   private _name: string;
