@@ -1,21 +1,21 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "dev",
       "roles": [
         "ROLE_USER"
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "doctor.house",
       "roles": [
         "ROLE_USER"
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "username": "nurse.joy",
       "roles": [
         "ROLE_USER"
@@ -24,13 +24,13 @@
   ],
   "administrators": [
     {
-      "id": 1,
+      "id": "1",
       "username": "dev"
     }
   ],
   "person-profiles": [
     {
-      "id": 101,
+      "id": "101",
       "fullName": "Carlos García Ríos",
       "dni": "40013837",
       "birthDate": "1955-01-01",
@@ -41,7 +41,7 @@
       "streetAddress": "Jr. Cusco 350, Arequipa"
     },
     {
-      "id": 102,
+      "id": "102",
       "fullName": "Carmen Rodríguez Campos",
       "dni": "40013974",
       "birthDate": "1954-02-02",
@@ -52,7 +52,7 @@
       "streetAddress": "Jr. Lima 704, Cusco"
     },
     {
-      "id": 103,
+      "id": "103",
       "fullName": "Luis Flores Espinoza",
       "dni": "40014111",
       "birthDate": "1953-03-03",
@@ -63,7 +63,7 @@
       "streetAddress": "Av. La Marina 338, Piura"
     },
     {
-      "id": 104,
+      "id": "104",
       "fullName": "Ana Quispe Cárdenas",
       "dni": "40014248",
       "birthDate": "1952-04-04",
@@ -74,7 +74,7 @@
       "streetAddress": "Av. La Marina 833, Piura"
     },
     {
-      "id": 105,
+      "id": "105",
       "fullName": "Andrés Torres Gutiérrez",
       "dni": "40014385",
       "birthDate": "1951-05-05",
@@ -85,7 +85,7 @@
       "streetAddress": "Jr. Cusco 928, Lima"
     },
     {
-      "id": 106,
+      "id": "106",
       "fullName": "Elena Ramírez Núñez",
       "dni": "40014522",
       "birthDate": "1950-06-06",
@@ -96,7 +96,7 @@
       "streetAddress": "Av. Brasil 384, Arequipa"
     },
     {
-      "id": 107,
+      "id": "107",
       "fullName": "Fernando Vargas Salas",
       "dni": "40014659",
       "birthDate": "1949-07-07",
@@ -107,7 +107,7 @@
       "streetAddress": "Jr. Lima 194, Cusco"
     },
     {
-      "id": 108,
+      "id": "108",
       "fullName": "Sofía Castillo Ponce",
       "dni": "40014796",
       "birthDate": "1948-08-08",
@@ -118,7 +118,7 @@
       "streetAddress": "Av. Brasil 718, Trujillo"
     },
     {
-      "id": 109,
+      "id": "109",
       "fullName": "Javier Mendoza Vega",
       "dni": "40014933",
       "birthDate": "1947-09-09",
@@ -129,7 +129,7 @@
       "streetAddress": "Jr. Lima 487, Lima"
     },
     {
-      "id": 110,
+      "id": "110",
       "fullName": "Gloria Rojas López",
       "dni": "40015070",
       "birthDate": "1946-10-10",
@@ -140,7 +140,7 @@
       "streetAddress": "Av. Brasil 691, Arequipa"
     },
     {
-      "id": 111,
+      "id": "111",
       "fullName": "Hugo Salazar Huamán",
       "dni": "40015207",
       "birthDate": "1945-11-11",
@@ -151,7 +151,7 @@
       "streetAddress": "Av. La Marina 891, Trujillo"
     },
     {
-      "id": 112,
+      "id": "112",
       "fullName": "Isabel Paredes Díaz",
       "dni": "40015344",
       "birthDate": "1944-12-12",
@@ -162,7 +162,7 @@
       "streetAddress": "Jr. Lima 489, Trujillo"
     },
     {
-      "id": 201,
+      "id": "201",
       "fullName": "Elena Ramírez Núñez",
       "dni": "40027537",
       "birthDate": "1994-06-06",
@@ -173,7 +173,7 @@
       "streetAddress": "Av. Brasil 266, Trujillo"
     },
     {
-      "id": 202,
+      "id": "202",
       "fullName": "Fernando Vargas Salas",
       "dni": "40027674",
       "birthDate": "1993-07-07",
@@ -184,7 +184,7 @@
       "streetAddress": "Jr. Cusco 818, Lima"
     },
     {
-      "id": 203,
+      "id": "203",
       "fullName": "Sofía Castillo Ponce",
       "dni": "40027811",
       "birthDate": "1992-08-08",
@@ -195,7 +195,7 @@
       "streetAddress": "Av. La Marina 267, Cusco"
     },
     {
-      "id": 204,
+      "id": "204",
       "fullName": "Javier Mendoza Vega",
       "dni": "40027948",
       "birthDate": "1991-09-09",
@@ -206,7 +206,7 @@
       "streetAddress": "Av. La Marina 801, Trujillo"
     },
     {
-      "id": 205,
+      "id": "205",
       "fullName": "Gloria Rojas López",
       "dni": "40028085",
       "birthDate": "1990-10-10",
@@ -217,7 +217,7 @@
       "streetAddress": "Av. Arequipa 924, Trujillo"
     },
     {
-      "id": 206,
+      "id": "206",
       "fullName": "Hugo Salazar Huamán",
       "dni": "40028222",
       "birthDate": "1989-11-11",
@@ -230,7 +230,7 @@
   ],
   "business-profiles": [
     {
-      "id": 1,
+      "id": "1",
       "businessName": "Residencia Veyra Care San Isidro",
       "ruc": "20512345678",
       "photo": "images/shared/veyra-placeholder.png",
@@ -241,7 +241,7 @@
   ],
   "nursing-homes": [
     {
-      "id": 0,
+      "id": "0",
       "businessProfileId": 1,
       "administratorId": 1
     }
@@ -253,7 +253,7 @@
   },
   "rooms": [
     {
-      "id": 1,
+      "id": "1",
       "roomNumber": "101",
       "nursingHomeId": 0,
       "capacity": 1,
@@ -262,7 +262,7 @@
       "status": "Full"
     },
     {
-      "id": 2,
+      "id": "2",
       "roomNumber": "102",
       "nursingHomeId": 1,
       "capacity": 2,
@@ -271,7 +271,7 @@
       "status": "Available"
     },
     {
-      "id": 3,
+      "id": "3",
       "roomNumber": "103",
       "nursingHomeId": 1,
       "capacity": 1,
@@ -280,7 +280,7 @@
       "status": "Full"
     },
     {
-      "id": 4,
+      "id": "4",
       "roomNumber": "104",
       "nursingHomeId": 1,
       "capacity": 3,
@@ -289,7 +289,7 @@
       "status": "Available"
     },
     {
-      "id": 5,
+      "id": "5",
       "roomNumber": "105",
       "nursingHomeId": 1,
       "capacity": 1,
@@ -298,7 +298,7 @@
       "status": "Available"
     },
     {
-      "id": 6,
+      "id": "6",
       "roomNumber": "106",
       "nursingHomeId": 1,
       "capacity": 2,
@@ -310,19 +310,19 @@
       "capacity": 2,
       "type": "double",
       "roomNumber": "1232",
-      "id": 7
+      "id": "7"
     },
     {
       "nursingHomeId": 0,
       "capacity": 1,
       "type": "double",
       "roomNumber": "121212",
-      "id": 8
+      "id": "8"
     }
   ],
   "residents": [
     {
-      "id": 1,
+      "id": "1",
       "personProfileId": 101,
       "legalRepresentativeFirstName": "Ana",
       "legalRepresentativeLastName": "Salazar Gutiérrez",
@@ -335,7 +335,7 @@
       "state": "active"
     },
     {
-      "id": 2,
+      "id": "2",
       "personProfileId": 102,
       "legalRepresentativeFirstName": "Javier",
       "legalRepresentativeLastName": "Torres Vega",
@@ -348,7 +348,7 @@
       "state": "active"
     },
     {
-      "id": 3,
+      "id": "3",
       "personProfileId": 103,
       "legalRepresentativeFirstName": "Carmen",
       "legalRepresentativeLastName": "García Huamán",
@@ -361,7 +361,7 @@
       "state": "active"
     },
     {
-      "id": 4,
+      "id": "4",
       "personProfileId": 104,
       "legalRepresentativeFirstName": "Raúl",
       "legalRepresentativeLastName": "Castillo Núñez",
@@ -374,7 +374,7 @@
       "state": "active"
     },
     {
-      "id": 5,
+      "id": "5",
       "personProfileId": 105,
       "legalRepresentativeFirstName": "Lucía",
       "legalRepresentativeLastName": "Salazar Espinoza",
@@ -387,7 +387,7 @@
       "state": "active"
     },
     {
-      "id": 6,
+      "id": "6",
       "personProfileId": 106,
       "legalRepresentativeFirstName": "Luis",
       "legalRepresentativeLastName": "Mendoza Huamán",
@@ -400,7 +400,7 @@
       "state": "active"
     },
     {
-      "id": 7,
+      "id": "7",
       "personProfileId": 107,
       "legalRepresentativeFirstName": "Rosa",
       "legalRepresentativeLastName": "Mendoza Núñez",
@@ -413,7 +413,7 @@
       "state": "active"
     },
     {
-      "id": 8,
+      "id": "8",
       "personProfileId": 108,
       "legalRepresentativeFirstName": "Andrés",
       "legalRepresentativeLastName": "Quispe López",
@@ -426,7 +426,7 @@
       "state": "active"
     },
     {
-      "id": 9,
+      "id": "9",
       "personProfileId": 109,
       "legalRepresentativeFirstName": "Beatriz",
       "legalRepresentativeLastName": "Flores Díaz",
@@ -439,7 +439,7 @@
       "state": "active"
     },
     {
-      "id": 10,
+      "id": "10",
       "personProfileId": 110,
       "legalRepresentativeFirstName": "Javier",
       "legalRepresentativeLastName": "Paredes Vega",
@@ -452,7 +452,7 @@
       "state": "inactive"
     },
     {
-      "id": 11,
+      "id": "11",
       "personProfileId": 111,
       "legalRepresentativeFirstName": "Sofía",
       "legalRepresentativeLastName": "Rodríguez Ríos",
@@ -465,7 +465,7 @@
       "state": "inactive"
     },
     {
-      "id": 12,
+      "id": "12",
       "personProfileId": 112,
       "legalRepresentativeFirstName": "Carlos",
       "legalRepresentativeLastName": "Rodríguez Vega",
@@ -480,7 +480,7 @@
   ],
   "medications": [
     {
-      "id": 1,
+      "id": "1",
       "residentId": 1,
       "name": "Insulina NPH",
       "description": "Control de diabetes",
@@ -490,7 +490,7 @@
       "dosage": "10 mL"
     },
     {
-      "id": 2,
+      "id": "2",
       "residentId": 1,
       "name": "Insulina NPH",
       "description": "Control de diabetes",
@@ -500,7 +500,7 @@
       "dosage": "10 mL"
     },
     {
-      "id": 3,
+      "id": "3",
       "residentId": 2,
       "name": "Atorvastatina",
       "description": "Reductor de colesterol",
@@ -510,7 +510,7 @@
       "dosage": "20 mg"
     },
     {
-      "id": 4,
+      "id": "4",
       "residentId": 2,
       "name": "Salbutamol",
       "description": "Broncodilatador",
@@ -520,7 +520,7 @@
       "dosage": "100 mcg"
     },
     {
-      "id": 5,
+      "id": "5",
       "residentId": 3,
       "name": "Paracetamol",
       "description": "Analgésico y antipirético",
@@ -530,7 +530,7 @@
       "dosage": "500 mg"
     },
     {
-      "id": 6,
+      "id": "6",
       "residentId": 3,
       "name": "Enalapril",
       "description": "Antihipertensivo",
@@ -540,7 +540,7 @@
       "dosage": "10 mg"
     },
     {
-      "id": 7,
+      "id": "7",
       "residentId": 4,
       "name": "Insulina NPH",
       "description": "Control de diabetes",
@@ -550,7 +550,7 @@
       "dosage": "10 mL"
     },
     {
-      "id": 8,
+      "id": "8",
       "residentId": 5,
       "name": "Insulina NPH",
       "description": "Control de diabetes",
@@ -560,7 +560,7 @@
       "dosage": "10 mL"
     },
     {
-      "id": 9,
+      "id": "9",
       "residentId": 5,
       "name": "Losartán",
       "description": "Antihipertensivo",
@@ -570,7 +570,7 @@
       "dosage": "50 mg"
     },
     {
-      "id": 10,
+      "id": "10",
       "residentId": 6,
       "name": "Losartán",
       "description": "Antihipertensivo",
@@ -580,7 +580,7 @@
       "dosage": "50 mg"
     },
     {
-      "id": 11,
+      "id": "11",
       "residentId": 7,
       "name": "Insulina NPH",
       "description": "Control de diabetes",
@@ -590,7 +590,7 @@
       "dosage": "10 mL"
     },
     {
-      "id": 12,
+      "id": "12",
       "residentId": 7,
       "name": "Metformina",
       "description": "Control de glucemia",
@@ -600,7 +600,7 @@
       "dosage": "850 mg"
     },
     {
-      "id": 13,
+      "id": "13",
       "residentId": 8,
       "name": "Insulina NPH",
       "description": "Control de diabetes",
@@ -610,7 +610,7 @@
       "dosage": "10 mL"
     },
     {
-      "id": 14,
+      "id": "14",
       "residentId": 8,
       "name": "Insulina NPH",
       "description": "Control de diabetes",
@@ -620,7 +620,7 @@
       "dosage": "10 mL"
     },
     {
-      "id": 15,
+      "id": "15",
       "residentId": 9,
       "name": "Paracetamol",
       "description": "Analgésico y antipirético",
@@ -630,7 +630,7 @@
       "dosage": "500 mg"
     },
     {
-      "id": 16,
+      "id": "16",
       "residentId": 10,
       "name": "Enalapril",
       "description": "Antihipertensivo",
@@ -640,7 +640,7 @@
       "dosage": "10 mg"
     },
     {
-      "id": 17,
+      "id": "17",
       "residentId": 11,
       "name": "Metformina",
       "description": "Control de glucemia",
@@ -650,7 +650,7 @@
       "dosage": "850 mg"
     },
     {
-      "id": 18,
+      "id": "18",
       "residentId": 11,
       "name": "Metformina",
       "description": "Control de glucemia",
@@ -660,7 +660,7 @@
       "dosage": "850 mg"
     },
     {
-      "id": 19,
+      "id": "19",
       "residentId": 12,
       "name": "Atorvastatina",
       "description": "Reductor de colesterol",
@@ -670,7 +670,7 @@
       "dosage": "20 mg"
     },
     {
-      "id": 20,
+      "id": "20",
       "residentId": 12,
       "name": "Atorvastatina",
       "description": "Reductor de colesterol",
@@ -680,7 +680,7 @@
       "dosage": "20 mg"
     },
     {
-      "id": 21,
+      "id": "21",
       "residentId": 12,
       "name": "Losartán",
       "description": "Antihipertensivo",
@@ -692,7 +692,7 @@
   ],
   "allergies": [
     {
-      "id": 1,
+      "id": "1",
       "residentId": 1,
       "allergenName": "Ácaros del polvo",
       "reaction": "Congestión nasal",
@@ -700,7 +700,7 @@
       "typeOfAllergy": "Ambiental"
     },
     {
-      "id": 2,
+      "id": "2",
       "residentId": 1,
       "allergenName": "Polen",
       "reaction": "Rinitis y estornudos",
@@ -708,7 +708,7 @@
       "typeOfAllergy": "Ambiental"
     },
     {
-      "id": 3,
+      "id": "3",
       "residentId": 2,
       "allergenName": "Maní",
       "reaction": "Hinchazón y dificultad respiratoria",
@@ -716,7 +716,7 @@
       "typeOfAllergy": "Alimentaria"
     },
     {
-      "id": 4,
+      "id": "4",
       "residentId": 3,
       "allergenName": "Mariscos",
       "reaction": "Urticaria generalizada",
@@ -724,7 +724,7 @@
       "typeOfAllergy": "Alimentaria"
     },
     {
-      "id": 5,
+      "id": "5",
       "residentId": 3,
       "allergenName": "Polen",
       "reaction": "Rinitis y estornudos",
@@ -732,7 +732,7 @@
       "typeOfAllergy": "Ambiental"
     },
     {
-      "id": 6,
+      "id": "6",
       "residentId": 5,
       "allergenName": "Lactosa",
       "reaction": "Malestar gastrointestinal",
@@ -740,7 +740,7 @@
       "typeOfAllergy": "Alimentaria"
     },
     {
-      "id": 7,
+      "id": "7",
       "residentId": 7,
       "allergenName": "Mariscos",
       "reaction": "Urticaria generalizada",
@@ -748,7 +748,7 @@
       "typeOfAllergy": "Alimentaria"
     },
     {
-      "id": 8,
+      "id": "8",
       "residentId": 7,
       "allergenName": "Polen",
       "reaction": "Rinitis y estornudos",
@@ -756,7 +756,7 @@
       "typeOfAllergy": "Ambiental"
     },
     {
-      "id": 9,
+      "id": "9",
       "residentId": 8,
       "allergenName": "Polen",
       "reaction": "Rinitis y estornudos",
@@ -764,7 +764,7 @@
       "typeOfAllergy": "Ambiental"
     },
     {
-      "id": 10,
+      "id": "10",
       "residentId": 11,
       "allergenName": "Ácaros del polvo",
       "reaction": "Congestión nasal",
@@ -772,7 +772,7 @@
       "typeOfAllergy": "Ambiental"
     },
     {
-      "id": 11,
+      "id": "11",
       "residentId": 12,
       "allergenName": "Penicilina",
       "reaction": "Erupción cutánea y urticaria",
@@ -780,7 +780,7 @@
       "typeOfAllergy": "Medicamentosa"
     },
     {
-      "id": 12,
+      "id": "12",
       "residentId": 12,
       "allergenName": "Penicilina",
       "reaction": "Erupción cutánea y urticaria",
@@ -790,163 +790,163 @@
   ],
   "vital-signs": [
     {
-      "id": 1,
+      "id": "1",
       "residentId": 1,
       "measurementId": 1001,
       "severityLevel": "Low"
     },
     {
-      "id": 2,
+      "id": "2",
       "residentId": 1,
       "measurementId": 1002,
       "severityLevel": "Critical"
     },
     {
-      "id": 3,
+      "id": "3",
       "residentId": 1,
       "measurementId": 1003,
       "severityLevel": "Medium"
     },
     {
-      "id": 4,
+      "id": "4",
       "residentId": 2,
       "measurementId": 1004,
       "severityLevel": "Medium"
     },
     {
-      "id": 5,
+      "id": "5",
       "residentId": 3,
       "measurementId": 1005,
       "severityLevel": "Low"
     },
     {
-      "id": 6,
+      "id": "6",
       "residentId": 4,
       "measurementId": 1006,
       "severityLevel": "Medium"
     },
     {
-      "id": 7,
+      "id": "7",
       "residentId": 4,
       "measurementId": 1007,
       "severityLevel": "Low"
     },
     {
-      "id": 8,
+      "id": "8",
       "residentId": 5,
       "measurementId": 1008,
       "severityLevel": "Critical"
     },
     {
-      "id": 9,
+      "id": "9",
       "residentId": 5,
       "measurementId": 1009,
       "severityLevel": "Medium"
     },
     {
-      "id": 10,
+      "id": "10",
       "residentId": 6,
       "measurementId": 1010,
       "severityLevel": "Critical"
     },
     {
-      "id": 11,
+      "id": "11",
       "residentId": 6,
       "measurementId": 1011,
       "severityLevel": "Normal"
     },
     {
-      "id": 12,
+      "id": "12",
       "residentId": 6,
       "measurementId": 1012,
       "severityLevel": "Critical"
     },
     {
-      "id": 13,
+      "id": "13",
       "residentId": 7,
       "measurementId": 1013,
       "severityLevel": "Normal"
     },
     {
-      "id": 14,
+      "id": "14",
       "residentId": 7,
       "measurementId": 1014,
       "severityLevel": "Low"
     },
     {
-      "id": 15,
+      "id": "15",
       "residentId": 8,
       "measurementId": 1015,
       "severityLevel": "Normal"
     },
     {
-      "id": 16,
+      "id": "16",
       "residentId": 8,
       "measurementId": 1016,
       "severityLevel": "Normal"
     },
     {
-      "id": 17,
+      "id": "17",
       "residentId": 9,
       "measurementId": 1017,
       "severityLevel": "Critical"
     },
     {
-      "id": 18,
+      "id": "18",
       "residentId": 9,
       "measurementId": 1018,
       "severityLevel": "Low"
     },
     {
-      "id": 19,
+      "id": "19",
       "residentId": 9,
       "measurementId": 1019,
       "severityLevel": "Medium"
     },
     {
-      "id": 20,
+      "id": "20",
       "residentId": 10,
       "measurementId": 1020,
       "severityLevel": "Critical"
     },
     {
-      "id": 21,
+      "id": "21",
       "residentId": 10,
       "measurementId": 1021,
       "severityLevel": "Low"
     },
     {
-      "id": 22,
+      "id": "22",
       "residentId": 11,
       "measurementId": 1022,
       "severityLevel": "Medium"
     },
     {
-      "id": 23,
+      "id": "23",
       "residentId": 11,
       "measurementId": 1023,
       "severityLevel": "Low"
     },
     {
-      "id": 24,
+      "id": "24",
       "residentId": 11,
       "measurementId": 1024,
       "severityLevel": "Medium"
     },
     {
-      "id": 25,
+      "id": "25",
       "residentId": 12,
       "measurementId": 1025,
       "severityLevel": "High"
     },
     {
-      "id": 26,
+      "id": "26",
       "residentId": 12,
       "measurementId": 1026,
       "severityLevel": "Medium"
     },
     {
-      "id": 27,
+      "id": "27",
       "residentId": 12,
       "measurementId": 1027,
       "severityLevel": "Normal"
@@ -954,7 +954,7 @@
   ],
   "devices": [
     {
-      "id": 1,
+      "id": "1",
       "deviceId": "VEYRA-IOT-1000",
       "residentId": 1,
       "assignedBy": "Elena Ramírez Núñez",
@@ -962,7 +962,7 @@
       "status": "Active"
     },
     {
-      "id": 2,
+      "id": "2",
       "deviceId": "VEYRA-IOT-1001",
       "residentId": 2,
       "assignedBy": "Sofía Castillo Ponce",
@@ -970,7 +970,7 @@
       "status": "Maintenance"
     },
     {
-      "id": 3,
+      "id": "3",
       "deviceId": "VEYRA-IOT-1002",
       "residentId": 3,
       "assignedBy": "Javier Mendoza Vega",
@@ -978,7 +978,7 @@
       "status": "Active"
     },
     {
-      "id": 4,
+      "id": "4",
       "deviceId": "VEYRA-IOT-1003",
       "residentId": 4,
       "assignedBy": "Elena Ramírez Núñez",
@@ -986,7 +986,7 @@
       "status": "Active"
     },
     {
-      "id": 5,
+      "id": "5",
       "deviceId": "VEYRA-IOT-1004",
       "residentId": 5,
       "assignedBy": "Sofía Castillo Ponce",
@@ -994,7 +994,7 @@
       "status": "Active"
     },
     {
-      "id": 6,
+      "id": "6",
       "deviceId": "VEYRA-IOT-1005",
       "residentId": 6,
       "assignedBy": "Elena Ramírez Núñez",
@@ -1002,7 +1002,7 @@
       "status": "Inactive"
     },
     {
-      "id": 7,
+      "id": "7",
       "deviceId": "VEYRA-IOT-1006",
       "residentId": 7,
       "assignedBy": "Fernando Vargas Salas",
@@ -1010,7 +1010,7 @@
       "status": "Inactive"
     },
     {
-      "id": 8,
+      "id": "8",
       "deviceId": "VEYRA-IOT-1007",
       "residentId": 8,
       "assignedBy": "Gloria Rojas López",
@@ -1018,7 +1018,7 @@
       "status": "Active"
     },
     {
-      "id": 9,
+      "id": "9",
       "deviceId": "VEYRA-IOT-1008",
       "residentId": 9,
       "assignedBy": "Fernando Vargas Salas",
@@ -1026,7 +1026,7 @@
       "status": "Maintenance"
     },
     {
-      "id": 10,
+      "id": "10",
       "deviceId": "VEYRA-IOT-1009",
       "residentId": 10,
       "assignedBy": "Sofía Castillo Ponce",
@@ -1034,7 +1034,7 @@
       "status": "Maintenance"
     },
     {
-      "id": 11,
+      "id": "11",
       "deviceId": "VEYRA-IOT-1010",
       "residentId": 11,
       "assignedBy": "Fernando Vargas Salas",
@@ -1042,7 +1042,7 @@
       "status": "Active"
     },
     {
-      "id": 12,
+      "id": "12",
       "deviceId": "VEYRA-IOT-1011",
       "residentId": 12,
       "assignedBy": "Javier Mendoza Vega",
@@ -1050,7 +1050,7 @@
       "status": "Inactive"
     },
     {
-      "id": 13,
+      "id": "13",
       "deviceId": "VEYRA-IOT-1012",
       "residentId": 1,
       "assignedBy": "Fernando Vargas Salas",
@@ -1058,7 +1058,7 @@
       "status": "Inactive"
     },
     {
-      "id": 14,
+      "id": "14",
       "deviceId": "VEYRA-IOT-1013",
       "residentId": 2,
       "assignedBy": "Sofía Castillo Ponce",
@@ -1068,7 +1068,7 @@
   ],
   "relatives": [
     {
-      "id": 1,
+      "id": "1",
       "firstName": "Carmen",
       "lastName": "Rodríguez Ríos",
       "email": "carmen.rodriguez@familia.test",
@@ -1076,7 +1076,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "firstName": "Luis",
       "lastName": "Flores Campos",
       "email": "luis.flores@familia.test",
@@ -1084,7 +1084,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "firstName": "Ana",
       "lastName": "Quispe Espinoza",
       "email": "ana.quispe@familia.test",
@@ -1092,7 +1092,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 4,
+      "id": "4",
       "firstName": "Andrés",
       "lastName": "Torres Cárdenas",
       "email": "andres.torres@familia.test",
@@ -1100,7 +1100,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 5,
+      "id": "5",
       "firstName": "Elena",
       "lastName": "Ramírez Gutiérrez",
       "email": "elena.ramirez@familia.test",
@@ -1108,7 +1108,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 6,
+      "id": "6",
       "firstName": "Fernando",
       "lastName": "Vargas Núñez",
       "email": "fernando.vargas@familia.test",
@@ -1116,7 +1116,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 7,
+      "id": "7",
       "firstName": "Sofía",
       "lastName": "Castillo Salas",
       "email": "sofia.castillo@familia.test",
@@ -1124,7 +1124,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 8,
+      "id": "8",
       "firstName": "Javier",
       "lastName": "Mendoza Ponce",
       "email": "javier.mendoza@familia.test",
@@ -1132,7 +1132,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 9,
+      "id": "9",
       "firstName": "Gloria",
       "lastName": "Rojas Vega",
       "email": "gloria.rojas@familia.test",
@@ -1140,7 +1140,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 10,
+      "id": "10",
       "firstName": "Hugo",
       "lastName": "Salazar López",
       "email": "hugo.salazar@familia.test",
@@ -1148,7 +1148,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 11,
+      "id": "11",
       "firstName": "Isabel",
       "lastName": "Paredes Huamán",
       "email": "isabel.paredes@familia.test",
@@ -1156,7 +1156,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 12,
+      "id": "12",
       "firstName": "Carlos",
       "lastName": "García Díaz",
       "email": "carlos.garcia@familia.test",
@@ -1164,7 +1164,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 13,
+      "id": "13",
       "firstName": "Carmen",
       "lastName": "Rodríguez Ríos",
       "email": "carmen.rodriguez@familia.test",
@@ -1172,7 +1172,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 14,
+      "id": "14",
       "firstName": "Luis",
       "lastName": "Flores Campos",
       "email": "luis.flores@familia.test",
@@ -1180,7 +1180,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 15,
+      "id": "15",
       "firstName": "Ana",
       "lastName": "Quispe Espinoza",
       "email": "ana.quispe@familia.test",
@@ -1188,7 +1188,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 16,
+      "id": "16",
       "firstName": "Andrés",
       "lastName": "Torres Cárdenas",
       "email": "andres.torres@familia.test",
@@ -1196,7 +1196,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 17,
+      "id": "17",
       "firstName": "Elena",
       "lastName": "Ramírez Gutiérrez",
       "email": "elena.ramirez@familia.test",
@@ -1204,7 +1204,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 18,
+      "id": "18",
       "firstName": "Fernando",
       "lastName": "Vargas Núñez",
       "email": "fernando.vargas@familia.test",
@@ -1212,7 +1212,7 @@
       "nursing-homeId": 1
     },
     {
-      "id": 19,
+      "id": "19",
       "firstName": "Sofía",
       "lastName": "Castillo Salas",
       "email": "sofia.castillo@familia.test",
@@ -1225,7 +1225,7 @@
       "email": "oeafma@hotmail.com",
       "residentId": 1,
       "nursing-homeId": 0,
-      "id": 20
+      "id": "20"
     }
   ],
   "doctor-monitoring": {
@@ -1282,7 +1282,7 @@
   },
   "staff": [
     {
-      "id": 1,
+      "id": "1",
       "personProfileId": 201,
       "emergencyContactFirstName": "Isabel",
       "emergencyContactLastName": "Ramírez Cárdenas",
@@ -1290,7 +1290,7 @@
       "status": "Active"
     },
     {
-      "id": 2,
+      "id": "2",
       "personProfileId": 202,
       "emergencyContactFirstName": "Patricia",
       "emergencyContactLastName": "Rojas Ríos",
@@ -1298,7 +1298,7 @@
       "status": "Active"
     },
     {
-      "id": 3,
+      "id": "3",
       "personProfileId": 203,
       "emergencyContactFirstName": "Patricia",
       "emergencyContactLastName": "García Núñez",
@@ -1306,7 +1306,7 @@
       "status": "Active"
     },
     {
-      "id": 4,
+      "id": "4",
       "personProfileId": 204,
       "emergencyContactFirstName": "Isabel",
       "emergencyContactLastName": "Paredes Ponce",
@@ -1314,7 +1314,7 @@
       "status": "On Leave"
     },
     {
-      "id": 5,
+      "id": "5",
       "personProfileId": 205,
       "emergencyContactFirstName": "Carmen",
       "emergencyContactLastName": "Salazar Espinoza",
@@ -1322,7 +1322,7 @@
       "status": "Active"
     },
     {
-      "id": 6,
+      "id": "6",
       "personProfileId": 206,
       "emergencyContactFirstName": "Carmen",
       "emergencyContactLastName": "Paredes Campos",
@@ -1332,7 +1332,7 @@
   ],
   "contracts": [
     {
-      "id": 1,
+      "id": "1",
       "staffMemberId": 1,
       "startDate": "2026-07-11",
       "endDate": "2026-07-23",
@@ -1342,7 +1342,7 @@
       "status": "Active"
     },
     {
-      "id": 2,
+      "id": "2",
       "staffMemberId": 2,
       "startDate": "2024-05-18",
       "endDate": "2026-03-07",
@@ -1352,7 +1352,7 @@
       "status": "Active"
     },
     {
-      "id": 3,
+      "id": "3",
       "staffMemberId": 3,
       "startDate": "2024-07-22",
       "endDate": "2026-07-22",
@@ -1362,7 +1362,7 @@
       "status": "Active"
     },
     {
-      "id": 4,
+      "id": "4",
       "staffMemberId": 4,
       "startDate": "2024-12-06",
       "endDate": "2026-10-19",
@@ -1372,7 +1372,7 @@
       "status": "Active"
     },
     {
-      "id": 5,
+      "id": "5",
       "staffMemberId": 5,
       "startDate": "2024-05-13",
       "endDate": "2026-09-27",
@@ -1382,7 +1382,7 @@
       "status": "Expired"
     },
     {
-      "id": 6,
+      "id": "6",
       "staffMemberId": 6,
       "startDate": "2024-01-10",
       "endDate": "2026-05-07",
@@ -1394,7 +1394,7 @@
   ],
   "activities": [
     {
-      "id": 1,
+      "id": "1",
       "residentId": 1,
       "healthcareStaffId": 1,
       "type": "MEAL",
@@ -1404,7 +1404,7 @@
       "recurringDays": []
     },
     {
-      "id": 2,
+      "id": "2",
       "residentId": 2,
       "healthcareStaffId": 2,
       "type": "BATH",
@@ -1418,7 +1418,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "residentId": 3,
       "healthcareStaffId": 3,
       "type": "RISK_PROFILE",
@@ -1428,7 +1428,7 @@
       "recurringDays": []
     },
     {
-      "id": 4,
+      "id": "4",
       "residentId": 4,
       "healthcareStaffId": 4,
       "type": "MEAL",
@@ -1444,7 +1444,7 @@
       ]
     },
     {
-      "id": 5,
+      "id": "5",
       "residentId": 5,
       "healthcareStaffId": 5,
       "type": "BATH",
@@ -1454,7 +1454,7 @@
       "recurringDays": []
     },
     {
-      "id": 6,
+      "id": "6",
       "residentId": 6,
       "healthcareStaffId": 6,
       "type": "RISK_PROFILE",
@@ -1467,7 +1467,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": "7",
       "residentId": 7,
       "healthcareStaffId": 1,
       "type": "MEAL",
@@ -1481,7 +1481,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": "8",
       "residentId": 8,
       "healthcareStaffId": 2,
       "type": "BATH",
@@ -1491,7 +1491,7 @@
       "recurringDays": []
     },
     {
-      "id": 9,
+      "id": "9",
       "residentId": 9,
       "healthcareStaffId": 3,
       "type": "RISK_PROFILE",
@@ -1501,7 +1501,7 @@
       "recurringDays": []
     },
     {
-      "id": 10,
+      "id": "10",
       "residentId": 10,
       "healthcareStaffId": 4,
       "type": "RECREATIONAL",
@@ -1509,11 +1509,17 @@
       "status": "PENDING",
       "isRecurring": true,
       "recurringDays": [
-        "SAT"
+        "SAT",
+        "WED",
+        "TUE",
+        "MON",
+        "THU",
+        "FRI",
+        "SUN"
       ]
     },
     {
-      "id": 11,
+      "id": "11",
       "residentId": 11,
       "healthcareStaffId": 5,
       "type": "MEAL",
@@ -1531,20 +1537,7 @@
       ]
     },
     {
-      "id": 12,
-      "residentId": 12,
-      "healthcareStaffId": 6,
-      "type": "RECREATIONAL",
-      "title": "Sesión de musicoterapia",
-      "status": "IN_PROGRESS",
-      "isRecurring": true,
-      "recurringDays": [
-        "WED",
-        "FRI"
-      ]
-    },
-    {
-      "id": 13,
+      "id": "13",
       "residentId": 1,
       "healthcareStaffId": 1,
       "type": "BATH",
@@ -1558,7 +1551,7 @@
       ]
     },
     {
-      "id": 14,
+      "id": "14",
       "residentId": 2,
       "healthcareStaffId": 2,
       "type": "MEAL",
@@ -1576,10 +1569,10 @@
       ]
     },
     {
-      "id": 15,
+      "id": "15",
       "residentId": 3,
       "healthcareStaffId": 3,
-      "type": "RECREATIONAL",
+      "type": "BATH",
       "title": "Paseo jardín",
       "status": "PENDING",
       "isRecurring": true,
@@ -1588,7 +1581,7 @@
       ]
     },
     {
-      "id": 16,
+      "id": "16",
       "residentId": 4,
       "healthcareStaffId": 4,
       "type": "RISK_PROFILE",
@@ -1596,11 +1589,23 @@
       "status": "IN_PROGRESS",
       "isRecurring": false,
       "recurringDays": []
+    },
+    {
+      "id": "mmuE_B4iF4I",
+      "residentId": 1,
+      "healthcareStaffId": 1,
+      "type": "BATH",
+      "title": "limas ",
+      "status": "IN_PROGRESS",
+      "isRecurring": true,
+      "recurringDays": [
+        "TUE"
+      ]
     }
   ],
   "analytics-staff-hires": [
     {
-      "id": 4,
+      "id": "4",
       "nursingHomeId": 0,
       "year": 2025,
       "labels": [
@@ -1635,7 +1640,7 @@
       "total": 32
     },
     {
-      "id": 3,
+      "id": "3",
       "year": 2026,
       "labels": [
         "Ene",
@@ -1671,7 +1676,7 @@
   ],
   "analytics-staff-terminations": [
     {
-      "id": 2,
+      "id": "2",
       "year": 2025,
       "labels": [
         "Ene",
@@ -1707,7 +1712,7 @@
   ],
   "analytics-residents-admissions": [
     {
-      "id": 1,
+      "id": "1",
       "year": 2025,
       "labels": [
         "Ene",
@@ -1743,7 +1748,7 @@
   ],
   "alerts": [
     {
-      "id": 1,
+      "id": "1",
       "nursingHomeId": 1,
       "residentId": 1,
       "residentName": "Carlos García Ríos",
@@ -1758,7 +1763,7 @@
       "createdAt": "2025-12-01T22:18:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "nursingHomeId": 1,
       "residentId": 2,
       "residentName": "Carmen Rodríguez Campos",
@@ -1773,7 +1778,7 @@
       "createdAt": "2025-12-02T08:21:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "nursingHomeId": 1,
       "residentId": 3,
       "residentName": "Luis Flores Espinoza",
@@ -1788,7 +1793,7 @@
       "createdAt": "2025-12-03T17:05:00Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "nursingHomeId": 1,
       "residentId": 4,
       "residentName": "Ana Quispe Cárdenas",
@@ -1803,7 +1808,7 @@
       "createdAt": "2025-12-04T04:14:00Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "nursingHomeId": 1,
       "residentId": 5,
       "residentName": "Andrés Torres Gutiérrez",
@@ -1818,7 +1823,7 @@
       "createdAt": "2025-12-05T22:09:00Z"
     },
     {
-      "id": 6,
+      "id": "6",
       "nursingHomeId": 1,
       "residentId": 6,
       "residentName": "Elena Ramírez Núñez",
@@ -1833,7 +1838,7 @@
       "createdAt": "2025-12-06T06:04:00Z"
     },
     {
-      "id": 7,
+      "id": "7",
       "nursingHomeId": 1,
       "residentId": 7,
       "residentName": "Fernando Vargas Salas",
@@ -1848,7 +1853,7 @@
       "createdAt": "2025-12-07T13:21:00Z"
     },
     {
-      "id": 8,
+      "id": "8",
       "nursingHomeId": 1,
       "residentId": 8,
       "residentName": "Sofía Castillo Ponce",
@@ -1863,7 +1868,7 @@
       "createdAt": "2025-12-08T14:26:00Z"
     },
     {
-      "id": 9,
+      "id": "9",
       "nursingHomeId": 1,
       "residentId": 9,
       "residentName": "Javier Mendoza Vega",
@@ -1878,7 +1883,7 @@
       "createdAt": "2025-12-09T06:53:00Z"
     },
     {
-      "id": 10,
+      "id": "10",
       "nursingHomeId": 1,
       "residentId": 10,
       "residentName": "Gloria Rojas López",
@@ -1893,7 +1898,7 @@
       "createdAt": "2025-12-10T12:57:00Z"
     },
     {
-      "id": 11,
+      "id": "11",
       "nursingHomeId": 1,
       "residentId": 11,
       "residentName": "Hugo Salazar Huamán",
@@ -1908,7 +1913,7 @@
       "createdAt": "2025-12-11T22:01:00Z"
     },
     {
-      "id": 12,
+      "id": "12",
       "nursingHomeId": 1,
       "residentId": 12,
       "residentName": "Isabel Paredes Díaz",
@@ -1923,7 +1928,7 @@
       "createdAt": "2025-12-12T12:30:00Z"
     },
     {
-      "id": 13,
+      "id": "13",
       "nursingHomeId": 1,
       "residentId": 1,
       "residentName": "Carlos García Ríos",
@@ -1938,7 +1943,7 @@
       "createdAt": "2025-12-13T11:19:00Z"
     },
     {
-      "id": 14,
+      "id": "14",
       "nursingHomeId": 1,
       "residentId": 2,
       "residentName": "Carmen Rodríguez Campos",
@@ -1953,7 +1958,7 @@
       "createdAt": "2025-12-14T13:34:00Z"
     },
     {
-      "id": 15,
+      "id": "15",
       "nursingHomeId": 1,
       "residentId": 3,
       "residentName": "Luis Flores Espinoza",
@@ -1968,7 +1973,7 @@
       "createdAt": "2025-12-15T23:34:00Z"
     },
     {
-      "id": 16,
+      "id": "16",
       "nursingHomeId": 1,
       "residentId": 4,
       "residentName": "Ana Quispe Cárdenas",
@@ -1982,5 +1987,6 @@
       "reportedBy": "Gloria Rojas López",
       "createdAt": "2025-12-16T07:31:00Z"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
