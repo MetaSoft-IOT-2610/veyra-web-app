@@ -13,11 +13,29 @@
         }
       </div>
       <div class="filters-right">
-        <span class="count-label">{{ 'activities.showing' | translate:{ count: filteredActivities.length } }}</span>
-        <button class="filter-btn">
-          <mat-icon>filter_list</mat-icon>
-          {{ 'activities.filter-btn' | translate }}
-        </button>
+        <span class="count-label">{{ 'activities.showing' | translate:{ count: filteredActivities().length } }}</span>
+        <div class="filter-btn-wrapper">
+          <button class="filter-btn" [class.active]="showFilterPanel() || selectedStatusFilter() !== 'ALL'" (click)="toggleFilterPanel()">
+            <mat-icon>filter_list</mat-icon>
+            {{ 'activities.filter-btn' | translate }}
+            @if (selectedStatusFilter() !== 'ALL') {
+              <span class="filter-badge">1</span>
+            }
+          </button>
+          @if (showFilterPanel()) {
+            <div class="filter-panel">
+              <p class="filter-panel-label">{{ 'activities.status-filters.label' | translate }}</p>
+              @for (sf of statusFilters; track sf.key) {
+                <button
+                  class="filter-panel-option"
+                  [class.selected]="selectedStatusFilter() === sf.key"
+                  (click)="setStatusFilter(sf.key)">
+                  {{ sf.label | translate }}
+                </button>
+              }
+            </div>
+          }
+        </div>
       </div>
     </div>
 
@@ -36,14 +54,14 @@
         </div>
       }
 
-      @if (!loading && filteredActivities.length === 0 && !error) {
+      @if (!loading && filteredActivities().length === 0 && !error) {
         <div class="empty-row">
           <mat-icon>event_note</mat-icon>
           <p>{{ 'activities.no-activities' | translate }}</p>
         </div>
       }
 
-      @if (!loading && filteredActivities.length > 0) {
+      @if (!loading && filteredActivities().length > 0) {
         <table class="activities-table">
           <thead>
           <tr>
@@ -55,7 +73,7 @@
           </tr>
           </thead>
           <tbody>
-            @for (activity of filteredActivities; track activity.id) {
+            @for (activity of filteredActivities(); track activity.id) {
               <tr>
                 <!-- Activity -->
                 <td class="activity-name-cell">
