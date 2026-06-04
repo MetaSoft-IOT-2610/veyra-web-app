@@ -401,6 +401,13 @@
     "no-activities": "No activities registered.",
     "add-new": "Add New",
     "filter-btn": "Filter",
+    "status-filters": {
+      "label": "Filter by status",
+      "all": "All statuses",
+      "pending": "Pending",
+      "in-progress": "In Progress",
+      "completed": "Completed"
+    },
     "filters": {
       "all": "All",
       "meal": "Meal",
