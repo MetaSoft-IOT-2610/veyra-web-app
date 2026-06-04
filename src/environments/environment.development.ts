@@ -8,7 +8,7 @@ export const environment = {
    */
   fallbackDevUserSession: true,
 
-  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderApiBaseUrl: 'http://localhost:3000',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
