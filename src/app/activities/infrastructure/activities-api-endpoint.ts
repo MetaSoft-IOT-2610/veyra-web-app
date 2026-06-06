@@ -9,17 +9,21 @@ import { environment } from '../../../environments/environment';
 /**
  * HTTP endpoint handler for the Activities bounded context.
  *
- * All routes are scoped to a nursing home:
- *   GET    /nursing-homes/{nursingHomeId}/activities
- *   POST   /nursing-homes/{nursingHomeId}/activities
- *   PUT    /nursing-homes/{nursingHomeId}/activities/{activityId}
- *   DELETE /nursing-homes/{nursingHomeId}/activities/{activityId}
- *   PATCH  /nursing-homes/{nursingHomeId}/activities/{activityId}/complete
+ * The backend exposes two controllers with different scopes:
+ *   NursingHomeActivitiesController (collection operations):
+ *     GET    /nursing-homes/{nursingHomeId}/activities
+ *     POST   /nursing-homes/{nursingHomeId}/activities
  *
- * The nursingHomeId is resolved at call time from localStorage so it
- * reflects the session selected by the user after login.
+ *   ActivitiesController (individual activity operations):
+ *     PUT    /activities/{activityId}
+ *     DELETE /activities/{activityId}
+ *     PATCH  /activities/{activityId}/complete
+ *
+ * nursingHomeId for collection routes is resolved at call time from localStorage.
  */
 export class ActivitiesApiEndpoint extends BaseApiEndpoint<Activity, ActivityResource, ActivitiesResponse, ActivityAssembler> {
+
+  private readonly activityBaseUrl: string;
 
   constructor(http: HttpClient) {
     super(
@@ -27,15 +31,16 @@ export class ActivitiesApiEndpoint extends BaseApiEndpoint<Activity, ActivityRes
       `${environment.platformProviderApiBaseUrl}${environment.platformProviderActivitiesEndpointPath}`,
       new ActivityAssembler()
     );
+    this.activityBaseUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderActivityEndpointPath}`;
   }
 
-  private buildUrl(): string {
+  private buildCollectionUrl(): string {
     const nursingHomeId = localStorage.getItem('nursingHomeId') ?? '1';
     return this.endpointUrl.replace('{nursingHomeId}', nursingHomeId);
   }
 
   override getAll(): Observable<Activity[]> {
-    return this.http.get<ActivityResource[]>(this.buildUrl()).pipe(
+    return this.http.get<ActivityResource[]>(this.buildCollectionUrl()).pipe(
       map(resources => resources.map(r => this.assembler.toEntityFromResource(r))),
       catchError(this.handleError('Failed to fetch activities'))
     );
@@ -43,14 +48,14 @@ export class ActivitiesApiEndpoint extends BaseApiEndpoint<Activity, ActivityRes
 
   override create(activity: Activity): Observable<Activity> {
     const body = this.assembler.toResourceFromEntity(activity);
-    return this.http.post<ActivityResource>(this.buildUrl(), body).pipe(
+    return this.http.post<ActivityResource>(this.buildCollectionUrl(), body).pipe(
       map(r => this.assembler.toEntityFromResource(r)),
       catchError(this.handleError('Failed to create activity'))
     );
   }
 
   getByResidentId(residentId: number): Observable<Activity[]> {
-    return this.http.get<ActivityResource[]>(`${this.buildUrl()}?residentId=${residentId}`).pipe(
+    return this.http.get<ActivityResource[]>(`${this.buildCollectionUrl()}?residentId=${residentId}`).pipe(
       map(resources => resources.map(r => this.assembler.toEntityFromResource(r))),
       catchError(this.handleError('Failed to fetch activities by residentId'))
     );
@@ -58,20 +63,20 @@ export class ActivitiesApiEndpoint extends BaseApiEndpoint<Activity, ActivityRes
 
   override update(activity: Activity): Observable<Activity> {
     const body = this.assembler.toResourceFromEntity(activity);
-    return this.http.put<ActivityResource>(`${this.buildUrl()}/${activity.id}`, body).pipe(
+    return this.http.put<ActivityResource>(`${this.activityBaseUrl}/${activity.id}`, body).pipe(
       map(r => this.assembler.toEntityFromResource(r)),
       catchError(this.handleError(`Failed to update activity with id ${activity.id}`))
     );
   }
 
   override delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.buildUrl()}/${id}`).pipe(
+    return this.http.delete<void>(`${this.activityBaseUrl}/${id}`).pipe(
       catchError(this.handleError(`Failed to delete activity with id ${id}`))
     );
   }
 
   complete(id: number): Observable<Activity> {
-    return this.http.patch<ActivityResource>(`${this.buildUrl()}/${id}/complete`, {}).pipe(
+    return this.http.patch<ActivityResource>(`${this.activityBaseUrl}/${id}/complete`, {}).pipe(
       map(r => this.assembler.toEntityFromResource(r)),
       catchError(this.handleError(`Failed to complete activity with id ${id}`))
     );
