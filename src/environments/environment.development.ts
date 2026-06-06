@@ -52,6 +52,7 @@ export const environment = {
 
   // Activities Bounded Context
   platformProviderActivitiesEndpointPath: '/nursing-homes/{nursingHomeId}/activities',
+  platformProviderActivityEndpointPath: '/activities',
 
   // Alerts Bounded Context
   platformProviderAlertsEndpointPath: '/alerts',
