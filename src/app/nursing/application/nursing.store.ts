@@ -46,6 +46,7 @@ export class NursingStore {
   readonly medications = this._medicationsSignal.asReadonly();
   readonly residents = this._residentSignal.asReadonly();
   readonly rooms = this._roomsSignal.asReadonly();
+  readonly nursingHomes = this._nursingHomesSignal.asReadonly();
   readonly vitalSigns = this._vitalSignsSignal.asReadonly();
   readonly relatives = this._relativeSignal.asReadonly();
   readonly monitoringResidents = this._monitoringResidentsSignal.asReadonly();
