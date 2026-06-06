@@ -8,7 +8,7 @@ export const environment = {
    */
   fallbackDevUserSession: true,
 
-  platformProviderApiBaseUrl: 'http://localhost:3000',
+  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
@@ -51,7 +51,7 @@ export const environment = {
   platformProviderPersonProfilesEndpointPath: '/person-profiles',
 
   // Activities Bounded Context
-  platformProviderActivitiesEndpointPath: '/activities',
+  platformProviderActivitiesEndpointPath: '/nursing-homes/{nursingHomeId}/activities',
 
   // Alerts Bounded Context
   platformProviderAlertsEndpointPath: '/alerts',
