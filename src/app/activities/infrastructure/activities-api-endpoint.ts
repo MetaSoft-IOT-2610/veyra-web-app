@@ -34,28 +34,27 @@ export class ActivitiesApiEndpoint extends BaseApiEndpoint<Activity, ActivityRes
     this.activityBaseUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderActivityEndpointPath}`;
   }
 
-  private buildCollectionUrl(): string {
-    const nursingHomeId = localStorage.getItem('nursingHomeId') ?? '1';
-    return this.endpointUrl.replace('{nursingHomeId}', nursingHomeId);
+  private buildCollectionUrl(nursingHomeId: number): string {
+    return this.endpointUrl.replace('{nursingHomeId}', nursingHomeId.toString());
   }
 
-  override getAll(): Observable<Activity[]> {
-    return this.http.get<ActivityResource[]>(this.buildCollectionUrl()).pipe(
+  override getAll(nursingHomeId: number): Observable<Activity[]> {
+    return this.http.get<ActivityResource[]>(this.buildCollectionUrl(nursingHomeId)).pipe(
       map(resources => resources.map(r => this.assembler.toEntityFromResource(r))),
       catchError(this.handleError('Failed to fetch activities'))
     );
   }
 
-  override create(activity: Activity): Observable<Activity> {
+  override create(activity: Activity, nursingHomeId: number): Observable<Activity> {
     const body = this.assembler.toResourceFromEntity(activity);
-    return this.http.post<ActivityResource>(this.buildCollectionUrl(), body).pipe(
+    return this.http.post<ActivityResource>(this.buildCollectionUrl(nursingHomeId), body).pipe(
       map(r => this.assembler.toEntityFromResource(r)),
       catchError(this.handleError('Failed to create activity'))
     );
   }
 
-  getByResidentId(residentId: number): Observable<Activity[]> {
-    return this.http.get<ActivityResource[]>(`${this.buildCollectionUrl()}?residentId=${residentId}`).pipe(
+  getByResidentId(residentId: number, nursingHomeId: number): Observable<Activity[]> {
+    return this.http.get<ActivityResource[]>(`${this.buildCollectionUrl(nursingHomeId)}?residentId=${residentId}`).pipe(
       map(resources => resources.map(r => this.assembler.toEntityFromResource(r))),
       catchError(this.handleError('Failed to fetch activities by residentId'))
     );
