@@ -18,6 +18,7 @@ export class ActivityAssembler implements BaseAssembler<Activity, ActivityResour
   toEntityFromResource(resource: ActivityResource): Activity {
     return new Activity({
       id: resource.id,
+      nursingHomeId: resource.nursingHomeId,
       residentId: resource.residentId,
       healthcareStaffId: resource.healthcareStaffId,
       type: resource.type as ActivityType,

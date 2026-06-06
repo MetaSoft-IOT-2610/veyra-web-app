@@ -274,6 +274,7 @@ export class ActivityList {
     if (this.showEditModal() && this.editingActivity) {
       const updated = new Activity({
         id: this.editingActivity.id,
+        nursingHomeId: this.editingActivity.nursingHomeId,
         residentId: this.editingActivity.residentId,
         healthcareStaffId: this.editingActivity.healthcareStaffId,
         type: this.formType,
@@ -289,6 +290,7 @@ export class ActivityList {
 
     const activity = new Activity({
       id: 0,
+      nursingHomeId: Number(localStorage.getItem('nursingHomeId')) || 1,
       residentId: 1,
       healthcareStaffId: Number(localStorage.getItem('staffId')) || 1,
       type: this.formType,
