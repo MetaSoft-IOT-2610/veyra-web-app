@@ -9,18 +9,18 @@ import { environment } from '../../../environments/environment';
 /**
  * HTTP endpoint handler for the Activities bounded context.
  *
- * Extends BaseApiEndpoint which provides the base CRUD operations:
- * - getAll()   → GET /activities
- * - create()   → POST /activities
+ * All routes are scoped to a nursing home:
+ *   GET    /nursing-homes/{nursingHomeId}/activities
+ *   POST   /nursing-homes/{nursingHomeId}/activities
+ *   PUT    /nursing-homes/{nursingHomeId}/activities/{activityId}
+ *   DELETE /nursing-homes/{nursingHomeId}/activities/{activityId}
+ *   PATCH  /nursing-homes/{nursingHomeId}/activities/{activityId}/complete
  *
- * This class adds the activity-specific endpoints that are not
- * covered by the base implementation.
+ * The nursingHomeId is resolved at call time from localStorage so it
+ * reflects the session selected by the user after login.
  */
 export class ActivitiesApiEndpoint extends BaseApiEndpoint<Activity, ActivityResource, ActivitiesResponse, ActivityAssembler> {
 
-  /**
-   * @param http - Angular HttpClient instance passed from ActivitiesApi
-   */
   constructor(http: HttpClient) {
     super(
       http,
@@ -29,51 +29,49 @@ export class ActivitiesApiEndpoint extends BaseApiEndpoint<Activity, ActivityRes
     );
   }
 
-  /**
-   * Retrieves all activities filtered by a specific resident.
-   * @param residentId - ID of the resident to filter by
-   * @returns Observable emitting an array of Activity entities
-   */
+  private buildUrl(): string {
+    const nursingHomeId = localStorage.getItem('nursingHomeId') ?? '1';
+    return this.endpointUrl.replace('{nursingHomeId}', nursingHomeId);
+  }
+
+  override getAll(): Observable<Activity[]> {
+    return this.http.get<ActivityResource[]>(this.buildUrl()).pipe(
+      map(resources => resources.map(r => this.assembler.toEntityFromResource(r))),
+      catchError(this.handleError('Failed to fetch activities'))
+    );
+  }
+
+  override create(activity: Activity): Observable<Activity> {
+    const body = this.assembler.toResourceFromEntity(activity);
+    return this.http.post<ActivityResource>(this.buildUrl(), body).pipe(
+      map(r => this.assembler.toEntityFromResource(r)),
+      catchError(this.handleError('Failed to create activity'))
+    );
+  }
+
   getByResidentId(residentId: number): Observable<Activity[]> {
-    return this.http.get<ActivityResource[]>(`${this.endpointUrl}?residentId=${residentId}`).pipe(
+    return this.http.get<ActivityResource[]>(`${this.buildUrl()}?residentId=${residentId}`).pipe(
       map(resources => resources.map(r => this.assembler.toEntityFromResource(r))),
       catchError(this.handleError('Failed to fetch activities by residentId'))
     );
   }
 
-  /**
-   * Updates an existing activity by its ID.
-   * Only type, title, isRecurring and recurringDays are sent to the backend.
-   * @param activity - Activity entity with updated fields
-   * @returns Observable emitting the updated Activity entity
-   */
   override update(activity: Activity): Observable<Activity> {
     const body = this.assembler.toResourceFromEntity(activity);
-    return this.http.put<ActivityResource>(`${this.endpointUrl}/${activity.id}`, body).pipe(
+    return this.http.put<ActivityResource>(`${this.buildUrl()}/${activity.id}`, body).pipe(
       map(r => this.assembler.toEntityFromResource(r)),
       catchError(this.handleError(`Failed to update activity with id ${activity.id}`))
     );
   }
 
-  /**
-   * Deletes an activity by its ID.
-   * @param id - ID of the activity to delete
-   * @returns Observable that completes when deletion is confirmed
-   */
   override delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.endpointUrl}/${id}`).pipe(
+    return this.http.delete<void>(`${this.buildUrl()}/${id}`).pipe(
       catchError(this.handleError(`Failed to delete activity with id ${id}`))
     );
   }
 
-  /**
-   * Marks an activity as COMPLETED.
-   * Triggered by healthcare staff via the mobile application.
-   * @param id - ID of the activity to complete
-   * @returns Observable emitting the updated Activity entity
-   */
   complete(id: number): Observable<Activity> {
-    return this.http.patch<ActivityResource>(`${this.endpointUrl}/${id}/complete`, {}).pipe(
+    return this.http.patch<ActivityResource>(`${this.buildUrl()}/${id}/complete`, {}).pipe(
       map(r => this.assembler.toEntityFromResource(r)),
       catchError(this.handleError(`Failed to complete activity with id ${id}`))
     );
