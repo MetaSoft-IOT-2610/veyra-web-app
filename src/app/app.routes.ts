@@ -20,6 +20,8 @@ const alertsRoutes = () =>
   import('./alerts/presentation/alerts-routes').then(m => m.alertsRoutes);
 const trackingRoutes =()=>
   import('./tracking/presentation/tracking-routes').then(m=>m.trackingRoutes);
+const chatRoutes = () =>
+  import('./chat/presentation/chat.routes').then(m => m.chatRoutes);
 const baseTitle = 'Veyra';
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -35,7 +37,8 @@ export const routes: Routes = [
       { path: 'payments', loadChildren: paymentsRoutes },
       { path: 'activities', loadChildren: activitiesRoutes },
       { path: 'alerts', loadChildren: alertsRoutes },
-      {path:'tracking',loadChildren:trackingRoutes}
+      {path:'tracking',loadChildren:trackingRoutes},
+      { path: 'chat', loadChildren: chatRoutes },
     ],
   },
   { path: '**', loadComponent: pageNotFound, title: `Page Not Found | ${baseTitle}` },
