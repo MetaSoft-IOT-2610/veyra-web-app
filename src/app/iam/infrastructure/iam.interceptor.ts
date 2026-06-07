@@ -33,8 +33,17 @@ import { IamStore } from '../application/iam.store';
  * 4) Peticiones que no usan `HttpClient` (p. ej. `fetch` en payments) no pasan por aquí: repetir
  *    la misma política allí o unificar todo en `HttpClient`.
  */
+const PUBLIC_URL_FRAGMENTS = [
+  '/authentication/sign-in',
+  '/authentication/sign-up',
+  '/administrators',
+];
+
 export const authenticationInterceptor: HttpInterceptorFn = (req, next) => {
   const iamStore = inject(IamStore);
+
+  const isPublic = PUBLIC_URL_FRAGMENTS.some(fragment => req.url.includes(fragment));
+  if (isPublic) return next(req);
 
   const token = iamStore.currentToken();
 
