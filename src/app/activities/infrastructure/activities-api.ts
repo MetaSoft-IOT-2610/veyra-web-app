@@ -24,7 +24,7 @@ export class ActivitiesApi extends BaseApi {
 
   constructor(http: HttpClient, private nursingHomeAcl: NursingHomeAcl) {
     super();
-    this._activitiesApiEndpoint = new ActivitiesApiEndpoint(http);
+    this._activitiesApiEndpoint = new ActivitiesApiEndpoint(http, nursingHomeAcl);
   }
 
   /**
@@ -32,7 +32,7 @@ export class ActivitiesApi extends BaseApi {
    * @returns Observable emitting an array of Activity entities
    */
   getAll(): Observable<Activity[]> {
-    return this._activitiesApiEndpoint.getAll(this.nursingHomeAcl.getCurrentNursingHomeId());
+    return this._activitiesApiEndpoint.getAll();
   }
 
   /**
@@ -41,7 +41,7 @@ export class ActivitiesApi extends BaseApi {
    * @returns Observable emitting an array of Activity entities
    */
   getByResidentId(residentId: number): Observable<Activity[]> {
-    return this._activitiesApiEndpoint.getByResidentId(residentId, this.nursingHomeAcl.getCurrentNursingHomeId());
+    return this._activitiesApiEndpoint.getByResidentId(residentId);
   }
 
   /**
@@ -50,7 +50,7 @@ export class ActivitiesApi extends BaseApi {
    * @returns Observable emitting the created Activity entity
    */
   create(activity: Activity): Observable<Activity> {
-    return this._activitiesApiEndpoint.create(activity, this.nursingHomeAcl.getCurrentNursingHomeId());
+    return this._activitiesApiEndpoint.create(activity);
   }
 
   /**
