@@ -22,7 +22,7 @@ import { NursingHomeAcl } from './acl/nursing-home.acl';
 export class ActivitiesApi extends BaseApi {
   private readonly _activitiesApiEndpoint: ActivitiesApiEndpoint;
 
-  constructor(http: HttpClient, private readonly nursingHomeAcl: NursingHomeAcl) {
+  constructor(http: HttpClient, private nursingHomeAcl: NursingHomeAcl) {
     super();
     this._activitiesApiEndpoint = new ActivitiesApiEndpoint(http);
   }
