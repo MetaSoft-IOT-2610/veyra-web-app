@@ -57,6 +57,13 @@ export const environment = {
   platformProviderWsTrackingTopicPath: '/topic/tracking',
   platformProviderDevicesEndpointPath: '/devices',
 
+  // Chat Bounded Context
+  platformProviderUsersEndpointPath: '/users',
+  platformProviderConversationsEndpointPath: '/conversations',
+  platformProviderUserConversationsEndpointPath: '/users/{userId}/conversations',
+  platformProviderConversationMessagesEndpointPath: '/conversations/{conversationId}/messages',
+  platformProviderWsChatTopicPath: '/topic/conversations',
+
   // Firebase Cloud Messaging
   platformProviderFcmTokenEndpointPath: '/users/{userId}/push-tokens',
   firebaseConfig: {

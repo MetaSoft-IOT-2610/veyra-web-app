@@ -60,6 +60,13 @@ export const environment = {
   platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
   platformProviderWsTrackingTopicPath: '/topic/tracking',
 
+  // Chat Bounded Context
+  platformProviderUsersEndpointPath: '/users',
+  platformProviderConversationsEndpointPath: '/conversations',
+  platformProviderUserConversationsEndpointPath: '/users/{userId}/conversations',
+  platformProviderConversationMessagesEndpointPath: '/conversations/{conversationId}/messages',
+  platformProviderWsChatTopicPath: '/topic/conversations',
+
   // Firebase Cloud Messaging
   // Generate the VAPID key from the Firebase Console → Project Settings → Cloud Messaging → Web Push certificates.
   platformProviderFcmTokenEndpointPath: '/users/{userId}/push-tokens',
