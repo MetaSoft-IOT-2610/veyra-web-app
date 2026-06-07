@@ -8,8 +8,8 @@ export const environment = {
   production: true,
   showIamToolbar: true,
   fallbackDevUserSession: false,
-  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
-  platformProviderWsUrl: 'ws://localhost:8080/ws',
+  platformProviderApiBaseUrl: 'https://veyra-backend-production-f22c.up.railway.app/api/v1',
+  platformProviderWsUrl: 'wss://veyra-backend-production-f22c.up.railway.app/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
   platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-hires',
@@ -50,7 +50,8 @@ export const environment = {
   platformProviderPersonProfilesEndpointPath: '/person-profiles',
 
   // Activities Bounded Context
-  platformProviderActivitiesEndpointPath: '/activities',
+  platformProviderActivitiesEndpointPath: '/nursing-homes/{nursingHomeId}/activities',
+  platformProviderActivityEndpointPath: '/activities',
 
   // Alerts Bounded Context
   platformProviderAlertsEndpointPath: '/alerts',
