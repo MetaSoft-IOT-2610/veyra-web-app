@@ -20,6 +20,7 @@ import { hcmPaths } from '../../../../hcm/presentation/hcm-routes';
 import { activitiesPaths } from '../../../../activities/presentation/activities-routes';
 import { alertsPaths } from '../../../../alerts/presentation/alerts-routes';
 import {trackingPaths} from '../../../../tracking/presentation/tracking-routes';
+import { chatPaths } from '../../../../chat/presentation/chat.routes';
 import { FirebaseMessagingService } from '../../../infrastructure/firebase-messaging.service';
 
 @Component({
@@ -76,6 +77,7 @@ export class MainLayout implements OnInit, AfterViewInit {
     { label: 'nav.alerts', icon: 'notifications_active', link: `/alerts${alertsPaths.list}`, color: '#5FC2BA' },
     { label: 'nav.relatives', icon: 'people', link: `/nursing/${nursingPaths.relatives}`, color: '#5FC2BA' },
     { label: 'my-patients', icon: 'favorite', link: `/nursing/${nursingPaths.myPatients}`, color: '#5FC2BA' },
+    { label: 'nav.chat', icon: 'chat', link: `/chat/${chatPaths.inbox}`, color: '#5FC2BA' },
   ];
 
   constructor(
