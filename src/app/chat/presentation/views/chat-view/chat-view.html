@@ -1,0 +1,130 @@
+<div class="chat-layout">
+
+  <!-- ===== LEFT: Contacts panel ===== -->
+  <aside class="contacts-panel">
+    <div class="contacts-header">
+      <h2 class="contacts-title">
+        <mat-icon class="contacts-title-icon">people</mat-icon>
+        {{ 'chat.section-title' | translate }}
+      </h2>
+    </div>
+
+    <div class="contacts-search">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          [placeholder]="'chat.search-placeholder' | translate"
+          [ngModel]="store.searchQuery()"
+          (ngModelChange)="onSearchChange($event)" />
+      </mat-form-field>
+    </div>
+
+    <div class="contacts-list">
+      @if (store.loadingContacts()) {
+        <div class="contacts-loading">
+          <mat-progress-spinner diameter="32" mode="indeterminate" />
+        </div>
+      } @else if (store.filteredContacts().length === 0) {
+        <div class="contacts-empty">
+          <mat-icon>person_off</mat-icon>
+          <span>{{ 'chat.empty-contacts' | translate }}</span>
+        </div>
+      } @else {
+        @for (contact of store.filteredContacts(); track contact.id) {
+          <div
+            class="contact-item"
+            [class.selected]="isSelected(contact)"
+            (click)="selectContact(contact)"
+            [matTooltip]="contact.username"
+            matTooltipPosition="right">
+            <div class="contact-avatar">{{ getInitials(contact.username) }}</div>
+            <div class="contact-info">
+              <span class="contact-name">{{ contact.username }}</span>
+              <span class="contact-role">{{ 'chat.role-label' | translate }}</span>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </aside>
+
+  <!-- ===== RIGHT: Messages panel ===== -->
+  <section class="messages-panel">
+    @if (!store.selectedContact()) {
+      <!-- Empty state -->
+      <div class="messages-empty-state">
+        <mat-icon class="empty-icon">chat_bubble_outline</mat-icon>
+        <h3>{{ 'chat.empty-state-heading' | translate }}</h3>
+        <p>{{ 'chat.empty-state-body' | translate }}</p>
+      </div>
+    } @else {
+      <!-- Header -->
+      <div class="messages-header">
+        <div class="messages-header-avatar">{{ getInitials(store.selectedContact()!.username) }}</div>
+        <div class="messages-header-info">
+          <span class="messages-header-name">{{ store.selectedContact()!.username }}</span>
+          <span class="messages-header-role">{{ 'chat.role-label' | translate }}</span>
+        </div>
+      </div>
+
+      <!-- Messages list -->
+      <div class="messages-list" id="messages-list">
+        @if (store.loadingMessages()) {
+          <div class="messages-loading">
+            <mat-progress-spinner diameter="36" mode="indeterminate" />
+          </div>
+        } @else if (store.messages().length === 0) {
+          <div class="messages-no-history">
+            <mat-icon>forum</mat-icon>
+            <span>{{ 'chat.no-messages' | translate }}</span>
+          </div>
+        } @else {
+          @for (message of store.messages(); track message.id) {
+            <div class="message-bubble-wrapper" [class.own]="isOwnMessage(message.senderUserId)">
+              <div class="message-bubble" [class.own]="isOwnMessage(message.senderUserId)">
+                <span class="message-content">{{ message.content }}</span>
+                <span class="message-time">{{ formatTime(message.createdAt) }}</span>
+              </div>
+            </div>
+          }
+        }
+      </div>
+
+      <!-- Input area -->
+      <div class="message-input-area">
+        @if (store.error()) {
+          <div class="message-error">
+            <mat-icon>error_outline</mat-icon>
+            {{ store.error() | translate }}
+          </div>
+        }
+        <div class="message-input-row">
+          <mat-form-field appearance="outline" class="message-input-field">
+            <input
+              matInput
+              [placeholder]="'chat.input-placeholder' | translate"
+              [ngModel]="messageText()"
+              (ngModelChange)="messageText.set($event)"
+              (keyup.enter)="sendMessage()"
+              [disabled]="store.sending()" />
+          </mat-form-field>
+          <button
+            mat-fab
+            color="primary"
+            class="send-button"
+            [disabled]="!messageText().trim() || store.sending()"
+            (click)="sendMessage()"
+            [matTooltip]="'chat.send' | translate">
+            @if (store.sending()) {
+              <mat-progress-spinner diameter="20" mode="indeterminate" color="accent" />
+            } @else {
+              <mat-icon>send</mat-icon>
+            }
+          </button>
+        </div>
+      </div>
+    }
+  </section>
+
+</div>
