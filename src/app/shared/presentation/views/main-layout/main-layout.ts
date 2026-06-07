@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { RouteToolbarService } from '../../../routing/route-toolbar.service';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
@@ -19,6 +20,7 @@ import { hcmPaths } from '../../../../hcm/presentation/hcm-routes';
 import { activitiesPaths } from '../../../../activities/presentation/activities-routes';
 import { alertsPaths } from '../../../../alerts/presentation/alerts-routes';
 import {trackingPaths} from '../../../../tracking/presentation/tracking-routes';
+import { FirebaseMessagingService } from '../../../infrastructure/firebase-messaging.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -42,6 +44,8 @@ import {trackingPaths} from '../../../../tracking/presentation/tracking-routes';
 export class MainLayout implements OnInit, AfterViewInit {
   private readonly iamStore = inject(IamStore);
   protected readonly routeToolbar = inject(RouteToolbarService);
+  private readonly fcmService = inject(FirebaseMessagingService);
+  private readonly destroyRef = inject(DestroyRef);
 
   /** Si es true, toolbar muestra IAM completo (login/registro). Si es false, solo con sesión activa (perfil / salir). */
   protected readonly showIamToolbar = environment.showIamToolbar;
@@ -92,6 +96,27 @@ export class MainLayout implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // Initialize FCM for sessions rehydrated from localStorage (e.g. after page refresh).
+    // For fresh sign-ins, IamStore.signIn() already triggers initFcmForCurrentUser().
+    if (this.iamStore.isSignedIn()) {
+      this.iamStore.initFcmForCurrentUser().catch(err =>
+        console.error('[FCM] Failed to initialize FCM on main layout init:', err)
+      );
+    }
+
+    // Show a browser Notification for FCM messages received while the app is in the foreground.
+    this.fcmService.foregroundMessage$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(payload => {
+        if (Notification.permission === 'granted') {
+          const title = payload.notification?.title ?? 'Veyra';
+          const body = payload.notification?.body ?? '';
+          new Notification(title, {
+            body,
+            icon: payload.notification?.icon ?? '/images/shared/logo.png',
+          });
+        }
+      });
   }
 
   ngAfterViewInit(): void {

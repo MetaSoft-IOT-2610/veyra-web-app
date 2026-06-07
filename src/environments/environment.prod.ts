@@ -8,7 +8,8 @@ export const environment = {
   production: true,
   showIamToolbar: true,
   fallbackDevUserSession: false,
-  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  //platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
@@ -58,5 +59,19 @@ export const environment = {
   // Tracking Bounden Context
   platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
   platformProviderWsTrackingTopicPath: '/topic/tracking',
+
+  // Firebase Cloud Messaging
+  // Generate the VAPID key from the Firebase Console → Project Settings → Cloud Messaging → Web Push certificates.
+  platformProviderFcmTokenEndpointPath: '/users/{userId}/push-tokens',
+  firebaseConfig: {
+    apiKey: 'AIzaSyAh2nXjZIW5dWci5GH-ibsR7ysRxGas_Dg',
+    authDomain: 'upc-pre-iot-metasoft.firebaseapp.com',
+    projectId: 'upc-pre-iot-metasoft',
+    storageBucket: 'upc-pre-iot-metasoft.firebasestorage.app',
+    messagingSenderId: '565630535895',
+    appId: '1:565630535895:web:3cfbc0720c5e0dc2438892',
+    measurementId: 'G-M9JKZLCWNE',
+  },
+  firebaseVapidKey: 'BKAE2jj01JE9rStKocpNBTDzHx8p73aArkWTx2LraSe84Ie8ulaFeWN3atm5WkbVZXSRyKhoAfzeLrECK6_nbmA',
 
 };

@@ -14,6 +14,7 @@ import {CreateAdministratorApiEndpoint} from './create-administrator-api-endpoin
 import {CreateAdministratorAssembler} from './create-administrator-assembler';
 import {AdministratorResource} from './create-administrator-response';
 import {CreateAdministratorCommand} from '../domain/model/create-administrator.command';
+import {FcmTokenApiEndpoint} from './fcm-token-api-endpoint';
 
 /**
  * API service for identity and access management operations, including sign-up and sign-in.
@@ -23,6 +24,7 @@ export class IamApi extends BaseApi {
   private readonly signUpEndpoint: SignUpApiEndpoint;
   private readonly signInEndpoint: SignInApiEndpoint;
   private readonly administratorEndpoint: CreateAdministratorApiEndpoint;
+  private readonly fcmTokenEndpoint: FcmTokenApiEndpoint;
 
   /**
    * Creates a new IamApi instance.
@@ -33,6 +35,7 @@ export class IamApi extends BaseApi {
     this.signUpEndpoint = new SignUpApiEndpoint(http, new SignUpAssembler());
     this.signInEndpoint = new SignInApiEndpoint(http, new SignInAssembler());
     this.administratorEndpoint = new CreateAdministratorApiEndpoint(http, new CreateAdministratorAssembler());
+    this.fcmTokenEndpoint = new FcmTokenApiEndpoint(http);
   }
 
   /**
@@ -55,5 +58,23 @@ export class IamApi extends BaseApi {
 
   createAdministrator(createAdministratorCommand: CreateAdministratorCommand): Observable<AdministratorResource> {
     return this.administratorEndpoint.createAdministrator(createAdministratorCommand);
+  }
+
+  /**
+   * Registers an FCM token with the backend so the server can send push notifications.
+   * @param userId - The authenticated user's ID.
+   * @param token - The FCM registration token.
+   */
+  registerFcmToken(userId: number, token: string): Observable<void> {
+    return this.fcmTokenEndpoint.registerToken(userId, token);
+  }
+
+  /**
+   * Removes an FCM token from the backend (called on sign-out).
+   * @param userId - The authenticated user's ID.
+   * @param token - The FCM registration token to remove.
+   */
+  removeFcmToken(userId: number, token: string): Observable<void> {
+    return this.fcmTokenEndpoint.removeToken(userId, token);
   }
 }

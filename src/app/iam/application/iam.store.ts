@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+﻿import { computed, Injectable, signal } from '@angular/core';
 import { User } from '../domain/model/user.entity';
 import { SignInCommand } from '../domain/model/sign-in.command';
 import { Router } from '@angular/router';
@@ -10,18 +10,16 @@ import { appNav } from '../../shared/routing/app-nav';
 import { analyticsNav } from '../../analytics/presentation/analytics-routes';
 import { iamNav } from '../presentation/iam.routes';
 import { nursingNav } from '../../nursing/presentation/nursing-routes';
+import { FirebaseMessagingService } from '../../shared/infrastructure/firebase-messaging.service';
 
 /**
- * Estado de sesión en memoria (`isSignedIn`, usuario, roles) + token en `localStorage` tras login.
- * Tras F5, `rehydrateSessionFromStorage()` restaura sesión si existen `token`, `username` y `userId`.
+ * Estado de sesion en memoria (isSignedIn, usuario, roles) + token en localStorage tras login.
+ * Tras F5, rehydrateSessionFromStorage() restaura sesion si existen token, username y userId.
  *
- * MEJORA — Expiración / 401 (coordinar con `authenticationInterceptor`):
- * - Añadir `readonly sessionExpired = signal(false)` (o `overlayVisible`).
- * - Método `handleSessionExpired(router: Router)`: limpiar storage y señales como `signOut`,
- *   poner `sessionExpired.set(true)`, abrir `MatSnackBar`, `router.navigate(['/iam/sign-in'])`.
- * - En la plantilla global o `MainLayout`, `@if (store.sessionExpired()) { <div class="session-lock">…</div> }`
- *   con posición fixed, fondo semitransparente y `pointer-events: auto` para bloquear la interacción
- *   hasta que el usuario vaya a login (o `sessionExpired.set(false)` solo tras login exitoso).
+ * FCM - Firebase Cloud Messaging:
+ * - initFcmForCurrentUser(): inicializa FCM, obtiene el token y lo registra en el backend.
+ *   Llamar tras sign-in (automatico) y al montar MainLayout para sesiones rehidratadas.
+ * - cleanupFcm(): revoca el token de Firebase y lo elimina del backend. Llamar en sign-out.
  */
 @Injectable({ providedIn: 'root' })
 export class IamStore {
@@ -31,7 +29,6 @@ export class IamStore {
   private readonly currentUsernameSignal = signal<string | null>(null);
   private readonly currentUserIdSignal = signal<number | null>(null);
   private readonly usersSignal = signal<Array<User>>([]);
-
   private readonly currentRolesSignal = signal<string[]>([]);
 
   readonly isSignedIn = this.isSignedInSignal.asReadonly();
@@ -45,7 +42,7 @@ export class IamStore {
   readonly error = this._errorSignal.asReadonly();
   readonly isLoadingUsers = this.loadingUsers.asReadonly();
 
-  constructor(private iamApi: IamApi) {
+  constructor(private iamApi: IamApi, private readonly fcmService: FirebaseMessagingService) {
     this.isSignedInSignal.set(false);
     this.currentUsernameSignal.set(null);
     this.currentUserIdSignal.set(null);
@@ -53,17 +50,12 @@ export class IamStore {
     this.rehydrateSessionFromStorage();
   }
 
-  /**
-   * Sesión simulada en desarrollo: llamar solo desde el shell autenticado (`MainLayout`),
-   * no al arrancar la app, para que rutas públicas como `/home` sigan mostrando SIGN-IN / registro.
-   */
   tryApplyDevFallbackSession(): void {
     if (environment.fallbackDevUserSession && !this.isSignedInSignal()) {
       this.applyDefaultDevUserSession();
     }
   }
 
-  /** Valores por defecto solo desarrollo, si no hay login real ni datos en storage. */
   private applyDefaultDevUserSession(): void {
     const username = 'Usuario';
     const userId = '1';
@@ -78,17 +70,14 @@ export class IamStore {
     this.currentRolesSignal.set(roles);
   }
 
-  /** Restaura sesión en memoria si hay token guardado (p. ej. tras F5 o login stub). */
   rehydrateSessionFromStorage(): void {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('userId');
     const rolesJson = localStorage.getItem('userRoles');
 
-    // LOG: inspección inicial de storage
     console.debug('[IamStore] rehydrateSessionFromStorage -> token:', token, 'username:', username, 'userId:', userId, 'roles:', rolesJson);
 
-    // tratar 'null' o cadena vacía como ausente
     if (!token || token === 'null' || !username || !userId) {
       console.debug('[IamStore] rehydrate aborted: token/username/userId missing or invalid');
       return;
@@ -107,6 +96,29 @@ export class IamStore {
     this.currentRolesSignal.set(Array.isArray(roles) ? roles : []);
   }
 
+  /**
+   * Initializes FCM for the currently authenticated user.
+   * Requests Notification permission, registers the service worker, retrieves the FCM
+   * token, and sends it to the backend. Idempotent - safe to call multiple times.
+   * Called automatically after sign-in and from MainLayout.ngOnInit for rehydrated sessions.
+   */
+  async initFcmForCurrentUser(): Promise<void> {
+    const userId = this.currentUserIdSignal();
+    if (!userId || !this.isSignedInSignal()) {
+      return;
+    }
+
+    const token = await this.fcmService.initAndGetToken();
+    if (!token) {
+      return;
+    }
+
+    this.iamApi.registerFcmToken(userId, token).subscribe({
+      next: () => console.debug('[FCM] Token registered with backend for user', userId),
+      error: err => console.error('[FCM] Failed to register token with backend:', err),
+    });
+  }
+
   createAdministrator(createAdministratorCommand: CreateAdministratorCommand, router: Router) {
     this.iamApi.createAdministrator(createAdministratorCommand).subscribe({
       next: (administratorResource) => {
@@ -121,7 +133,7 @@ export class IamStore {
         this.currentRolesSignal.set([]);
         void router.navigate(iamNav.signUp(), { queryParams: { role: 'admin' } });
       }
-    })
+    });
   }
 
   signIn(signInCommand: SignInCommand, router: Router) {
@@ -137,7 +149,11 @@ export class IamStore {
         this.currentUserIdSignal.set(signInResource.id);
         this.currentRolesSignal.set(signInResource.roles ?? []);
 
-        if(signInResource.roles.includes("ROLE_ADMIN")) {
+        this.initFcmForCurrentUser().catch(err =>
+          console.error('[FCM] Failed to initialize FCM after sign-in:', err)
+        );
+
+        if (signInResource.roles.includes('ROLE_ADMIN')) {
           void router.navigate(nursingNav.nursingHomeNew());
         } else {
           void router.navigate(analyticsNav.dashboard());
@@ -172,6 +188,8 @@ export class IamStore {
   }
 
   signOut(router: Router) {
+    this._cleanupFcm();
+
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('username');
@@ -182,5 +200,23 @@ export class IamStore {
     this.currentUserIdSignal.set(null);
     this.currentRolesSignal.set([]);
     void router.navigate(appNav.home);
+  }
+
+  // Private
+
+  private _cleanupFcm(): void {
+    const userId = this.currentUserIdSignal();
+    const storedToken = this.fcmService.storedToken();
+
+    if (userId && storedToken) {
+      this.iamApi.removeFcmToken(userId, storedToken).subscribe({
+        next: () => console.debug('[FCM] Token removed from backend for user', userId),
+        error: err => console.error('[FCM] Failed to remove token from backend:', err),
+      });
+    }
+
+    this.fcmService.deleteCurrentToken().catch(err =>
+      console.error('[FCM] Failed to delete Firebase token:', err)
+    );
   }
 }

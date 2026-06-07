@@ -19,3 +19,8 @@
 
 /i18n/*
   Cache-Control: no-cache
+
+# Service worker must not be cached so the browser always fetches the latest version
+/firebase-messaging-sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Service-Worker-Allowed: /
