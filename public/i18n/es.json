@@ -39,7 +39,24 @@
     "open-menu": "Abrir menú",
     "language": "Idioma de la interfaz",
     "lang-es": "Español",
-    "lang-en": "English"
+    "lang-en": "English",
+    "chat": "Chat"
+  },
+  "chat": {
+    "title": "Chat",
+    "section-title": "Familiares",
+    "search-placeholder": "Buscar familiar...",
+    "empty-contacts": "No se encontraron familiares",
+    "role-label": "Familiar",
+    "empty-state-heading": "Selecciona un familiar",
+    "empty-state-body": "Elige un contacto de la lista para iniciar o continuar una conversación.",
+    "no-messages": "No hay mensajes aún. ¡Sé el primero en escribir!",
+    "input-placeholder": "Escribe un mensaje...",
+    "send": "Enviar",
+    "error-load-contacts": "No se pudo cargar la lista de contactos.",
+    "error-start-conversation": "No se pudo iniciar la conversación.",
+    "error-load-messages": "No se pudieron cargar los mensajes.",
+    "error-send-message": "No se pudo enviar el mensaje."
   },
   "page-not-found": {
     "title": "Página no encontrada",

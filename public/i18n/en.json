@@ -39,7 +39,24 @@
     "open-menu": "Open menu",
     "language": "Interface language",
     "lang-es": "Spanish",
-    "lang-en": "English"
+    "lang-en": "English",
+    "chat": "Chat"
+  },
+  "chat": {
+    "title": "Chat",
+    "section-title": "Relatives",
+    "search-placeholder": "Search relative...",
+    "empty-contacts": "No relatives found",
+    "role-label": "Relative",
+    "empty-state-heading": "Select a relative",
+    "empty-state-body": "Choose a contact from the list to start or continue a conversation.",
+    "no-messages": "No messages yet. Be the first to write!",
+    "input-placeholder": "Write a message...",
+    "send": "Send",
+    "error-load-contacts": "Could not load the contacts list.",
+    "error-start-conversation": "Could not start the conversation.",
+    "error-load-messages": "Could not load messages.",
+    "error-send-message": "Could not send the message."
   },
   "page-not-found": {
     "title": "Page not found",
