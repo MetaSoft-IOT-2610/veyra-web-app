@@ -1,45 +1,28 @@
 import { AfterViewChecked, Component, computed, inject, ViewChild } from '@angular/core';
 import { TrackingStore } from '../../../application/tracking.store';
 import { Router } from '@angular/router';
-import { MatError } from '@angular/material/form-field';
-import {
-  MatCell, MatCellDef, MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
-  MatTable, MatTableDataSource
-} from '@angular/material/table';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSortModule, MatSort } from '@angular/material/sort';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
 import { TranslatePipe } from '@ngx-translate/core';
-import { MatIcon } from '@angular/material/icon';
-import { MatSort, MatSortHeader } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import {trackingNav} from '../../tracking-routes';
-import {DeviceStatus} from '../../../domain/model/device-status.enum';
+import { trackingNav } from '../../tracking-routes';
+import { DeviceStatus } from '../../../domain/model/device-status.enum';
+import { ChangeDeviceStatusCommand } from '../../../domain/model/change-device-status.command';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-device-list',
   imports: [
-    MatError,
-    MatTable,
-    MatHeaderCellDef,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatCell,
-    MatHeaderRowDef,
-    MatRowDef,
-    MatButton,
-    MatHeaderRow,
-    MatRow,
-    MatProgressSpinner,
-    TranslatePipe,
-    MatIcon,
-    MatIconButton,
-    MatSort,
-    MatSortHeader,
-    MatPaginator
+    MatTableModule, MatButtonModule, MatProgressSpinnerModule,
+    MatIconModule, MatSortModule, MatPaginatorModule,
+    MatSelectModule, MatFormFieldModule, MatChipsModule,
+    TranslatePipe, FormsModule,
   ],
   templateUrl: './device-list.html',
   styleUrl: './device-list.css'
@@ -49,8 +32,14 @@ export class DeviceList implements AfterViewChecked {
   protected router = inject(Router);
   readonly DeviceStatus = DeviceStatus;
 
-  displayedColumns: string[] = ['macAddress','deviceType', 'status', 'actions'];
+  displayedColumns: string[] = ['macAddress', 'deviceType', 'status', 'actions'];
   nursingHomeId: number = 0;
+
+  readonly statusOptions = [
+    { value: DeviceStatus.AVAILABLE, labelKey: 'tracking.devices.status-options.available' },
+    { value: DeviceStatus.ASSIGNED,  labelKey: 'tracking.devices.status-options.assigned'  },
+    { value: DeviceStatus.DISABLED,  labelKey: 'tracking.devices.status-options.disabled'  },
+  ];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -79,9 +68,11 @@ export class DeviceList implements AfterViewChecked {
     this.router.navigate(trackingNav.deviceEdit(id)).then();
   }
 
-  disableDevice(id: number): void {
-    this.store.disableDevice(id);
+  onStatusChange(deviceId: number, newStatus: string): void {
+    const command = new ChangeDeviceStatusCommand({ deviceId, status: newStatus });
+    this.store.changeDeviceStatus(command);
   }
+
   ngAfterViewChecked(): void {
     if (this.dataSource().paginator !== this.paginator) {
       this.dataSource().paginator = this.paginator;

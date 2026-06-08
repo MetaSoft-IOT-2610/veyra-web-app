@@ -72,7 +72,7 @@ export class DeviceForm {
 
     if (this.isEdit && this.deviceId) {
       const command = new UpdateDeviceCommand({
-        id: this.deviceId,
+        deviceId: this.deviceId,
         deviceType: this.form.value.deviceType!,
         macAddress: this.form.value.macAddress!
       });
@@ -83,7 +83,7 @@ export class DeviceForm {
         deviceType: this.form.value.deviceType!,
         macAddress: this.form.value.macAddress!
       });
-      this.store.addDevice(this.nursingHomeId, command);
+      this.store.addDevice(command);
     }
 
     this.router.navigate(trackingNav.devices()).then();

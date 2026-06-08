@@ -1,57 +1,136 @@
-<h1 class="title">{{ 'tracking.devices.list-title' | translate }}</h1>
+<div class="page-wrapper">
 
-@if (store.loading()) {
-  <mat-spinner diameter="40"></mat-spinner>
-}
-@if (store.error()) {
-  <mat-error>{{ store.error() }}</mat-error>
-}
+  <div class="page-header">
+    <div>
+      <h2 class="page-title">{{ 'tracking.devices.title' | translate }}</h2>
+      <p class="page-subtitle">{{ 'tracking.devices.subtitle' | translate }}</p>
+    </div>
+    <button mat-flat-button class="btn-register" (click)="navigateToNew()">
+      <mat-icon>add_circle_outline</mat-icon>
+      {{ 'tracking.devices.register-new' | translate }}
+    </button>
+  </div>
 
-<table mat-table [dataSource]="dataSource()" class="mat-elevation-z8"
-       matSort matSortActive="deviceId" matSortDirection="asc" matSortDisableClear>
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon total"><mat-icon>devices</mat-icon></div>
+        <span class="stat-chip total-chip">{{ 'tracking.devices.stats.total' | translate }}</span>
+      </div>
+      <div class="stat-number">{{ store.totalDevices() }}</div>
+      <div class="stat-label">{{ 'tracking.devices.stats.registered' | translate }}</div>
+    </div>
 
-  <ng-container matColumnDef="macAddress">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'tracking.devices.mac-address' | translate }}</th>
-    <td mat-cell *matCellDef="let device">{{ device.macAddress }}</td>
-  </ng-container>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon available"><mat-icon>wifi_tethering</mat-icon></div>
+        <span class="stat-chip available-chip">{{ 'tracking.devices.stats.available' | translate }}</span>
+      </div>
+      <div class="stat-number">{{ store.availableDevices() }}</div>
+      <div class="stat-label">{{ 'tracking.devices.stats.ready' | translate }}</div>
+    </div>
 
-  <ng-container matColumnDef="deviceType">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'tracking.devices.device-type' | translate }}</th>
-    <td mat-cell *matCellDef="let device">{{ device.deviceType }}</td>
-  </ng-container>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon assigned"><mat-icon>person_pin</mat-icon></div>
+        <span class="stat-chip assigned-chip">{{ 'tracking.devices.stats.assigned' | translate }}</span>
+      </div>
+      <div class="stat-number">{{ store.assignedDevices() }}</div>
+      <div class="stat-label">{{ 'tracking.devices.stats.in-use' | translate }}</div>
+    </div>
 
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'tracking.devices.status' | translate }}</th>
-    <td mat-cell *matCellDef="let device">{{ device.status }}</td>
-  </ng-container>
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon disabled"><mat-icon>wifi_off</mat-icon></div>
+        <span class="stat-chip disabled-chip">{{ 'tracking.devices.stats.disabled' | translate }}</span>
+      </div>
+      <div class="stat-number">{{ store.disabledDevices() }}</div>
+      <div class="stat-label">{{ 'tracking.devices.stats.offline' | translate }}</div>
+    </div>
+  </div>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>{{ 'tracking.devices.actions' | translate }}</th>
-    <td mat-cell *matCellDef="let device">
+  @if (store.loading()) {
+    <div class="loading-wrap"><mat-spinner diameter="36"></mat-spinner></div>
+  }
+  @if (store.error()) {
+    <div class="error-banner">{{ store.error() }}</div>
+  }
 
-      <button mat-icon-button (click)="editDevice(device.id)">
-        <mat-icon>edit</mat-icon>
-      </button>
+  <div class="table-card">
+    <div class="table-header-row">
+      <span class="table-title">{{ 'tracking.devices.inventory-title' | translate }}</span>
+    </div>
 
-      <button mat-icon-button
-              [disabled]="device.status !== DeviceStatus.AVAILABLE"
-              (click)="assignDevice(device.id)">
-        <mat-icon>person_add</mat-icon>
-      </button>
+    <table mat-table [dataSource]="dataSource()" matSort class="devices-table">
 
-      <button mat-icon-button (click)="disableDevice(device.id)">
-        <mat-icon>{{ device.status === DeviceStatus.DISABLED ? 'toggle_on' : 'toggle_off' }}</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+      <ng-container matColumnDef="macAddress">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'tracking.devices.mac-address' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let device">
+          <div class="device-cell">
+            <div class="device-icon"
+                 [class.icon-gps]="device.deviceType === 'GPS'"
+                 [class.icon-vital]="device.deviceType !== 'GPS'">
+              <mat-icon>{{ device.deviceType === 'GPS' ? 'location_on' : 'monitor_heart' }}</mat-icon>
+            </div>
+            <div>
+              <div class="mac-text">{{ device.macAddress }}</div>
+              <div class="device-id-text">ID: {{ device.id }}</div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <ng-container matColumnDef="deviceType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'tracking.devices.device-type' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let device">{{ device.deviceType }}</td>
+      </ng-container>
 
-</table>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ 'tracking.devices.status' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let device">
+          <mat-select
+            class="status-select"
+            [class.sel-available]="device.status === DeviceStatus.AVAILABLE"
+            [class.sel-assigned]="device.status === DeviceStatus.ASSIGNED"
+            [class.sel-disabled]="device.status === DeviceStatus.DISABLED"
+            [value]="device.status"
+            (selectionChange)="onStatusChange(device.id, $event.value)"
+          >
+            @for (opt of statusOptions; track opt.value) {
+              <mat-option [value]="opt.value">{{ opt.labelKey | translate }}</mat-option>
+            }
+          </mat-select>
+        </td>
+      </ng-container>
 
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-<button mat-raised-button color="primary" (click)="navigateToNew()">
-  {{ 'tracking.devices.new' | translate }}
-</button>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ 'tracking.devices.actions' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let device">
+          <button mat-icon-button
+                  [title]="'tracking.devices.edit' | translate"
+                  (click)="editDevice(device.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button
+                  [disabled]="device.status !== DeviceStatus.AVAILABLE"
+                  [title]="'tracking.devices.assign' | translate"
+                  (click)="assignDevice(device.id)">
+            <mat-icon>person_add</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
