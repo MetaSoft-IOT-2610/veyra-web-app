@@ -15,6 +15,7 @@ export class DeviceAssembler implements BaseAssembler<Device, DeviceResource, De
        status:resource.status,
       macAddress:resource.macAddress,
       residentId:resource.residentId,
+        lastSync:resource.lastSync,
     });
   }
 
@@ -26,6 +27,7 @@ export class DeviceAssembler implements BaseAssembler<Device, DeviceResource, De
       status: entity.status,
       macAddress: entity.macAddress,
       residentId:entity.residentId,
+      lastSync:entity.lastSync,
     } as DeviceResource;
   }
 }
