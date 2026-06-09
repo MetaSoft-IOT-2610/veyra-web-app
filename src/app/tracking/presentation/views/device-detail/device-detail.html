@@ -1,1 +1,111 @@
-<p>device-detail works!</p>
+<div class="detail-wrapper">
+  @if (!device) {
+    <div class="not-found">
+      <mat-icon>device_unknown</mat-icon>
+      <p>{{ 'tracking.devices.detail.not-found' | translate }}</p>
+      <button mat-stroked-button (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'tracking.devices.detail.back' | translate }}
+      </button>
+    </div>
+  }
+
+  @if (device) {
+    <!-- Header -->
+    <div class="detail-header">
+      <div class="header-left">
+        <button mat-icon-button class="back-btn" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div>
+          <h2 class="detail-title">{{ 'tracking.devices.detail.title' | translate }}</h2>
+          <p class="detail-subtitle">ID: {{ device.id }}</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="status-badge" [class]="getStatusClass()">
+          <mat-icon class="badge-icon">{{ getStatusIcon() }}</mat-icon>
+          {{ 'tracking.devices.status-options.' + device.status.toLowerCase() | translate }}
+        </span>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="detail-body">
+
+      <div class="info-card">
+        <div class="card-header">
+          <div class="device-icon-wrap" [class.icon-gps]="device.deviceType === 'GPS'" [class.icon-vital]="device.deviceType !== 'GPS'">
+            <mat-icon>{{ getDeviceIcon() }}</mat-icon>
+          </div>
+          <div>
+            <div class="card-label">{{ 'tracking.devices.detail.device-type' | translate }}</div>
+            <div class="card-value">{{ device.deviceType }}</div>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="info-row">
+          <div class="info-item">
+            <span class="info-label">
+              <mat-icon class="info-icon">router</mat-icon>
+              {{ 'tracking.devices.mac-address' | translate }}
+            </span>
+            <span class="mac-value">{{ device.macAddress }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">
+              <mat-icon class="info-icon">sync</mat-icon>
+              {{ 'tracking.devices.detail.last-sync' | translate }}
+            </span>
+            <span class="info-value">
+              {{ device.lastSync ? (device.lastSync | date:'dd MMM yyyy, HH:mm') : '—' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resident card -->
+      <div class="info-card">
+        <div class="card-section-title">
+          <mat-icon>person_pin</mat-icon>
+          {{ 'tracking.devices.detail.assigned-resident' | translate }}
+        </div>
+
+        @if (device.residentId) {
+          <div class="resident-row">
+            <div class="resident-avatar">
+              <mat-icon>person</mat-icon>
+            </div>
+            <div class="resident-info">
+              <div class="resident-name">{{ 'tracking.devices.detail.resident-id' | translate }}: {{ device.residentId }}</div>
+              <div class="resident-home">{{ 'tracking.devices.detail.nursing-home' | translate }}: {{ device.nursingHomeId }}</div>
+            </div>
+          </div>
+        } @else {
+          <div class="unassigned-row">
+            <mat-icon class="unassigned-icon">person_off</mat-icon>
+            <span>{{ 'tracking.devices.detail.unassigned' | translate }}</span>
+          </div>
+        }
+      </div>
+
+    </div>
+
+    <!-- Footer actions -->
+    <div class="detail-footer">
+      <button mat-stroked-button class="btn-cancel" (click)="goBack()">
+        <mat-icon>close</mat-icon>
+        {{ 'tracking.devices.detail.cancel' | translate }}
+      </button>
+      <button mat-flat-button class="btn-edit" (click)="goToEdit()">
+        <mat-icon>edit</mat-icon>
+        {{ 'tracking.devices.detail.edit' | translate }}
+      </button>
+    </div>
+  }
+
+</div>
