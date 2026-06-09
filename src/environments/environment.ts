@@ -53,8 +53,9 @@ export const environment = {
 
   // Tracking Bounden Context
   platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
-  platformProviderWsTrackingTopicPath: '/topic/tracking',
   platformProviderDevicesEndpointPath: '/devices',
+  platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
+  platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
 
 };
 
