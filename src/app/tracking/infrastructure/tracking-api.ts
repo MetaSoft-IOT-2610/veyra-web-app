@@ -58,4 +58,7 @@ assignDevice(command:AssignDeviceCommand):Observable<DeviceResource>{
 changeStatusDevice(command:ChangeDeviceStatusCommand){
     return this.changeDeviceStatusEndpoint.changeDeviceStatus(command);
 }
+getDevice(id:number):Observable<Device>{
+    return this.getDevice(id);
+}
 }

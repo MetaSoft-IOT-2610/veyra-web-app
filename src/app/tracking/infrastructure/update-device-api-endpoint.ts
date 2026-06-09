@@ -5,7 +5,7 @@ import {UpdateDeviceAssembler} from './update-device-assembler';
 import {DeviceResource} from './devices-response';
 import {catchError, Observable} from 'rxjs';
 import {UpdateDeviceCommand} from '../domain/model/update-device.command';
-const updateDeviceEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderDevicesEndpointPath}`;
+const updateDeviceEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderDeviceByIdEndpointPath}`;
 function updateDeviceUrl(deviceId:number):string{
 return updateDeviceEndpointUrl.replace('{deviceId}', deviceId.toString());
 }
