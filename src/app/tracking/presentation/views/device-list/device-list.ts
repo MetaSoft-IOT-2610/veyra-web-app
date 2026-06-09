@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { TranslatePipe } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
 import { trackingNav } from '../../tracking-routes';
 import { DeviceStatus } from '../../../domain/model/device-status.enum';
 import { ChangeDeviceStatusCommand } from '../../../domain/model/change-device-status.command';
@@ -22,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     MatTableModule, MatButtonModule, MatProgressSpinnerModule,
     MatIconModule, MatSortModule, MatPaginatorModule,
     MatSelectModule, MatFormFieldModule, MatChipsModule,
-    TranslatePipe, FormsModule,
+    TranslatePipe, FormsModule, DatePipe,
   ],
   templateUrl: './device-list.html',
   styleUrl: './device-list.css'
@@ -32,7 +33,7 @@ export class DeviceList implements AfterViewChecked {
   protected router = inject(Router);
   readonly DeviceStatus = DeviceStatus;
 
-  displayedColumns: string[] = ['macAddress', 'deviceType', 'status', 'actions'];
+  displayedColumns: string[] = ['macAddress', 'deviceType', 'resident', 'lastSync', 'status', 'actions'];
   nursingHomeId: number = 0;
 
   readonly statusOptions = [
@@ -54,6 +55,10 @@ export class DeviceList implements AfterViewChecked {
   constructor() {
     this.nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
     this.store.loadDevices(this.nursingHomeId);
+  }
+
+  viewDevice(id: number): void {
+    this.router.navigate(trackingNav.deviceDetail(id)).then();
   }
 
   assignDevice(id: number): void {
