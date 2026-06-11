@@ -28,7 +28,7 @@ export class TrackingStore {
     this.devices().filter(d => d.status === DeviceStatus.ASSIGNED).length
   );
   readonly disabledDevices = computed(() =>
-    this.devices().filter(d => d.status === DeviceStatus.DISABLED).length
+    this.devices().filter(d => d.status === DeviceStatus.UNAVAILABLE).length
   );
 
   constructor(private trackingApi: TrackingApi) {}
@@ -63,7 +63,7 @@ export class TrackingStore {
           status: resource.status,
           macAddress: resource.macAddress,
           residentId: resource.residentId,
-          lastSync: resource.lastSync
+          assignedAt: resource.assignedAt
         });
         this.deviceSignal.update(list => [...list, device]);
         this.loadingSignal.set(false);
@@ -89,7 +89,7 @@ export class TrackingStore {
               status: resource.status,
               macAddress: resource.macAddress,
               residentId: resource.residentId,
-              lastSync: resource.lastSync
+              assignedAt: resource.assignedAt
             })
             : d
           )
@@ -117,7 +117,7 @@ export class TrackingStore {
               status: resource.status,
               macAddress: resource.macAddress,
               residentId: resource.residentId,
-              lastSync: resource.lastSync
+              assignedAt: resource.assignedAt
             })
             : d
           )
@@ -143,7 +143,7 @@ export class TrackingStore {
               nursingHomeId: d.nursingHomeId,
               deviceType: d.deviceType,
               macAddress: d.macAddress,
-              lastSync: d.lastSync,
+              assignedAt: d.assignedAt,
               residentId: null,
               status: DeviceStatus.AVAILABLE,
             })
@@ -173,7 +173,7 @@ export class TrackingStore {
               status: resource.status,
               macAddress: resource.macAddress,
               residentId: resource.residentId,
-              lastSync: resource.lastSync
+              assignedAt: resource.assignedAt
             })
             : d
           )
