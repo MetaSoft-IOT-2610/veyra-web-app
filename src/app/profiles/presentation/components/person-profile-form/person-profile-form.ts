@@ -130,6 +130,10 @@ export class PersonProfileForm {
     return this.selectedFile;
   }
 
+  getPhotoFromForm(): string {
+    return this.form.get('photo')?.value || '';
+  }
+
   private resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
