@@ -1,4 +1,5 @@
 <div class="detail-wrapper">
+
   @if (!device) {
     <div class="not-found">
       <mat-icon>device_unknown</mat-icon>
@@ -11,93 +12,116 @@
   }
 
   @if (device) {
+
     <!-- Header -->
-    <div class="detail-header">
-      <div class="header-left">
-        <button mat-icon-button class="back-btn" (click)="goBack()">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-        <div>
-          <h2 class="detail-title">{{ 'tracking.devices.detail.title' | translate }}</h2>
-          <p class="detail-subtitle">ID: {{ device.id }}</p>
+    <mat-card appearance="outlined" class="header-card">
+      <mat-card-content class="header-content">
+        <div class="header-left">
+          <button mat-icon-button (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <div>
+            <h2 class="detail-title">{{ 'tracking.devices.detail.title' | translate }}</h2>
+            <p class="detail-subtitle">ID: {{ device.id }}</p>
+          </div>
         </div>
-      </div>
-      <div class="header-right">
-        <span class="status-badge" [class]="getStatusClass()">
-          <mat-icon class="badge-icon">{{ getStatusIcon() }}</mat-icon>
+        <mat-chip [class]="getStatusClass()" disableRipple>
+          <mat-icon matChipAvatar>{{ getStatusIcon() }}</mat-icon>
           {{ 'tracking.devices.status-options.' + device.status.toLowerCase() | translate }}
-        </span>
-      </div>
-    </div>
+        </mat-chip>
+      </mat-card-content>
+    </mat-card>
 
-    <mat-divider></mat-divider>
+    <!-- Device info -->
+    <mat-card appearance="outlined">
+      <mat-card-content>
 
-    <div class="detail-body">
+        <div class="card-section-label">
+          <mat-icon class="section-icon">devices</mat-icon>
+          {{ 'tracking.devices.detail.device-info' | translate }}
+        </div>
 
-      <div class="info-card">
-        <div class="card-header">
-          <div class="device-icon-wrap" [class.icon-gps]="device.deviceType === 'GPS'" [class.icon-vital]="device.deviceType !== 'GPS'">
+        <div class="device-hero">
+          <div class="device-icon-wrap"
+               [class.icon-gps]="device.deviceType === 'GPS'"
+               [class.icon-vital]="device.deviceType !== 'GPS'">
             <mat-icon>{{ getDeviceIcon() }}</mat-icon>
           </div>
           <div>
-            <div class="card-label">{{ 'tracking.devices.detail.device-type' | translate }}</div>
-            <div class="card-value">{{ device.deviceType }}</div>
+            <div class="device-name">{{ device.deviceType }}</div>
+            <div class="device-sub">
+              {{ device.deviceType === 'GPS'
+              ? ('tracking.devices.detail.gps-desc' | translate)
+              : ('tracking.devices.detail.vital-desc' | translate) }}
+            </div>
           </div>
         </div>
 
-        <mat-divider></mat-divider>
+        <mat-divider class="section-divider"></mat-divider>
 
-        <div class="info-row">
-          <div class="info-item">
-            <span class="info-label">
-              <mat-icon class="info-icon">router</mat-icon>
+        <div class="info-grid">
+          <mat-form-field appearance="outline" class="info-field" subscriptSizing="dynamic">
+            <mat-label>
+              <mat-icon>router</mat-icon>
               {{ 'tracking.devices.mac-address' | translate }}
-            </span>
-            <span class="mac-value">{{ device.macAddress }}</span>
-          </div>
+            </mat-label>
+            <input matInput [value]="device.macAddress" readonly class="mac-input">
+          </mat-form-field>
 
-          <div class="info-item">
-            <span class="info-label">
-              <mat-icon class="info-icon">sync</mat-icon>
-              {{ 'tracking.devices.detail.last-sync' | translate }}
-            </span>
-            <span class="info-value">
-              {{ device.lastSync ? (device.lastSync | date:'dd MMM yyyy, HH:mm') : '—' }}
-            </span>
-          </div>
+          <mat-form-field appearance="outline" class="info-field" subscriptSizing="dynamic">
+            <mat-label>
+              <mat-icon>swap_horiz</mat-icon>
+              {{ 'tracking.devices.device-type' | translate }}
+            </mat-label>
+            <input matInput [value]="device.deviceType" readonly>
+          </mat-form-field>
         </div>
-      </div>
 
-      <!-- Resident card -->
-      <div class="info-card">
-        <div class="card-section-title">
-          <mat-icon>person_pin</mat-icon>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Resident -->
+    <mat-card appearance="outlined">
+      <mat-card-content>
+
+        <div class="card-section-label">
+          <mat-icon class="section-icon">person_pin</mat-icon>
           {{ 'tracking.devices.detail.assigned-resident' | translate }}
         </div>
 
-        @if (device.residentId) {
+        @if (device.residentId && residentName()) {
           <div class="resident-row">
             <div class="resident-avatar">
               <mat-icon>person</mat-icon>
             </div>
-            <div class="resident-info">
-              <div class="resident-name">{{ 'tracking.devices.detail.resident-id' | translate }}: {{ device.residentId }}</div>
-              <div class="resident-home">{{ 'tracking.devices.detail.nursing-home' | translate }}: {{ device.nursingHomeId }}</div>
+            <div>
+              <div class="resident-name">{{ residentName() }}</div>
             </div>
           </div>
         } @else {
           <div class="unassigned-row">
-            <mat-icon class="unassigned-icon">person_off</mat-icon>
-            <span>{{ 'tracking.devices.detail.unassigned' | translate }}</span>
+            <mat-icon>person_off</mat-icon>
+            <span>{{ 'tracking.devices.detail.available' | translate }}</span>
           </div>
         }
-      </div>
 
-    </div>
+        @if (device.assignedAt) {
+          <mat-divider class="section-divider"></mat-divider>
+          <mat-form-field appearance="outline" class="info-field full-width" subscriptSizing="dynamic">
+            <mat-label>
+              <mat-icon>calendar_today</mat-icon>
+              {{ 'tracking.devices.assigned-at' | translate }}
+            </mat-label>
+            <input matInput [value]="device.assignedAt | date:'dd/MM/yyyy HH:mm'" readonly>
+          </mat-form-field>
+        }
 
-    <!-- Footer actions -->
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Footer -->
     <div class="detail-footer">
-      <button mat-stroked-button class="btn-cancel" (click)="goBack()">
+      <button mat-stroked-button (click)="goBack()">
         <mat-icon>close</mat-icon>
         {{ 'tracking.devices.detail.cancel' | translate }}
       </button>
@@ -106,6 +130,6 @@
         {{ 'tracking.devices.detail.edit' | translate }}
       </button>
     </div>
-  }
 
+  }
 </div>
