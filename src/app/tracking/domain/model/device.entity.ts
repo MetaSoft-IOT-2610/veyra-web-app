@@ -6,7 +6,7 @@ export class Device implements BaseEntity{
    private _residentId: number | null;
    private _nursingHomeId: number;
    private _macAddress:string;
-   private _lastSync:Date;
+   private _assignedAt:Date|null;
   constructor(device: {
     id: number;
     nursingHomeId: number;
@@ -14,7 +14,7 @@ export class Device implements BaseEntity{
     status: string;
     macAddress:string;
      residentId: number|null;
-     lastSync: Date;
+    assignedAt: Date| null;
   }) {
     this._id = device.id;
     this._deviceType = device.deviceType;
@@ -22,7 +22,7 @@ export class Device implements BaseEntity{
     this._residentId=device.residentId;
     this._nursingHomeId=device.nursingHomeId;
     this._macAddress=device.macAddress;
-  this._lastSync=device.lastSync;
+  this._assignedAt=device.assignedAt;
   }
 
   get id(): number { return this._id; }
@@ -46,8 +46,8 @@ export class Device implements BaseEntity{
   set nursingHomeId(value: number) {
     this._nursingHomeId = value;
   }
-  get lastSync(): Date {
-    return this._lastSync;
+  get assignedAt(): Date|null {
+    return this._assignedAt;
   }
   get residentId(): number | null {
     return this._residentId;
@@ -60,7 +60,7 @@ export class Device implements BaseEntity{
   set macAddress(value: string) {
     this._macAddress = value;
   }
-  set lastSync(value: Date) {
-    this._lastSync = value;
+  set assignedAt(value: Date|null) {
+    this._assignedAt = value;
   }
 }
