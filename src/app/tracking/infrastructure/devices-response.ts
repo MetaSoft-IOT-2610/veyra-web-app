@@ -7,7 +7,7 @@ export interface DeviceResource extends BaseResource {
   status:string;
   macAddress:string;
   residentId:number;
-  lastSync:Date;
+  assignedAt:Date;
 }
 
 export interface DevicesResponse extends BaseResponse {
