@@ -24,16 +24,20 @@ import { AllergiesApiEndpoint } from './allergies-api-endpoint';
 import { CreateAllergyCommandsApiEndpoint } from './create-allergy-commands-api-endpoint';
 import { Allergy } from '../domain/model/allergy.entity';
 import { CreateAllergyCommand } from '../domain/model/create-allergy.command';
-import {DevicesApiEndpoint} from './devices-api-endpoint';
-import {Device} from '../domain/model/device.entity';
-import {VitalSign} from '../domain/model/vital-sign.entity';
-import {VitalSignsApiEndpoint} from './vital-signs-api-endpoint';
-import {RelativesApiEndpoint} from './relatives-api-endpoint';
-import {CreateRelativeCommand} from '../domain/model/create-relative.command';
-import {Relative} from '../domain/model/relative.entity';
-import {CreateRelativeCommandApiEndpoint} from './create-relative-command-api-endpoint';
-import {MonitoringResidentsApiEndpoint} from './monitoring-residents-api-endpoint';
-import {MonitoringResidents} from '../domain/model/monitoring-residents.entity';
+import { DevicesApiEndpoint } from './devices-api-endpoint';
+import { Device } from '../domain/model/device.entity';
+import { VitalSign } from '../domain/model/vital-sign.entity';
+import { VitalSignsApiEndpoint } from './vital-signs-api-endpoint';
+import { RelativesApiEndpoint } from './relatives-api-endpoint';
+import { CreateRelativeCommand } from '../domain/model/create-relative.command';
+import { Relative } from '../domain/model/relative.entity';
+import { CreateRelativeCommandApiEndpoint } from './create-relative-command-api-endpoint';
+import { MonitoringResidentsApiEndpoint } from './monitoring-residents-api-endpoint';
+import { MonitoringResidents } from '../domain/model/monitoring-residents.entity';
+
+import { MedicalCondition } from '../domain/model/medical-condition.entity';
+import { CreateMedicalConditionCommand } from '../domain/model/create-medical-condition.command';
+import { CreateMedicalConditionCommandsApiEndpoint } from './create-medical-condition-commands-api-endpoint';
 
 /**
  * @purpose: Service to interact with the Nursing Home API
@@ -46,14 +50,15 @@ import {MonitoringResidents} from '../domain/model/monitoring-residents.entity';
  * Service class to handle Resident and Nursing API operations.
  * Provides CRUD methods for managing residents through HTTP requests.
  */
-export class NursingApi extends BaseApi{
-  private readonly _nursingHomesApidEndpoint:NursingHomesApiEndpoint;
+export class NursingApi extends BaseApi {
+  private readonly _nursingHomesApidEndpoint: NursingHomesApiEndpoint;
   private readonly _residentsApiEndPoint: ResidentsApiEndpoint;
   private readonly _roomsApiEndpoint: RoomsApiEndpoint;
   private readonly _medicationsApiEndpoint: MedicationsApiEndpoint;
   private readonly _residentCommandsApiEndpoint: CreateResidentCommandsApiEndpoint;
   private readonly _roomCommandsApiEndpoint: CreateRoomCommandsApiEndpoint;
   private readonly _medicationCommandsApiEndpoint: CreateMedicationCommandsApiEndpoint;
+  private readonly _medicalConditionCommandsApiEndpoint: CreateMedicalConditionCommandsApiEndpoint;
   private readonly _assignRoomCommandsApiEndpoint: AssignRoomCommandsApiEndpoint;
   private readonly _createNursingHomeCommandsApiEndpoint: CreateNursingHomeCommandsApiEndpoint;
   private readonly _allergiesApiEndpoint: AllergiesApiEndpoint;
@@ -63,19 +68,21 @@ export class NursingApi extends BaseApi{
   private readonly _relativeApiEndpoint: RelativesApiEndpoint;
   private readonly _createRelativeCommandsApiEndpoint: CreateRelativeCommandApiEndpoint;
   private readonly _monitoringResidentsApiEndpoint: MonitoringResidentsApiEndpoint;
+
   /**
    * Initializes the Resident, Room and Nursing Home API service with the required HTTP client.
    * @param http - Angular HttpClient used to perform API requests.
    */
-  constructor(http:HttpClient) {
+  constructor(http: HttpClient) {
     super();
-    this._nursingHomesApidEndpoint=new NursingHomesApiEndpoint(http);
+    this._nursingHomesApidEndpoint = new NursingHomesApiEndpoint(http);
     this._residentsApiEndPoint = new ResidentsApiEndpoint(http);
     this._roomsApiEndpoint = new RoomsApiEndpoint(http);
     this._medicationsApiEndpoint = new MedicationsApiEndpoint(http);
     this._residentCommandsApiEndpoint = new CreateResidentCommandsApiEndpoint(http);
     this._roomCommandsApiEndpoint = new CreateRoomCommandsApiEndpoint(http);
     this._medicationCommandsApiEndpoint = new CreateMedicationCommandsApiEndpoint(http);
+    this._medicalConditionCommandsApiEndpoint = new CreateMedicalConditionCommandsApiEndpoint(http);
     this._assignRoomCommandsApiEndpoint = new AssignRoomCommandsApiEndpoint(http);
     this._createNursingHomeCommandsApiEndpoint = new CreateNursingHomeCommandsApiEndpoint(http);
     this._allergiesApiEndpoint = new AllergiesApiEndpoint(http);
@@ -84,14 +91,14 @@ export class NursingApi extends BaseApi{
     this._vitalSignsApiEndpoint = new VitalSignsApiEndpoint(http);
     this._relativeApiEndpoint = new RelativesApiEndpoint(http);
     this._createRelativeCommandsApiEndpoint = new CreateRelativeCommandApiEndpoint(http);
-   this._monitoringResidentsApiEndpoint= new MonitoringResidentsApiEndpoint(http);
+    this._monitoringResidentsApiEndpoint = new MonitoringResidentsApiEndpoint(http);
   }
 
-  createNursingHome(administratorId: number, createNursingHomeCommand: CreateNursingHomeCommand):Observable<NursingHome>{
+  createNursingHome(administratorId: number, createNursingHomeCommand: CreateNursingHomeCommand): Observable<NursingHome> {
     return this._createNursingHomeCommandsApiEndpoint.create(administratorId, createNursingHomeCommand);
   }
 
-  getNursingHome(administratorId: number):Observable<any>{
+  getNursingHome(administratorId: number): Observable<any> {
     return this._createNursingHomeCommandsApiEndpoint.getByAdministratorId(administratorId);
   }
 
@@ -155,6 +162,28 @@ export class NursingApi extends BaseApi{
 
   createMedication(residentId: number, medicationCommand: CreateMedicationCommand): Observable<Medication> {
     return this._medicationCommandsApiEndpoint.create(residentId, medicationCommand);
+  }
+
+  /**
+   * Retrieves all medical conditions associated with a resident.
+   * @param residentId - Unique identifier of the resident.
+   * @returns Observable containing a list of medical conditions.
+   */
+  getMedicalConditions(residentId: number): Observable<MedicalCondition[]> {
+    return this._medicalConditionCommandsApiEndpoint.getAll(residentId);
+  }
+
+  /**
+   * Creates a new medical condition for a resident.
+   * @param residentId - Unique identifier of the resident.
+   * @param medicalConditionCommand - Command containing the medical condition data to be created.
+   * @returns Observable with the created medical condition.
+   */
+  createMedicalCondition(
+    residentId: number,
+    medicalConditionCommand: CreateMedicalConditionCommand
+  ): Observable<MedicalCondition> {
+    return this._medicalConditionCommandsApiEndpoint.create(residentId, medicalConditionCommand);
   }
 
   assignRoomToResident(nursingHomeId: number, residentId: number, assignRoomCommand: AssignRoomCommand): Observable<Resident> {
