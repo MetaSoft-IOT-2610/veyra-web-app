@@ -1,14 +1,14 @@
 export const environment = {
   production: false,
   /** Si es false, el `MainLayout` no muestra botones SIGN-IN / registro en toolbar; con sesión activa sí se muestra el menú de cuenta. */
-  showIamToolbar: false,
+  showIamToolbar: true,
   /**
    * Si no hay sesión válida en `localStorage`, aplica usuario de desarrollo **solo al entrar al layout
    * con sidebar** (`MainLayout`), no en `/home` ni otras rutas públicas.
    */
-  fallbackDevUserSession: true,
+  fallbackDevUserSession: false,
 
-  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
@@ -34,6 +34,7 @@ export const environment = {
   platformProviderAdministratorNursingHomesEndpointPath: '/administrators/{administratorId}/nursing-homes',
   platformProviderResidentRoomsEndpointPath: '/nursing-homes/{nursingHomeId}/rooms/{residentId}',
   platformProviderResidentMedicationsEndpointPath: '/residents/{residentId}/medications',
+  platformProviderResidentMedicalConditionsEndpointPath: '/residents/{residentId}/medical-conditions',
   platformProviderNursingHomeResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/residents',
   platformProviderNursingHomeStaffEndpointPath: '/nursing-homes/{nursingHomeId}/staff',
   platformProviderNursingHomeRoomsEndpointPath: '/nursing-homes/{nursingHomeId}/rooms',

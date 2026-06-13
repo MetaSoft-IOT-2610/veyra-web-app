@@ -35,6 +35,7 @@ export const environment = {
   platformProviderResidentRelativesEndpointPath: '/residents/{residentId}/relatives',
   platformProviderNursingHomeRelativesEndpointPath: '/nursing-homes/{nursingHomeId}/relatives',
   platformProviderMedicationsEndpointPath:'/medications',
+  platformProviderResidentMedicalConditionsEndpointPath: '/residents/{residentId}/medical-conditions',
   platformProviderNursingHomesEndpointPath:'/nursing-homes',
   platformProviderResidentsEndpointPath:'/residents',
   platformProviderRoomsEndpointPath: '/rooms',
