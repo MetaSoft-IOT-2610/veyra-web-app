@@ -19,6 +19,10 @@ const medicationList = () =>
   import('./views/medication-list/medication-list').then((m) => m.MedicationList);
 const medicationForm = () =>
   import('./views/medication-form/medication-form').then((m) => m.MedicationForm);
+const medicalConditionList = () =>
+  import('./views/medical-condition-list/medical-condition-list').then((m) => m.MedicalConditionList);
+const medicalConditionForm = () =>
+  import('./views/medical-condition-form/medical-condition-form').then((m) => m.MedicalConditionForm);
 const assignRoomForm = () =>
   import('./views/assign-room-form/assign-room-form').then((m) => m.AssignRoomForm);
 const deviceList = () => import('./views/device-list/device-list').then((m) => m.DeviceList);
@@ -45,6 +49,8 @@ export const nursingPaths = {
   roomEdit: 'rooms/:id/edit',
   medications: 'residents/:id/medications',
   medicationNew: 'residents/:id/medications/new',
+  medicalConditions: 'residents/:id/medical-conditions',
+  medicalConditionNew: 'residents/:id/medical-conditions/new',
   devices: 'devices',
   relatives: 'relatives',
   relativeNew: 'relatives/new',
@@ -75,6 +81,19 @@ export const nursingNav = {
     nursingPaths.residents,
     id,
     'medications',
+    'new',
+  ],
+  medicalConditions: (id: number | string) => [
+    '/nursing',
+    nursingPaths.residents,
+    id,
+    'medical-conditions',
+  ],
+  medicalConditionNew: (id: number | string) => [
+    '/nursing',
+    nursingPaths.residents,
+    id,
+    'medical-conditions',
     'new',
   ],
   devices: () => ['/nursing', nursingPaths.devices],
@@ -224,6 +243,28 @@ const nursingRoutes: Routes = [
       title: 'Nueva medicación',
       module: 'Enfermería',
       description: 'Registrar un medicamento',
+      showBackButton: true,
+    },
+  }),
+  definePageRoute({
+    path: nursingPaths.medicalConditions,
+    name: 'nursing.residents.medical-conditions',
+    loadComponent: medicalConditionList,
+    page: {
+      title: 'Condiciones médicas',
+      module: 'Enfermería',
+      description: 'Condiciones médicas del residente',
+      showBackButton: true,
+    },
+  }),
+  definePageRoute({
+    path: nursingPaths.medicalConditionNew,
+    name: 'nursing.residents.medical-condition-new',
+    loadComponent: medicalConditionForm,
+    page: {
+      title: 'Nueva condición médica',
+      module: 'Enfermería',
+      description: 'Registrar una condición médica',
       showBackButton: true,
     },
   }),
