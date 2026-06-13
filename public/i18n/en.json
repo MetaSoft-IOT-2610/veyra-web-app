@@ -16,8 +16,6 @@
   "allergies.add": "Add Allergy",
   "vital-signs.add": "Add Vital Sign",
   "devices.list-title": "Device List",
-  "Search": "Search",
-  "Enter the name": "Enter the name",
   "device-id": "Device ID",
   "assignedBy": "Assigned By",
   "assignedAt": "Assigned At",
@@ -101,9 +99,7 @@
     "new": {
       "title": "New Medication"
     },
-    "edit": {
-      "title": "Edit Medication"
-    },
+    "edit": "Edit",
     "basic-info": "Basic Information",
     "inventory-info": "Inventory Information",
     "batch-supplier-info": "Batch and Supplier Information",
@@ -140,7 +136,6 @@
     "register": "Register Medication",
     "update": "Update Medication",
     "cancel": "Cancel",
-    "edit": "Edit",
     "select-image": "Select Image",
     "max-size": "Maximum 5MB",
     "optional": "Optional",
@@ -540,5 +535,35 @@
       "status": "Status",
       "close": "Close"
     }
-  }
+  },
+  "medical-conditions": {
+    "title": "Medical Conditions",
+    "new-title": "New Medical Condition",
+    "add": "Add Medical Condition",
+    "diagnosis-name": "Diagnosis Name",
+    "diagnosis-date": "Diagnosis Date",
+    "status": "Status",
+    "notes": "Notes",
+    "no-medical-conditions": "No medical conditions found",
+    "search": "Enter the diagnosis name",
+    "medical-condition": "Medical Condition",
+    "select-diagnosis-date": "Select diagnosis date",
+    "diagnosis-name-required": "Diagnosis name is required",
+    "diagnosis-date-required": "Diagnosis date is required",
+    "status-required": "Status is required",
+    "notes-required": "Notes are required",
+    "active": "Active",
+    "controlled": "Controlled",
+    "recovered": "Recovered",
+    "chronic": "Chronic",
+    "cancel": "Cancel",
+    "save": "Add"
+  },
+  "Search vital signs": "Search vital signs",
+  "Temperature": "Temperature",
+  "Heart Rate": "Heart Rate",
+  "Blood Pressure": "Blood Pressure",
+  "Oxygen": "Oxygen",
+  "Respiratory Rate": "Respiratory Rate",
+  "Registered At": "Registered At"
 }
