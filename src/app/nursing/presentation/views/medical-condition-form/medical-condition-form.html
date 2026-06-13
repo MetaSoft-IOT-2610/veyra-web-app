@@ -1,0 +1,124 @@
+<h1 class="title">{{ 'medical-conditions.new-title' | translate }}</h1>
+
+<div class="form-wrapper">
+  @if (store.loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>{{ 'Loading...' | translate }}</p>
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="info-grid">
+
+      <mat-card class="info-card">
+        <div class="card-header-custom">
+          <div class="icon-wrapper">
+            <mat-icon>health_and_safety</mat-icon>
+          </div>
+          <h3>{{ 'medical-conditions.title' | translate }}</h3>
+        </div>
+
+        <div class="card-body">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'medical-conditions.diagnosis-name' | translate }}</mat-label>
+            <input matInput formControlName="diagnosisName" required>
+
+            @if (form.get('diagnosisName')?.touched && form.get('diagnosisName')!.hasError('required')) {
+              <mat-error>{{ 'medical-conditions.error.diagnosis-name-required' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'medical-conditions.status' | translate }}</mat-label>
+            <mat-select formControlName="status" required>
+              <mat-option value="ACTIVE">{{ 'medical-conditions.status-active' | translate }}</mat-option>
+              <mat-option value="RESOLVED">{{ 'medical-conditions.status-resolved' | translate }}</mat-option>
+              <mat-option value="CHRONIC">{{ 'medical-conditions.status-chronic' | translate }}</mat-option>
+            </mat-select>
+
+            @if (form.get('status')?.touched && form.get('status')!.hasError('required')) {
+              <mat-error>{{ 'medical-conditions.error.status-required' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <mat-card class="info-card">
+        <div class="card-header-custom">
+          <div class="icon-wrapper">
+            <mat-icon>notes</mat-icon>
+          </div>
+          <h3>{{ 'medical-conditions.notes' | translate }}</h3>
+        </div>
+
+        <div class="card-body">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'medical-conditions.notes' | translate }}</mat-label>
+            <textarea
+              matInput
+              rows="5"
+              formControlName="notes"
+              required>
+            </textarea>
+
+            @if (form.get('notes')?.touched && form.get('notes')!.hasError('required')) {
+              <mat-error>{{ 'medical-conditions.error.notes-required' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <mat-card class="info-card">
+        <div class="card-header-custom">
+          <div class="icon-wrapper">
+            <mat-icon>event</mat-icon>
+          </div>
+          <h3>{{ 'medical-conditions.diagnosis-date' | translate }}</h3>
+        </div>
+
+        <div class="card-body">
+          <div class="calendar-section">
+            <label class="section-label">
+              {{ 'medical-conditions.select-diagnosis-date' | translate }}
+              <span class="required">*</span>
+            </label>
+
+            <mat-calendar
+              [selected]="form.value.diagnosisDate"
+              (selectedChange)="onDiagnosisDateSelected($event)"
+              [maxDate]="maxDiagnosisDate"
+              [startAt]="startDate">
+            </mat-calendar>
+
+            @if (form.value.diagnosisDate) {
+              <div class="selected-date">
+                <mat-icon>event</mat-icon>
+                <span>{{ form.value.diagnosisDate | date:'dd/MM/yyyy' }}</span>
+              </div>
+            }
+
+            @if (form.get('diagnosisDate')?.touched && form.get('diagnosisDate')!.hasError('required')) {
+              <mat-error>{{ 'medical-conditions.error.diagnosis-date-required' | translate }}</mat-error>
+            }
+          </div>
+        </div>
+      </mat-card>
+
+    </div>
+
+    <div class="space"></div>
+
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" type="button" (click)="onCancel()">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'medical-conditions.cancel' | translate }}
+      </button>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        <mat-icon>save</mat-icon>
+        {{ 'medical-conditions.add' | translate }}
+      </button>
+    </div>
+  </form>
+</div>
