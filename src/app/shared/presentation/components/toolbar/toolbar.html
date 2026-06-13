@@ -1,6 +1,27 @@
 <mat-toolbar color="primary" class="toolbar">
-  <img src="/images/shared/veyra-logo.png" alt="logo" >
-  <p class="title">Veyra</p>
+  @if (routeToolbar.showBackButton()) {
+    <button
+      mat-icon-button
+      type="button"
+      class="toolbar-back-btn"
+      (click)="routeToolbar.goBack()"
+      [attr.aria-label]="'toolbar.back' | translate">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  }
+
+  @if (routeToolbar.pageData(); as page) {
+    <div class="toolbar-page-info">
+      <h1 class="toolbar-page-module">{{ page.module }}</h1>
+      @if (page.description) {
+        <p class="toolbar-page-description">{{ page.description }}</p>
+      }
+    </div>
+  } @else {
+    <img src="/images/shared/veyra-logo.png" [attr.alt]="'toolbar.logoAlt' | translate" />
+    <p class="title">Veyra</p>
+  }
+
   <span class="spacer"></span>
   <app-language-switcher></app-language-switcher>
 </mat-toolbar>

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import { activitiesNav } from '../../activities-routes';
 import { FormsModule } from '@angular/forms';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -9,7 +10,6 @@ import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { ActivitiesStore } from '../../../application/activities.store';
 import { Activity, ActivityType, ActivityStatus } from '../../../domain/model/activity.entity';
 
@@ -29,8 +29,7 @@ import { Activity, ActivityType, ActivityStatus } from '../../../domain/model/ac
     MatSelect,
     MatOption,
     MatButton,
-    MatIcon,
-    LayoutNursingHome
+    MatIcon
   ],
   templateUrl: './activity-form.html',
   styleUrl: './activity-form.css'
@@ -68,11 +67,11 @@ export class ActivityForm {
     this.store.logActivity(activity);
 
     if (!this.error) {
-      this.router.navigate(['/activities']);
+      void this.router.navigate(activitiesNav.list());
     }
   }
 
   onCancel() {
-    this.router.navigate(['/activities']);
+    void this.router.navigate(activitiesNav.list());
   }
 }

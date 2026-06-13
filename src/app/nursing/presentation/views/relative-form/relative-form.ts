@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { nursingNav } from '../../nursing-routes';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatCardModule } from '@angular/material/card';
@@ -8,7 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import { NursingStore } from '../../../application/nursing.store';
 import { ProfilesStore } from '../../../../profiles/application/profiles.store';
 import { Resident } from '../../../domain/model/resident.entity';
@@ -32,7 +32,6 @@ export interface ResidentWithProfile {
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    LayoutNursingHome,
   ],
   templateUrl: './relative-form.html',
   styleUrls: ['./relative-form.css']
@@ -61,9 +60,9 @@ export class RelativeForm {
 
   constructor() {
 
-    const nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
+    const nursingHomeId = localStorage.getItem('nursingHomeId');
     if (nursingHomeId) {
-      this.nursingStore.loadResidentsByNursingHome(nursingHomeId);
+      this.nursingStore.loadResidentsByNursingHome(Number(nursingHomeId));
     }
     this.profilesStore.loadPersonProfiles();
   }
@@ -90,11 +89,6 @@ export class RelativeForm {
       return;
     }
 
-    const nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
-    if (!nursingHomeId) {
-      console.error('Nursing home ID not found in local storage');
-      return;
-    }
 
     const command = new CreateRelativeCommand({
       firstName: this.form.value.firstName,
@@ -105,11 +99,15 @@ export class RelativeForm {
 
     // Pasar nursingHomeId como primer parámetro (el endpoint espera
     // POST /nursing-homes/{nursingHomeId}/relatives)
-    this.nursingStore.addRelative(nursingHomeId, command);
-    this.router.navigate(['/nursing/relatives']).then();
+    this.nursingStore.addRelative(Number(localStorage.getItem('nursingHomeId')), command)
+
+    void this.router.navigate(nursingNav.relatives());
+
   }
 
+
+
   onCancel(): void {
-    this.router.navigate(['/nursing/relatives']).then();
+    void this.router.navigate(nursingNav.relatives());
   }
 }

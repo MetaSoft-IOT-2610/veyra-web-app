@@ -1,8 +1,11 @@
 export const environment = {
   production: true,
-  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
-  platformProviderFakeApiBaseUrl: 'http://localhost:3000/api/v1',
-
+  /** En producción suele mostrarse la sección IAM del toolbar cuando reactive el login real. */
+  showIamToolbar: true,
+  /** Nunca aplicar sesión simulada en producción. */
+  fallbackDevUserSession: false,
+  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
   platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-hires',
@@ -21,7 +24,7 @@ export const environment = {
 
   // Nursing Bounded Context
   platformProviderResidentVitalSigsEndpointPath: '/resident/{residentId}/vital-signs',
-  platformProviderDevicesEndpointPath: '/devices',
+  platformProviderNursingHomeDevicesEndpointPath: '/nursing-homes/{nursingHomeId}/devices',
   platformProviderResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
   platformProviderAdministratorNursingHomesEndpointPath: '/administrators/{administratorId}/nursing-homes',
   platformProviderResidentRoomsEndpointPath: '/nursing-homes/{nursingHomeId}/rooms/{residentId}',
@@ -36,7 +39,7 @@ export const environment = {
   platformProviderResidentsEndpointPath:'/residents',
   platformProviderRoomsEndpointPath: '/rooms',
   platformProviderRelativesEndpointPath: '/relatives',
-
+  platformProviderMonitoringResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/doctors/{doctorId}/monitoring-residents',
 
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
@@ -44,5 +47,14 @@ export const environment = {
 
   // Activities Bounded Context
   platformProviderActivitiesEndpointPath: '/activities',
+
+  // Alerts Bounded Context
+  platformProviderAlertsEndpointPath: '/alerts',
+
+  // Tracking Bounden Context
+  platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
+  platformProviderWsTrackingTopicPath: '/topic/tracking',
+  platformProviderDevicesEndpointPath: '/devices',
+
 };
 

@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {LayoutNursingHome} from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
 import {ActivatedRoute, Router} from '@angular/router';
+import { hcmNav } from '../../hcm-routes';
 import {HcmStore} from '../../../application/hcm.store';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UpdateContractStatusCommand} from '../../../domain/model/update-contract-status.command';
@@ -14,7 +14,6 @@ import {MatOption, MatSelect} from '@angular/material/select';
 @Component({
   selector: 'app-update-contract-status-form',
   imports: [
-    LayoutNursingHome,
     MatButton,
     MatIcon,
     ReactiveFormsModule,
@@ -91,14 +90,14 @@ export class UpdateContractStatusForm implements OnInit {
 
     this.store.updateContractStatus(this.staffMemberId!, this.contractId!, updateContractStatusCommand);
 
-    this.router.navigate(['/hcm/staff', this.staffMemberId!, 'contracts']).then();
+    void this.router.navigate(hcmNav.contracts(this.staffMemberId!));
   }
 
   /**
    * Cancels form and navigates back
    */
   cancel() {
-    this.router.navigate(['/hcm/staff', this.staffMemberId!, 'contracts']).then();
+    void this.router.navigate(hcmNav.contracts(this.staffMemberId!));
   }
 
   /**

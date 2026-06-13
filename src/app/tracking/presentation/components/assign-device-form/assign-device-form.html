@@ -1,0 +1,39 @@
+<h1 class="title">{{ 'device.assign-title' | translate }}</h1>
+
+<form (ngSubmit)="submit()">
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'device.search-resident' | translate }}</mat-label>
+    <input
+      matInput
+      [formControl]="searchControl"
+      [matAutocomplete]="auto"
+      placeholder="{{ 'device.search-resident-placeholder' | translate }}"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="displayFn.bind(this)"
+      (optionSelected)="onResidentSelected($event.option.value)"
+    >
+      @for (item of filteredResidents$ | async; track item.resident.id) {
+        <mat-option [value]="item.resident">
+          {{ item.profile?.fullName ?? ('device.unknown-resident' | translate) }}
+        </mat-option>
+      }
+    </mat-autocomplete>
+
+    @if (searchControl.touched && searchControl.hasError('required')) {
+      <mat-error>{{ 'device.error.resident-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!selectedResident"
+  >
+    {{ 'device.assign' | translate }}
+  </button>
+
+</form>

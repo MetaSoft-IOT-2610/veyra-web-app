@@ -1,113 +1,1897 @@
 {
-  "contracts": [],
-  "staff": [],
+  "users": [
+    {
+      "id": 1,
+      "username": "dev",
+      "roles": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 2,
+      "username": "doctor.house",
+      "roles": [
+        "ROLE_USER"
+      ]
+    },
+    {
+      "id": 3,
+      "username": "nurse.joy",
+      "roles": [
+        "ROLE_USER"
+      ]
+    }
+  ],
+  "administrators": [
+    {
+      "id": 1,
+      "username": "dev"
+    }
+  ],
+  "person-profiles": [
+    {
+      "id": 101,
+      "fullName": "Carlos García Ríos",
+      "dni": "40013837",
+      "birthDate": "1955-01-01",
+      "age": 70,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 991 214 125",
+      "emailAddress": "carlos.garcia@veyra.test",
+      "streetAddress": "Jr. Cusco 350, Arequipa"
+    },
+    {
+      "id": 102,
+      "fullName": "Carmen Rodríguez Campos",
+      "dni": "40013974",
+      "birthDate": "1954-02-02",
+      "age": 71,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 927 854 204",
+      "emailAddress": "carmen.rodriguez@veyra.test",
+      "streetAddress": "Jr. Lima 704, Cusco"
+    },
+    {
+      "id": 103,
+      "fullName": "Luis Flores Espinoza",
+      "dni": "40014111",
+      "birthDate": "1953-03-03",
+      "age": 72,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 914 130 195",
+      "emailAddress": "luis.flores@veyra.test",
+      "streetAddress": "Av. La Marina 338, Piura"
+    },
+    {
+      "id": 104,
+      "fullName": "Ana Quispe Cárdenas",
+      "dni": "40014248",
+      "birthDate": "1952-04-04",
+      "age": 73,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 987 127 674",
+      "emailAddress": "ana.quispe@veyra.test",
+      "streetAddress": "Av. La Marina 833, Piura"
+    },
+    {
+      "id": 105,
+      "fullName": "Andrés Torres Gutiérrez",
+      "dni": "40014385",
+      "birthDate": "1951-05-05",
+      "age": 74,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 963 325 559",
+      "emailAddress": "andres.torres@veyra.test",
+      "streetAddress": "Jr. Cusco 928, Lima"
+    },
+    {
+      "id": 106,
+      "fullName": "Elena Ramírez Núñez",
+      "dni": "40014522",
+      "birthDate": "1950-06-06",
+      "age": 75,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 930 814 532",
+      "emailAddress": "elena.ramirez@veyra.test",
+      "streetAddress": "Av. Brasil 384, Arequipa"
+    },
+    {
+      "id": 107,
+      "fullName": "Fernando Vargas Salas",
+      "dni": "40014659",
+      "birthDate": "1949-07-07",
+      "age": 76,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 937 881 444",
+      "emailAddress": "fernando.vargas@veyra.test",
+      "streetAddress": "Jr. Lima 194, Cusco"
+    },
+    {
+      "id": 108,
+      "fullName": "Sofía Castillo Ponce",
+      "dni": "40014796",
+      "birthDate": "1948-08-08",
+      "age": 77,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 922 467 967",
+      "emailAddress": "sofia.castillo@veyra.test",
+      "streetAddress": "Av. Brasil 718, Trujillo"
+    },
+    {
+      "id": 109,
+      "fullName": "Javier Mendoza Vega",
+      "dni": "40014933",
+      "birthDate": "1947-09-09",
+      "age": 78,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 915 847 570",
+      "emailAddress": "javier.mendoza@veyra.test",
+      "streetAddress": "Jr. Lima 487, Lima"
+    },
+    {
+      "id": 110,
+      "fullName": "Gloria Rojas López",
+      "dni": "40015070",
+      "birthDate": "1946-10-10",
+      "age": 79,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 980 400 949",
+      "emailAddress": "gloria.rojas@veyra.test",
+      "streetAddress": "Av. Brasil 691, Arequipa"
+    },
+    {
+      "id": 111,
+      "fullName": "Hugo Salazar Huamán",
+      "dni": "40015207",
+      "birthDate": "1945-11-11",
+      "age": 80,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 918 146 777",
+      "emailAddress": "hugo.salazar@veyra.test",
+      "streetAddress": "Av. La Marina 891, Trujillo"
+    },
+    {
+      "id": 112,
+      "fullName": "Isabel Paredes Díaz",
+      "dni": "40015344",
+      "birthDate": "1944-12-12",
+      "age": 81,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 920 975 338",
+      "emailAddress": "isabel.paredes@veyra.test",
+      "streetAddress": "Jr. Lima 489, Trujillo"
+    },
+    {
+      "id": 201,
+      "fullName": "Elena Ramírez Núñez",
+      "dni": "40027537",
+      "birthDate": "1994-06-06",
+      "age": 31,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 968 750 954",
+      "emailAddress": "elena.ramirez@veyra.test",
+      "streetAddress": "Av. Brasil 266, Trujillo"
+    },
+    {
+      "id": 202,
+      "fullName": "Fernando Vargas Salas",
+      "dni": "40027674",
+      "birthDate": "1993-07-07",
+      "age": 32,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 955 314 786",
+      "emailAddress": "fernando.vargas@veyra.test",
+      "streetAddress": "Jr. Cusco 818, Lima"
+    },
+    {
+      "id": 203,
+      "fullName": "Sofía Castillo Ponce",
+      "dni": "40027811",
+      "birthDate": "1992-08-08",
+      "age": 33,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 987 750 275",
+      "emailAddress": "sofia.castillo@veyra.test",
+      "streetAddress": "Av. La Marina 267, Cusco"
+    },
+    {
+      "id": 204,
+      "fullName": "Javier Mendoza Vega",
+      "dni": "40027948",
+      "birthDate": "1991-09-09",
+      "age": 34,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 958 376 755",
+      "emailAddress": "javier.mendoza@veyra.test",
+      "streetAddress": "Av. La Marina 801, Trujillo"
+    },
+    {
+      "id": 205,
+      "fullName": "Gloria Rojas López",
+      "dni": "40028085",
+      "birthDate": "1990-10-10",
+      "age": 35,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 917 334 941",
+      "emailAddress": "gloria.rojas@veyra.test",
+      "streetAddress": "Av. Arequipa 924, Trujillo"
+    },
+    {
+      "id": 206,
+      "fullName": "Hugo Salazar Huamán",
+      "dni": "40028222",
+      "birthDate": "1989-11-11",
+      "age": 36,
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 961 374 167",
+      "emailAddress": "hugo.salazar@veyra.test",
+      "streetAddress": "Av. La Marina 680, Trujillo"
+    }
+  ],
+  "business-profiles": [
+    {
+      "id": 1,
+      "businessName": "Residencia Veyra Care San Isidro",
+      "ruc": "20512345678",
+      "photo": "images/shared/veyra-placeholder.png",
+      "phoneNumber": "+51 1 442 1234",
+      "emailAddress": "contacto@veyracare.test",
+      "streetAddress": "Av. Javier Prado Este 1234, San Isidro, Lima"
+    }
+  ],
   "nursing-homes": [
     {
       "id": 0,
-      "name": "Veyra Nursing Home",
-      "address": "Av. Primavera 123, Lima"
+      "businessProfileId": 1,
+      "administratorId": 1
+    }
+  ],
+  "administrator-nursing-home": {
+    "id": 1,
+    "businessProfileId": 1,
+    "administratorId": 1
+  },
+  "rooms": [
+    {
+      "id": 1,
+      "roomNumber": "101",
+      "nursingHomeId": 0,
+      "capacity": 1,
+      "occupied": 1,
+      "type": "Individual",
+      "status": "Full"
+    },
+    {
+      "id": 2,
+      "roomNumber": "102",
+      "nursingHomeId": 1,
+      "capacity": 2,
+      "occupied": 1,
+      "type": "Doble",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "roomNumber": "103",
+      "nursingHomeId": 1,
+      "capacity": 1,
+      "occupied": 1,
+      "type": "Suite",
+      "status": "Full"
+    },
+    {
+      "id": 4,
+      "roomNumber": "104",
+      "nursingHomeId": 1,
+      "capacity": 3,
+      "occupied": 2,
+      "type": "Compartida",
+      "status": "Available"
+    },
+    {
+      "id": 5,
+      "roomNumber": "105",
+      "nursingHomeId": 1,
+      "capacity": 1,
+      "occupied": 0,
+      "type": "Individual",
+      "status": "Available"
+    },
+    {
+      "id": 6,
+      "roomNumber": "106",
+      "nursingHomeId": 1,
+      "capacity": 2,
+      "occupied": 2,
+      "type": "Doble",
+      "status": "Full"
+    },
+    {
+      "capacity": 2,
+      "type": "double",
+      "roomNumber": "1232",
+      "id": 7
+    },
+    {
+      "nursingHomeId": 0,
+      "capacity": 1,
+      "type": "double",
+      "roomNumber": "121212",
+      "id": 8
     }
   ],
   "residents": [
     {
       "id": 1,
-      "fullName": "María Fernández",
-      "age": 77,
+      "personProfileId": 101,
+      "legalRepresentativeFirstName": "Ana",
+      "legalRepresentativeLastName": "Salazar Gutiérrez",
+      "legalRepresentativePhoneNumber": "+51 960 758 569",
+      "emergencyContactFirstName": "Luis",
+      "emergencyContactLastName": "Torres Díaz",
+      "emergencyContactPhoneNumber": "+51 941 862 674",
       "roomId": 1,
-      "nursingHomeId": 0
+      "nursingHomeId": 0,
+      "state": "active"
     },
     {
       "id": 2,
-      "fullName": "Carlos Ramírez",
-      "age": 82,
+      "personProfileId": 102,
+      "legalRepresentativeFirstName": "Javier",
+      "legalRepresentativeLastName": "Torres Vega",
+      "legalRepresentativePhoneNumber": "+51 984 538 697",
+      "emergencyContactFirstName": "Patricia",
+      "emergencyContactLastName": "Ramírez Ríos",
+      "emergencyContactPhoneNumber": "+51 927 621 605",
+      "roomId": 1,
+      "nursingHomeId": 0,
+      "state": "active"
+    },
+    {
+      "id": 3,
+      "personProfileId": 103,
+      "legalRepresentativeFirstName": "Carmen",
+      "legalRepresentativeLastName": "García Huamán",
+      "legalRepresentativePhoneNumber": "+51 929 742 263",
+      "emergencyContactFirstName": "Hugo",
+      "emergencyContactLastName": "Vargas Salas",
+      "emergencyContactPhoneNumber": "+51 918 494 490",
       "roomId": 2,
-      "nursingHomeId": 0
+      "nursingHomeId": 1,
+      "state": "active"
+    },
+    {
+      "id": 4,
+      "personProfileId": 104,
+      "legalRepresentativeFirstName": "Raúl",
+      "legalRepresentativeLastName": "Castillo Núñez",
+      "legalRepresentativePhoneNumber": "+51 942 666 981",
+      "emergencyContactFirstName": "María",
+      "emergencyContactLastName": "Salazar Vega",
+      "emergencyContactPhoneNumber": "+51 924 798 649",
+      "roomId": 3,
+      "nursingHomeId": 1,
+      "state": "active"
+    },
+    {
+      "id": 5,
+      "personProfileId": 105,
+      "legalRepresentativeFirstName": "Lucía",
+      "legalRepresentativeLastName": "Salazar Espinoza",
+      "legalRepresentativePhoneNumber": "+51 924 400 545",
+      "emergencyContactFirstName": "Luis",
+      "emergencyContactLastName": "Castillo López",
+      "emergencyContactPhoneNumber": "+51 943 612 880",
+      "roomId": 3,
+      "nursingHomeId": 1,
+      "state": "active"
+    },
+    {
+      "id": 6,
+      "personProfileId": 106,
+      "legalRepresentativeFirstName": "Luis",
+      "legalRepresentativeLastName": "Mendoza Huamán",
+      "legalRepresentativePhoneNumber": "+51 990 405 961",
+      "emergencyContactFirstName": "Teresa",
+      "emergencyContactLastName": "Mendoza Salas",
+      "emergencyContactPhoneNumber": "+51 935 256 482",
+      "roomId": 4,
+      "nursingHomeId": 1,
+      "state": "active"
+    },
+    {
+      "id": 7,
+      "personProfileId": 107,
+      "legalRepresentativeFirstName": "Rosa",
+      "legalRepresentativeLastName": "Mendoza Núñez",
+      "legalRepresentativePhoneNumber": "+51 910 713 431",
+      "emergencyContactFirstName": "Eduardo",
+      "emergencyContactLastName": "García Huamán",
+      "emergencyContactPhoneNumber": "+51 956 999 951",
+      "roomId": 4,
+      "nursingHomeId": 1,
+      "state": "active"
+    },
+    {
+      "id": 8,
+      "personProfileId": 108,
+      "legalRepresentativeFirstName": "Andrés",
+      "legalRepresentativeLastName": "Quispe López",
+      "legalRepresentativePhoneNumber": "+51 940 999 680",
+      "emergencyContactFirstName": "Carmen",
+      "emergencyContactLastName": "Rodríguez Vega",
+      "emergencyContactPhoneNumber": "+51 972 935 170",
+      "roomId": 6,
+      "nursingHomeId": 1,
+      "state": "active"
+    },
+    {
+      "id": 9,
+      "personProfileId": 109,
+      "legalRepresentativeFirstName": "Beatriz",
+      "legalRepresentativeLastName": "Flores Díaz",
+      "legalRepresentativePhoneNumber": "+51 994 586 662",
+      "emergencyContactFirstName": "Luis",
+      "emergencyContactLastName": "Torres Núñez",
+      "emergencyContactPhoneNumber": "+51 987 533 316",
+      "roomId": 6,
+      "nursingHomeId": 1,
+      "state": "active"
+    },
+    {
+      "id": 10,
+      "personProfileId": 110,
+      "legalRepresentativeFirstName": "Javier",
+      "legalRepresentativeLastName": "Paredes Vega",
+      "legalRepresentativePhoneNumber": "+51 935 830 419",
+      "emergencyContactFirstName": "Patricia",
+      "emergencyContactLastName": "Salazar Ponce",
+      "emergencyContactPhoneNumber": "+51 957 548 629",
+      "roomId": null,
+      "nursingHomeId": 1,
+      "state": "inactive"
+    },
+    {
+      "id": 11,
+      "personProfileId": 111,
+      "legalRepresentativeFirstName": "Sofía",
+      "legalRepresentativeLastName": "Rodríguez Ríos",
+      "legalRepresentativePhoneNumber": "+51 938 165 446",
+      "emergencyContactFirstName": "Carlos",
+      "emergencyContactLastName": "Rojas Núñez",
+      "emergencyContactPhoneNumber": "+51 939 702 325",
+      "roomId": null,
+      "nursingHomeId": 1,
+      "state": "inactive"
+    },
+    {
+      "id": 12,
+      "personProfileId": 112,
+      "legalRepresentativeFirstName": "Carlos",
+      "legalRepresentativeLastName": "Rodríguez Vega",
+      "legalRepresentativePhoneNumber": "+51 990 160 334",
+      "emergencyContactFirstName": "Carmen",
+      "emergencyContactLastName": "García Espinoza",
+      "emergencyContactPhoneNumber": "+51 919 626 343",
+      "roomId": 5,
+      "nursingHomeId": 1,
+      "state": "inactive"
     }
   ],
-  "rooms": [
+  "medications": [
     {
       "id": 1,
-      "nursingHomeId": 0,
-      "number": "A-101",
-      "status": "Occupied"
+      "residentId": 1,
+      "name": "Insulina NPH",
+      "description": "Control de diabetes",
+      "amount": 37,
+      "expirationDate": "2026-09-05",
+      "drugPresentation": "Inyectable",
+      "dosage": "10 mL"
     },
     {
       "id": 2,
-      "nursingHomeId": 0,
-      "number": "A-102",
-      "status": "Occupied"
+      "residentId": 1,
+      "name": "Insulina NPH",
+      "description": "Control de diabetes",
+      "amount": 41,
+      "expirationDate": "2026-08-26",
+      "drugPresentation": "Inyectable",
+      "dosage": "10 mL"
+    },
+    {
+      "id": 3,
+      "residentId": 2,
+      "name": "Atorvastatina",
+      "description": "Reductor de colesterol",
+      "amount": 22,
+      "expirationDate": "2026-02-22",
+      "drugPresentation": "Tableta",
+      "dosage": "20 mg"
+    },
+    {
+      "id": 4,
+      "residentId": 2,
+      "name": "Salbutamol",
+      "description": "Broncodilatador",
+      "amount": 55,
+      "expirationDate": "2026-07-14",
+      "drugPresentation": "Inhalador",
+      "dosage": "100 mcg"
+    },
+    {
+      "id": 5,
+      "residentId": 3,
+      "name": "Paracetamol",
+      "description": "Analgésico y antipirético",
+      "amount": 22,
+      "expirationDate": "2026-01-13",
+      "drugPresentation": "Tableta",
+      "dosage": "500 mg"
+    },
+    {
+      "id": 6,
+      "residentId": 3,
+      "name": "Enalapril",
+      "description": "Antihipertensivo",
+      "amount": 23,
+      "expirationDate": "2026-04-07",
+      "drugPresentation": "Tableta",
+      "dosage": "10 mg"
+    },
+    {
+      "id": 7,
+      "residentId": 4,
+      "name": "Insulina NPH",
+      "description": "Control de diabetes",
+      "amount": 27,
+      "expirationDate": "2026-07-06",
+      "drugPresentation": "Inyectable",
+      "dosage": "10 mL"
+    },
+    {
+      "id": 8,
+      "residentId": 5,
+      "name": "Insulina NPH",
+      "description": "Control de diabetes",
+      "amount": 41,
+      "expirationDate": "2026-02-15",
+      "drugPresentation": "Inyectable",
+      "dosage": "10 mL"
+    },
+    {
+      "id": 9,
+      "residentId": 5,
+      "name": "Losartán",
+      "description": "Antihipertensivo",
+      "amount": 16,
+      "expirationDate": "2026-11-18",
+      "drugPresentation": "Tableta",
+      "dosage": "50 mg"
+    },
+    {
+      "id": 10,
+      "residentId": 6,
+      "name": "Losartán",
+      "description": "Antihipertensivo",
+      "amount": 40,
+      "expirationDate": "2026-03-14",
+      "drugPresentation": "Tableta",
+      "dosage": "50 mg"
+    },
+    {
+      "id": 11,
+      "residentId": 7,
+      "name": "Insulina NPH",
+      "description": "Control de diabetes",
+      "amount": 37,
+      "expirationDate": "2026-07-02",
+      "drugPresentation": "Inyectable",
+      "dosage": "10 mL"
+    },
+    {
+      "id": 12,
+      "residentId": 7,
+      "name": "Metformina",
+      "description": "Control de glucemia",
+      "amount": 58,
+      "expirationDate": "2026-01-13",
+      "drugPresentation": "Tableta",
+      "dosage": "850 mg"
+    },
+    {
+      "id": 13,
+      "residentId": 8,
+      "name": "Insulina NPH",
+      "description": "Control de diabetes",
+      "amount": 46,
+      "expirationDate": "2026-07-23",
+      "drugPresentation": "Inyectable",
+      "dosage": "10 mL"
+    },
+    {
+      "id": 14,
+      "residentId": 8,
+      "name": "Insulina NPH",
+      "description": "Control de diabetes",
+      "amount": 29,
+      "expirationDate": "2026-04-10",
+      "drugPresentation": "Inyectable",
+      "dosage": "10 mL"
+    },
+    {
+      "id": 15,
+      "residentId": 9,
+      "name": "Paracetamol",
+      "description": "Analgésico y antipirético",
+      "amount": 84,
+      "expirationDate": "2026-12-18",
+      "drugPresentation": "Tableta",
+      "dosage": "500 mg"
+    },
+    {
+      "id": 16,
+      "residentId": 10,
+      "name": "Enalapril",
+      "description": "Antihipertensivo",
+      "amount": 17,
+      "expirationDate": "2026-01-19",
+      "drugPresentation": "Tableta",
+      "dosage": "10 mg"
+    },
+    {
+      "id": 17,
+      "residentId": 11,
+      "name": "Metformina",
+      "description": "Control de glucemia",
+      "amount": 17,
+      "expirationDate": "2026-09-03",
+      "drugPresentation": "Tableta",
+      "dosage": "850 mg"
+    },
+    {
+      "id": 18,
+      "residentId": 11,
+      "name": "Metformina",
+      "description": "Control de glucemia",
+      "amount": 18,
+      "expirationDate": "2026-10-03",
+      "drugPresentation": "Tableta",
+      "dosage": "850 mg"
+    },
+    {
+      "id": 19,
+      "residentId": 12,
+      "name": "Atorvastatina",
+      "description": "Reductor de colesterol",
+      "amount": 61,
+      "expirationDate": "2026-02-19",
+      "drugPresentation": "Tableta",
+      "dosage": "20 mg"
+    },
+    {
+      "id": 20,
+      "residentId": 12,
+      "name": "Atorvastatina",
+      "description": "Reductor de colesterol",
+      "amount": 84,
+      "expirationDate": "2026-10-02",
+      "drugPresentation": "Tableta",
+      "dosage": "20 mg"
+    },
+    {
+      "id": 21,
+      "residentId": 12,
+      "name": "Losartán",
+      "description": "Antihipertensivo",
+      "amount": 63,
+      "expirationDate": "2026-11-19",
+      "drugPresentation": "Tableta",
+      "dosage": "50 mg"
     }
   ],
-  "business-profiles": [],
-  "person-profiles": [],
-  "medications": [],
-  "activities": [],
-  "devices": [],
-  "relatives": [],
-
   "allergies": [
     {
       "id": 1,
       "residentId": 1,
-      "allergen": "Penicillin",
-      "reaction": "Skin rash",
-      "severity": "High",
-      "diagnosedAt": "2025-04-10",
-      "notes": "Avoid penicillin-based medication."
+      "allergenName": "Ácaros del polvo",
+      "reaction": "Congestión nasal",
+      "severityLevel": "Low",
+      "typeOfAllergy": "Ambiental"
     },
     {
       "id": 2,
       "residentId": 1,
-      "allergen": "Peanuts",
-      "reaction": "Breathing difficulty",
-      "severity": "Critical",
-      "diagnosedAt": "2024-11-20",
-      "notes": "Requires immediate medical attention in case of exposure."
+      "allergenName": "Polen",
+      "reaction": "Rinitis y estornudos",
+      "severityLevel": "Low",
+      "typeOfAllergy": "Ambiental"
     },
     {
       "id": 3,
       "residentId": 2,
-      "allergen": "Dust mites",
-      "reaction": "Sneezing and irritation",
-      "severity": "Medium",
-      "diagnosedAt": "2025-01-18",
-      "notes": "Keep room clean and ventilated."
+      "allergenName": "Maní",
+      "reaction": "Hinchazón y dificultad respiratoria",
+      "severityLevel": "Critical",
+      "typeOfAllergy": "Alimentaria"
+    },
+    {
+      "id": 4,
+      "residentId": 3,
+      "allergenName": "Mariscos",
+      "reaction": "Urticaria generalizada",
+      "severityLevel": "High",
+      "typeOfAllergy": "Alimentaria"
+    },
+    {
+      "id": 5,
+      "residentId": 3,
+      "allergenName": "Polen",
+      "reaction": "Rinitis y estornudos",
+      "severityLevel": "Low",
+      "typeOfAllergy": "Ambiental"
+    },
+    {
+      "id": 6,
+      "residentId": 5,
+      "allergenName": "Lactosa",
+      "reaction": "Malestar gastrointestinal",
+      "severityLevel": "Medium",
+      "typeOfAllergy": "Alimentaria"
+    },
+    {
+      "id": 7,
+      "residentId": 7,
+      "allergenName": "Mariscos",
+      "reaction": "Urticaria generalizada",
+      "severityLevel": "High",
+      "typeOfAllergy": "Alimentaria"
+    },
+    {
+      "id": 8,
+      "residentId": 7,
+      "allergenName": "Polen",
+      "reaction": "Rinitis y estornudos",
+      "severityLevel": "Low",
+      "typeOfAllergy": "Ambiental"
+    },
+    {
+      "id": 9,
+      "residentId": 8,
+      "allergenName": "Polen",
+      "reaction": "Rinitis y estornudos",
+      "severityLevel": "Low",
+      "typeOfAllergy": "Ambiental"
+    },
+    {
+      "id": 10,
+      "residentId": 11,
+      "allergenName": "Ácaros del polvo",
+      "reaction": "Congestión nasal",
+      "severityLevel": "Low",
+      "typeOfAllergy": "Ambiental"
+    },
+    {
+      "id": 11,
+      "residentId": 12,
+      "allergenName": "Penicilina",
+      "reaction": "Erupción cutánea y urticaria",
+      "severityLevel": "High",
+      "typeOfAllergy": "Medicamentosa"
+    },
+    {
+      "id": 12,
+      "residentId": 12,
+      "allergenName": "Penicilina",
+      "reaction": "Erupción cutánea y urticaria",
+      "severityLevel": "High",
+      "typeOfAllergy": "Medicamentosa"
     }
   ],
-
   "vital-signs": [
     {
       "id": 1,
       "residentId": 1,
-      "temperature": 36.8,
-      "heartRate": 78,
-      "bloodPressure": "120/80",
-      "oxygenSaturation": 98,
-      "respiratoryRate": 16,
-      "registeredAt": "2026-05-15T09:30:00",
-      "status": "Normal"
+      "measurementId": 1001,
+      "severityLevel": "Low"
     },
     {
       "id": 2,
       "residentId": 1,
-      "temperature": 37.9,
-      "heartRate": 92,
-      "bloodPressure": "135/85",
-      "oxygenSaturation": 95,
-      "respiratoryRate": 20,
-      "registeredAt": "2026-05-15T12:00:00",
-      "status": "Warning"
+      "measurementId": 1002,
+      "severityLevel": "Critical"
     },
     {
       "id": 3,
+      "residentId": 1,
+      "measurementId": 1003,
+      "severityLevel": "Medium"
+    },
+    {
+      "id": 4,
       "residentId": 2,
-      "temperature": 36.5,
-      "heartRate": 74,
-      "bloodPressure": "118/78",
-      "oxygenSaturation": 97,
-      "respiratoryRate": 15,
-      "registeredAt": "2026-05-15T10:15:00",
-      "status": "Normal"
+      "measurementId": 1004,
+      "severityLevel": "Medium"
+    },
+    {
+      "id": 5,
+      "residentId": 3,
+      "measurementId": 1005,
+      "severityLevel": "Low"
+    },
+    {
+      "id": 6,
+      "residentId": 4,
+      "measurementId": 1006,
+      "severityLevel": "Medium"
+    },
+    {
+      "id": 7,
+      "residentId": 4,
+      "measurementId": 1007,
+      "severityLevel": "Low"
+    },
+    {
+      "id": 8,
+      "residentId": 5,
+      "measurementId": 1008,
+      "severityLevel": "Critical"
+    },
+    {
+      "id": 9,
+      "residentId": 5,
+      "measurementId": 1009,
+      "severityLevel": "Medium"
+    },
+    {
+      "id": 10,
+      "residentId": 6,
+      "measurementId": 1010,
+      "severityLevel": "Critical"
+    },
+    {
+      "id": 11,
+      "residentId": 6,
+      "measurementId": 1011,
+      "severityLevel": "Normal"
+    },
+    {
+      "id": 12,
+      "residentId": 6,
+      "measurementId": 1012,
+      "severityLevel": "Critical"
+    },
+    {
+      "id": 13,
+      "residentId": 7,
+      "measurementId": 1013,
+      "severityLevel": "Normal"
+    },
+    {
+      "id": 14,
+      "residentId": 7,
+      "measurementId": 1014,
+      "severityLevel": "Low"
+    },
+    {
+      "id": 15,
+      "residentId": 8,
+      "measurementId": 1015,
+      "severityLevel": "Normal"
+    },
+    {
+      "id": 16,
+      "residentId": 8,
+      "measurementId": 1016,
+      "severityLevel": "Normal"
+    },
+    {
+      "id": 17,
+      "residentId": 9,
+      "measurementId": 1017,
+      "severityLevel": "Critical"
+    },
+    {
+      "id": 18,
+      "residentId": 9,
+      "measurementId": 1018,
+      "severityLevel": "Low"
+    },
+    {
+      "id": 19,
+      "residentId": 9,
+      "measurementId": 1019,
+      "severityLevel": "Medium"
+    },
+    {
+      "id": 20,
+      "residentId": 10,
+      "measurementId": 1020,
+      "severityLevel": "Critical"
+    },
+    {
+      "id": 21,
+      "residentId": 10,
+      "measurementId": 1021,
+      "severityLevel": "Low"
+    },
+    {
+      "id": 22,
+      "residentId": 11,
+      "measurementId": 1022,
+      "severityLevel": "Medium"
+    },
+    {
+      "id": 23,
+      "residentId": 11,
+      "measurementId": 1023,
+      "severityLevel": "Low"
+    },
+    {
+      "id": 24,
+      "residentId": 11,
+      "measurementId": 1024,
+      "severityLevel": "Medium"
+    },
+    {
+      "id": 25,
+      "residentId": 12,
+      "measurementId": 1025,
+      "severityLevel": "High"
+    },
+    {
+      "id": 26,
+      "residentId": 12,
+      "measurementId": 1026,
+      "severityLevel": "Medium"
+    },
+    {
+      "id": 27,
+      "residentId": 12,
+      "measurementId": 1027,
+      "severityLevel": "Normal"
+    }
+  ],
+  "devices": [
+    {
+      "id": 1,
+      "deviceId": "VEYRA-IOT-1000",
+      "residentId": 1,
+      "assignedBy": "Elena Ramírez Núñez",
+      "assignedAt": "2025-11-14T12:02:00Z",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "deviceId": "VEYRA-IOT-1001",
+      "residentId": 2,
+      "assignedBy": "Sofía Castillo Ponce",
+      "assignedAt": "2025-03-21T12:10:00Z",
+      "status": "Maintenance"
+    },
+    {
+      "id": 3,
+      "deviceId": "VEYRA-IOT-1002",
+      "residentId": 3,
+      "assignedBy": "Javier Mendoza Vega",
+      "assignedAt": "2025-09-23T14:35:00Z",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "deviceId": "VEYRA-IOT-1003",
+      "residentId": 4,
+      "assignedBy": "Elena Ramírez Núñez",
+      "assignedAt": "2025-02-23T10:34:00Z",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "deviceId": "VEYRA-IOT-1004",
+      "residentId": 5,
+      "assignedBy": "Sofía Castillo Ponce",
+      "assignedAt": "2025-10-18T10:27:00Z",
+      "status": "Active"
+    },
+    {
+      "id": 6,
+      "deviceId": "VEYRA-IOT-1005",
+      "residentId": 6,
+      "assignedBy": "Elena Ramírez Núñez",
+      "assignedAt": "2025-05-12T08:57:00Z",
+      "status": "Inactive"
+    },
+    {
+      "id": 7,
+      "deviceId": "VEYRA-IOT-1006",
+      "residentId": 7,
+      "assignedBy": "Fernando Vargas Salas",
+      "assignedAt": "2025-11-08T18:06:00Z",
+      "status": "Inactive"
+    },
+    {
+      "id": 8,
+      "deviceId": "VEYRA-IOT-1007",
+      "residentId": 8,
+      "assignedBy": "Gloria Rojas López",
+      "assignedAt": "2025-07-20T10:59:00Z",
+      "status": "Active"
+    },
+    {
+      "id": 9,
+      "deviceId": "VEYRA-IOT-1008",
+      "residentId": 9,
+      "assignedBy": "Fernando Vargas Salas",
+      "assignedAt": "2025-03-14T08:11:00Z",
+      "status": "Maintenance"
+    },
+    {
+      "id": 10,
+      "deviceId": "VEYRA-IOT-1009",
+      "residentId": 10,
+      "assignedBy": "Sofía Castillo Ponce",
+      "assignedAt": "2025-07-26T18:55:00Z",
+      "status": "Maintenance"
+    },
+    {
+      "id": 11,
+      "deviceId": "VEYRA-IOT-1010",
+      "residentId": 11,
+      "assignedBy": "Fernando Vargas Salas",
+      "assignedAt": "2025-05-06T09:24:00Z",
+      "status": "Active"
+    },
+    {
+      "id": 12,
+      "deviceId": "VEYRA-IOT-1011",
+      "residentId": 12,
+      "assignedBy": "Javier Mendoza Vega",
+      "assignedAt": "2025-04-07T15:22:00Z",
+      "status": "Inactive"
+    },
+    {
+      "id": 13,
+      "deviceId": "VEYRA-IOT-1012",
+      "residentId": 1,
+      "assignedBy": "Fernando Vargas Salas",
+      "assignedAt": "2025-04-01T18:12:00Z",
+      "status": "Inactive"
+    },
+    {
+      "id": 14,
+      "deviceId": "VEYRA-IOT-1013",
+      "residentId": 2,
+      "assignedBy": "Sofía Castillo Ponce",
+      "assignedAt": "2025-05-28T09:49:00Z",
+      "status": "Inactive"
+    }
+  ],
+  "relatives": [
+    {
+      "id": 1,
+      "firstName": "Carmen",
+      "lastName": "Rodríguez Ríos",
+      "email": "carmen.rodriguez@familia.test",
+      "residentId": 1,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 2,
+      "firstName": "Luis",
+      "lastName": "Flores Campos",
+      "email": "luis.flores@familia.test",
+      "residentId": 1,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 3,
+      "firstName": "Ana",
+      "lastName": "Quispe Espinoza",
+      "email": "ana.quispe@familia.test",
+      "residentId": 2,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 4,
+      "firstName": "Andrés",
+      "lastName": "Torres Cárdenas",
+      "email": "andres.torres@familia.test",
+      "residentId": 2,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 5,
+      "firstName": "Elena",
+      "lastName": "Ramírez Gutiérrez",
+      "email": "elena.ramirez@familia.test",
+      "residentId": 3,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 6,
+      "firstName": "Fernando",
+      "lastName": "Vargas Núñez",
+      "email": "fernando.vargas@familia.test",
+      "residentId": 3,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 7,
+      "firstName": "Sofía",
+      "lastName": "Castillo Salas",
+      "email": "sofia.castillo@familia.test",
+      "residentId": 4,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 8,
+      "firstName": "Javier",
+      "lastName": "Mendoza Ponce",
+      "email": "javier.mendoza@familia.test",
+      "residentId": 5,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 9,
+      "firstName": "Gloria",
+      "lastName": "Rojas Vega",
+      "email": "gloria.rojas@familia.test",
+      "residentId": 6,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 10,
+      "firstName": "Hugo",
+      "lastName": "Salazar López",
+      "email": "hugo.salazar@familia.test",
+      "residentId": 6,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 11,
+      "firstName": "Isabel",
+      "lastName": "Paredes Huamán",
+      "email": "isabel.paredes@familia.test",
+      "residentId": 7,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 12,
+      "firstName": "Carlos",
+      "lastName": "García Díaz",
+      "email": "carlos.garcia@familia.test",
+      "residentId": 8,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 13,
+      "firstName": "Carmen",
+      "lastName": "Rodríguez Ríos",
+      "email": "carmen.rodriguez@familia.test",
+      "residentId": 8,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 14,
+      "firstName": "Luis",
+      "lastName": "Flores Campos",
+      "email": "luis.flores@familia.test",
+      "residentId": 9,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 15,
+      "firstName": "Ana",
+      "lastName": "Quispe Espinoza",
+      "email": "ana.quispe@familia.test",
+      "residentId": 10,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 16,
+      "firstName": "Andrés",
+      "lastName": "Torres Cárdenas",
+      "email": "andres.torres@familia.test",
+      "residentId": 11,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 17,
+      "firstName": "Elena",
+      "lastName": "Ramírez Gutiérrez",
+      "email": "elena.ramirez@familia.test",
+      "residentId": 11,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 18,
+      "firstName": "Fernando",
+      "lastName": "Vargas Núñez",
+      "email": "fernando.vargas@familia.test",
+      "residentId": 12,
+      "nursing-homeId": 1
+    },
+    {
+      "id": 19,
+      "firstName": "Sofía",
+      "lastName": "Castillo Salas",
+      "email": "sofia.castillo@familia.test",
+      "residentId": 12,
+      "nursing-homeId": 1
+    },
+    {
+      "firstName": "kwemfawef",
+      "lastName": "ervmkrae",
+      "email": "oeafma@hotmail.com",
+      "residentId": 1,
+      "nursing-homeId": 0,
+      "id": 20
+    }
+  ],
+  "doctor-monitoring": {
+    "monitoringResidents": [
+      {
+        "id": 1,
+        "residentId": 1,
+        "healthId": 5001,
+        "doctorId": 1
+      },
+      {
+        "id": 2,
+        "residentId": 2,
+        "healthId": 5002,
+        "doctorId": 1
+      },
+      {
+        "id": 3,
+        "residentId": 3,
+        "healthId": 5003,
+        "doctorId": 1
+      },
+      {
+        "id": 4,
+        "residentId": 4,
+        "healthId": 5004,
+        "doctorId": 1
+      },
+      {
+        "id": 5,
+        "residentId": 5,
+        "healthId": 5005,
+        "doctorId": 1
+      },
+      {
+        "id": 6,
+        "residentId": 6,
+        "healthId": 5006,
+        "doctorId": 1
+      },
+      {
+        "id": 7,
+        "residentId": 7,
+        "healthId": 5007,
+        "doctorId": 1
+      },
+      {
+        "id": 8,
+        "residentId": 8,
+        "healthId": 5008,
+        "doctorId": 1
+      }
+    ]
+  },
+  "staff": [
+    {
+      "id": 1,
+      "personProfileId": 201,
+      "emergencyContactFirstName": "Isabel",
+      "emergencyContactLastName": "Ramírez Cárdenas",
+      "emergencyContactPhoneNumber": "+51 987 623 218",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "personProfileId": 202,
+      "emergencyContactFirstName": "Patricia",
+      "emergencyContactLastName": "Rojas Ríos",
+      "emergencyContactPhoneNumber": "+51 942 145 825",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "personProfileId": 203,
+      "emergencyContactFirstName": "Patricia",
+      "emergencyContactLastName": "García Núñez",
+      "emergencyContactPhoneNumber": "+51 978 803 836",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "personProfileId": 204,
+      "emergencyContactFirstName": "Isabel",
+      "emergencyContactLastName": "Paredes Ponce",
+      "emergencyContactPhoneNumber": "+51 935 472 541",
+      "status": "On Leave"
+    },
+    {
+      "id": 5,
+      "personProfileId": 205,
+      "emergencyContactFirstName": "Carmen",
+      "emergencyContactLastName": "Salazar Espinoza",
+      "emergencyContactPhoneNumber": "+51 989 421 779",
+      "status": "Active"
+    },
+    {
+      "id": 6,
+      "personProfileId": 206,
+      "emergencyContactFirstName": "Carmen",
+      "emergencyContactLastName": "Paredes Campos",
+      "emergencyContactPhoneNumber": "+51 974 416 782",
+      "status": "Inactive"
+    }
+  ],
+  "contracts": [
+    {
+      "id": 1,
+      "staffMemberId": 1,
+      "startDate": "2026-07-11",
+      "endDate": "2026-07-23",
+      "typeOfContract": "Indefinido",
+      "staffRole": "Enfermero",
+      "workShift": "Mañana",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "staffMemberId": 2,
+      "startDate": "2024-05-18",
+      "endDate": "2026-03-07",
+      "typeOfContract": "Plazo Fijo",
+      "staffRole": "Médico",
+      "workShift": "Tarde",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "staffMemberId": 3,
+      "startDate": "2024-07-22",
+      "endDate": "2026-07-22",
+      "typeOfContract": "Temporal",
+      "staffRole": "Cuidador",
+      "workShift": "Noche",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "staffMemberId": 4,
+      "startDate": "2024-12-06",
+      "endDate": "2026-10-19",
+      "typeOfContract": "Indefinido",
+      "staffRole": "Fisioterapeuta",
+      "workShift": "Rotativo",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "staffMemberId": 5,
+      "startDate": "2024-05-13",
+      "endDate": "2026-09-27",
+      "typeOfContract": "Plazo Fijo",
+      "staffRole": "Nutricionista",
+      "workShift": "Mañana",
+      "status": "Expired"
+    },
+    {
+      "id": 6,
+      "staffMemberId": 6,
+      "startDate": "2024-01-10",
+      "endDate": "2026-05-07",
+      "typeOfContract": "Temporal",
+      "staffRole": "Administrativo",
+      "workShift": "Tarde",
+      "status": "Active"
+    }
+  ],
+  "activities": [
+    {
+      "id": 1,
+      "residentId": 1,
+      "healthcareStaffId": 1,
+      "type": "MEAL",
+      "status": "PENDING",
+      "notes": "Almuerzo completo, buena ingesta.",
+      "loggedAt": "2025-12-01T13:50:00Z"
+    },
+    {
+      "id": 2,
+      "residentId": 2,
+      "healthcareStaffId": 2,
+      "type": "BATH",
+      "status": "IN_PROGRESS",
+      "notes": "Aseo asistido sin incidencias.",
+      "loggedAt": "2025-12-02T16:38:00Z"
+    },
+    {
+      "id": 3,
+      "residentId": 3,
+      "healthcareStaffId": 3,
+      "type": "RISK_PROFILE",
+      "status": "COMPLETED",
+      "notes": "Evaluación de riesgo de caídas registrada.",
+      "loggedAt": "2025-12-03T17:20:00Z"
+    },
+    {
+      "id": 4,
+      "residentId": 4,
+      "healthcareStaffId": 4,
+      "type": "MEAL",
+      "status": "PENDING",
+      "notes": "Almuerzo completo, buena ingesta.",
+      "loggedAt": "2025-12-04T14:28:00Z"
+    },
+    {
+      "id": 5,
+      "residentId": 5,
+      "healthcareStaffId": 5,
+      "type": "BATH",
+      "status": "IN_PROGRESS",
+      "notes": "Aseo asistido sin incidencias.",
+      "loggedAt": "2025-12-05T14:43:00Z"
+    },
+    {
+      "id": 6,
+      "residentId": 6,
+      "healthcareStaffId": 6,
+      "type": "RISK_PROFILE",
+      "status": "COMPLETED",
+      "notes": "Evaluación de riesgo de caídas registrada.",
+      "loggedAt": "2025-12-06T10:32:00Z"
+    },
+    {
+      "id": 7,
+      "residentId": 7,
+      "healthcareStaffId": 1,
+      "type": "MEAL",
+      "status": "PENDING",
+      "notes": "Almuerzo completo, buena ingesta.",
+      "loggedAt": "2025-12-07T14:50:00Z"
+    },
+    {
+      "id": 8,
+      "residentId": 8,
+      "healthcareStaffId": 2,
+      "type": "BATH",
+      "status": "IN_PROGRESS",
+      "notes": "Aseo asistido sin incidencias.",
+      "loggedAt": "2025-12-08T19:47:00Z"
+    },
+    {
+      "id": 9,
+      "residentId": 9,
+      "healthcareStaffId": 3,
+      "type": "RISK_PROFILE",
+      "status": "COMPLETED",
+      "notes": "Evaluación de riesgo de caídas registrada.",
+      "loggedAt": "2025-12-09T09:42:00Z"
+    },
+    {
+      "id": 10,
+      "residentId": 10,
+      "healthcareStaffId": 4,
+      "type": "MEAL",
+      "status": "PENDING",
+      "notes": "Almuerzo completo, buena ingesta.",
+      "loggedAt": "2025-12-10T08:18:00Z"
+    },
+    {
+      "id": 11,
+      "residentId": 11,
+      "healthcareStaffId": 5,
+      "type": "BATH",
+      "status": "IN_PROGRESS",
+      "notes": "Aseo asistido sin incidencias.",
+      "loggedAt": "2025-12-11T15:42:00Z"
+    },
+    {
+      "id": 12,
+      "residentId": 12,
+      "healthcareStaffId": 6,
+      "type": "RISK_PROFILE",
+      "status": "COMPLETED",
+      "notes": "Evaluación de riesgo de caídas registrada.",
+      "loggedAt": "2025-12-12T17:39:00Z"
+    },
+    {
+      "id": 13,
+      "residentId": 1,
+      "healthcareStaffId": 1,
+      "type": "MEAL",
+      "status": "PENDING",
+      "notes": "Almuerzo completo, buena ingesta.",
+      "loggedAt": "2025-12-13T12:05:00Z"
+    },
+    {
+      "id": 14,
+      "residentId": 2,
+      "healthcareStaffId": 2,
+      "type": "BATH",
+      "status": "IN_PROGRESS",
+      "notes": "Aseo asistido sin incidencias.",
+      "loggedAt": "2025-12-14T20:48:00Z"
+    },
+    {
+      "id": 15,
+      "residentId": 3,
+      "healthcareStaffId": 3,
+      "type": "RISK_PROFILE",
+      "status": "COMPLETED",
+      "notes": "Evaluación de riesgo de caídas registrada.",
+      "loggedAt": "2025-12-15T10:43:00Z"
+    },
+    {
+      "id": 16,
+      "residentId": 4,
+      "healthcareStaffId": 4,
+      "type": "MEAL",
+      "status": "PENDING",
+      "notes": "Almuerzo completo, buena ingesta.",
+      "loggedAt": "2025-12-16T11:14:00Z"
+    },
+    {
+      "id": 17,
+      "residentId": 5,
+      "healthcareStaffId": 5,
+      "type": "BATH",
+      "status": "IN_PROGRESS",
+      "notes": "Aseo asistido sin incidencias.",
+      "loggedAt": "2025-12-17T19:12:00Z"
+    },
+    {
+      "id": 18,
+      "residentId": 6,
+      "healthcareStaffId": 6,
+      "type": "RISK_PROFILE",
+      "status": "COMPLETED",
+      "notes": "Evaluación de riesgo de caídas registrada.",
+      "loggedAt": "2025-12-18T09:01:00Z"
+    },
+    {
+      "id": 19,
+      "residentId": 7,
+      "healthcareStaffId": 1,
+      "type": "MEAL",
+      "status": "PENDING",
+      "notes": "Almuerzo completo, buena ingesta.",
+      "loggedAt": "2025-12-19T07:15:00Z"
+    },
+    {
+      "id": 20,
+      "residentId": 8,
+      "healthcareStaffId": 2,
+      "type": "BATH",
+      "status": "IN_PROGRESS",
+      "notes": "Aseo asistido sin incidencias.",
+      "loggedAt": "2025-12-20T14:39:00Z"
+    },
+    {
+      "id": 21,
+      "residentId": 9,
+      "healthcareStaffId": 3,
+      "type": "RISK_PROFILE",
+      "status": "COMPLETED",
+      "notes": "Evaluación de riesgo de caídas registrada.",
+      "loggedAt": "2025-12-21T20:49:00Z"
+    },
+    {
+      "id": 22,
+      "residentId": 10,
+      "healthcareStaffId": 4,
+      "type": "MEAL",
+      "status": "PENDING",
+      "notes": "Almuerzo completo, buena ingesta.",
+      "loggedAt": "2025-12-22T08:29:00Z"
+    },
+    {
+      "id": 23,
+      "residentId": 11,
+      "healthcareStaffId": 5,
+      "type": "BATH",
+      "status": "IN_PROGRESS",
+      "notes": "Aseo asistido sin incidencias.",
+      "loggedAt": "2025-12-23T13:56:00Z"
+    },
+    {
+      "id": 24,
+      "residentId": 12,
+      "healthcareStaffId": 6,
+      "type": "RISK_PROFILE",
+      "status": "COMPLETED",
+      "notes": "Evaluación de riesgo de caídas registrada.",
+      "loggedAt": "2025-12-24T17:36:00Z"
+    }
+  ],
+  "analytics-staff-hires": [
+    {
+      "id": 4,
+      "nursingHomeId": 0,
+      "year": 2025,
+      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+      "values": [1,5,5,3,3,3,1,1,5,5,0,0],
+      "metricType": "STAFF_HIRES",
+      "total": 32
+    },
+    {
+      "id": 3,
+      "year": 2026,
+      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+      "values": [2,4,3,5,2,1,4,2,3,4,1,2],
+      "metricType": "STAFF_HIRES",
+      "total": 33
+    }
+  ],
+
+  "analytics-staff-terminations": [
+    {
+      "id": 2,
+      "year": 2025,
+      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+      "values": [3,1,1,3,0,1,0,3,1,3,2,3],
+      "metricType": "STAFF_TERMINATIONS",
+      "total": 21
+    }
+  ],
+
+  "analytics-residents-admissions": [
+    {
+      "id": 1,
+      "year": 2025,
+      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+      "values": [7,8,3,8,8,5,4,5,8,4,5,8],
+      "metricType": "RESIDENTS_ADMISSIONS",
+      "total": 73
+    }
+  ],
+
+  "alerts": [
+    {
+      "id": 1,
+      "nursingHomeId": 1,
+      "residentId": 1,
+      "residentName": "Carlos García Ríos",
+      "roomNumber": "101",
+      "title": "Signos vitales fuera de rango",
+      "description": "Signos vitales fuera de rango para el residente Carlos García Ríos.",
+      "severity": "URGENT",
+      "type": "VITAL_SIGNS",
+      "source": "STAFF",
+      "status": "UNREAD",
+      "reportedBy": "Elena Ramírez Núñez",
+      "createdAt": "2025-12-01T22:18:00Z"
+    },
+    {
+      "id": 2,
+      "nursingHomeId": 1,
+      "residentId": 2,
+      "residentName": "Carmen Rodríguez Campos",
+      "roomNumber": "101",
+      "title": "Dispositivo sin señal",
+      "description": "Dispositivo sin señal para el residente Carmen Rodríguez Campos.",
+      "severity": "WARNING",
+      "type": "TELEMETRY",
+      "source": "SYSTEM",
+      "status": "READ",
+      "reportedBy": "Fernando Vargas Salas",
+      "createdAt": "2025-12-02T08:21:00Z"
+    },
+    {
+      "id": 3,
+      "nursingHomeId": 1,
+      "residentId": 3,
+      "residentName": "Luis Flores Espinoza",
+      "roomNumber": "102",
+      "title": "Medicación no administrada",
+      "description": "Medicación no administrada para el residente Luis Flores Espinoza.",
+      "severity": "INFO",
+      "type": "MEDICATION",
+      "source": "IOT",
+      "status": "ACKNOWLEDGED",
+      "reportedBy": "Sofía Castillo Ponce",
+      "createdAt": "2025-12-03T17:05:00Z"
+    },
+    {
+      "id": 4,
+      "nursingHomeId": 1,
+      "residentId": 4,
+      "residentName": "Ana Quispe Cárdenas",
+      "roomNumber": "103",
+      "title": "Riesgo de caída detectado",
+      "description": "Riesgo de caída detectado para el residente Ana Quispe Cárdenas.",
+      "severity": "URGENT",
+      "type": "FALL_RISK",
+      "source": "STAFF",
+      "status": "UNREAD",
+      "reportedBy": "Fernando Vargas Salas",
+      "createdAt": "2025-12-04T04:14:00Z"
+    },
+    {
+      "id": 5,
+      "nursingHomeId": 1,
+      "residentId": 5,
+      "residentName": "Andrés Torres Gutiérrez",
+      "roomNumber": "103",
+      "title": "Notificación general",
+      "description": "Notificación general para el residente Andrés Torres Gutiérrez.",
+      "severity": "WARNING",
+      "type": "GENERAL",
+      "source": "SYSTEM",
+      "status": "READ",
+      "reportedBy": "Javier Mendoza Vega",
+      "createdAt": "2025-12-05T22:09:00Z"
+    },
+    {
+      "id": 6,
+      "nursingHomeId": 1,
+      "residentId": 6,
+      "residentName": "Elena Ramírez Núñez",
+      "roomNumber": "104",
+      "title": "Signos vitales fuera de rango",
+      "description": "Signos vitales fuera de rango para el residente Elena Ramírez Núñez.",
+      "severity": "INFO",
+      "type": "VITAL_SIGNS",
+      "source": "IOT",
+      "status": "ACKNOWLEDGED",
+      "reportedBy": "Hugo Salazar Huamán",
+      "createdAt": "2025-12-06T06:04:00Z"
+    },
+    {
+      "id": 7,
+      "nursingHomeId": 1,
+      "residentId": 7,
+      "residentName": "Fernando Vargas Salas",
+      "roomNumber": "104",
+      "title": "Dispositivo sin señal",
+      "description": "Dispositivo sin señal para el residente Fernando Vargas Salas.",
+      "severity": "URGENT",
+      "type": "TELEMETRY",
+      "source": "STAFF",
+      "status": "UNREAD",
+      "reportedBy": "Javier Mendoza Vega",
+      "createdAt": "2025-12-07T13:21:00Z"
+    },
+    {
+      "id": 8,
+      "nursingHomeId": 1,
+      "residentId": 8,
+      "residentName": "Sofía Castillo Ponce",
+      "roomNumber": "106",
+      "title": "Medicación no administrada",
+      "description": "Medicación no administrada para el residente Sofía Castillo Ponce.",
+      "severity": "WARNING",
+      "type": "MEDICATION",
+      "source": "SYSTEM",
+      "status": "READ",
+      "reportedBy": "Gloria Rojas López",
+      "createdAt": "2025-12-08T14:26:00Z"
+    },
+    {
+      "id": 9,
+      "nursingHomeId": 1,
+      "residentId": 9,
+      "residentName": "Javier Mendoza Vega",
+      "roomNumber": "106",
+      "title": "Riesgo de caída detectado",
+      "description": "Riesgo de caída detectado para el residente Javier Mendoza Vega.",
+      "severity": "INFO",
+      "type": "FALL_RISK",
+      "source": "IOT",
+      "status": "ACKNOWLEDGED",
+      "reportedBy": "Elena Ramírez Núñez",
+      "createdAt": "2025-12-09T06:53:00Z"
+    },
+    {
+      "id": 10,
+      "nursingHomeId": 1,
+      "residentId": 10,
+      "residentName": "Gloria Rojas López",
+      "roomNumber": "N/A",
+      "title": "Notificación general",
+      "description": "Notificación general para el residente Gloria Rojas López.",
+      "severity": "URGENT",
+      "type": "GENERAL",
+      "source": "STAFF",
+      "status": "UNREAD",
+      "reportedBy": "Javier Mendoza Vega",
+      "createdAt": "2025-12-10T12:57:00Z"
+    },
+    {
+      "id": 11,
+      "nursingHomeId": 1,
+      "residentId": 11,
+      "residentName": "Hugo Salazar Huamán",
+      "roomNumber": "N/A",
+      "title": "Signos vitales fuera de rango",
+      "description": "Signos vitales fuera de rango para el residente Hugo Salazar Huamán.",
+      "severity": "WARNING",
+      "type": "VITAL_SIGNS",
+      "source": "SYSTEM",
+      "status": "READ",
+      "reportedBy": "Gloria Rojas López",
+      "createdAt": "2025-12-11T22:01:00Z"
+    },
+    {
+      "id": 12,
+      "nursingHomeId": 1,
+      "residentId": 12,
+      "residentName": "Isabel Paredes Díaz",
+      "roomNumber": "105",
+      "title": "Dispositivo sin señal",
+      "description": "Dispositivo sin señal para el residente Isabel Paredes Díaz.",
+      "severity": "INFO",
+      "type": "TELEMETRY",
+      "source": "IOT",
+      "status": "ACKNOWLEDGED",
+      "reportedBy": "Gloria Rojas López",
+      "createdAt": "2025-12-12T12:30:00Z"
+    },
+    {
+      "id": 13,
+      "nursingHomeId": 1,
+      "residentId": 1,
+      "residentName": "Carlos García Ríos",
+      "roomNumber": "101",
+      "title": "Medicación no administrada",
+      "description": "Medicación no administrada para el residente Carlos García Ríos.",
+      "severity": "URGENT",
+      "type": "MEDICATION",
+      "source": "STAFF",
+      "status": "UNREAD",
+      "reportedBy": "Elena Ramírez Núñez",
+      "createdAt": "2025-12-13T11:19:00Z"
+    },
+    {
+      "id": 14,
+      "nursingHomeId": 1,
+      "residentId": 2,
+      "residentName": "Carmen Rodríguez Campos",
+      "roomNumber": "101",
+      "title": "Riesgo de caída detectado",
+      "description": "Riesgo de caída detectado para el residente Carmen Rodríguez Campos.",
+      "severity": "WARNING",
+      "type": "FALL_RISK",
+      "source": "SYSTEM",
+      "status": "READ",
+      "reportedBy": "Javier Mendoza Vega",
+      "createdAt": "2025-12-14T13:34:00Z"
+    },
+    {
+      "id": 15,
+      "nursingHomeId": 1,
+      "residentId": 3,
+      "residentName": "Luis Flores Espinoza",
+      "roomNumber": "102",
+      "title": "Notificación general",
+      "description": "Notificación general para el residente Luis Flores Espinoza.",
+      "severity": "INFO",
+      "type": "GENERAL",
+      "source": "IOT",
+      "status": "ACKNOWLEDGED",
+      "reportedBy": "Hugo Salazar Huamán",
+      "createdAt": "2025-12-15T23:34:00Z"
+    },
+    {
+      "id": 16,
+      "nursingHomeId": 1,
+      "residentId": 4,
+      "residentName": "Ana Quispe Cárdenas",
+      "roomNumber": "103",
+      "title": "Signos vitales fuera de rango",
+      "description": "Signos vitales fuera de rango para el residente Ana Quispe Cárdenas.",
+      "severity": "URGENT",
+      "type": "VITAL_SIGNS",
+      "source": "STAFF",
+      "status": "UNREAD",
+      "reportedBy": "Gloria Rojas López",
+      "createdAt": "2025-12-16T07:31:00Z"
     }
   ]
 }

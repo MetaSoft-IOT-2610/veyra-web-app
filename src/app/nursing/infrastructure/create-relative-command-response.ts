@@ -3,5 +3,5 @@ export interface RelativeCommandResource {
   firstName: string;
   lastName: string;
   email: string;
-  residentId?: number;
+  residentId: number;
 }

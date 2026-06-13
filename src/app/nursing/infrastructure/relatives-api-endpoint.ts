@@ -6,8 +6,8 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map} from 'rxjs';
 
-const relativesEndpointUrl = `${environment.platformProviderFakeApiBaseUrl}${environment.platformProviderRelativesEndpointPath}`;
-const nursingHomeRelativesEndpointUrl = `${environment.platformProviderFakeApiBaseUrl}${environment.platformProviderNursingHomeRelativesEndpointPath}`;
+const relativesEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderRelativesEndpointPath}`;
+const nursingHomeRelativesEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderNursingHomeRelativesEndpointPath}`;
 export class RelativesApiEndpoint extends BaseApiEndpoint<Relative, RelativeResource, RelativeResponse, RelativeAssembler>{
 
   constructor(http: HttpClient) {

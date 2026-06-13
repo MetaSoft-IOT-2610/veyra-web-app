@@ -2,30 +2,31 @@
 
   <div class="header-banner">
     <div class="name-tag">
-      {{ form.get('firstName')?.value || relative?.firstName }} {{ form.get('lastName')?.value || relative?.lastName }}
+      <!--      {{ form.get('firstName')?.value || relative?.firstName }} {{ form.get('lastName')?.value || relative?.lastName }}-->
+      {{ 'relatives.form.personal-info' | translate }}
     </div>
   </div>
 
   <div class="body-content">
 
-    <h3 class="section-title">{{'relatives.form.account-setup' | translate}}
+    <h3 class="section-title">{{ 'relatives.form.account-setup' | translate }}
     </h3>
 
     <div class="setup-section">
       <div class="form-fields">
         <div class="field-row">
           <div class="field-group">
-            <label>{{'relatives.form.name' | translate}}</label>
+            <label>{{ 'relatives.form.name' | translate }}</label>
             <input type="text" formControlName="firstName" [readonly]="!editing()" [class.readonly]="!editing()">
           </div>
           <div class="field-group">
-            <label>{{'relatives.form.last-name' | translate}}</label>
+            <label>{{ 'relatives.form.last-name' | translate }}</label>
             <input type="text" formControlName="lastName" [readonly]="!editing()" [class.readonly]="!editing()">
           </div>
         </div>
 
         <div class="field-group">
-          <label>{{'relatives.form.email' | translate}}</label>
+          <label>{{ 'relatives.form.email' | translate }}</label>
           <input type="email" formControlName="email" [readonly]="!editing()" [class.readonly]="!editing()">
         </div>
       </div>
@@ -33,8 +34,8 @@
       <div class="secure-setup-box">
         <mat-icon class="shield-icon">security</mat-icon>
         <div class="secure-text">
-          <strong>{{'relatives.form.account-setup' | translate}}</strong>
-          <p>{{'relatives.form.secure-self-setup-description' | translate}}</p>
+          <strong>{{ 'relatives.form.account-setup' | translate }}</strong>
+          <p>{{ 'relatives.form.secure-self-setup-description' | translate }}</p>
         </div>
       </div>
     </div>
@@ -43,19 +44,33 @@
 
     <h3 class="section-title">
       <mat-icon class="link-icon">link</mat-icon>
-      {{'relatives.form.resident-association' | translate}}
+      {{ 'relatives.form.resident-association' | translate }}
     </h3>
 
     <div class="field-group">
-      <label>      {{'relatives.form.linked-resident' | translate}}
-      </label>
+      <label>{{ 'relatives.form.linked-resident' | translate }}</label>
+
       <div class="resident-box">
         <div class="resident-info">
-          <strong>María Ríos</strong> <span>Room 105 • Admitted Jan 2024</span>
+          <strong>
+            {{ selectedEntry()?.profile?.fullName ?? ('relatives.form.unknown-resident' | translate) }}
+          </strong>
         </div>
-        <button type="button" class="btn-change-resident" *ngIf="editing()">      {{'relatives.buttons.change-resident' | translate}}
+        <button type="button" class="btn-change-resident" *ngIf="editing()" (click)="toggleResidentDropdown()">
+          {{ 'relatives.buttons.change-resident' | translate }}
         </button>
       </div>
+
+      <!-- Dropdown extraído de la lógica de relative-form -->
+      <div class="resident-dropdown" *ngIf="showResidentDropdown() && editing()">
+        <div *ngFor="let entry of residentsWithProfiles()"
+             class="resident-option"
+             [class.selected]="selectedEntry()?.resident?.id === entry.resident.id"
+             (click)="selectEntry(entry)">
+          {{ entry.profile?.fullName ?? ('relatives.unknown-resident' | translate) }}
+        </div>
+      </div>
+
     </div>
 
   </div>

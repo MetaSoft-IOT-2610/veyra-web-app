@@ -23,17 +23,23 @@
   "assignedAt": "Asignado en",
   "status": "Estado",
   "no-devices": "No hay dispositivos disponibles",
-
   "nav": {
     "dashboard": "Tablero",
     "inventory": "Inventario",
     "device": "Dispositivos",
     "resident": "Residentes",
+    "relatives": "Familiares",
     "staff": "Personal",
     "care-management": "Gestión de la atención",
     "room": "Habitaciones",
     "activities": "Actividades",
-    "relatives": "Familiares"
+    "alerts": "Alertas",
+    "hide-menu": "Ocultar menú",
+    "show-menu": "Mostrar menú",
+    "open-menu": "Abrir menú",
+    "language": "Idioma de la interfaz",
+    "lang-es": "Español",
+    "lang-en": "English"
   },
   "page-not-found": {
     "title": "Página no encontrada",
@@ -41,7 +47,19 @@
     "go-home": "Ir al inicio"
   },
   "toolbar": {
-    "logoAlt": "logo"
+    "logoAlt": "logo",
+    "back": "Volver"
+  },
+  "iam": {
+    "profile": "Perfil",
+    "sign-out": "Cerrar sesión",
+    "user-menu": "Menú de cuenta",
+    "role": {
+      "admin-support": "Soporte administrativo",
+      "admin-support-panel": "Soporte Administrativo",
+      "user": "Usuario",
+      "user-panel": "Usuario"
+    }
   },
   "welcome": {
     "title": "Cuidamos a quienes<br>amas, informamos a<br>quienes esperan",
@@ -473,6 +491,55 @@
       "search": "Buscar",
       "search-info": "Ingrese el nombre o apellido",
       "change-resident": "Cambiar residente"
+    }
+  },
+  "alerts": {
+    "title": "Centro de Alertas",
+    "subtitle": "Monitoreo de reportes del personal de cuidado y telemetría IoT.",
+    "filter-btn": "Filtrar",
+    "mark-all-read": "Marcar todo como leído",
+    "loading": "Cargando alertas...",
+    "empty": "No hay alertas en este momento.",
+    "unread": "No leída",
+    "acknowledged": "Atendida",
+    "room": "Hab.",
+    "reported-by": "Reportado por",
+    "summary": {
+      "critical": "Críticas",
+      "warnings": "Advertencias",
+      "reports": "Reportes de App"
+    },
+    "filter": {
+      "all": "Todas",
+      "urgent": "Urgentes",
+      "warning": "Advertencias",
+      "info": "Informativas"
+    },
+    "severity": {
+      "urgent": "Urgente",
+      "warning": "Advertencia",
+      "info": "Info",
+      "automatic": "Automático"
+    },
+    "status": {
+      "unread": "No leída",
+      "read": "Leída",
+      "acknowledged": "Atendida"
+    },
+    "action": {
+      "attend": "Atender de Inmediato",
+      "view-history": "Ver Historial",
+      "view-vitals": "Ver Signos Vitales",
+      "contact-staff": "Contactar Personal",
+      "acknowledge": "Marcar como atendida"
+    },
+    "detail": {
+      "description": "Descripción",
+      "resident": "Residente",
+      "reported-by": "Reportado por",
+      "time": "Tiempo",
+      "status": "Estado",
+      "close": "Cerrar"
     }
   }
 }

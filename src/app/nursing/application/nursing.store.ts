@@ -17,6 +17,7 @@ import {Device} from '../domain/model/device.entity';
 import {VitalSign} from '../domain/model/vital-sign.entity';
 import {Relative} from '../domain/model/relative.entity';
 import {CreateRelativeCommand} from '../domain/model/create-relative.command';
+import {MonitoringResidents} from '../domain/model/monitoring-residents.entity';
 
 /*
 * @purpose: Manage the state of nursing homes in the application
@@ -35,6 +36,7 @@ export class NursingStore {
   private readonly _devicesSignal = signal<Device[]>([]);
   private readonly _vitalSignsSignal = signal<VitalSign[]>([]);
   private readonly _relativeSignal = signal<Relative[]>([]);
+  private  readonly _monitoringResidentsSignal = signal<MonitoringResidents[]>([]);
   private readonly _loadingSignal=signal<boolean>(false);
   private readonly _errorSignal=signal<string|null>(null);
   readonly loading=this._loadingSignal.asReadonly();
@@ -46,6 +48,7 @@ export class NursingStore {
   readonly rooms = this._roomsSignal.asReadonly();
   readonly vitalSigns = this._vitalSignsSignal.asReadonly();
   readonly relatives = this._relativeSignal.asReadonly();
+  readonly monitoringResidents = this._monitoringResidentsSignal.asReadonly();
 
   constructor(private nursingApi: NursingApi) {}
 
@@ -74,7 +77,7 @@ export class NursingStore {
     this._errorSignal.set(null);
     this.nursingApi.getNursingHome(administratorId).pipe(retry(2)).subscribe({
       next: nursingHome => {
-        this._nursingHomesSignal.set(nursingHome);
+        this._nursingHomesSignal.set([nursingHome]);  // Cambiar de .set(nursingHome) a .set([nursingHome])
         localStorage.setItem('nursingHomeId', nursingHome.id.toString());
         this._loadingSignal.set(false);
       },
@@ -362,10 +365,10 @@ export class NursingStore {
     });
   }
 
-  updateRelative(nursingHomeId: number, relativeId: number, createRelativeCommand: CreateRelativeCommand): void {
+  updateRelative(relativeId: number, createRelativeCommand: CreateRelativeCommand): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.nursingApi.updateRelativeByNursingHomeId(nursingHomeId, relativeId, createRelativeCommand).pipe(retry(2)).subscribe({
+    this.nursingApi.updateRelativeByNursingHomeId(relativeId, createRelativeCommand).pipe(retry(2)).subscribe({
       next: updatedRelative => {
         this._relativeSignal.update(relatives =>
           relatives.map(rel => rel.id === updatedRelative.id ? updatedRelative : rel));
@@ -378,6 +381,20 @@ export class NursingStore {
     });
   }
 
+  loadMonitoringResidentsByDoctor(nursingHomeId: number, doctorId: number): void {
+    this._loadingSignal.set(true);
+    this._errorSignal.set(null);
+    this.nursingApi.getMonitoringResidentsByDoctor(nursingHomeId, doctorId).pipe(retry(2)).subscribe({
+      next: monitoringResidents => {
+        this._monitoringResidentsSignal.set(monitoringResidents);
+        this._loadingSignal.set(false);
+      },
+      error: err => {
+        this._errorSignal.set(this.formatError(err, 'Failed to load monitoring residents'));
+        this._loadingSignal.set(false);
+      }
+    });
+  }
   /**
    *  @purpose: Format error messages
    *  @description: This private method takes an error object and a fallback string.

@@ -1,0 +1,35 @@
+<h1 class="title">{{ (isEdit ? 'device.edit-title' : 'device.new-title') | translate }}</h1>
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <mat-form-field>
+    <mat-label>{{ 'device.type' | translate }}</mat-label>
+    <mat-select formControlName="deviceType" required>
+      @for (type of deviceTypes; track type) {
+        <mat-option [value]="type">{{ type }}</mat-option>
+      }
+    </mat-select>
+    @if (form.get('deviceType')?.touched && form.get('deviceType')?.hasError('required')) {
+      <mat-error>{{ 'device.error.type-required' | translate }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>MAC Address</mat-label>
+    <input
+      matInput
+      formControlName="macAddress"
+      placeholder="AA:BB:CC:DD:EE:FF">
+
+    @if (form.get('macAddress')?.touched && form.get('macAddress')?.hasError('required')) {
+      <mat-error>MAC Address is required</mat-error>
+    }
+
+    @if (form.get('macAddress')?.touched && form.get('macAddress')?.hasError('pattern')) {
+      <mat-error>Invalid MAC Address format</mat-error>
+    }
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    {{ (isEdit ? 'device.update' : 'device.create') | translate }}
+  </button>
+
+</form>

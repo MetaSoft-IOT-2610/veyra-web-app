@@ -1,8 +1,15 @@
 export const environment = {
   production: false,
-  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
-  platformProviderFakeApiBaseUrl: 'http://localhost:3000/api/v1',
+  /** Si es false, el `MainLayout` no muestra botones SIGN-IN / registro en toolbar; con sesión activa sí se muestra el menú de cuenta. */
+  showIamToolbar: false,
+  /**
+   * Si no hay sesión válida en `localStorage`, aplica usuario de desarrollo **solo al entrar al layout
+   * con sidebar** (`MainLayout`), no en `/home` ni otras rutas públicas.
+   */
+  fallbackDevUserSession: true,
 
+  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
   platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-hires',
@@ -22,6 +29,7 @@ export const environment = {
   // Nursing Bounded Context
   platformProviderResidentVitalSigsEndpointPath: '/resident/{residentId}/vital-signs',
   platformProviderDevicesEndpointPath: '/devices',
+  platformProviderNursingHomeDevicesEndpointPath: '/nursing-homes/{nursingHomeId}/devices',
   platformProviderResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
   platformProviderAdministratorNursingHomesEndpointPath: '/administrators/{administratorId}/nursing-homes',
   platformProviderResidentRoomsEndpointPath: '/nursing-homes/{nursingHomeId}/rooms/{residentId}',
@@ -36,6 +44,7 @@ export const environment = {
   platformProviderResidentsEndpointPath:'/residents',
   platformProviderRoomsEndpointPath: '/rooms',
   platformProviderRelativesEndpointPath: '/relatives',
+  platformProviderMonitoringResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/doctors/{doctorId}/monitoring-residents',
 
   // Healt Bounded Context
   platformProviderAllergiesEndpointPath: '/allergies',
@@ -51,5 +60,12 @@ export const environment = {
 
   // Activities Bounded Context
   platformProviderActivitiesEndpointPath: '/activities',
+
+  // Alerts Bounded Context
+  platformProviderAlertsEndpointPath: '/alerts',
+
+  //Tracking Bounden Context
+  platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
+  platformProviderWsTrackingTopicPath: '/topic/tracking',
 
 };

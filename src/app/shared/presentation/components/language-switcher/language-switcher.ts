@@ -1,27 +1,24 @@
-import {Component, inject} from '@angular/core';
-import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
-import {TranslateService} from '@ngx-translate/core';
+import { UpperCasePipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-language-switcher',
-  imports: [
-    MatButtonToggleGroup,
-    MatButtonToggle
-  ],
+  standalone: true,
+  imports: [TranslatePipe, UpperCasePipe],
   templateUrl: './language-switcher.html',
   styleUrl: './language-switcher.css'
 })
 export class LanguageSwitcher {
   protected currentLang = 'en';
-  protected languages: string[] = ['en', 'es'];
-  protected translate: TranslateService;
+  protected readonly languages: string[] = ['en', 'es'];
+  private readonly translate = inject(TranslateService);
 
   constructor() {
-    this.translate = inject(TranslateService);
-    this.currentLang = this.translate.getCurrentLang();
+    this.currentLang = this.translate.getCurrentLang() || 'en';
   }
 
-  useLanguage(language: string) {
+  useLanguage(language: string): void {
     this.translate.use(language);
     this.currentLang = language;
   }

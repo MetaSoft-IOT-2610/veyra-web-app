@@ -8,6 +8,8 @@ import {
   Inject,
   Optional,
   signal,
+  computed,
+  inject,
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,10 +20,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { Relative } from '../../../domain/model/relative.entity';
 import { CreateRelativeCommand } from '../../../domain/model/create-relative.command';
-import {TranslatePipe} from '@ngx-translate/core';
+import { NursingStore } from '../../../application/nursing.store';
+import { ProfilesStore } from '../../../../profiles/application/profiles.store';
+import { Resident } from '../../../domain/model/resident.entity';
+import { PersonProfile } from '../../../../profiles/domain/model/person-profile.entity';
+
+export interface ResidentWithProfile {
+  resident: Resident;
+  profile: PersonProfile | undefined;
+}
 
 @Component({
   selector: 'app-relative-detail',
@@ -38,6 +49,28 @@ export class RelativeDetail implements OnChanges, OnInit {
   editing = signal(false);
   form: FormGroup;
 
+  // Inyección de Stores
+  private readonly nursingStore = inject(NursingStore);
+  private readonly profilesStore = inject(ProfilesStore);
+  selectedResidentId = signal<number | null>(null);
+
+  // Modifica el selectedEntry actual por este:
+  readonly selectedEntry = computed<ResidentWithProfile | null>(() => {
+    const currentResidentId = this.selectedResidentId(); // Reaccionará a los cambios de esta señal
+    return this.residentsWithProfiles().find(r => r.resident.id === currentResidentId) || null;
+  });
+
+  // Lista calculada de residentes con sus perfiles
+  readonly residentsWithProfiles = computed<ResidentWithProfile[]>(() =>
+    this.nursingStore.residents().map(resident => ({
+      resident,
+      profile: this.profilesStore.personProfiles().find(p => p.id === resident.personProfileId)
+    }))
+  );
+
+
+  readonly showResidentDropdown = signal<boolean>(false);
+
   constructor(
     private fb: FormBuilder,
     @Optional() private dialogRef?: MatDialogRef<RelativeDetail>,
@@ -46,32 +79,44 @@ export class RelativeDetail implements OnChanges, OnInit {
     this.form = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
+      relative: [null, Validators.required],
     });
+
+    // Cargar datos al instanciar
+    const nursingHomeId = localStorage.getItem('nursingHomeId');
+    if (nursingHomeId) {
+      this.nursingStore.loadResidentsByNursingHome(Number(nursingHomeId));
+    }
+    this.profilesStore.loadPersonProfiles();
   }
 
   ngOnInit(): void {
     const source = this.data ?? this.relative;
     if (source) {
-      this.form.patchValue({
-        firstName: source.firstName,
-        lastName: source.lastName,
-        email: source.email
-      });
-      this.editing.set(false);
+      this.patchForm(source);
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const source = this.data ?? this.relative;
     if (source) {
-      this.form.patchValue({
-        firstName: source.firstName,
-        lastName: source.lastName,
-        email: source.email
-      });
-      this.editing.set(false);
+      this.patchForm(source);
     }
+  }
+
+  private patchForm(source: Relative): void {
+    this.form.patchValue({
+      firstName: source.firstName,
+      lastName: source.lastName,
+      email: source.email,
+      relative: source.residentId
+    });
+
+    // Añade esta línea para sincronizar la señal
+    this.selectedResidentId.set(source.residentId);
+
+    this.editing.set(false);
   }
 
   startEdit(): void {
@@ -81,13 +126,23 @@ export class RelativeDetail implements OnChanges, OnInit {
   cancelEdit(): void {
     const source = this.data ?? this.relative;
     if (source) {
-      this.form.patchValue({
-        firstName: source.firstName,
-        lastName: source.lastName,
-        email: source.email
-      });
+      this.patchForm(source);
     }
     this.editing.set(false);
+    this.showResidentDropdown.set(false);
+  }
+
+  toggleResidentDropdown(): void {
+    this.showResidentDropdown.update(v => !v);
+  }
+
+  selectEntry(entry: ResidentWithProfile): void {
+    this.form.patchValue({ relative: entry.resident.id });
+
+    // Añade esta línea para actualizar la UI instantáneamente
+    this.selectedResidentId.set(entry.resident.id);
+
+    this.showResidentDropdown.set(false);
   }
 
   onClose(): void {
@@ -104,14 +159,13 @@ export class RelativeDetail implements OnChanges, OnInit {
       return;
     }
 
-    const source = this.data ?? this.relative;
-
     const command = new CreateRelativeCommand({
       firstName: this.form.value.firstName,
       lastName: this.form.value.lastName,
       email: this.form.value.email,
-      residentId: source?.residentId ?? 0
+      residentId: this.form.value.relative
     });
+
     if (this.dialogRef) {
       this.dialogRef.close(command);
       return;
@@ -119,6 +173,6 @@ export class RelativeDetail implements OnChanges, OnInit {
 
     this.save.emit(command);
     this.editing.set(false);
-
+    this.showResidentDropdown.set(false);
   }
 }

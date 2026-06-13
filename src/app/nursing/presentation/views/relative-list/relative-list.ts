@@ -1,24 +1,23 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { LayoutNursingHome } from '../../../../shared/presentation/components/layout-nursing-home/layout-nursing-home';
-import { Router } from '@angular/router';
-import { NursingStore } from '../../../application/nursing.store';
-import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
-import { MatIcon } from '@angular/material/icon';
-import { TranslatePipe } from '@ngx-translate/core';
-import { MatIconButton } from '@angular/material/button';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import {Component, computed, inject, signal} from '@angular/core';
+import {Router} from '@angular/router';
+import {nursingNav} from '../../nursing-routes';
+import {NursingStore} from '../../../application/nursing.store';
+import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
+import {MatIcon} from '@angular/material/icon';
+import {TranslatePipe} from '@ngx-translate/core';
+import {MatIconButton} from '@angular/material/button';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {NgForOf, NgIf} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CreateRelativeCommand} from '../../../domain/model/create-relative.command';
-import { RelativeDetail } from '../relative-detail/relative-detail';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Relative } from '../../../domain/model/relative.entity';
+import {RelativeDetail} from '../relative-detail/relative-detail';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {Relative} from '../../../domain/model/relative.entity';
 
 @Component({
   selector: 'app-relative-list',
   standalone: true,
   imports: [
-    LayoutNursingHome,
     MatError,
     MatIcon,
     MatLabel,
@@ -38,13 +37,10 @@ import { Relative } from '../../../domain/model/relative.entity';
 export class RelativeList {
   readonly store = inject(NursingStore);
   protected router = inject(Router);
-  nursingHomeId: number = Number(localStorage.getItem('nursingHomeId') || 0);
+  nursingHomeId: number = Number(localStorage.getItem('nursingHomeId'));
 
-  // Llama a la carga sólo en ngOnInit (no duplicar en constructor)
   ngOnInit() {
-    if (this.nursingHomeId) {
-      this.store.loadRelativesByNursingHomeId(this.nursingHomeId);
-    }
+    this.store.loadRelativesByNursingHomeId(this.nursingHomeId);
   }
 
   selectedId: number | null = null;
@@ -79,7 +75,7 @@ export class RelativeList {
 
     ref.afterClosed().subscribe((result: CreateRelativeCommand | undefined) => {
       if (result) {
-        this.store.updateRelative(this.nursingHomeId, relative.id, result);
+        this.store.updateRelative(relative.id, result);
       }
     });
   }
@@ -89,7 +85,7 @@ export class RelativeList {
   }
 
   createRelative() {
-    this.router.navigate(['/nursing/relatives/new']).then();
+    void this.router.navigate(nursingNav.relativeNew());
   }
 
   trackById(index: number, item: any) {

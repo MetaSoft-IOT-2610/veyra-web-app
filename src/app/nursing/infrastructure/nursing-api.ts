@@ -32,6 +32,8 @@ import {RelativesApiEndpoint} from './relatives-api-endpoint';
 import {CreateRelativeCommand} from '../domain/model/create-relative.command';
 import {Relative} from '../domain/model/relative.entity';
 import {CreateRelativeCommandApiEndpoint} from './create-relative-command-api-endpoint';
+import {MonitoringResidentsApiEndpoint} from './monitoring-residents-api-endpoint';
+import {MonitoringResidents} from '../domain/model/monitoring-residents.entity';
 
 /**
  * @purpose: Service to interact with the Nursing Home API
@@ -60,7 +62,7 @@ export class NursingApi extends BaseApi{
   private readonly _vitalSignsApiEndpoint: VitalSignsApiEndpoint;
   private readonly _relativeApiEndpoint: RelativesApiEndpoint;
   private readonly _createRelativeCommandsApiEndpoint: CreateRelativeCommandApiEndpoint;
-
+  private readonly _monitoringResidentsApiEndpoint: MonitoringResidentsApiEndpoint;
   /**
    * Initializes the Resident, Room and Nursing Home API service with the required HTTP client.
    * @param http - Angular HttpClient used to perform API requests.
@@ -82,7 +84,7 @@ export class NursingApi extends BaseApi{
     this._vitalSignsApiEndpoint = new VitalSignsApiEndpoint(http);
     this._relativeApiEndpoint = new RelativesApiEndpoint(http);
     this._createRelativeCommandsApiEndpoint = new CreateRelativeCommandApiEndpoint(http);
-
+   this._monitoringResidentsApiEndpoint= new MonitoringResidentsApiEndpoint(http);
   }
 
   createNursingHome(administratorId: number, createNursingHomeCommand: CreateNursingHomeCommand):Observable<NursingHome>{
@@ -183,8 +185,11 @@ export class NursingApi extends BaseApi{
     return this._relativeApiEndpoint.getRelativesByNursingHomeId(nursingHomeId);
   }
 
-  updateRelativeByNursingHomeId(nursingHomeId: number, relativeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
-    return this._createRelativeCommandsApiEndpoint.update(nursingHomeId, relativeId, createRelativeCommand);
+  updateRelativeByNursingHomeId(relativeId: number, createRelativeCommand: CreateRelativeCommand): Observable<Relative> {
+    return this._createRelativeCommandsApiEndpoint.update(relativeId, createRelativeCommand);
   }
 
+  getMonitoringResidentsByDoctor(nursingHomeId: number, doctorId: number): Observable<MonitoringResidents[]> {
+    return this._monitoringResidentsApiEndpoint.getByDoctorId(nursingHomeId, doctorId);
+  }
 }
