@@ -541,5 +541,68 @@
       "status": "Estado",
       "close": "Cerrar"
     }
+  },
+  "tracking": {
+    "devices": {
+      "title": "Dispositivos de Seguimiento",
+      "subtitle": "Gestión centralizada de sensores IoT y rastreadores GPS.",
+      "register-new": "Registrar Nuevo Dispositivo",
+      "inventory-title": "Inventario Activo",
+      "mac-address": "DISPOSITIVO / DIRECCIÓN MAC",
+      "device-type": "CATEGORÍA",
+      "resident": "RESIDENTE",
+      "assigned-at": "ASIGNADO EL",
+      "status": "ESTADO",
+      "actions": "ACCIONES",
+      "edit": "Editar dispositivo",
+      "assign": "Asignar a residente",
+      "unassign": "Desasignar",
+      "unassign-success": "Dispositivo desasignado correctamente",
+      "status-changed": "Estado actualizado",
+      "no-data": "No hay dispositivos registrados",
+      "unassigned": "Sin asignar",
+      "stats": {
+        "total": "Total",
+        "registered": "Dispositivos Registrados",
+        "available": "Disponibles",
+        "ready": "Listos para Asignar",
+        "assigned": "Asignados",
+        "in-use": "En Uso",
+        "disabled": "No Disponibles",
+        "offline": "Problemas de Conexión"
+      },
+      "status-options": {
+        "available": "Disponible",
+        "assigned": "Asignado",
+        "unavailable": "No Disponible"
+      },
+      "detail": {
+        "title": "Detalle del Dispositivo",
+        "view": "Ver detalle",
+        "not-found": "Dispositivo no encontrado",
+        "back": "Volver",
+        "cancel": "Cancelar",
+        "edit": "Editar dispositivo",
+        "device-info": "Información del dispositivo",
+        "gps-desc": "Rastreador de ubicación GPS",
+        "vital-desc": "Monitor de signos vitales",
+        "assigned-resident": "Residente asignado",
+        "available": "Ningún residente asignado",
+        "nursing-home": "Residencia geriátrica",
+        "resident-id": "ID del residente"
+      },
+      "form": {
+        "new-title": "Registrar Dispositivo",
+        "edit-title": "Editar Dispositivo",
+        "assign-title": "Asignar Dispositivo",
+        "device-type": "Tipo de dispositivo",
+        "mac-address": "Dirección MAC",
+        "select-resident": "Seleccionar residente",
+        "register": "Registrar",
+        "update": "Actualizar",
+        "assign": "Asignar",
+        "cancel": "Cancelar"
+      }
+    }
   }
 }

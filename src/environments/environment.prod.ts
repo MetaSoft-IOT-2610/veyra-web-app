@@ -28,7 +28,6 @@ export const environment = {
 
   // Nursing Bounded Context
   platformProviderResidentVitalSigsEndpointPath: '/resident/{residentId}/vital-signs',
-  platformProviderDevicesEndpointPath: '/devices',
   platformProviderNursingHomeDevicesEndpointPath: '/nursing-homes/{nursingHomeId}/devices',
   platformProviderResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
   platformProviderAdministratorNursingHomesEndpointPath: '/administrators/{administratorId}/nursing-homes',
@@ -57,6 +56,10 @@ export const environment = {
 
   // Tracking Bounden Context
   platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
-  platformProviderWsTrackingTopicPath: '/topic/tracking',
+  platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
+  platformProviderDevicesEndpointPath: '/devices',
+  platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
+
+
 
 };

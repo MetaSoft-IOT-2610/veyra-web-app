@@ -7,11 +7,14 @@ const deviceForm = () =>
   import('./views/device-form/device-form').then(m => m.DeviceForm);
 const assignDeviceForm = () =>
  import('./components/assign-device-form/assign-device-form').then(m => m.AssignDeviceForm);
+const deviceDetail = () =>                                                          // ← nuevo
+  import('./views/device-detail/device-detail').then(m => m.DeviceDetail);
 export const trackingPaths = {
   devices: 'devices',
   deviceNew: 'devices/new',
   deviceEdit: 'devices/:id/edit',
   deviceAssign: 'devices/:id/assign',
+  deviceDetail: 'devices/:id/detail',
 } as const;
 
 export const trackingNav = {
@@ -19,6 +22,7 @@ export const trackingNav = {
   deviceNew: () => ['/tracking', 'devices', 'new'],
   deviceEdit: (id: number | string) => ['/tracking', 'devices', id, 'edit'],
   deviceAssign: (id: number | string) => ['/tracking', 'devices', id, 'assign'],
+  deviceDetail: (id: number | string) => ['/tracking', 'devices', id, 'detail'],
 } as const;
 
 const trackingRoutes: Routes = [
@@ -63,6 +67,17 @@ const trackingRoutes: Routes = [
       title: 'Asignar dispositivo',
       module: 'Tracking',
       description: 'Asignar dispositivo a un residente',
+      showBackButton: true,
+    },
+  }),
+  definePageRoute({                        // ← nuevo
+    path: trackingPaths.deviceDetail,
+    name: 'tracking.devices.detail',
+    loadComponent: deviceDetail,
+    page: {
+      title: 'Detalle del dispositivo',
+      module: 'Tracking',
+      description: 'Ver información del dispositivo',
       showBackButton: true,
     },
   }),

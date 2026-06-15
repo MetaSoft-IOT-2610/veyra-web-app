@@ -540,5 +540,68 @@
       "status": "Status",
       "close": "Close"
     }
+  },
+  "tracking": {
+    "devices": {
+      "title": "Tracking Devices",
+      "subtitle": "Centralized management of IoT sensors and GPS trackers.",
+      "register-new": "Register New Device",
+      "inventory-title": "Active Inventory",
+      "mac-address": "DEVICE / MAC ADDRESS",
+      "device-type": "CATEGORY",
+      "resident": "RESIDENT",
+      "assigned-at": "ASSIGNED AT",
+      "status": "STATUS",
+      "actions": "ACTIONS",
+      "edit": "Edit device",
+      "assign": "Assign to resident",
+      "unassign": "Unassign",
+      "unassign-success": "Device unassigned successfully",
+      "status-changed": "Status updated",
+      "no-data": "No devices registered",
+      "unassigned": "Unassigned",
+      "stats": {
+        "total": "Total",
+        "registered": "Registered Devices",
+        "available": "Available",
+        "ready": "Ready to Assign",
+        "assigned": "Assigned",
+        "in-use": "In Use",
+        "disabled": "Disabled",
+        "offline": "Offline Issues"
+      },
+      "status-options": {
+        "available": "Available",
+        "assigned": "Assigned",
+        "unavailable": "Disabled"
+      },
+      "detail": {
+        "title": "Device Detail",
+        "view": "View detail",
+        "not-found": "Device not found",
+        "back": "Go back",
+        "cancel": "Cancel",
+        "edit": "Edit device",
+        "device-info": "Device info",
+        "gps-desc": "GPS location tracker",
+        "vital-desc": "Vital signs monitor",
+        "assigned-resident": "Assigned resident",
+        "available": "No resident assigned",
+        "nursing-home": "Nursing home",
+        "resident-id": "Resident ID"
+      },
+      "form": {
+        "new-title": "Register Device",
+        "edit-title": "Edit Device",
+        "assign-title": "Assign Device",
+        "device-type": "Device type",
+        "mac-address": "MAC address",
+        "select-resident": "Select resident",
+        "register": "Register",
+        "update": "Update",
+        "assign": "Assign",
+        "cancel": "Cancel"
+      }
+    }
   }
 }

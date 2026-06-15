@@ -67,6 +67,7 @@ export class AssignDeviceForm {
           !term || (profile?.fullName.toLowerCase().includes(term) ?? false)
         );
     })
+
   );
 
   constructor() {
@@ -99,7 +100,7 @@ export class AssignDeviceForm {
       residentId: this.selectedResident.id
     });
 
-    this.trackingStore.assignDevice(this.deviceId, command);
+    this.trackingStore.assignDevice(command);
     this.router.navigate(trackingNav.devices()).then();
   }
 }
