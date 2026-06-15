@@ -11,6 +11,7 @@ export class CreateStaffMemberCommand {
   private _postalCode: string;
   private _country: string;
   private _photo: string;
+  private _photoFile: File | null;
   private _phoneNumber: string;
 
   private _emergencyContactFirstName: string;
@@ -30,6 +31,7 @@ export class CreateStaffMemberCommand {
     postalCode: string;
     country: string;
     photo: string;
+    photoFile: File | null;
     phoneNumber: string;
 
     emergencyContactFirstName: string;
@@ -48,6 +50,7 @@ export class CreateStaffMemberCommand {
     this._postalCode = command.postalCode;
     this._country = command.country;
     this._photo = command.photo;
+    this._photoFile = command.photoFile;
     this._phoneNumber = command.phoneNumber;
 
     this._emergencyContactFirstName = command.emergencyContactFirstName;
@@ -149,6 +152,13 @@ export class CreateStaffMemberCommand {
 
   set photo(value: string) {
     this._photo = value;
+  }
+
+  get photoFile(): File | null {
+    return this._photoFile;
+  }
+  set photoFile(value: File | null) {
+    this._photoFile = value;
   }
 
   get phoneNumber(): string {

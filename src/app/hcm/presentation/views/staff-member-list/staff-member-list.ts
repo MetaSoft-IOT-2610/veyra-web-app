@@ -41,6 +41,10 @@ export class StaffMemberList {
     this.store.loadStaff(this.nursingHomeId);
   }
 
+  ngOnInit() {
+    this.store.loadStaff(this.nursingHomeId);
+  }
+
   selectedId: number | null = null;
   searchTerm = signal('');
   filteredPersonProfilesIds = signal<number[]>([]);
