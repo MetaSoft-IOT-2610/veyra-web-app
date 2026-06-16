@@ -1422,7 +1422,7 @@
       "residentId": 3,
       "healthcareStaffId": 3,
       "type": "RISK_PROFILE",
-      "title": "Editado",
+      "title": "Evaluación de riesgo de caídas",
       "status": "COMPLETED",
       "isRecurring": false,
       "recurringDays": []
@@ -1601,16 +1601,6 @@
       "recurringDays": [
         "TUE"
       ]
-    },
-    {
-      "residentId": 1,
-      "healthcareStaffId": 1,
-      "type": "MEAL",
-      "title": "Test desde curl",
-      "status": "PENDING",
-      "isRecurring": false,
-      "recurringDays": [],
-      "id": "039OBLt"
     }
   ],
   "analytics-staff-hires": [
