@@ -13,6 +13,20 @@
         }
       </div>
       <div class="filters-right">
+        <div class="search-box">
+          <mat-icon>search</mat-icon>
+          <input
+            class="search-input"
+            type="text"
+            [ngModel]="searchQuery()"
+            (ngModelChange)="setSearch($event)"
+            [placeholder]="'activities.search-placeholder' | translate" />
+          @if (searchQuery()) {
+            <button class="search-clear" (click)="setSearch('')">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </div>
         <span class="count-label">{{ 'activities.showing' | translate:{ count: filteredActivities().length } }}</span>
         <div class="filter-btn-wrapper">
           <button class="filter-btn" [class.active]="showFilterPanel() || selectedStatusFilter() !== 'ALL'" (click)="toggleFilterPanel()">
@@ -73,7 +87,7 @@
           </tr>
           </thead>
           <tbody>
-            @for (activity of filteredActivities(); track activity.id) {
+            @for (activity of pagedActivities(); track activity.id) {
               <tr>
                 <!-- Activity -->
                 <td class="activity-name-cell">
@@ -134,6 +148,26 @@
             }
           </tbody>
         </table>
+
+        @if (totalPages() > 1) {
+          <div class="pagination">
+            <button
+              class="page-btn"
+              [disabled]="currentPage() === 1"
+              (click)="prevPage()">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <span class="page-info">
+              {{ 'activities.pagination.page' | translate:{ current: currentPage(), total: totalPages() } }}
+            </span>
+            <button
+              class="page-btn"
+              [disabled]="currentPage() === totalPages()"
+              (click)="nextPage()">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        }
       }
     </div>
 

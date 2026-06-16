@@ -63,6 +63,63 @@
   color: #888;
 }
 
+/* ─── Search box ──────────────────────────────────────────────────────────── */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  transition: border 0.2s;
+}
+
+.search-box:focus-within {
+  border-color: #4db6ac;
+}
+
+.search-box mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #999;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: #333;
+  background: transparent;
+  width: 180px;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+.search-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.search-clear:hover {
+  color: #666;
+}
+
+.search-clear mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
 .filter-btn-wrapper {
   position: relative;
 }
@@ -191,6 +248,53 @@
 
 .activities-table tbody tr:hover {
   background: #fafafa;
+}
+
+/* ─── Pagination ─────────────────────────────────────────────────────────── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: #4db6ac;
+  color: #4db6ac;
+  background: #f0faf9;
+}
+
+.page-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.page-btn mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.page-info {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
 }
 
 /* ─── Cell activity ─────────────────────────────────────────────────────── */

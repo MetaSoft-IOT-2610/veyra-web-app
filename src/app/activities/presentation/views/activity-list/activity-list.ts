@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -46,6 +46,15 @@ export class ActivityList {
 
   /** Currently active status filter key. Defaults to 'ALL'. */
   selectedStatusFilter = signal<string>('ALL');
+
+  /** Free-text search query matched against the activity title. */
+  searchQuery = signal<string>('');
+
+  /** Current page number for the paginated table. 1-based. */
+  currentPage = signal<number>(1);
+
+  /** Number of activities shown per page. */
+  readonly pageSize = 10;
 
   /** Whether the status filter dropdown panel is visible. */
   showFilterPanel = signal<boolean>(false);
@@ -119,40 +128,95 @@ export class ActivityList {
   get error(): string | null { return this.store.error(); }
 
   /**
-   * Computed signal that applies the active type and status filters to the
-   * full activity list. Re-evaluates automatically when either filter or
-   * the underlying store data changes.
+   * Computed signal that applies the active type filter, status filter, and
+   * free-text search to the full activity list. Re-evaluates automatically
+   * when any filter, the search query, or the underlying store data changes.
    *
    * @returns Filtered array of {@link Activity} entities
    */
   filteredActivities = computed(() => {
     const typeFilter = this.selectedFilter();
     const statusFilter = this.selectedStatusFilter();
+    const query = this.searchQuery().trim().toLowerCase();
     let result = this.store.activities();
     if (typeFilter !== 'ALL') result = result.filter(a => a.type === typeFilter);
     if (statusFilter !== 'ALL') result = result.filter(a => a.status === statusFilter);
+    if (query) result = result.filter(a => (a.title ?? '').toLowerCase().includes(query));
     return result;
+  });
+
+  /**
+   * Total number of pages for the current filtered result, never below 1.
+   * @returns Page count based on {@link pageSize}
+   */
+  totalPages = computed(() =>
+    Math.max(1, Math.ceil(this.filteredActivities().length / this.pageSize))
+  );
+
+  /**
+   * The slice of {@link filteredActivities} visible on the current page.
+   * @returns Up to {@link pageSize} activities for {@link currentPage}
+   */
+  pagedActivities = computed(() => {
+    const start = (this.currentPage() - 1) * this.pageSize;
+    return this.filteredActivities().slice(start, start + this.pageSize);
+  });
+
+  /**
+   * Keeps {@link currentPage} within valid bounds when the filtered result
+   * shrinks (e.g. after deleting or narrowing filters), preventing an empty
+   * page from being shown.
+   */
+  private readonly _clampPage = effect(() => {
+    const total = this.totalPages();
+    if (this.currentPage() > total) this.currentPage.set(total);
   });
 
   // ─── Filter actions ──────────────────────────────────────────────────────────
 
   /**
-   * Sets the active type filter.
+   * Sets the active type filter and returns to the first page.
    * @param filter - One of the type filter keys ('ALL' | ActivityType)
    */
-  setFilter(filter: string): void { this.selectedFilter.set(filter); }
+  setFilter(filter: string): void {
+    this.selectedFilter.set(filter);
+    this.currentPage.set(1);
+  }
 
   /**
-   * Sets the active status filter and closes the filter panel.
+   * Sets the active status filter, closes the filter panel, and returns to
+   * the first page.
    * @param status - One of the status filter keys ('ALL' | ActivityStatus)
    */
   setStatusFilter(status: string): void {
     this.selectedStatusFilter.set(status);
     this.showFilterPanel.set(false);
+    this.currentPage.set(1);
   }
 
   /** Toggles the visibility of the status filter dropdown panel. */
   toggleFilterPanel(): void { this.showFilterPanel.update(v => !v); }
+
+  /**
+   * Updates the free-text search query and returns to the first page.
+   * @param query - The raw search input value
+   */
+  setSearch(query: string): void {
+    this.searchQuery.set(query);
+    this.currentPage.set(1);
+  }
+
+  // ─── Pagination actions ────────────────────────────────────────────────────────
+
+  /** Advances to the next page if one exists. */
+  nextPage(): void {
+    if (this.currentPage() < this.totalPages()) this.currentPage.update(p => p + 1);
+  }
+
+  /** Goes back to the previous page if one exists. */
+  prevPage(): void {
+    if (this.currentPage() > 1) this.currentPage.update(p => p - 1);
+  }
 
   // ─── Detail modal ────────────────────────────────────────────────────────────
 
