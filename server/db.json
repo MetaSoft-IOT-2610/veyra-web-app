@@ -1422,7 +1422,7 @@
       "residentId": 3,
       "healthcareStaffId": 3,
       "type": "RISK_PROFILE",
-      "title": "Evaluación de riesgo de caídas",
+      "title": "Editado",
       "status": "COMPLETED",
       "isRecurring": false,
       "recurringDays": []
@@ -1601,6 +1601,16 @@
       "recurringDays": [
         "TUE"
       ]
+    },
+    {
+      "residentId": 1,
+      "healthcareStaffId": 1,
+      "type": "MEAL",
+      "title": "Test desde curl",
+      "status": "PENDING",
+      "isRecurring": false,
+      "recurringDays": [],
+      "id": "039OBLt"
     }
   ],
   "analytics-staff-hires": [
@@ -1608,43 +1618,144 @@
       "id": 4,
       "nursingHomeId": 0,
       "year": 2025,
-      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-      "values": [1,5,5,3,3,3,1,1,5,5,0,0],
+      "labels": [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      "values": [
+        1,
+        5,
+        5,
+        3,
+        3,
+        3,
+        1,
+        1,
+        5,
+        5,
+        0,
+        0
+      ],
       "metricType": "STAFF_HIRES",
       "total": 32
     },
     {
       "id": 3,
       "year": 2026,
-      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-      "values": [2,4,3,5,2,1,4,2,3,4,1,2],
+      "labels": [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      "values": [
+        2,
+        4,
+        3,
+        5,
+        2,
+        1,
+        4,
+        2,
+        3,
+        4,
+        1,
+        2
+      ],
       "metricType": "STAFF_HIRES",
       "total": 33
     }
   ],
-
   "analytics-staff-terminations": [
     {
       "id": 2,
       "year": 2025,
-      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-      "values": [3,1,1,3,0,1,0,3,1,3,2,3],
+      "labels": [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      "values": [
+        3,
+        1,
+        1,
+        3,
+        0,
+        1,
+        0,
+        3,
+        1,
+        3,
+        2,
+        3
+      ],
       "metricType": "STAFF_TERMINATIONS",
       "total": 21
     }
   ],
-
   "analytics-residents-admissions": [
     {
       "id": 1,
       "year": 2025,
-      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-      "values": [7,8,3,8,8,5,4,5,8,4,5,8],
+      "labels": [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      "values": [
+        7,
+        8,
+        3,
+        8,
+        8,
+        5,
+        4,
+        5,
+        8,
+        4,
+        5,
+        8
+      ],
       "metricType": "RESIDENTS_ADMISSIONS",
       "total": 73
     }
   ],
-
   "alerts": [
     {
       "id": 1,
