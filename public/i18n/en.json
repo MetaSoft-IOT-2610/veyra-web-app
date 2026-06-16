@@ -398,6 +398,10 @@
   "activities": {
     "title": "Activities",
     "showing": "Showing {{ count }} activities",
+    "search-placeholder": "Search activities...",
+    "pagination": {
+      "page": "Page {{ current }} of {{ total }}"
+    },
     "no-activities": "No activities registered.",
     "add-new": "Add New",
     "filter-btn": "Filter",
