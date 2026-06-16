@@ -8,12 +8,12 @@ export const environment = {
    */
   fallbackDevUserSession: true,
 
-  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
+  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
-  platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
-  platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-hires',
-  platformProviderAnalyticsResidentsAdmissionsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/residents-admissions',
+  platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
+  platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/staff-hires',
+  platformProviderAnalyticsResidentsAdmissionsEndpointPath: '/nursing-homes/{nursingHomeId}/residents-admissions',
 
   // Hcm Bounded Context
   platformProviderContractsEndpointPath: '/contracts',
@@ -28,7 +28,6 @@ export const environment = {
 
   // Nursing Bounded Context
   platformProviderResidentVitalSigsEndpointPath: '/resident/{residentId}/vital-signs',
-  platformProviderDevicesEndpointPath: '/devices',
   platformProviderNursingHomeDevicesEndpointPath: '/nursing-homes/{nursingHomeId}/devices',
   platformProviderResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
   platformProviderAdministratorNursingHomesEndpointPath: '/administrators/{administratorId}/nursing-homes',
@@ -59,6 +58,9 @@ export const environment = {
 
   //Tracking Bounden Context
   platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
-  platformProviderWsTrackingTopicPath: '/topic/tracking',
+  platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
+  platformProviderDevicesEndpointPath: '/devices',
+  platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
+
 
 };

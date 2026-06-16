@@ -1,13 +1,15 @@
 export const environment = {
   production: true,
-  showIamToolbar: false,
-  fallbackDevUserSession: true,
-  platformProviderApiBaseUrl: 'http://localhost:3000',
+  /** En producción suele mostrarse la sección IAM del toolbar cuando reactive el login real. */
+  showIamToolbar: true,
+  /** Nunca aplicar sesión simulada en producción. */
+  fallbackDevUserSession: false,
+  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
-  platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
-  platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-hires',
-  platformProviderAnalyticsResidentsAdmissionsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/residents-admissions',
+  platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
+  platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/staff-hires',
+  platformProviderAnalyticsResidentsAdmissionsEndpointPath: '/nursing-homes/{nursingHomeId}/residents-admissions',
 
   // Hcm Bounded Context
   platformProviderContractsEndpointPath: '/contracts',
@@ -52,8 +54,9 @@ export const environment = {
 
   // Tracking Bounden Context
   platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
-  platformProviderWsTrackingTopicPath: '/topic/tracking',
   platformProviderDevicesEndpointPath: '/devices',
+  platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
+  platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
 
 };
 

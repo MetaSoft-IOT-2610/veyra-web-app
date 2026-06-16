@@ -35,7 +35,7 @@ export const routes: Routes = [
       { path: 'payments', loadChildren: paymentsRoutes },
       { path: 'activities', loadChildren: activitiesRoutes },
       { path: 'alerts', loadChildren: alertsRoutes },
-      { path: 'tracking', loadChildren: trackingRoutes },
+      {path:'tracking',loadChildren:trackingRoutes}
     ],
   },
   { path: '**', loadComponent: pageNotFound, title: `Page Not Found | ${baseTitle}` },

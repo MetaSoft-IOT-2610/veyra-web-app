@@ -16,7 +16,6 @@ export class App {
   constructor() {
     this.translate = inject(TranslateService);
     this.translate.addLangs(['en', 'es']);
-    this.translate.setDefaultLang('en');
     this.translate.use('en');
   }
 }
