@@ -8,7 +8,7 @@ export const environment = {
    */
   fallbackDevUserSession: true,
 
-  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderApiBaseUrl: 'https://veyra-backend.whiteground-ce499065.canadacentral.azurecontainerapps.io/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
@@ -61,6 +61,8 @@ export const environment = {
   platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
   platformProviderDevicesEndpointPath: '/devices',
   platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
+  platformProviderWsTrackingTopicPath: '/topic/tracking',
+
 
 
 };

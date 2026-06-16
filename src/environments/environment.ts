@@ -4,7 +4,7 @@ export const environment = {
   showIamToolbar: true,
   /** Nunca aplicar sesión simulada en producción. */
   fallbackDevUserSession: false,
-  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderApiBaseUrl: 'https://veyra-backend.whiteground-ce499065.canadacentral.azurecontainerapps.io/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
@@ -57,6 +57,7 @@ export const environment = {
   platformProviderDevicesEndpointPath: '/devices',
   platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
   platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
+  platformProviderWsTrackingTopicPath: '/topic/tracking',
 
 };
 
