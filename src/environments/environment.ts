@@ -57,7 +57,6 @@ export const environment = {
   platformProviderDevicesEndpointPath: '/devices',
   platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
   platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
-  platformProviderWsTrackingTopicPath: '/topic/tracking',
 
 };
 

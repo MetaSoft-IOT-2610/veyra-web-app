@@ -89,6 +89,8 @@ export class StaffMemberForm {
       return;
     }
 
+    const photoFile: File | null = this.personProfileForm.getSelectedFile();
+
     const staffMember = this.form.getRawValue();
 
     const staffMemberCommand = new CreateStaffMemberCommand({
@@ -104,6 +106,7 @@ export class StaffMemberForm {
       postalCode: personProfile.postalCode,
       country: personProfile.country,
       photo: personProfile.photo,
+      photoFile: photoFile,
       phoneNumber: personProfile.phoneNumber,
       emergencyContactFirstName: staffMember.emergencyContactFirstName,
       emergencyContactLastName: staffMember.emergencyContactLastName,

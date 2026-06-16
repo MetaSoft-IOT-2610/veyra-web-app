@@ -96,6 +96,12 @@ export class ResidentForm {
       return;
     }
 
+    // Obtener la foto del formulario (preserva la foto anterior si no se cambió)
+    const photoFromForm = this.personProfileForm.getPhotoFromForm();
+    if (photoFromForm) {
+      personProfile.photo = photoFromForm;
+    }
+
     const resident = this.form.getRawValue();
 
     const createResidentCommand = new CreateResidentCommand({

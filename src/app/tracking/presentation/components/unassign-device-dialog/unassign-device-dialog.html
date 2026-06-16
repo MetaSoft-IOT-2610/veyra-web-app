@@ -1,0 +1,21 @@
+<div class="dialog-wrap">
+  <div class="dialog-icon">
+    <mat-icon>person_remove</mat-icon>
+  </div>
+  <h2 mat-dialog-title>{{ 'tracking.devices.unassign-title' | translate }}</h2>
+  <mat-dialog-content>
+    <p>{{ 'tracking.devices.unassign-confirm' | translate }}</p>
+    @if (data?.device?.residentFullName) {
+      <p class="resident-name"><strong>{{ data.device.residentFullName }}</strong></p>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button (click)="cancel()">
+      {{ 'common.cancel' | translate }}
+    </button>
+    <button mat-flat-button color="warn" (click)="confirm()">
+      <mat-icon>person_remove</mat-icon>
+      {{ 'tracking.devices.unassign' | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>
