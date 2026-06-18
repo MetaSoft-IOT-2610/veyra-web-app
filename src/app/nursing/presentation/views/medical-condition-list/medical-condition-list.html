@@ -1,4 +1,4 @@
-<h1 class="title">{{ 'Medical Conditions' | translate }}</h1>
+<h1 class="title">{{ 'medical-conditions.title' | translate }}</h1>
 
 <div class="search-container">
   <mat-form-field appearance="outline">
@@ -7,7 +7,7 @@
 
     <input
       matInput
-      [placeholder]="'Enter the diagnosis name' | translate"
+      [placeholder]="'medical-conditions.search' | translate"
       [value]="searchTerm()"
       (input)="searchTerm.set($any($event.target).value)"
       type="text"/>
@@ -34,7 +34,7 @@
           <ng-container matColumnDef="diagnosisName">
             <th mat-header-cell *matHeaderCellDef (click)="toggleSort('diagnosisName')">
               <div class="header-content">
-                {{ 'Diagnosis Name' | translate }}
+                {{ 'medical-conditions.diagnosis-name' | translate }}
                 <mat-icon class="header-icon">
                   @if (selectedColumn() !== 'diagnosisName') { unfold_more }
                   @else if (sortDirection() === 'asc') { arrow_drop_up }
@@ -53,7 +53,7 @@
           <ng-container matColumnDef="diagnosisDate">
             <th mat-header-cell *matHeaderCellDef (click)="toggleSort('diagnosisDate')">
               <div class="header-content">
-                {{ 'Diagnosis Date' | translate }}
+                {{ 'medical-conditions.diagnosis-date' | translate }}
                 <mat-icon class="header-icon">
                   @if (selectedColumn() !== 'diagnosisDate') { unfold_more }
                   @else if (sortDirection() === 'asc') { arrow_drop_up }
@@ -70,7 +70,7 @@
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef (click)="toggleSort('status')">
               <div class="header-content">
-                {{ 'Status' | translate }}
+                {{ 'medical-conditions.status' | translate }}
                 <mat-icon class="header-icon">
                   @if (selectedColumn() !== 'status') { unfold_more }
                   @else if (sortDirection() === 'asc') { arrow_drop_up }
@@ -87,7 +87,7 @@
           <ng-container matColumnDef="notes">
             <th mat-header-cell *matHeaderCellDef (click)="toggleSort('notes')">
               <div class="header-content">
-                {{ 'Notes' | translate }}
+                {{ 'medical-conditions.notes' | translate }}
                 <mat-icon class="header-icon">
                   @if (selectedColumn() !== 'notes') { unfold_more }
                   @else if (sortDirection() === 'asc') { arrow_drop_up }
@@ -113,7 +113,7 @@
               } @else {
                 <div class="empty-state">
                   <mat-icon>health_and_safety</mat-icon>
-                  <p>{{ 'No medical conditions found' | translate }}</p>
+                  <p>{{ 'medical-conditions.no-medical-conditions' | translate }}</p>
                 </div>
               }
             </td>
@@ -135,12 +135,12 @@
     <div class="floating-actions">
       <button mat-raised-button color="accent" type="button" (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
-        {{ 'Go Back' | translate }}
+        {{ 'go-back' | translate }}
       </button>
 
       <button mat-raised-button color="accent" type="button" (click)="navigateToNew(residentId()!)">
         <mat-icon>add</mat-icon>
-        {{ 'Add Medical Condition' | translate }}
+        {{ 'medical-conditions.add' | translate }}
       </button>
     </div>
 
