@@ -20,6 +20,7 @@ export const environment = {
   //IAM Bounded Context
   platformProviderSignInEndpointPath: '/authentication/sign-in',
   platformProviderSignUpEndpointPath: '/authentication/sign-up',
+  platformProviderSetPasswordEndpointPath:'/authentication/set-password',
   platformProviderAdministratorsEndpointPath: '/administrators',
 
   // Nursing Bounded Context
