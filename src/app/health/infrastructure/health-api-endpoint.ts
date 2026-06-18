@@ -4,9 +4,6 @@ export class HealthApiEndpoint {
   public static readonly allergies =
     `${environment.platformProviderApiBaseUrl}${environment.platformProviderAllergiesEndpointPath}`;
 
-  public static readonly vitalSigns =
-    `${environment.platformProviderApiBaseUrl}${environment.platformProviderVitalSignsEndpointPath}`;
-
   public static readonly healthRecords =
     `${environment.platformProviderApiBaseUrl}${environment.platformProviderHealthRecordsEndpointPath}`;
 
@@ -20,8 +17,8 @@ export class HealthApiEndpoint {
     return `${environment.platformProviderApiBaseUrl}${endpointPath}`;
   }
 
-  public static residentVitalSigns(residentId: number): string {
-    const endpointPath = environment.platformProviderHealthResidentVitalSignsEndpointPath
+  public static residentVitalSignThreshold(residentId: number): string {
+    const endpointPath = environment.platformProviderHealthResidentVitalSignThresholdsEndpointPath
       .replace('{residentId}', residentId.toString());
 
     return `${environment.platformProviderApiBaseUrl}${endpointPath}`;

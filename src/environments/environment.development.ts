@@ -48,11 +48,10 @@ export const environment = {
 
   // Health Bounded Context
   platformProviderAllergiesEndpointPath: '/allergies',
-  platformProviderVitalSignsEndpointPath: '/vital-signs',
   platformProviderHealthRecordsEndpointPath: '/health-records',
   platformProviderHealthAlertsEndpointPath: '/health-alerts',
   platformProviderHealthResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
-  platformProviderHealthResidentVitalSignsEndpointPath: '/residents/{residentId}/vital-signs',
+  platformProviderHealthResidentVitalSignThresholdsEndpointPath: '/residents/{residentId}/vital-sign-thresholds',
 
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',

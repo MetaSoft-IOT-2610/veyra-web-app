@@ -15,13 +15,13 @@ export class ResidentVitalSigns implements OnChanges {
 
   readonly store = inject(HealthStore);
 
-  readonly vitalSigns = this.store.vitalSigns;
+  readonly threshold = this.store.threshold;
   readonly isLoading = this.store.loading;
   readonly errorMessage = this.store.error;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['residentId'] && this.residentId > 0) {
-      this.store.loadVitalSignsByResident(this.residentId);
+      this.store.loadThresholdByResident(this.residentId);
     }
   }
 }
