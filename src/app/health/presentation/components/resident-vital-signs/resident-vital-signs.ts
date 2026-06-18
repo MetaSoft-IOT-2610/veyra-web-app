@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 
-import { VitalSign } from '../../../domain/model/vital-sign.entity';
-import { VitalSignsApiService } from '../../../infrastructure/vital-signs-api.service';
+import { HealthStore } from '../../../application/health.store';
 
 @Component({
   selector: 'app-resident-vital-signs',
@@ -14,31 +13,15 @@ import { VitalSignsApiService } from '../../../infrastructure/vital-signs-api.se
 export class ResidentVitalSigns implements OnChanges {
   @Input() residentId = 0;
 
-  vitalSigns: VitalSign[] = [];
-  isLoading = false;
-  errorMessage = '';
+  readonly store = inject(HealthStore);
 
-  constructor(private vitalSignsApiService: VitalSignsApiService) {}
+  readonly vitalSigns = this.store.vitalSigns;
+  readonly isLoading = this.store.loading;
+  readonly errorMessage = this.store.error;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['residentId'] && this.residentId > 0) {
-      this.loadVitalSigns();
+      this.store.loadVitalSignsByResident(this.residentId);
     }
-  }
-
-  private loadVitalSigns(): void {
-    this.isLoading = true;
-    this.errorMessage = '';
-
-    this.vitalSignsApiService.getVitalSignsByResidentId(this.residentId).subscribe({
-      next: (vitalSigns) => {
-        this.vitalSigns = vitalSigns;
-        this.isLoading = false;
-      },
-      error: () => {
-        this.errorMessage = 'Could not load vital signs.';
-        this.isLoading = false;
-      }
-    });
   }
 }

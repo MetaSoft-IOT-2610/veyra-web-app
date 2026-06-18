@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 
-import { Allergy } from '../../../domain/model/allergy.entity';
-import { AllergiesApiService } from '../../../infrastructure/allergies-api.service';
+import { HealthStore } from '../../../application/health.store';
 
 @Component({
   selector: 'app-resident-allergies',
@@ -14,31 +13,15 @@ import { AllergiesApiService } from '../../../infrastructure/allergies-api.servi
 export class ResidentAllergies implements OnChanges {
   @Input() residentId = 0;
 
-  allergies: Allergy[] = [];
-  isLoading = false;
-  errorMessage = '';
+  readonly store = inject(HealthStore);
 
-  constructor(private allergiesApiService: AllergiesApiService) {}
+  readonly allergies = this.store.allergies;
+  readonly isLoading = this.store.loading;
+  readonly errorMessage = this.store.error;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['residentId'] && this.residentId > 0) {
-      this.loadAllergies();
+      this.store.loadAllergiesByResident(this.residentId);
     }
-  }
-
-  private loadAllergies(): void {
-    this.isLoading = true;
-    this.errorMessage = '';
-
-    this.allergiesApiService.getAllergiesByResidentId(this.residentId).subscribe({
-      next: (allergies) => {
-        this.allergies = allergies;
-        this.isLoading = false;
-      },
-      error: () => {
-        this.errorMessage = 'Could not load allergies.';
-        this.isLoading = false;
-      }
-    });
   }
 }
