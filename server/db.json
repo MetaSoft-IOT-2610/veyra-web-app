@@ -793,163 +793,325 @@
       "id": 1,
       "residentId": 1,
       "measurementId": 1001,
-      "severityLevel": "Low"
+      "severityLevel": "Low",
+      "temperature": 36.1,
+      "heartRate": 62,
+      "bloodPressure": "100/65",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 14,
+      "registeredAt": "2025-01-15"
     },
     {
       "id": 2,
       "residentId": 1,
       "measurementId": 1002,
-      "severityLevel": "Critical"
+      "severityLevel": "Critical",
+      "temperature": 38.7,
+      "heartRate": 105,
+      "bloodPressure": "150/100",
+      "oxygenSaturation": 90,
+      "respiratoryRate": 24,
+      "registeredAt": "2025-01-22"
     },
     {
       "id": 3,
       "residentId": 1,
       "measurementId": 1003,
-      "severityLevel": "Medium"
+      "severityLevel": "Medium",
+      "temperature": 37.8,
+      "heartRate": 88,
+      "bloodPressure": "118/78",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 19,
+      "registeredAt": "2025-01-29"
     },
     {
       "id": 4,
       "residentId": 2,
       "measurementId": 1004,
-      "severityLevel": "Medium"
+      "severityLevel": "Medium",
+      "temperature": 37.2,
+      "heartRate": 78,
+      "bloodPressure": "120/80",
+      "oxygenSaturation": 95,
+      "respiratoryRate": 17,
+      "registeredAt": "2025-02-05"
     },
     {
       "id": 5,
       "residentId": 3,
       "measurementId": 1005,
-      "severityLevel": "Low"
+      "severityLevel": "Low",
+      "temperature": 36.5,
+      "heartRate": 68,
+      "bloodPressure": "105/68",
+      "oxygenSaturation": 98,
+      "respiratoryRate": 15,
+      "registeredAt": "2025-02-12"
     },
     {
       "id": 6,
       "residentId": 4,
       "measurementId": 1006,
-      "severityLevel": "Medium"
+      "severityLevel": "Medium",
+      "temperature": 37.8,
+      "heartRate": 88,
+      "bloodPressure": "118/78",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 19,
+      "registeredAt": "2025-02-19"
     },
     {
       "id": 7,
       "residentId": 4,
       "measurementId": 1007,
-      "severityLevel": "Low"
+      "severityLevel": "Low",
+      "temperature": 36.1,
+      "heartRate": 62,
+      "bloodPressure": "100/65",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 14,
+      "registeredAt": "2025-02-26"
     },
     {
       "id": 8,
       "residentId": 5,
       "measurementId": 1008,
-      "severityLevel": "Critical"
+      "severityLevel": "Critical",
+      "temperature": 38.7,
+      "heartRate": 105,
+      "bloodPressure": "150/100",
+      "oxygenSaturation": 90,
+      "respiratoryRate": 24,
+      "registeredAt": "2025-03-05"
     },
     {
       "id": 9,
       "residentId": 5,
       "measurementId": 1009,
-      "severityLevel": "Medium"
+      "severityLevel": "Medium",
+      "temperature": 37.8,
+      "heartRate": 88,
+      "bloodPressure": "118/78",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 19,
+      "registeredAt": "2025-03-12"
     },
     {
       "id": 10,
       "residentId": 6,
       "measurementId": 1010,
-      "severityLevel": "Critical"
+      "severityLevel": "Critical",
+      "temperature": 38.2,
+      "heartRate": 98,
+      "bloodPressure": "145/95",
+      "oxygenSaturation": 88,
+      "respiratoryRate": 22,
+      "registeredAt": "2025-03-19"
     },
     {
       "id": 11,
       "residentId": 6,
       "measurementId": 1011,
-      "severityLevel": "Normal"
+      "severityLevel": "Normal",
+      "temperature": 36.9,
+      "heartRate": 74,
+      "bloodPressure": "118/76",
+      "oxygenSaturation": 98,
+      "respiratoryRate": 16,
+      "registeredAt": "2025-03-26"
     },
     {
       "id": 12,
       "residentId": 6,
       "measurementId": 1012,
-      "severityLevel": "Critical"
+      "severityLevel": "Critical",
+      "temperature": 39.1,
+      "heartRate": 112,
+      "bloodPressure": "160/105",
+      "oxygenSaturation": 92,
+      "respiratoryRate": 26,
+      "registeredAt": "2025-04-02"
     },
     {
       "id": 13,
       "residentId": 7,
       "measurementId": 1013,
-      "severityLevel": "Normal"
+      "severityLevel": "Normal",
+      "temperature": 36.6,
+      "heartRate": 70,
+      "bloodPressure": "115/75",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 15,
+      "registeredAt": "2025-04-09"
     },
     {
       "id": 14,
       "residentId": 7,
       "measurementId": 1014,
-      "severityLevel": "Low"
+      "severityLevel": "Low",
+      "temperature": 36.5,
+      "heartRate": 68,
+      "bloodPressure": "105/68",
+      "oxygenSaturation": 98,
+      "respiratoryRate": 15,
+      "registeredAt": "2025-04-16"
     },
     {
       "id": 15,
       "residentId": 8,
       "measurementId": 1015,
-      "severityLevel": "Normal"
+      "severityLevel": "Normal",
+      "temperature": 37,
+      "heartRate": 76,
+      "bloodPressure": "120/78",
+      "oxygenSaturation": 99,
+      "respiratoryRate": 17,
+      "registeredAt": "2025-04-23"
     },
     {
       "id": 16,
       "residentId": 8,
       "measurementId": 1016,
-      "severityLevel": "Normal"
+      "severityLevel": "Normal",
+      "temperature": 36.6,
+      "heartRate": 70,
+      "bloodPressure": "115/75",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 15,
+      "registeredAt": "2025-04-30"
     },
     {
       "id": 17,
       "residentId": 9,
       "measurementId": 1017,
-      "severityLevel": "Critical"
+      "severityLevel": "Critical",
+      "temperature": 38.7,
+      "heartRate": 105,
+      "bloodPressure": "150/100",
+      "oxygenSaturation": 90,
+      "respiratoryRate": 24,
+      "registeredAt": "2025-05-07"
     },
     {
       "id": 18,
       "residentId": 9,
       "measurementId": 1018,
-      "severityLevel": "Low"
+      "severityLevel": "Low",
+      "temperature": 36.8,
+      "heartRate": 72,
+      "bloodPressure": "108/70",
+      "oxygenSaturation": 99,
+      "respiratoryRate": 16,
+      "registeredAt": "2025-05-14"
     },
     {
       "id": 19,
       "residentId": 9,
       "measurementId": 1019,
-      "severityLevel": "Medium"
+      "severityLevel": "Medium",
+      "temperature": 37.2,
+      "heartRate": 78,
+      "bloodPressure": "120/80",
+      "oxygenSaturation": 95,
+      "respiratoryRate": 17,
+      "registeredAt": "2025-05-21"
     },
     {
       "id": 20,
       "residentId": 10,
       "measurementId": 1020,
-      "severityLevel": "Critical"
+      "severityLevel": "Critical",
+      "temperature": 38.7,
+      "heartRate": 105,
+      "bloodPressure": "150/100",
+      "oxygenSaturation": 90,
+      "respiratoryRate": 24,
+      "registeredAt": "2025-05-28"
     },
     {
       "id": 21,
       "residentId": 10,
       "measurementId": 1021,
-      "severityLevel": "Low"
+      "severityLevel": "Low",
+      "temperature": 36.8,
+      "heartRate": 72,
+      "bloodPressure": "108/70",
+      "oxygenSaturation": 99,
+      "respiratoryRate": 16,
+      "registeredAt": "2025-06-04"
     },
     {
       "id": 22,
       "residentId": 11,
       "measurementId": 1022,
-      "severityLevel": "Medium"
+      "severityLevel": "Medium",
+      "temperature": 37.2,
+      "heartRate": 78,
+      "bloodPressure": "120/80",
+      "oxygenSaturation": 95,
+      "respiratoryRate": 17,
+      "registeredAt": "2025-06-11"
     },
     {
       "id": 23,
       "residentId": 11,
       "measurementId": 1023,
-      "severityLevel": "Low"
+      "severityLevel": "Low",
+      "temperature": 36.5,
+      "heartRate": 68,
+      "bloodPressure": "105/68",
+      "oxygenSaturation": 98,
+      "respiratoryRate": 15,
+      "registeredAt": "2025-06-18"
     },
     {
       "id": 24,
       "residentId": 11,
       "measurementId": 1024,
-      "severityLevel": "Medium"
+      "severityLevel": "Medium",
+      "temperature": 37.8,
+      "heartRate": 88,
+      "bloodPressure": "118/78",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 19,
+      "registeredAt": "2025-06-25"
     },
     {
       "id": 25,
       "residentId": 12,
       "measurementId": 1025,
-      "severityLevel": "High"
+      "severityLevel": "High",
+      "temperature": 36.6,
+      "heartRate": 70,
+      "bloodPressure": "115/75",
+      "oxygenSaturation": 97,
+      "respiratoryRate": 15,
+      "registeredAt": "2025-07-02"
     },
     {
       "id": 26,
       "residentId": 12,
       "measurementId": 1026,
-      "severityLevel": "Medium"
+      "severityLevel": "Medium",
+      "temperature": 37.5,
+      "heartRate": 83,
+      "bloodPressure": "125/82",
+      "oxygenSaturation": 96,
+      "respiratoryRate": 18,
+      "registeredAt": "2025-07-09"
     },
     {
       "id": 27,
       "residentId": 12,
       "measurementId": 1027,
-      "severityLevel": "Normal"
+      "severityLevel": "Normal",
+      "temperature": 37,
+      "heartRate": 76,
+      "bloodPressure": "120/78",
+      "oxygenSaturation": 99,
+      "respiratoryRate": 17,
+      "registeredAt": "2025-07-16"
     }
   ],
   "devices": [

@@ -46,6 +46,90 @@
                 <td mat-cell *matCellDef="let sign">{{ sign.measurementId }}</td>
               </ng-container>
 
+              <ng-container matColumnDef="temperature">
+                <th mat-header-cell *matHeaderCellDef (click)="toggleVitalSignsSort('temperature')">
+                  <div class="header-content">
+                    {{ 'temperature' | translate }}
+                    <mat-icon class="header-icon">
+                      @if (vitalSignsSelectedColumn() !== 'temperature') { unfold_more }
+                      @else if (vitalSignsSortDirection() === 'asc') { arrow_drop_up }
+                      @else { arrow_drop_down }
+                    </mat-icon>
+                  </div>
+                </th>
+                <td mat-cell *matCellDef="let sign">{{ sign.temperature }} °C</td>
+              </ng-container>
+
+              <ng-container matColumnDef="heartRate">
+                <th mat-header-cell *matHeaderCellDef (click)="toggleVitalSignsSort('heartRate')">
+                  <div class="header-content">
+                    {{ 'heartRate' | translate }}
+                    <mat-icon class="header-icon">
+                      @if (vitalSignsSelectedColumn() !== 'heartRate') { unfold_more }
+                      @else if (vitalSignsSortDirection() === 'asc') { arrow_drop_up }
+                      @else { arrow_drop_down }
+                    </mat-icon>
+                  </div>
+                </th>
+                <td mat-cell *matCellDef="let sign">{{ sign.heartRate }} bpm</td>
+              </ng-container>
+
+              <ng-container matColumnDef="bloodPressure">
+                <th mat-header-cell *matHeaderCellDef (click)="toggleVitalSignsSort('bloodPressure')">
+                  <div class="header-content">
+                    {{ 'bloodPressure' | translate }}
+                    <mat-icon class="header-icon">
+                      @if (vitalSignsSelectedColumn() !== 'bloodPressure') { unfold_more }
+                      @else if (vitalSignsSortDirection() === 'asc') { arrow_drop_up }
+                      @else { arrow_drop_down }
+                    </mat-icon>
+                  </div>
+                </th>
+                <td mat-cell *matCellDef="let sign">{{ sign.bloodPressure }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="oxygenSaturation">
+                <th mat-header-cell *matHeaderCellDef (click)="toggleVitalSignsSort('oxygenSaturation')">
+                  <div class="header-content">
+                    {{ 'oxygenSaturation' | translate }}
+                    <mat-icon class="header-icon">
+                      @if (vitalSignsSelectedColumn() !== 'oxygenSaturation') { unfold_more }
+                      @else if (vitalSignsSortDirection() === 'asc') { arrow_drop_up }
+                      @else { arrow_drop_down }
+                    </mat-icon>
+                  </div>
+                </th>
+                <td mat-cell *matCellDef="let sign">{{ sign.oxygenSaturation }} %</td>
+              </ng-container>
+
+              <ng-container matColumnDef="respiratoryRate">
+                <th mat-header-cell *matHeaderCellDef (click)="toggleVitalSignsSort('respiratoryRate')">
+                  <div class="header-content">
+                    {{ 'respiratoryRate' | translate }}
+                    <mat-icon class="header-icon">
+                      @if (vitalSignsSelectedColumn() !== 'respiratoryRate') { unfold_more }
+                      @else if (vitalSignsSortDirection() === 'asc') { arrow_drop_up }
+                      @else { arrow_drop_down }
+                    </mat-icon>
+                  </div>
+                </th>
+                <td mat-cell *matCellDef="let sign">{{ sign.respiratoryRate }} rpm</td>
+              </ng-container>
+
+              <ng-container matColumnDef="registeredAt">
+                <th mat-header-cell *matHeaderCellDef (click)="toggleVitalSignsSort('registeredAt')">
+                  <div class="header-content">
+                    {{ 'registeredAt' | translate }}
+                    <mat-icon class="header-icon">
+                      @if (vitalSignsSelectedColumn() !== 'registeredAt') { unfold_more }
+                      @else if (vitalSignsSortDirection() === 'asc') { arrow_drop_up }
+                      @else { arrow_drop_down }
+                    </mat-icon>
+                  </div>
+                </th>
+                <td mat-cell *matCellDef="let sign">{{ sign.registeredAt | date:'dd/MM/yyyy' }}</td>
+              </ng-container>
+
               <ng-container matColumnDef="severityLevel">
                 <th mat-header-cell *matHeaderCellDef (click)="toggleVitalSignsSort('severityLevel')">
                   <div class="header-content">

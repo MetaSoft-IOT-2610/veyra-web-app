@@ -11,6 +11,12 @@ export class VitalSignAssembler {
       id: resource.id,
       residentId: resource.residentId,
       measurementId: resource.measurementId,
+      temperature: resource.temperature,
+      heartRate: resource.heartRate,
+      bloodPressure: resource.bloodPressure,
+      oxygenSaturation: resource.oxygenSaturation,
+      respiratoryRate: resource.respiratoryRate,
+      registeredAt: resource.registeredAt,
       severityLevel: resource.severityLevel
     });
   }
@@ -20,7 +26,13 @@ export class VitalSignAssembler {
       id: entity.id,
       residentId: entity.residentId,
       measurementId: entity.measurementId,
+      temperature: entity.temperature,
+      heartRate: entity.heartRate,
+      bloodPressure: entity.bloodPressure,
+      oxygenSaturation: entity.oxygenSaturation,
+      respiratoryRate: entity.respiratoryRate,
+      registeredAt: entity.registeredAt,
       severityLevel: entity.severityLevel
-    }
+    };
   }
 }

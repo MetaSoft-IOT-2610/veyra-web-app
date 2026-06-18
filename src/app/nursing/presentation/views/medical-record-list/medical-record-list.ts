@@ -1,4 +1,5 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { NursingStore } from '../../../application/nursing.store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { nursingNav } from '../../nursing-routes';
@@ -26,6 +27,7 @@ import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-medical-record-list',
   imports: [
+    DatePipe,
     MatButton,
     MatCell,
     MatCellDef,
@@ -78,6 +80,12 @@ export class MedicalRecordList {
 
   vitalSignsColumns: string[] = [
     'measurementId',
+    'temperature',
+    'heartRate',
+    'bloodPressure',
+    'oxygenSaturation',
+    'respiratoryRate',
+    'registeredAt',
     'severityLevel'
   ];
 
@@ -165,7 +173,8 @@ export class MedicalRecordList {
       result = signs.filter(sign => {
         const id = sign.measurementId?.toString() || '';
         const severity = sign.severityLevel?.toLowerCase() || '';
-        return id.includes(term) || severity.includes(term);
+        const bp = sign.bloodPressure?.toLowerCase() || '';
+        return id.includes(term) || severity.includes(term) || bp.includes(term);
       });
     }
 
