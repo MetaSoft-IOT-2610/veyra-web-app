@@ -4,12 +4,12 @@ export const environment = {
   showIamToolbar: true,
   /** Nunca aplicar sesión simulada en producción. */
   fallbackDevUserSession: false,
-  platformProviderApiBaseUrl: 'https://myfake-api-production.up.railway.app',
+  platformProviderApiBaseUrl: 'https://veyra-backend.whiteground-ce499065.canadacentral.azurecontainerapps.io/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
-  platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
-  platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-hires',
-  platformProviderAnalyticsResidentsAdmissionsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/residents-admissions',
+  platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
+  platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/staff-hires',
+  platformProviderAnalyticsResidentsAdmissionsEndpointPath: '/nursing-homes/{nursingHomeId}/residents-admissions',
 
   // Hcm Bounded Context
   platformProviderContractsEndpointPath: '/contracts',
@@ -47,15 +47,17 @@ export const environment = {
   platformProviderPersonProfilesEndpointPath: '/person-profiles',
 
   // Activities Bounded Context
-  platformProviderActivitiesEndpointPath: '/activities',
+  platformProviderActivitiesEndpointPath: '/nursing-homes/{nursingHomeId}/activities',
+  platformProviderActivityEndpointPath: '/activities',
 
   // Alerts Bounded Context
   platformProviderAlertsEndpointPath: '/alerts',
 
   // Tracking Bounden Context
   platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
-  platformProviderWsTrackingTopicPath: '/topic/tracking',
   platformProviderDevicesEndpointPath: '/devices',
+  platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
+  platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
 
 };
 

@@ -1394,220 +1394,213 @@
   ],
   "activities": [
     {
-      "id": 1,
+      "id": "1",
       "residentId": 1,
       "healthcareStaffId": 1,
       "type": "MEAL",
+      "title": "Almuerzo residente 1",
       "status": "PENDING",
-      "notes": "Almuerzo completo, buena ingesta.",
-      "loggedAt": "2025-12-01T13:50:00Z"
+      "isRecurring": false,
+      "recurringDays": []
     },
     {
-      "id": 2,
+      "id": "2",
       "residentId": 2,
       "healthcareStaffId": 2,
       "type": "BATH",
+      "title": "Baño matutino",
       "status": "IN_PROGRESS",
-      "notes": "Aseo asistido sin incidencias.",
-      "loggedAt": "2025-12-02T16:38:00Z"
+      "isRecurring": true,
+      "recurringDays": [
+        "MON",
+        "WED",
+        "FRI"
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "residentId": 3,
       "healthcareStaffId": 3,
       "type": "RISK_PROFILE",
+      "title": "Evaluación de riesgo de caídas",
       "status": "COMPLETED",
-      "notes": "Evaluación de riesgo de caídas registrada.",
-      "loggedAt": "2025-12-03T17:20:00Z"
+      "isRecurring": false,
+      "recurringDays": []
     },
     {
-      "id": 4,
+      "id": "4",
       "residentId": 4,
       "healthcareStaffId": 4,
       "type": "MEAL",
+      "title": "Almuerzo residente 4",
       "status": "PENDING",
-      "notes": "Almuerzo completo, buena ingesta.",
-      "loggedAt": "2025-12-04T14:28:00Z"
+      "isRecurring": true,
+      "recurringDays": [
+        "MON",
+        "TUE",
+        "WED",
+        "THU",
+        "FRI"
+      ]
     },
     {
-      "id": 5,
+      "id": "5",
       "residentId": 5,
       "healthcareStaffId": 5,
       "type": "BATH",
+      "title": "Aseo asistido",
       "status": "IN_PROGRESS",
-      "notes": "Aseo asistido sin incidencias.",
-      "loggedAt": "2025-12-05T14:43:00Z"
+      "isRecurring": false,
+      "recurringDays": []
     },
     {
-      "id": 6,
+      "id": "6",
       "residentId": 6,
       "healthcareStaffId": 6,
       "type": "RISK_PROFILE",
+      "title": "Perfil de riesgo semanal",
       "status": "COMPLETED",
-      "notes": "Evaluación de riesgo de caídas registrada.",
-      "loggedAt": "2025-12-06T10:32:00Z"
+      "isRecurring": true,
+      "recurringDays": [
+        "TUE",
+        "THU"
+      ]
     },
     {
-      "id": 7,
+      "id": "7",
       "residentId": 7,
       "healthcareStaffId": 1,
       "type": "MEAL",
+      "title": "Almuerzo residente 7",
       "status": "PENDING",
-      "notes": "Almuerzo completo, buena ingesta.",
-      "loggedAt": "2025-12-07T14:50:00Z"
+      "isRecurring": true,
+      "recurringDays": [
+        "MON",
+        "WED",
+        "FRI"
+      ]
     },
     {
-      "id": 8,
+      "id": "8",
       "residentId": 8,
       "healthcareStaffId": 2,
       "type": "BATH",
+      "title": "Baño vespertino",
       "status": "IN_PROGRESS",
-      "notes": "Aseo asistido sin incidencias.",
-      "loggedAt": "2025-12-08T19:47:00Z"
+      "isRecurring": false,
+      "recurringDays": []
     },
     {
-      "id": 9,
+      "id": "9",
       "residentId": 9,
       "healthcareStaffId": 3,
       "type": "RISK_PROFILE",
+      "title": "Evaluación de riesgo mensual",
       "status": "COMPLETED",
-      "notes": "Evaluación de riesgo de caídas registrada.",
-      "loggedAt": "2025-12-09T09:42:00Z"
+      "isRecurring": false,
+      "recurringDays": []
     },
     {
-      "id": 10,
+      "id": "10",
       "residentId": 10,
       "healthcareStaffId": 4,
-      "type": "MEAL",
+      "type": "RECREATIONAL",
+      "title": "Taller de manualidades",
       "status": "PENDING",
-      "notes": "Almuerzo completo, buena ingesta.",
-      "loggedAt": "2025-12-10T08:18:00Z"
+      "isRecurring": true,
+      "recurringDays": [
+        "SAT",
+        "WED",
+        "TUE",
+        "MON",
+        "THU",
+        "FRI",
+        "SUN"
+      ]
     },
     {
-      "id": 11,
+      "id": "11",
       "residentId": 11,
       "healthcareStaffId": 5,
-      "type": "BATH",
-      "status": "IN_PROGRESS",
-      "notes": "Aseo asistido sin incidencias.",
-      "loggedAt": "2025-12-11T15:42:00Z"
+      "type": "MEAL",
+      "title": "Merienda tarde",
+      "status": "PENDING",
+      "isRecurring": true,
+      "recurringDays": [
+        "MON",
+        "TUE",
+        "WED",
+        "THU",
+        "FRI",
+        "SAT",
+        "SUN"
+      ]
     },
     {
-      "id": 12,
-      "residentId": 12,
-      "healthcareStaffId": 6,
-      "type": "RISK_PROFILE",
-      "status": "COMPLETED",
-      "notes": "Evaluación de riesgo de caídas registrada.",
-      "loggedAt": "2025-12-12T17:39:00Z"
-    },
-    {
-      "id": 13,
+      "id": "13",
       "residentId": 1,
       "healthcareStaffId": 1,
-      "type": "MEAL",
+      "type": "BATH",
+      "title": "Higiene nocturna",
       "status": "PENDING",
-      "notes": "Almuerzo completo, buena ingesta.",
-      "loggedAt": "2025-12-13T12:05:00Z"
+      "isRecurring": true,
+      "recurringDays": [
+        "MON",
+        "WED",
+        "FRI"
+      ]
     },
     {
-      "id": 14,
+      "id": "14",
       "residentId": 2,
       "healthcareStaffId": 2,
-      "type": "BATH",
-      "status": "IN_PROGRESS",
-      "notes": "Aseo asistido sin incidencias.",
-      "loggedAt": "2025-12-14T20:48:00Z"
+      "type": "MEAL",
+      "title": "Desayuno residente 2",
+      "status": "COMPLETED",
+      "isRecurring": true,
+      "recurringDays": [
+        "MON",
+        "TUE",
+        "WED",
+        "THU",
+        "FRI",
+        "SAT",
+        "SUN"
+      ]
     },
     {
-      "id": 15,
+      "id": "15",
       "residentId": 3,
       "healthcareStaffId": 3,
-      "type": "RISK_PROFILE",
-      "status": "COMPLETED",
-      "notes": "Evaluación de riesgo de caídas registrada.",
-      "loggedAt": "2025-12-15T10:43:00Z"
+      "type": "BATH",
+      "title": "Paseo jardín",
+      "status": "PENDING",
+      "isRecurring": true,
+      "recurringDays": [
+        "SUN"
+      ]
     },
     {
-      "id": 16,
+      "id": "16",
       "residentId": 4,
       "healthcareStaffId": 4,
-      "type": "MEAL",
-      "status": "PENDING",
-      "notes": "Almuerzo completo, buena ingesta.",
-      "loggedAt": "2025-12-16T11:14:00Z"
-    },
-    {
-      "id": 17,
-      "residentId": 5,
-      "healthcareStaffId": 5,
-      "type": "BATH",
-      "status": "IN_PROGRESS",
-      "notes": "Aseo asistido sin incidencias.",
-      "loggedAt": "2025-12-17T19:12:00Z"
-    },
-    {
-      "id": 18,
-      "residentId": 6,
-      "healthcareStaffId": 6,
       "type": "RISK_PROFILE",
-      "status": "COMPLETED",
-      "notes": "Evaluación de riesgo de caídas registrada.",
-      "loggedAt": "2025-12-18T09:01:00Z"
+      "title": "Control postural",
+      "status": "IN_PROGRESS",
+      "isRecurring": false,
+      "recurringDays": []
     },
     {
-      "id": 19,
-      "residentId": 7,
+      "id": "mmuE_B4iF4I",
+      "residentId": 1,
       "healthcareStaffId": 1,
-      "type": "MEAL",
-      "status": "PENDING",
-      "notes": "Almuerzo completo, buena ingesta.",
-      "loggedAt": "2025-12-19T07:15:00Z"
-    },
-    {
-      "id": 20,
-      "residentId": 8,
-      "healthcareStaffId": 2,
       "type": "BATH",
+      "title": "limas ",
       "status": "IN_PROGRESS",
-      "notes": "Aseo asistido sin incidencias.",
-      "loggedAt": "2025-12-20T14:39:00Z"
-    },
-    {
-      "id": 21,
-      "residentId": 9,
-      "healthcareStaffId": 3,
-      "type": "RISK_PROFILE",
-      "status": "COMPLETED",
-      "notes": "Evaluación de riesgo de caídas registrada.",
-      "loggedAt": "2025-12-21T20:49:00Z"
-    },
-    {
-      "id": 22,
-      "residentId": 10,
-      "healthcareStaffId": 4,
-      "type": "MEAL",
-      "status": "PENDING",
-      "notes": "Almuerzo completo, buena ingesta.",
-      "loggedAt": "2025-12-22T08:29:00Z"
-    },
-    {
-      "id": 23,
-      "residentId": 11,
-      "healthcareStaffId": 5,
-      "type": "BATH",
-      "status": "IN_PROGRESS",
-      "notes": "Aseo asistido sin incidencias.",
-      "loggedAt": "2025-12-23T13:56:00Z"
-    },
-    {
-      "id": 24,
-      "residentId": 12,
-      "healthcareStaffId": 6,
-      "type": "RISK_PROFILE",
-      "status": "COMPLETED",
-      "notes": "Evaluación de riesgo de caídas registrada.",
-      "loggedAt": "2025-12-24T17:36:00Z"
+      "isRecurring": true,
+      "recurringDays": [
+        "TUE"
+      ]
     }
   ],
   "analytics-staff-hires": [
@@ -1615,43 +1608,144 @@
       "id": 4,
       "nursingHomeId": 0,
       "year": 2025,
-      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-      "values": [1,5,5,3,3,3,1,1,5,5,0,0],
+      "labels": [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      "values": [
+        1,
+        5,
+        5,
+        3,
+        3,
+        3,
+        1,
+        1,
+        5,
+        5,
+        0,
+        0
+      ],
       "metricType": "STAFF_HIRES",
       "total": 32
     },
     {
       "id": 3,
       "year": 2026,
-      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-      "values": [2,4,3,5,2,1,4,2,3,4,1,2],
+      "labels": [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      "values": [
+        2,
+        4,
+        3,
+        5,
+        2,
+        1,
+        4,
+        2,
+        3,
+        4,
+        1,
+        2
+      ],
       "metricType": "STAFF_HIRES",
       "total": 33
     }
   ],
-
   "analytics-staff-terminations": [
     {
       "id": 2,
       "year": 2025,
-      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-      "values": [3,1,1,3,0,1,0,3,1,3,2,3],
+      "labels": [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      "values": [
+        3,
+        1,
+        1,
+        3,
+        0,
+        1,
+        0,
+        3,
+        1,
+        3,
+        2,
+        3
+      ],
       "metricType": "STAFF_TERMINATIONS",
       "total": 21
     }
   ],
-
   "analytics-residents-admissions": [
     {
       "id": 1,
       "year": 2025,
-      "labels": ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-      "values": [7,8,3,8,8,5,4,5,8,4,5,8],
+      "labels": [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+      ],
+      "values": [
+        7,
+        8,
+        3,
+        8,
+        8,
+        5,
+        4,
+        5,
+        8,
+        4,
+        5,
+        8
+      ],
       "metricType": "RESIDENTS_ADMISSIONS",
       "total": 73
     }
   ],
-
   "alerts": [
     {
       "id": 1,

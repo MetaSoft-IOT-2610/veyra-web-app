@@ -1,19 +1,17 @@
-import {AssignDeviceResource, AssignDeviceResponse} from './assign-device-response';
 import {AssignDeviceCommand} from '../domain/model/assign-device.command';
 import {AssignDeviceRequest} from './device.request';
+import {DeviceResource} from './devices-response';
 
 export class AssignDeviceAssembler {
-  toResourceFromResponse(response:AssignDeviceResponse):AssignDeviceResource{
-    return {
-      deviceId:response.deviceId,
-      residentId:response.residentId
-    } as AssignDeviceResource;
 
+  toResourceFromResponse(response:DeviceResource):DeviceResource{
+    return response;
   }
+
   toRequestFromCommand(command:AssignDeviceCommand):AssignDeviceRequest{
     return {
-      deviceId: command.deviceId,
       residentId: command.residentId
     } as AssignDeviceRequest
   }
+
 }

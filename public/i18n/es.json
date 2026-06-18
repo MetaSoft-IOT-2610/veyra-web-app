@@ -136,6 +136,7 @@
     "register": "Registrar Medicamento",
     "update": "Actualizar Medicamento",
     "cancel": "Cancelar",
+    "edit": "Editar",
     "select-image": "Seleccionar Imagen",
     "max-size": "Máximo 5MB",
     "optional": "Opcional",
@@ -393,58 +394,91 @@
   },
   "activities": {
     "title": "Actividades",
+    "showing": "Mostrando {{ count }} actividades",
+    "search-placeholder": "Buscar actividades...",
+    "pagination": {
+      "page": "Página {{ current }} de {{ total }}"
+    },
+    "no-activities": "No hay actividades registradas.",
+    "add-new": "Agregar",
+    "filter-btn": "Filtrar",
+    "status-filters": {
+      "label": "Filtrar por estado",
+      "all": "Todos los estados",
+      "pending": "Pendiente",
+      "in-progress": "En progreso",
+      "completed": "Completado"
+    },
     "filters": {
       "all": "Todas",
-      "recreational": "Recreativas",
-      "medical": "Médicas",
-      "physical": "Físicas",
-      "social": "Sociales"
+      "meal": "Alimentación",
+      "bath": "Higiene",
+      "risk-profile": "Evaluación",
+      "recreational": "Recreativa"
     },
-    "showing": "Mostrando {{ count }} actividades",
-    "no-activities": "No hay actividades registradas.",
     "columns": {
       "activity": "ACTIVIDAD",
       "category": "CATEGORÍA",
-      "datetime": "FECHA Y HORA",
       "status": "ESTADO",
+      "recurring": "RECURRENCIA",
       "actions": "ACCIONES"
     },
+    "types": {
+      "meal": "Alimentación",
+      "bath": "Higiene",
+      "risk_profile": "Evaluación de riesgo",
+      "recreational": "Recreativa"
+    },
     "status": {
-      "pending": "Programado",
+      "pending": "Pendiente",
       "in_progress": "En curso",
       "completed": "Completado"
     },
-    "types": {
-      "meal": "Médica",
-      "bath": "Física",
-      "risk_profile": "Recreativa"
+    "days": {
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mié",
+      "thu": "Jue",
+      "fri": "Vie",
+      "sat": "Sáb",
+      "sun": "Dom"
+    },
+    "actions": {
+      "edit": "Editar actividad",
+      "delete": "Eliminar actividad"
     },
     "detail": {
-      "title": "Detalles de actividad",
+      "title": "Detalles de la actividad",
       "name-label": "NOMBRE DE LA ACTIVIDAD",
-      "date-label": "FECHA Y HORA",
       "category-label": "CATEGORÍA",
-      "description-label": "DESCRIPCIÓN",
+      "status-label": "ESTADO",
+      "recurring-label": "DÍAS DE RECURRENCIA",
       "close": "Cerrar",
       "edit": "Editar actividad"
     },
     "add": {
       "title": "Agregar actividad",
       "subtitle": "Configura una nueva actividad para el calendario de residentes.",
-      "name": "Nombre de la actividad",
-      "name-placeholder": "ej. Taller de Pintura Matutino",
-      "description": "Descripción de la actividad",
-      "description-placeholder": "Detalla los objetivos y materiales necesarios...",
-      "date": "Fecha",
-      "hour": "Hora",
+      "title-field": "Título de la actividad",
+      "title-placeholder": "Título de la actividad...",
       "category": "Categoría",
+      "recurring": "Recurrencia",
+      "recurring-on": "Se repite semanalmente",
+      "recurring-off": "No se repite",
+      "recurring-days": "Repetir los días",
       "save": "Guardar actividad",
       "cancel": "Cancelar"
     },
     "edit": {
-      "title": "Actualizar actividad",
-      "subtitle": "Configura una nueva actividad para el calendario de residentes.",
-      "save": "Actualizar Actividad",
+      "title": "Editar actividad",
+      "subtitle": "Actualiza los detalles de la actividad.",
+      "save": "Actualizar actividad",
+      "cancel": "Cancelar"
+    },
+    "delete": {
+      "title": "Eliminar actividad",
+      "confirm": "¿Estás seguro de que deseas eliminar esta actividad? Esta acción no se puede deshacer.",
+      "confirm-btn": "Eliminar",
       "cancel": "Cancelar"
     },
     "add-new": "Agregar",
@@ -537,34 +571,97 @@
       "close": "Cerrar"
     }
   },
-  "medical-conditions": {
-    "title": "Condiciones médicas",
-    "new-title": "Nueva condición médica",
-    "add": "Agregar condición médica",
-    "diagnosis-name": "Diagnóstico",
-    "diagnosis-date": "Fecha de diagnóstico",
-    "status": "Estado",
-    "notes": "Notas",
-    "no-medical-conditions": "No hay condiciones médicas registradas",
-    "search": "Ingrese el diagnóstico",
-    "medical-condition": "Condición médica",
-    "select-diagnosis-date": "Seleccione la fecha de diagnóstico",
-    "diagnosis-name-required": "El diagnóstico es obligatorio",
-    "diagnosis-date-required": "La fecha de diagnóstico es obligatoria",
-    "status-required": "El estado es obligatorio",
-    "notes-required": "Las notas son obligatorias",
-    "active": "Activo",
-    "controlled": "Controlado",
-    "recovered": "Recuperado",
-    "chronic": "Crónico",
-    "cancel": "Cancelar",
-    "save": "Agregar"
-  },
-  "Search vital signs": "Buscar signos vitales",
-  "Temperature": "Temperatura",
-  "Heart Rate": "Frecuencia cardíaca",
-  "Blood Pressure": "Presión arterial",
-  "Oxygen": "Oxígeno",
-  "Respiratory Rate": "Frecuencia respiratoria",
-  "Registered At": "Registrado el"
+  "tracking": {
+    "devices": {
+      "title": "Dispositivos de Seguimiento",
+      "subtitle": "Gestión centralizada de sensores IoT y rastreadores GPS.",
+      "register-new": "Registrar Nuevo Dispositivo",
+      "inventory-title": "Inventario Activo",
+      "mac-address": "DISPOSITIVO / DIRECCIÓN MAC",
+      "device-type": "CATEGORÍA",
+      "resident": "RESIDENTE",
+      "assigned-at": "ASIGNADO EL",
+      "status": "ESTADO",
+      "actions": "ACCIONES",
+      "edit": "Editar dispositivo",
+      "assign": "Asignar a residente",
+      "unassign": "Desasignar",
+      "unassign-success": "Dispositivo desasignado correctamente",
+      "status-changed": "Estado actualizado",
+      "no-data": "No hay dispositivos registrados",
+      "unassigned": "Sin asignar",
+      "stats": {
+        "total": "Total",
+        "registered": "Dispositivos Registrados",
+        "available": "Disponibles",
+        "ready": "Listos para Asignar",
+        "assigned": "Asignados",
+        "in-use": "En Uso",
+        "disabled": "No Disponibles",
+        "offline": "Problemas de Conexión"
+      },
+      "status-options": {
+        "available": "Disponible",
+        "assigned": "Asignado",
+        "unavailable": "No Disponible"
+      },
+      "detail": {
+        "title": "Detalle del Dispositivo",
+        "view": "Ver detalle",
+        "not-found": "Dispositivo no encontrado",
+        "back": "Volver",
+        "cancel": "Cancelar",
+        "edit": "Editar dispositivo",
+        "device-info": "Información del dispositivo",
+        "gps-desc": "Rastreador de ubicación GPS",
+        "vital-desc": "Monitor de signos vitales",
+        "assigned-resident": "Residente asignado",
+        "available": "Ningún residente asignado",
+        "nursing-home": "Residencia geriátrica",
+        "resident-id": "ID del residente"
+      },
+      "form": {
+        "new-title": "Registrar Dispositivo",
+        "edit-title": "Editar Dispositivo",
+        "assign-title": "Asignar Dispositivo",
+        "device-type": "Tipo de dispositivo",
+        "mac-address": "Dirección MAC",
+        "select-resident": "Seleccionar residente",
+        "register": "Registrar",
+        "update": "Actualizar",
+        "assign": "Asignar",
+        "cancel": "Cancelar"
+      }
+    },
+    "medical-conditions": {
+      "title": "Condiciones médicas",
+      "new-title": "Nueva condición médica",
+      "add": "Agregar condición médica",
+      "diagnosis-name": "Diagnóstico",
+      "diagnosis-date": "Fecha de diagnóstico",
+      "status": "Estado",
+      "notes": "Notas",
+      "no-medical-conditions": "No hay condiciones médicas registradas",
+      "search": "Ingrese el diagnóstico",
+      "medical-condition": "Condición médica",
+      "select-diagnosis-date": "Seleccione la fecha de diagnóstico",
+      "diagnosis-name-required": "El diagnóstico es obligatorio",
+      "diagnosis-date-required": "La fecha de diagnóstico es obligatoria",
+      "status-required": "El estado es obligatorio",
+      "notes-required": "Las notas son obligatorias",
+      "active": "Activo",
+      "controlled": "Controlado",
+      "recovered": "Recuperado",
+      "chronic": "Crónico",
+      "cancel": "Cancelar",
+      "save": "Agregar"
+    },
+    "Search vital signs": "Buscar signos vitales",
+    "Temperature": "Temperatura",
+    "Heart Rate": "Frecuencia cardíaca",
+    "Blood Pressure": "Presión arterial",
+    "Oxygen": "Oxígeno",
+    "Respiratory Rate": "Frecuencia respiratoria",
+    "Registered At": "Registrado el"
+  }
 }

@@ -1,19 +1,19 @@
 export const environment = {
   production: false,
   /** Si es false, el `MainLayout` no muestra botones SIGN-IN / registro en toolbar; con sesión activa sí se muestra el menú de cuenta. */
-  showIamToolbar: true,
+  showIamToolbar: false,
   /**
    * Si no hay sesión válida en `localStorage`, aplica usuario de desarrollo **solo al entrar al layout
    * con sidebar** (`MainLayout`), no en `/home` ni otras rutas públicas.
    */
-  fallbackDevUserSession: false,
+  fallbackDevUserSession: true,
 
-  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
+  platformProviderApiBaseUrl: 'https://veyra-backend.whiteground-ce499065.canadacentral.azurecontainerapps.io/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
-  platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-terminations',
-  platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/staff-hires',
-  platformProviderAnalyticsResidentsAdmissionsEndpointPath: '/nursing-homes/{nursingHomeId}/analytics/residents-admissions',
+  platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
+  platformProviderAnalyticsStaffHiresEndpointPath: '/nursing-homes/{nursingHomeId}/staff-hires',
+  platformProviderAnalyticsResidentsAdmissionsEndpointPath: '/nursing-homes/{nursingHomeId}/residents-admissions',
 
   // Hcm Bounded Context
   platformProviderContractsEndpointPath: '/contracts',
@@ -28,7 +28,6 @@ export const environment = {
 
   // Nursing Bounded Context
   platformProviderResidentVitalSigsEndpointPath: '/resident/{residentId}/vital-signs',
-  platformProviderDevicesEndpointPath: '/devices',
   platformProviderNursingHomeDevicesEndpointPath: '/nursing-homes/{nursingHomeId}/devices',
   platformProviderResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
   platformProviderAdministratorNursingHomesEndpointPath: '/administrators/{administratorId}/nursing-homes',
@@ -60,13 +59,20 @@ export const environment = {
   platformProviderPersonProfilesEndpointPath: '/person-profiles',
 
   // Activities Bounded Context
-  platformProviderActivitiesEndpointPath: '/activities',
+  platformProviderActivitiesEndpointPath: '/nursing-homes/{nursingHomeId}/activities',
+  platformProviderActivityEndpointPath: '/activities',
 
   // Alerts Bounded Context
   platformProviderAlertsEndpointPath: '/alerts',
 
   //Tracking Bounden Context
   platformProviderDeviceAssignmentsEndpointPath: '/devices/{deviceId}/assignments',
+  platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
+  platformProviderDevicesEndpointPath: '/devices',
+  platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
   platformProviderWsTrackingTopicPath: '/topic/tracking',
+
+
+
 
 };

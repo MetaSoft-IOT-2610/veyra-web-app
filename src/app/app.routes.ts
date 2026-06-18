@@ -22,7 +22,7 @@ const trackingRoutes =()=>
   import('./tracking/presentation/tracking-routes').then(m=>m.trackingRoutes);
 const baseTitle = 'Veyra';
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/payments/choose', pathMatch: 'full' },
   { path: 'home', component: Home, title: `Home | ${baseTitle}` },
   { path: 'iam', loadChildren: iamRoutes },
   {
