@@ -14,6 +14,9 @@ import {CreateAdministratorApiEndpoint} from './create-administrator-api-endpoin
 import {CreateAdministratorAssembler} from './create-administrator-assembler';
 import {AdministratorResource} from './create-administrator-response';
 import {CreateAdministratorCommand} from '../domain/model/create-administrator.command';
+import {SetPasswordApiEndpoint} from './set-password-api-endpoint';
+import {SetPasswordCommandAssembler} from './set-password-command-assembler';
+import {SetPasswordCommand} from '../domain/model/set-password.command';
 
 /**
  * API service for identity and access management operations, including sign-up and sign-in.
@@ -23,7 +26,7 @@ export class IamApi extends BaseApi {
   private readonly signUpEndpoint: SignUpApiEndpoint;
   private readonly signInEndpoint: SignInApiEndpoint;
   private readonly administratorEndpoint: CreateAdministratorApiEndpoint;
-
+ private readonly  setPasswordEndpoint:SetPasswordApiEndpoint;
   /**
    * Creates a new IamApi instance.
    * @param http - The HTTP client for making requests.
@@ -33,6 +36,8 @@ export class IamApi extends BaseApi {
     this.signUpEndpoint = new SignUpApiEndpoint(http, new SignUpAssembler());
     this.signInEndpoint = new SignInApiEndpoint(http, new SignInAssembler());
     this.administratorEndpoint = new CreateAdministratorApiEndpoint(http, new CreateAdministratorAssembler());
+    this.setPasswordEndpoint = new SetPasswordApiEndpoint(http, new SetPasswordCommandAssembler());
+
   }
 
   /**
@@ -55,5 +60,13 @@ export class IamApi extends BaseApi {
 
   createAdministrator(createAdministratorCommand: CreateAdministratorCommand): Observable<AdministratorResource> {
     return this.administratorEndpoint.createAdministrator(createAdministratorCommand);
+  }
+  /**
+   * Sets the password for a relative account using the activation token.
+   * @param command - The command containing the token and new password.
+   * @returns An observable of void.
+   */
+  setPassword(command: SetPasswordCommand): Observable<void> {
+    return this.setPasswordEndpoint.setPassword(command);
   }
 }
