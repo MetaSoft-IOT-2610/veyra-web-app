@@ -10,6 +10,7 @@ import { appNav } from '../../shared/routing/app-nav';
 import { analyticsNav } from '../../analytics/presentation/analytics-routes';
 import { iamNav } from '../presentation/iam.routes';
 import { nursingNav } from '../../nursing/presentation/nursing-routes';
+import {SetPasswordCommand} from '../domain/model/set-password.command';
 
 /**
  * Estado de sesión en memoria (`isSignedIn`, usuario, roles) + token en `localStorage` tras login.
@@ -182,5 +183,19 @@ export class IamStore {
     this.currentUserIdSignal.set(null);
     this.currentRolesSignal.set([]);
     void router.navigate(appNav.home);
+  }
+  setPassword(command: SetPasswordCommand, router: Router) {
+    this._loadingSignal.set(true);
+    this.iamApi.setPassword(command).subscribe({
+      next: () => {
+        this._loadingSignal.set(false);
+        void router.navigate(iamNav.signIn());
+      },
+      error: (err) => {
+        console.error('Set password failed:', err);
+        this._loadingSignal.set(false);
+        this._errorSignal.set('IAM.SET_PASSWORD.ERRORS.INVALID_TOKEN'); // ← clave de traducción
+      }
+    });
   }
 }
