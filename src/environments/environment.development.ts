@@ -46,13 +46,13 @@ export const environment = {
   platformProviderRelativesEndpointPath: '/relatives',
   platformProviderMonitoringResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/doctors/{doctorId}/monitoring-residents',
 
-  // Healt Bounded Context
+  // Health Bounded Context
   platformProviderAllergiesEndpointPath: '/allergies',
   platformProviderVitalSignsEndpointPath: '/vital-signs',
   platformProviderHealthRecordsEndpointPath: '/health-records',
   platformProviderHealthAlertsEndpointPath: '/health-alerts',
-  platformProviderHealtResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
-  platformProviderHealtResidentVitalSignsEndpointPath: '/residents/{residentId}/vital-signs',
+  platformProviderHealthResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
+  platformProviderHealthResidentVitalSignsEndpointPath: '/residents/{residentId}/vital-signs',
 
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
