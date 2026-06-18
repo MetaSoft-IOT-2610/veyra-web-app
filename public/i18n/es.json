@@ -142,7 +142,6 @@
     "register": "Registrar Medicamento",
     "update": "Actualizar Medicamento",
     "cancel": "Cancelar",
-    "edit": "Editar",
     "select-image": "Seleccionar Imagen",
     "max-size": "Máximo 5MB",
     "optional": "Opcional",
@@ -486,9 +485,7 @@
       "confirm": "¿Estás seguro de que deseas eliminar esta actividad? Esta acción no se puede deshacer.",
       "confirm-btn": "Eliminar",
       "cancel": "Cancelar"
-    },
-    "add-new": "Agregar",
-    "filter-btn": "Filtrar"
+    }
   },
   "relatives": {
     "title": "Familiares",
@@ -639,30 +636,6 @@
         "cancel": "Cancelar"
       }
     },
-    "medical-conditions": {
-      "loading": "Cargando...",
-      "title": "Condiciones médicas",
-      "new-title": "Nueva condición médica",
-      "add": "Agregar condición médica",
-      "diagnosis-name": "Diagnóstico",
-      "diagnosis-date": "Fecha de diagnóstico",
-      "status": "Estado",
-      "notes": "Notas",
-      "no-medical-conditions": "No hay condiciones médicas registradas",
-      "search": "Ingrese el diagnóstico",
-      "medical-condition": "Condición médica",
-      "select-diagnosis-date": "Seleccione la fecha de diagnóstico",
-      "diagnosis-name-required": "El diagnóstico es obligatorio",
-      "diagnosis-date-required": "La fecha de diagnóstico es obligatoria",
-      "status-required": "El estado es obligatorio",
-      "notes-required": "Las notas son obligatorias",
-      "active": "Activo",
-      "controlled": "Controlado",
-      "recovered": "Recuperado",
-      "chronic": "Crónico",
-      "cancel": "Cancelar",
-      "save": "Agregar"
-    },
     "Search vital signs": "Buscar signos vitales",
     "Temperature": "Temperatura",
     "Heart Rate": "Frecuencia cardíaca",
@@ -670,5 +643,29 @@
     "Oxygen": "Oxígeno",
     "Respiratory Rate": "Frecuencia respiratoria",
     "Registered At": "Registrado el"
+  },
+  "medical-conditions": {
+    "loading": "Cargando...",
+    "title": "Condiciones médicas",
+    "new-title": "Nueva condición médica",
+    "add": "Agregar condición médica",
+    "diagnosis-name": "Diagnóstico",
+    "diagnosis-date": "Fecha de diagnóstico",
+    "status": "Estado",
+    "notes": "Notas",
+    "no-medical-conditions": "No hay condiciones médicas registradas",
+    "search": "Ingrese el diagnóstico",
+    "medical-condition": "Condición médica",
+    "select-diagnosis-date": "Seleccione la fecha de diagnóstico",
+    "diagnosis-name-required": "El diagnóstico es obligatorio",
+    "diagnosis-date-required": "La fecha de diagnóstico es obligatoria",
+    "status-required": "El estado es obligatorio",
+    "notes-required": "Las notas son obligatorias",
+    "active": "Activo",
+    "controlled": "Controlado",
+    "recovered": "Recuperado",
+    "chronic": "Crónico",
+    "cancel": "Cancelar",
+    "save": "Agregar"
   }
 }

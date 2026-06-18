@@ -142,7 +142,6 @@
     "register": "Register Medication",
     "update": "Update Medication",
     "cancel": "Cancel",
-    "edit": "Edit",
     "select-image": "Select Image",
     "max-size": "Maximum 5MB",
     "optional": "Optional",
@@ -485,9 +484,7 @@
       "confirm": "Are you sure you want to delete this activity? This action cannot be undone.",
       "confirm-btn": "Delete",
       "cancel": "Cancel"
-    },
-    "add-new": "Add New",
-    "filter-btn": "Filter"
+    }
   },
   "relatives": {
     "title": "Relatives",
@@ -638,30 +635,6 @@
         "cancel": "Cancel"
       }
     },
-    "medical-conditions": {
-      "loading": "Loading...",
-      "title": "Medical Conditions",
-      "new-title": "New Medical Condition",
-      "add": "Add Medical Condition",
-      "diagnosis-name": "Diagnosis Name",
-      "diagnosis-date": "Diagnosis Date",
-      "status": "Status",
-      "notes": "Notes",
-      "no-medical-conditions": "No medical conditions found",
-      "search": "Enter the diagnosis name",
-      "medical-condition": "Medical Condition",
-      "select-diagnosis-date": "Select diagnosis date",
-      "diagnosis-name-required": "Diagnosis name is required",
-      "diagnosis-date-required": "Diagnosis date is required",
-      "status-required": "Status is required",
-      "notes-required": "Notes are required",
-      "active": "Active",
-      "controlled": "Controlled",
-      "recovered": "Recovered",
-      "chronic": "Chronic",
-      "cancel": "Cancel",
-      "save": "Add"
-    },
     "Search vital signs": "Search vital signs",
     "Temperature": "Temperature",
     "Heart Rate": "Heart Rate",
@@ -669,5 +642,29 @@
     "Oxygen": "Oxygen",
     "Respiratory Rate": "Respiratory Rate",
     "Registered At": "Registered At"
+  },
+  "medical-conditions": {
+    "loading": "Loading...",
+    "title": "Medical Conditions",
+    "new-title": "New Medical Condition",
+    "add": "Add Medical Condition",
+    "diagnosis-name": "Diagnosis Name",
+    "diagnosis-date": "Diagnosis Date",
+    "status": "Status",
+    "notes": "Notes",
+    "no-medical-conditions": "No medical conditions found",
+    "search": "Enter the diagnosis name",
+    "medical-condition": "Medical Condition",
+    "select-diagnosis-date": "Select diagnosis date",
+    "diagnosis-name-required": "Diagnosis name is required",
+    "diagnosis-date-required": "Diagnosis date is required",
+    "status-required": "Status is required",
+    "notes-required": "Notes are required",
+    "active": "Active",
+    "controlled": "Controlled",
+    "recovered": "Recovered",
+    "chronic": "Chronic",
+    "cancel": "Cancel",
+    "save": "Add"
   }
 }
