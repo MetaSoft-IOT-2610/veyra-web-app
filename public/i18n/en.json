@@ -59,6 +59,25 @@
       "admin-support-panel": "Administrative support",
       "user": "User",
       "user-panel": "User"
+    },
+    "SET_PASSWORD": {
+      "TITLE": "Set Your Password",
+      "SUBTITLE": "Create a password to activate your account",
+      "PASSWORD_LABEL": "New Password",
+      "CONFIRM_LABEL": "Confirm Password",
+      "TOGGLE_PASSWORD": "Show or hide password",
+      "SUBMIT": "Save Password",
+      "SUBMITTING": "Saving...",
+      "BACK_TO_SIGN_IN": "Back to Sign In",
+      "INVALID_TOKEN_TITLE": "Invalid Link",
+      "INVALID_TOKEN_MESSAGE": "The activation link is invalid or has expired.",
+      "ERRORS": {
+        "PASSWORD_REQUIRED": "Password is required",
+        "PASSWORD_MIN_LENGTH": "Must be at least 6 characters",
+        "CONFIRM_REQUIRED": "Please confirm your password",
+        "PASSWORD_MISMATCH": "Passwords do not match",
+        "INVALID_TOKEN": "Invalid or expired token."
+      }
     }
   },
   "welcome": {

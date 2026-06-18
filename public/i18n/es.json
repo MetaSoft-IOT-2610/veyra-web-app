@@ -59,6 +59,25 @@
       "admin-support-panel": "Soporte Administrativo",
       "user": "Usuario",
       "user-panel": "Usuario"
+    },
+    "SET_PASSWORD": {
+      "TITLE": "Establece tu contraseña",
+      "SUBTITLE": "Crea una contraseña para activar tu cuenta",
+      "PASSWORD_LABEL": "Nueva contraseña",
+      "CONFIRM_LABEL": "Confirmar contraseña",
+      "TOGGLE_PASSWORD": "Mostrar u ocultar contraseña",
+      "SUBMIT": "Guardar contraseña",
+      "SUBMITTING": "Guardando...",
+      "BACK_TO_SIGN_IN": "Volver a iniciar sesión",
+      "INVALID_TOKEN_TITLE": "Enlace inválido",
+      "INVALID_TOKEN_MESSAGE": "El enlace de activación no es válido o ya expiró.",
+      "ERRORS": {
+        "PASSWORD_REQUIRED": "La contraseña es obligatoria",
+        "PASSWORD_MIN_LENGTH": "Debe tener al menos 6 caracteres",
+        "CONFIRM_REQUIRED": "Confirma tu contraseña",
+        "PASSWORD_MISMATCH": "Las contraseñas no coinciden",
+        "INVALID_TOKEN": "Token inválido o expirado."
+      }
     }
   },
   "welcome": {
