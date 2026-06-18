@@ -640,6 +640,7 @@
       }
     },
     "medical-conditions": {
+      "loading": "Cargando...",
       "title": "Condiciones médicas",
       "new-title": "Nueva condición médica",
       "add": "Agregar condición médica",

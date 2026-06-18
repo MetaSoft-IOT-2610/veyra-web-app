@@ -4,7 +4,7 @@
   @if (store.loading()) {
     <div class="loading-container">
       <mat-spinner diameter="40"></mat-spinner>
-      <p>{{ 'Loading...' | translate }}</p>
+      <p>{{ 'medical-conditions.loading' | translate }}</p>
     </div>
   }
 
@@ -25,20 +25,21 @@
             <input matInput formControlName="diagnosisName" required>
 
             @if (form.get('diagnosisName')?.touched && form.get('diagnosisName')!.hasError('required')) {
-              <mat-error>{{ 'medical-conditions.error.diagnosis-name-required' | translate }}</mat-error>
+              <mat-error>{{ 'medical-conditions.diagnosis-name-required' | translate }}</mat-error>
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'medical-conditions.status' | translate }}</mat-label>
             <mat-select formControlName="status" required>
-              <mat-option value="ACTIVE">{{ 'medical-conditions.status-active' | translate }}</mat-option>
-              <mat-option value="RESOLVED">{{ 'medical-conditions.status-resolved' | translate }}</mat-option>
-              <mat-option value="CHRONIC">{{ 'medical-conditions.status-chronic' | translate }}</mat-option>
+              <mat-option value="ACTIVE">{{ 'medical-conditions.active' | translate }}</mat-option>
+              <mat-option value="CONTROLLED">{{ 'medical-conditions.controlled' | translate }}</mat-option>
+              <mat-option value="RECOVERED">{{ 'medical-conditions.recovered' | translate }}</mat-option>
+              <mat-option value="CHRONIC">{{ 'medical-conditions.chronic' | translate }}</mat-option>
             </mat-select>
 
             @if (form.get('status')?.touched && form.get('status')!.hasError('required')) {
-              <mat-error>{{ 'medical-conditions.error.status-required' | translate }}</mat-error>
+              <mat-error>{{ 'medical-conditions.status-required' | translate }}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -63,7 +64,7 @@
             </textarea>
 
             @if (form.get('notes')?.touched && form.get('notes')!.hasError('required')) {
-              <mat-error>{{ 'medical-conditions.error.notes-required' | translate }}</mat-error>
+              <mat-error>{{ 'medical-conditions.notes-required' | translate }}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -99,7 +100,7 @@
             }
 
             @if (form.get('diagnosisDate')?.touched && form.get('diagnosisDate')!.hasError('required')) {
-              <mat-error>{{ 'medical-conditions.error.diagnosis-date-required' | translate }}</mat-error>
+              <mat-error>{{ 'medical-conditions.diagnosis-date-required' | translate }}</mat-error>
             }
           </div>
         </div>

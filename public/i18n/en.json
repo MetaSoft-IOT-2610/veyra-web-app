@@ -639,6 +639,7 @@
       }
     },
     "medical-conditions": {
+      "loading": "Loading...",
       "title": "Medical Conditions",
       "new-title": "New Medical Condition",
       "add": "Add Medical Condition",
