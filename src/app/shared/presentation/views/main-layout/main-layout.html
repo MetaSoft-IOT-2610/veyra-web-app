@@ -29,7 +29,7 @@
         </div>
 
         <nav class="nav-menu">
-          @for (option of options; track option.link) {
+          @for (option of options(); track option.link) {
             <div
               class="nav-item"
               [class.active]="isActive(option.link)"
