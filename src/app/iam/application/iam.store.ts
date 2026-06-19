@@ -129,10 +129,9 @@ export class IamStore {
     this.iamApi.signIn(signInCommand).subscribe({
       next: (signInResource) => {
         localStorage.setItem('token', signInResource.token);
-        localStorage.setItem('userId', signInResource.id.toString());
+        localStorage.setItem('userId', String(signInResource.entityId));
         localStorage.setItem('username', signInResource.username);
         localStorage.setItem('userRoles', JSON.stringify(signInResource.roles ?? []));
-
         this.isSignedInSignal.set(true);
         this.currentUsernameSignal.set(signInResource.username);
         this.currentUserIdSignal.set(signInResource.id);
