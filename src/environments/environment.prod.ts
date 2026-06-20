@@ -51,8 +51,8 @@ export const environment = {
   platformProviderHealthRecordsEndpointPath: '/health-records',
   platformProviderHealthAlertsEndpointPath: '/health-alerts',
   platformProviderHealthResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
-  platformProviderHealthResidentVitalSignsEndpointPath: '/residents/{residentId}/vital-signs',
-  platformProviderHealthResidentMedicalConditionsEndpointPath: '/residents/{residentId}/medical-conditions',
+  platformProviderHealthResidentVitalSignThresholdsEndpointPath: '/residents/{residentId}/vital-sign-thresholds',
+  platformProviderResidentMedicalConditionsEndpointPath: '/residents/{residentId}/medical-conditions',
 
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
@@ -60,6 +60,7 @@ export const environment = {
 
   // Activities Bounded Context
   platformProviderActivitiesEndpointPath: '/activities',
+  platformProviderActivityEndpointPath: '/activities',
 
   // Alerts Bounded Context
   platformProviderAlertsEndpointPath: '/alerts',
