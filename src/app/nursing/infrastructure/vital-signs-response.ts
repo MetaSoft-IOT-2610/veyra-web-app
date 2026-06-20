@@ -4,6 +4,12 @@ export interface VitalSignResource extends BaseResource{
   id: number;
   residentId: number;
   measurementId: number;
+  temperature: number;
+  heartRate: number;
+  bloodPressure: string;
+  oxygenSaturation: number;
+  respiratoryRate: number;
+  registeredAt: string;
   severityLevel: string;
 }
 

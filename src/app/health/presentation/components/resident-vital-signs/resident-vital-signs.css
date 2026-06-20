@@ -1,0 +1,129 @@
+.health-section {
+  width: 100%;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+
+.health-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.health-section__header h2 {
+  margin: 0;
+  color: #0f2f6e;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.health-section__header span {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #0369a1;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.health-message {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+}
+
+.health-message--error {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.vital-sign-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.vital-sign-card {
+  padding: 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.vital-sign-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.vital-sign-card h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.status {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status--normal {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status--warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status--critical {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.vital-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.vital-item {
+  padding: 0.85rem;
+  border-radius: 0.8rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.vital-item span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.vital-item strong {
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .vital-grid {
+    grid-template-columns: 1fr;
+  }
+}
