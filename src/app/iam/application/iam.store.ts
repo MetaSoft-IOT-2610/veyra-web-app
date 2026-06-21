@@ -10,6 +10,7 @@ import { appNav } from '../../shared/routing/app-nav';
 import { analyticsNav } from '../../analytics/presentation/analytics-routes';
 import { iamNav } from '../presentation/iam.routes';
 import { nursingNav } from '../../nursing/presentation/nursing-routes';
+import { HcmApi } from '../../hcm/infrastructure/hcm-api';
 import {SetPasswordCommand} from '../domain/model/set-password.command';
 
 /**
@@ -46,7 +47,7 @@ export class IamStore {
   readonly error = this._errorSignal.asReadonly();
   readonly isLoadingUsers = this.loadingUsers.asReadonly();
 
-  constructor(private iamApi: IamApi) {
+  constructor(private iamApi: IamApi, private hcmApi: HcmApi) {
     this.isSignedInSignal.set(false);
     this.currentUsernameSignal.set(null);
     this.currentUserIdSignal.set(null);
@@ -129,7 +130,7 @@ export class IamStore {
     this.iamApi.signIn(signInCommand).subscribe({
       next: (signInResource) => {
         localStorage.setItem('token', signInResource.token);
-        localStorage.setItem('userId', signInResource.id.toString());
+        localStorage.setItem('userId', String(signInResource.entityId));
         localStorage.setItem('username', signInResource.username);
         localStorage.setItem('userRoles', JSON.stringify(signInResource.roles ?? []));
 
@@ -138,10 +139,22 @@ export class IamStore {
         this.currentUserIdSignal.set(signInResource.id);
         this.currentRolesSignal.set(signInResource.roles ?? []);
 
-        if(signInResource.roles.includes("ROLE_ADMIN")) {
+        if (signInResource.roles.includes('ROLE_ADMIN')) {
           void router.navigate(nursingNav.nursingHomeNew());
         } else {
-          void router.navigate(analyticsNav.dashboard());
+          // Staff: fetch the nursingHomeId and navigate AFTER it is stored
+          // to avoid race conditions in views that read nursingHomeId from localStorage on init.
+          this.hcmApi.getNursingHomeByUserId(signInResource.id).subscribe({
+            next: (staffNursingHome) => {
+              localStorage.setItem('nursingHomeId', staffNursingHome.businessProfileId.toString());
+              console.debug('[IamStore] nursingHomeId set for staff:', staffNursingHome.businessProfileId);
+              void router.navigate(analyticsNav.dashboard());
+            },
+            error: (err) => {
+              console.error('[IamStore] Failed to fetch nursingHomeId for staff, navigating anyway:', err);
+              void router.navigate(analyticsNav.dashboard());
+            }
+          });
         }
       },
       error: (err) => {

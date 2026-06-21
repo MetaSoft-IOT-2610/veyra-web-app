@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
   /** Si es false, el `MainLayout` no muestra botones SIGN-IN / registro en toolbar; con sesión activa sí se muestra el menú de cuenta. */
-  showIamToolbar: false,
+  showIamToolbar: true,
   /**
    * Si no hay sesión válida en `localStorage`, aplica usuario de desarrollo **solo al entrar al layout
    * con sidebar** (`MainLayout`), no en `/home` ni otras rutas públicas.
    */
-  fallbackDevUserSession: true,
+  fallbackDevUserSession: false,
 
   platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
@@ -20,6 +20,7 @@ export const environment = {
   platformProviderStaffEndpointPath:'/staff',
   platformProviderStaffMemberContractsEndpointPath:'/staff/{staffMemberId}/contracts',
   platformProviderStaffMemberContractStatusEndpointPath:'/staff/{staffMemberId}/contracts/{contractId}',
+  platformProviderStaffNursingHomesEndpointPath: '/staff/by-user/{userId}/nursing-homes',
 
   //IAM Bounded Context
   platformProviderSignInEndpointPath: '/authentication/sign-in',

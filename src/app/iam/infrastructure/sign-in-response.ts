@@ -20,6 +20,8 @@ export interface SignInResource extends BaseResource {
    * The authentication token.
    */
   token: string;
+
+  entityId: number;
 }
 
 /**

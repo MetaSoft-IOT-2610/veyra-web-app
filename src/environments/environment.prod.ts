@@ -20,6 +20,7 @@ export const environment = {
   platformProviderStaffEndpointPath: '/staff',
   platformProviderStaffMemberContractsEndpointPath: '/staff/{staffMemberId}/contracts',
   platformProviderStaffMemberContractStatusEndpointPath: '/staff/{staffMemberId}/contracts/{contractId}',
+  platformProviderStaffNursingHomesEndpointPath: '/staff/by-user/{userId}/nursing-homes',
 
   // IAM Bounded Context
   platformProviderSignInEndpointPath: '/authentication/sign-in',
