@@ -36,11 +36,22 @@ export const environment = {
   platformProviderResidentRelativesEndpointPath: '/residents/{residentId}/relatives',
   platformProviderNursingHomeRelativesEndpointPath: '/nursing-homes/{nursingHomeId}/relatives',
   platformProviderMedicationsEndpointPath:'/medications',
+  platformProviderResidentMedicalConditionsEndpointPath: '/residents/{residentId}/medical-conditions',
   platformProviderNursingHomesEndpointPath:'/nursing-homes',
   platformProviderResidentsEndpointPath:'/residents',
   platformProviderRoomsEndpointPath: '/rooms',
   platformProviderRelativesEndpointPath: '/relatives',
   platformProviderMonitoringResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/doctors/{doctorId}/monitoring-residents',
+
+  // Health Bounded Context
+  platformProviderAllergiesEndpointPath: '/allergies',
+  platformProviderVitalSignsEndpointPath: '/vital-signs',
+  platformProviderHealthRecordsEndpointPath: '/health-records',
+  platformProviderHealthAlertsEndpointPath: '/health-alerts',
+  platformProviderHealthResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
+  platformProviderHealthResidentVitalSignsEndpointPath: '/residents/{residentId}/vital-signs',
+  platformProviderHealthResidentHealthRecordsEndpointPath: '/residents/{residentId}/health-records',
+  platformProviderHealthResidentHealthAlertsEndpointPath: '/residents/{residentId}/health-alerts',
 
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',

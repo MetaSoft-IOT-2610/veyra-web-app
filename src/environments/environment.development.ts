@@ -8,7 +8,7 @@ export const environment = {
    */
   fallbackDevUserSession: true,
 
-  platformProviderApiBaseUrl: 'https://veyra-backend.whiteground-ce499065.canadacentral.azurecontainerapps.io/api/v1',
+  platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
@@ -34,6 +34,7 @@ export const environment = {
   platformProviderAdministratorNursingHomesEndpointPath: '/administrators/{administratorId}/nursing-homes',
   platformProviderResidentRoomsEndpointPath: '/nursing-homes/{nursingHomeId}/rooms/{residentId}',
   platformProviderResidentMedicationsEndpointPath: '/residents/{residentId}/medications',
+  platformProviderResidentMedicalConditionsEndpointPath: '/residents/{residentId}/medical-conditions',
   platformProviderNursingHomeResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/residents',
   platformProviderNursingHomeStaffEndpointPath: '/nursing-homes/{nursingHomeId}/staff',
   platformProviderNursingHomeRoomsEndpointPath: '/nursing-homes/{nursingHomeId}/rooms',
@@ -45,6 +46,13 @@ export const environment = {
   platformProviderRoomsEndpointPath: '/rooms',
   platformProviderRelativesEndpointPath: '/relatives',
   platformProviderMonitoringResidentsEndpointPath: '/nursing-homes/{nursingHomeId}/doctors/{doctorId}/monitoring-residents',
+
+  // Health Bounded Context
+  platformProviderAllergiesEndpointPath: '/allergies',
+  platformProviderHealthRecordsEndpointPath: '/health-records',
+  platformProviderHealthAlertsEndpointPath: '/health-alerts',
+  platformProviderHealthResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
+  platformProviderHealthResidentVitalSignThresholdsEndpointPath: '/residents/{residentId}/vital-sign-thresholds',
 
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',

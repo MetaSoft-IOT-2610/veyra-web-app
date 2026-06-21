@@ -3,21 +3,25 @@
   "allergies": "Alergias",
   "vital-signs": "Signos Vitales",
   "Search": "Buscar",
-  "Enter the name": "Ingrese el nombre",
+  "Enter the name": "Ingresa el nombre",
   "Search by ID or severity": "Buscar por ID o severidad",
   "allergenName": "Nombre del Alérgeno",
   "reaction": "Reacción",
   "severityLevel": "Nivel de Severidad",
   "typeOfAllergy": "Tipo de Alergia",
   "measurementId": "ID de Medición",
+  "temperature": "Temperatura",
+  "heartRate": "Frecuencia Cardíaca",
+  "bloodPressure": "Presión Arterial",
+  "oxygenSaturation": "Saturación de Oxígeno",
+  "respiratoryRate": "Frecuencia Respiratoria",
+  "registeredAt": "Registrado El",
   "no-allergies": "No hay alergias registradas",
   "no-vital-signs": "No hay signos vitales registrados",
   "go-back": "Volver",
   "allergies.add": "Agregar Alergia",
   "vital-signs.add": "Agregar Signo Vital",
   "devices.list-title": "Lista de dispositivos",
-  "Search": "Buscar",
-  "Enter the name": "Ingresa el nombre",
   "device-id": "ID del dispositivo",
   "assignedBy": "Asignado por",
   "assignedAt": "Asignado en",
@@ -120,9 +124,7 @@
     "new": {
       "title": "Nuevo Medicamento"
     },
-    "edit": {
-      "title": "Editar Medicamento"
-    },
+    "edit": "Editar",
     "basic-info": "Información Básica",
     "inventory-info": "Información de Inventario",
     "batch-supplier-info": "Información de Lote y Proveedor",
@@ -159,7 +161,6 @@
     "register": "Registrar Medicamento",
     "update": "Actualizar Medicamento",
     "cancel": "Cancelar",
-    "edit": "Editar",
     "select-image": "Seleccionar Imagen",
     "max-size": "Máximo 5MB",
     "optional": "Opcional",
@@ -503,9 +504,7 @@
       "confirm": "¿Estás seguro de que deseas eliminar esta actividad? Esta acción no se puede deshacer.",
       "confirm-btn": "Eliminar",
       "cancel": "Cancelar"
-    },
-    "add-new": "Agregar",
-    "filter-btn": "Filtrar"
+    }
   },
   "relatives": {
     "title": "Familiares",
@@ -655,6 +654,37 @@
         "assign": "Asignar",
         "cancel": "Cancelar"
       }
-    }
+    },
+    "Search vital signs": "Buscar signos vitales",
+    "Temperature": "Temperatura",
+    "Heart Rate": "Frecuencia cardíaca",
+    "Blood Pressure": "Presión arterial",
+    "Oxygen": "Oxígeno",
+    "Respiratory Rate": "Frecuencia respiratoria",
+    "Registered At": "Registrado el"
+  },
+  "medical-conditions": {
+    "loading": "Cargando...",
+    "title": "Condiciones médicas",
+    "new-title": "Nueva condición médica",
+    "add": "Agregar condición médica",
+    "diagnosis-name": "Diagnóstico",
+    "diagnosis-date": "Fecha de diagnóstico",
+    "status": "Estado",
+    "notes": "Notas",
+    "no-medical-conditions": "No hay condiciones médicas registradas",
+    "search": "Ingrese el diagnóstico",
+    "medical-condition": "Condición médica",
+    "select-diagnosis-date": "Seleccione la fecha de diagnóstico",
+    "diagnosis-name-required": "El diagnóstico es obligatorio",
+    "diagnosis-date-required": "La fecha de diagnóstico es obligatoria",
+    "status-required": "El estado es obligatorio",
+    "notes-required": "Las notas son obligatorias",
+    "active": "Activo",
+    "controlled": "Controlado",
+    "recovered": "Recuperado",
+    "chronic": "Crónico",
+    "cancel": "Cancelar",
+    "save": "Agregar"
   }
 }

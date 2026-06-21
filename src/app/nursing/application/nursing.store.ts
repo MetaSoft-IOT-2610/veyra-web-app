@@ -1,7 +1,7 @@
 import { computed, Injectable, Signal, signal } from '@angular/core';
 import { NursingHome } from '../domain/model/nursing-home.entity';
 import { NursingApi } from '../infrastructure/nursing-api';
-import {Observable, retry, throwError} from 'rxjs';
+import {Observable, retry, tap, throwError} from 'rxjs';
 import { Resident } from '../domain/model/resident.entity';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Room } from '../domain/model/room.entity';
@@ -12,12 +12,14 @@ import { CreateMedicationCommand } from '../domain/model/create-medication.comma
 import { AssignRoomCommand } from '../domain/model/assign-room.command';
 import { CreateNursingHomeCommand } from '../domain/model/create-nursing-home.command';
 import { Allergy } from '../domain/model/allergy.entity';
-import {CreateAllergyCommand} from '../domain/model/create-allergy.command';
-import {Device} from '../domain/model/device.entity';
-import {VitalSign} from '../domain/model/vital-sign.entity';
-import {Relative} from '../domain/model/relative.entity';
-import {CreateRelativeCommand} from '../domain/model/create-relative.command';
-import {MonitoringResidents} from '../domain/model/monitoring-residents.entity';
+import { CreateAllergyCommand } from '../domain/model/create-allergy.command';
+import { Device } from '../domain/model/device.entity';
+import { VitalSign } from '../domain/model/vital-sign.entity';
+import { Relative } from '../domain/model/relative.entity';
+import { CreateRelativeCommand } from '../domain/model/create-relative.command';
+import { MonitoringResidents } from '../domain/model/monitoring-residents.entity';
+import { MedicalCondition } from '../domain/model/medical-condition.entity';
+import { CreateMedicalConditionCommand } from '../domain/model/create-medical-condition.command';
 
 /*
 * @purpose: Manage the state of nursing homes in the application
@@ -29,21 +31,24 @@ import {MonitoringResidents} from '../domain/model/monitoring-residents.entity';
 })
 export class NursingStore {
   private readonly _medicationsSignal = signal<Medication[]>([]);
+  private readonly _medicalConditionsSignal = signal<MedicalCondition[]>([]);
   private readonly _residentSignal = signal<Resident[]>([]);
-  private readonly _nursingHomesSignal= signal<NursingHome[]>([]);
+  private readonly _nursingHomesSignal = signal<NursingHome[]>([]);
   private readonly _roomsSignal = signal<Room[]>([]);
   private readonly _allergiesSignal = signal<Allergy[]>([]);
   private readonly _devicesSignal = signal<Device[]>([]);
   private readonly _vitalSignsSignal = signal<VitalSign[]>([]);
   private readonly _relativeSignal = signal<Relative[]>([]);
-  private  readonly _monitoringResidentsSignal = signal<MonitoringResidents[]>([]);
-  private readonly _loadingSignal=signal<boolean>(false);
-  private readonly _errorSignal=signal<string|null>(null);
-  readonly loading=this._loadingSignal.asReadonly();
+  private readonly _monitoringResidentsSignal = signal<MonitoringResidents[]>([]);
+  private readonly _loadingSignal = signal<boolean>(false);
+  private readonly _errorSignal = signal<string | null>(null);
+
+  readonly loading = this._loadingSignal.asReadonly();
   readonly error = this._errorSignal.asReadonly();
   readonly devices = this._devicesSignal.asReadonly();
   readonly allergies = this._allergiesSignal.asReadonly();
   readonly medications = this._medicationsSignal.asReadonly();
+  readonly medicalConditions = this._medicalConditionsSignal.asReadonly();
   readonly residents = this._residentSignal.asReadonly();
   readonly rooms = this._roomsSignal.asReadonly();
   readonly vitalSigns = this._vitalSignsSignal.asReadonly();
@@ -56,17 +61,17 @@ export class NursingStore {
 * @purpose: Add a new nursing home
 * @description: This method sets the loading state to true, clears any previous errors, and calls the API to create a new nursing home. On success, it updates the nursing homes signal and sets loading to false. On error, it sets an appropriate error message and sets loading to false.
 * */
-  addNursingHome(administratorId: number, createNursingHomeCommand: CreateNursingHomeCommand):void{
+  addNursingHome(administratorId: number, createNursingHomeCommand: CreateNursingHomeCommand): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
     this.nursingApi.createNursingHome(administratorId, createNursingHomeCommand).pipe(retry(2)).subscribe({
-      next:createdNursingHome=>{
-        this._nursingHomesSignal.update(nursingHome=>[...nursingHome,createdNursingHome]);
+      next: createdNursingHome => {
+        this._nursingHomesSignal.update(nursingHome => [...nursingHome, createdNursingHome]);
         localStorage.setItem('nursingHomeId', createdNursingHome.id.toString());
         this._loadingSignal.set(false);
       },
-      error:err=>{
-        this._errorSignal.set(this.formatError(err,'Failed to create nursing home'));
+      error: err => {
+        this._errorSignal.set(this.formatError(err, 'Failed to create nursing home'));
         this._loadingSignal.set(false);
       }
     });
@@ -77,16 +82,17 @@ export class NursingStore {
     this._errorSignal.set(null);
     this.nursingApi.getNursingHome(administratorId).pipe(retry(2)).subscribe({
       next: nursingHome => {
-        this._nursingHomesSignal.set([nursingHome]);  // Cambiar de .set(nursingHome) a .set([nursingHome])
+        this._nursingHomesSignal.set([nursingHome]);
         localStorage.setItem('nursingHomeId', nursingHome.id.toString());
         this._loadingSignal.set(false);
       },
-      error: err=>{
-        this._errorSignal.set(this.formatError(err,'Failed to get nursing home'));
+      error: err => {
+        this._errorSignal.set(this.formatError(err, 'Failed to get nursing home'));
         this._loadingSignal.set(false);
       }
-    })
+    });
   }
+
   /**
    * Retrieves a resident by ID as a reactive signal.
    * @param id - Resident unique identifier.
@@ -103,8 +109,8 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-      this._errorSignal.set(this.formatError(err, 'Failed to create resident in nursing home'));
-      this._loadingSignal.set(false);
+        this._errorSignal.set(this.formatError(err, 'Failed to create resident in nursing home'));
+        this._loadingSignal.set(false);
       }
     });
   }
@@ -226,6 +232,36 @@ export class NursingStore {
     });
   }
 
+  /**
+   * Creates a new medical condition for a resident and updates the store state.
+   * @param residentId - Unique identifier of the resident.
+   * @param createMedicalConditionCommand - Command containing the medical condition data.
+   */
+  addMedicalCondition(
+    residentId: number,
+    createMedicalConditionCommand: CreateMedicalConditionCommand
+  ): Observable<MedicalCondition> {
+    this._loadingSignal.set(true);
+    this._errorSignal.set(null);
+
+    return this.nursingApi.createMedicalCondition(residentId, createMedicalConditionCommand).pipe(
+      retry(2),
+      tap({
+        next: createdMedicalCondition => {
+          this._medicalConditionsSignal.update(medicalConditions => [
+            ...medicalConditions,
+            createdMedicalCondition
+          ]);
+          this._loadingSignal.set(false);
+        },
+        error: err => {
+          this._errorSignal.set(this.formatError(err, 'Failed to create medical condition'));
+          this._loadingSignal.set(false);
+        }
+      })
+    );
+  }
+
   assignRoom(nursingHomeId: number, residentId: number, assignRoomCommand: AssignRoomCommand): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
@@ -251,6 +287,17 @@ export class NursingStore {
 
   getMedicationsByResidentId(residentId: number): Signal<Medication[]> {
     return computed(() => this.medications().filter(medication => medication.residentId === residentId));
+  }
+
+  /**
+   * Retrieves all medical conditions associated with a resident as a reactive signal.
+   * @param residentId - Unique identifier of the resident.
+   * @returns A computed signal containing the resident medical conditions.
+   */
+  getMedicalConditionsByResidentId(residentId: number): Signal<MedicalCondition[]> {
+    return computed(() =>
+      this.medicalConditions().filter(condition => condition.residentId === residentId)
+    );
   }
 
   addAllergy(residentId: number, createAllergyCommand: CreateAllergyCommand): void {
@@ -311,6 +358,26 @@ export class NursingStore {
       },
       error: err => {
         this._errorSignal.set(this.formatError(err, 'Failed to load medications'));
+        this._loadingSignal.set(false);
+      }
+    });
+  }
+
+  /**
+   * Loads all medical conditions for a given resident from the API into the store.
+   * @param residentId - Unique identifier of the resident.
+   */
+  loadMedicalConditions(residentId: number): void {
+    this._loadingSignal.set(true);
+    this._errorSignal.set(null);
+
+    this.nursingApi.getMedicalConditions(residentId).pipe(takeUntilDestroyed()).subscribe({
+      next: medicalConditions => {
+        this._medicalConditionsSignal.set(medicalConditions);
+        this._loadingSignal.set(false);
+      },
+      error: err => {
+        this._errorSignal.set(this.formatError(err, 'Failed to load medical conditions'));
         this._loadingSignal.set(false);
       }
     });
@@ -395,16 +462,16 @@ export class NursingStore {
       }
     });
   }
+
   /**
    *  @purpose: Format error messages
    *  @description: This private method takes an error object and a fallback string.
    *  If the error is an instance of Error, it checks if the message includes 'Resource not found' and returns a formatted message.
    *  Otherwise, it returns the fallback string.
    */
-  private formatError(error:any,fallback:string):string{
-    if(error instanceof Error){
-      return error.message.includes('Resource not found ')?`${fallback}:Not Found`:error.message;
-
+  private formatError(error: any, fallback: string): string {
+    if (error instanceof Error) {
+      return error.message.includes('Resource not found ') ? `${fallback}:Not Found` : error.message;
     }
     return fallback;
   }
