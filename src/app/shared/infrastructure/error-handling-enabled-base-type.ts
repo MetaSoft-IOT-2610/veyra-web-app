@@ -14,7 +14,9 @@ export abstract class ErrorHandlingEnabledBaseType {
   protected handleError(operation: string) {
     return (error: HttpErrorResponse): Observable<never> => {
       let errorMessage = operation;
-      if (error.status === 404) {
+      if (error.status === 401) {
+        errorMessage = `${operation}: Unauthorized — sign in again to refresh your session`;
+      } else if (error.status === 404) {
         errorMessage = `Resource not found: ${operation}`;
       } else if (error.error instanceof ErrorEvent) {
         errorMessage = `${operation}: ${error.error.message}`;
