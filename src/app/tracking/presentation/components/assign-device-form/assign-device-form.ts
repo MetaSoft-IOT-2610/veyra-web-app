@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AsyncPipe } from '@angular/common';
 import { AssignDeviceCommand } from '../../../domain/model/assign-device.command';
+import { isAssignableDeviceType } from '../../../domain/model/device-type.helpers';
 import { trackingNav } from '../../tracking-routes';
 import { Resident } from '../../../../nursing/domain/model/resident.entity';
 import { map, startWith } from 'rxjs';
@@ -72,9 +73,16 @@ export class AssignDeviceForm {
 
   constructor() {
     this.nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
+    this.trackingStore.loadDevices(this.nursingHomeId);
 
     this.route.params.subscribe(params => {
       this.deviceId = params['id'] ? +params['id'] : null;
+      if (this.deviceId) {
+        const device = this.trackingStore.getDeviceById(this.deviceId)();
+        if (device && !isAssignableDeviceType(device.deviceType)) {
+          this.router.navigate(trackingNav.devices()).then();
+        }
+      }
     });
 
     this.nursingStore.loadResidentsByNursingHome(this.nursingHomeId);

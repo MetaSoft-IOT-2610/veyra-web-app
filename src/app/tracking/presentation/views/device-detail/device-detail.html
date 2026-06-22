@@ -1,6 +1,12 @@
 <div class="detail-wrapper">
 
-  @if (!device) {
+  @if (store.loading() && !device) {
+    <div class="loading-wrap">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  }
+
+  @if (!store.loading() && !device && deviceId) {
     <div class="not-found">
       <mat-icon>device_unknown</mat-icon>
       <p>{{ 'tracking.devices.detail.not-found' | translate }}</p>
@@ -12,124 +18,213 @@
   }
 
   @if (device) {
-
-    <!-- Header -->
-    <mat-card appearance="outlined" class="header-card">
-      <mat-card-content class="header-content">
-        <div class="header-left">
-          <button mat-icon-button (click)="goBack()">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
-          <div>
-            <h2 class="detail-title">{{ 'tracking.devices.detail.title' | translate }}</h2>
-            <p class="detail-subtitle">ID: {{ device.id }}</p>
-          </div>
-        </div>
-        <mat-chip [class]="getStatusClass()" disableRipple>
-          <mat-icon matChipAvatar>{{ getStatusIcon() }}</mat-icon>
-          {{ 'tracking.devices.status-options.' + device.status.toLowerCase() | translate }}
-        </mat-chip>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- Device info -->
-    <mat-card appearance="outlined">
-      <mat-card-content>
-
-        <div class="card-section-label">
-          <mat-icon class="section-icon">devices</mat-icon>
-          {{ 'tracking.devices.detail.device-info' | translate }}
-        </div>
-
+    <section class="overview-bar">
+      <div class="overview-main">
         <div class="device-hero">
-          <div class="device-icon-wrap"
-               [class.icon-gps]="device.deviceType === 'GPS'"
-               [class.icon-vital]="device.deviceType !== 'GPS'">
-            <mat-icon>{{ getDeviceIcon() }}</mat-icon>
+          <div class="device-icon-wrap" [class]="deviceTypeIconClass(device.deviceType)">
+            <mat-icon>{{ deviceTypeIcon(device.deviceType) }}</mat-icon>
           </div>
-          <div>
-            <div class="device-name">{{ device.deviceType }}</div>
-            <div class="device-sub">
-              {{ device.deviceType === 'GPS'
-              ? ('tracking.devices.detail.gps-desc' | translate)
-              : ('tracking.devices.detail.vital-desc' | translate) }}
-            </div>
+          <div class="device-copy">
+            <div class="device-name">{{ deviceTypeLabelKey(device.deviceType) | translate }}</div>
+            <div class="device-sub">{{ getDeviceDescriptionKey() | translate }}</div>
           </div>
         </div>
 
-        <mat-divider class="section-divider"></mat-divider>
-
-        <div class="info-grid">
-          <mat-form-field appearance="outline" class="info-field" subscriptSizing="dynamic">
-            <mat-label>
-              <mat-icon>router</mat-icon>
-              {{ 'tracking.devices.mac-address' | translate }}
-            </mat-label>
-            <input matInput [value]="device.macAddress" readonly class="mac-input">
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="info-field" subscriptSizing="dynamic">
-            <mat-label>
-              <mat-icon>swap_horiz</mat-icon>
-              {{ 'tracking.devices.device-type' | translate }}
-            </mat-label>
-            <input matInput [value]="device.deviceType" readonly>
-          </mat-form-field>
+        <div class="status-chips">
+          <mat-chip [class]="getIotStatusClass()" disableRipple>
+            <mat-icon matChipAvatar>{{ device.iotStatus === IotStatus.ACTIVE ? 'verified' : 'block' }}</mat-icon>
+            {{ 'tracking.devices.iot-options.' + device.iotStatus.toLowerCase() | translate }}
+          </mat-chip>
+          <mat-chip [class]="getStatusClass()" disableRipple>
+            <mat-icon matChipAvatar>{{ getStatusIcon() }}</mat-icon>
+            {{ 'tracking.devices.status-options.' + device.status.toLowerCase() | translate }}
+          </mat-chip>
         </div>
+      </div>
 
-      </mat-card-content>
-    </mat-card>
+      <div class="overview-actions">
+        <button mat-stroked-button type="button" (click)="toggleIotStatus()">
+          <mat-icon>{{ device.iotStatus === IotStatus.ACTIVE ? 'block' : 'verified' }}</mat-icon>
+          {{ (device.iotStatus === IotStatus.ACTIVE
+            ? 'tracking.devices.revoke-iot'
+            : 'tracking.devices.activate-iot') | translate }}
+        </button>
+        <button mat-flat-button class="btn-edit" type="button" (click)="goToEdit()">
+          <mat-icon>edit</mat-icon>
+          {{ 'tracking.devices.detail.edit' | translate }}
+        </button>
+      </div>
+    </section>
 
-    <!-- Resident -->
-    <mat-card appearance="outlined">
-      <mat-card-content>
-
-        <div class="card-section-label">
-          <mat-icon class="section-icon">person_pin</mat-icon>
-          {{ 'tracking.devices.detail.assigned-resident' | translate }}
-        </div>
-
-        @if (device.residentId && residentName()) {
-          <div class="resident-row">
-            <div class="resident-avatar">
-              <mat-icon>person</mat-icon>
+    @if (supportsTelemetry(device.deviceType)) {
+      <mat-card appearance="outlined" class="telemetry-card">
+        <mat-card-content>
+          <div class="telemetry-header">
+            <div class="card-section-label">
+              <mat-icon class="section-icon">monitor_heart</mat-icon>
+              {{ 'tracking.devices.detail.telemetry' | translate }}
             </div>
-            <div>
-              <div class="resident-name">{{ residentName() }}</div>
+            <button mat-stroked-button type="button" (click)="refreshTelemetry()">
+              <mat-icon>refresh</mat-icon>
+              {{ 'tracking.devices.detail.refresh-telemetry' | translate }}
+            </button>
+          </div>
+
+          @if (store.measurementsLoading() && store.measurements().length === 0) {
+            <div class="loading-wrap inline">
+              <mat-spinner diameter="32"></mat-spinner>
             </div>
+          }
+
+          @if (store.measurementsError()) {
+            <div class="error-banner">
+              <mat-icon>error_outline</mat-icon>
+              {{ store.measurementsError() }}
+            </div>
+          }
+
+          @if (store.latestMeasurement(); as latest) {
+            <div class="vitals-grid">
+              <div class="vital-card">
+                <mat-icon>favorite</mat-icon>
+                <div class="vital-value">{{ formatValue(latest.heartRate, ' bpm') }}</div>
+                <div class="vital-label">{{ 'tracking.devices.detail.heart-rate' | translate }}</div>
+              </div>
+              <div class="vital-card">
+                <mat-icon>air</mat-icon>
+                <div class="vital-value">{{ formatValue(latest.oxygenSaturation, '%') }}</div>
+                <div class="vital-label">{{ 'tracking.devices.detail.oxygen' | translate }}</div>
+              </div>
+              <div class="vital-card">
+                <mat-icon>thermostat</mat-icon>
+                <div class="vital-value">{{ formatValue(latest.displayTemperature(), ' °C') }}</div>
+                <div class="vital-label">{{ latest.temperature != null ? ('tracking.devices.detail.temperature' | translate) : ('tracking.devices.detail.ambient-temperature' | translate) }}</div>
+              </div>
+            </div>
+            <p class="last-reading">
+              {{ 'tracking.devices.detail.last-reading' | translate }}:
+              {{ latest.timestamp | date:'dd/MM/yyyy HH:mm:ss' }}
+            </p>
+          } @else if (!store.measurementsLoading()) {
+            <div class="no-telemetry">
+              <mat-icon>sensors_off</mat-icon>
+              <span>{{ 'tracking.devices.detail.no-telemetry' | translate }}</span>
+            </div>
+          }
+
+          @if (store.measurements().length > 0) {
+            <mat-divider class="section-divider"></mat-divider>
+            <div class="history-title">{{ 'tracking.devices.detail.telemetry-history' | translate }}</div>
+            <div class="table-scroll">
+              <table mat-table [dataSource]="store.measurements()" class="telemetry-table">
+                <ng-container matColumnDef="timestamp">
+                  <th mat-header-cell *matHeaderCellDef>{{ 'tracking.devices.detail.timestamp' | translate }}</th>
+                  <td mat-cell *matCellDef="let row">{{ row.timestamp | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                </ng-container>
+                <ng-container matColumnDef="heartRate">
+                  <th mat-header-cell *matHeaderCellDef>{{ 'tracking.devices.detail.heart-rate' | translate }}</th>
+                  <td mat-cell *matCellDef="let row">{{ formatValue(row.heartRate) }}</td>
+                </ng-container>
+                <ng-container matColumnDef="oxygenSaturation">
+                  <th mat-header-cell *matHeaderCellDef>{{ 'tracking.devices.detail.oxygen' | translate }}</th>
+                  <td mat-cell *matCellDef="let row">{{ formatValue(row.oxygenSaturation) }}</td>
+                </ng-container>
+                <ng-container matColumnDef="temperature">
+                  <th mat-header-cell *matHeaderCellDef>{{ 'tracking.devices.detail.temperature' | translate }}</th>
+                  <td mat-cell *matCellDef="let row">{{ formatValue(row.displayTemperature()) }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="telemetryColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: telemetryColumns;"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="no-data-cell" [attr.colspan]="telemetryColumns.length">—</td>
+                </tr>
+              </table>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+
+    <div class="detail-grid">
+      <mat-card appearance="outlined">
+        <mat-card-content>
+          <div class="card-section-label">
+            <mat-icon class="section-icon">badge</mat-icon>
+            {{ 'tracking.devices.detail.device-info' | translate }}
           </div>
-        } @else {
-          <div class="unassigned-row">
-            <mat-icon>person_off</mat-icon>
-            <span>{{ 'tracking.devices.detail.available' | translate }}</span>
-          </div>
-        }
 
-        @if (device.assignedAt) {
-          <mat-divider class="section-divider"></mat-divider>
-          <mat-form-field appearance="outline" class="info-field full-width" subscriptSizing="dynamic">
-            <mat-label>
-              <mat-icon>calendar_today</mat-icon>
-              {{ 'tracking.devices.assigned-at' | translate }}
-            </mat-label>
-            <input matInput [value]="device.assignedAt | date:'dd/MM/yyyy HH:mm'" readonly>
-          </mat-form-field>
-        }
+          <dl class="meta-list">
+            <div class="meta-item">
+              <dt>{{ 'tracking.devices.form.external-id' | translate }}</dt>
+              <dd><code>{{ device.externalDeviceId }}</code></dd>
+            </div>
+            <div class="meta-item">
+              <dt>{{ 'tracking.devices.mac-address' | translate }}</dt>
+              <dd><code>{{ device.macAddress }}</code></dd>
+            </div>
+            @if (device.assignedAt) {
+              <div class="meta-item">
+                <dt>{{ 'tracking.devices.assigned-at' | translate }}</dt>
+                <dd>{{ device.assignedAt | date:'dd/MM/yyyy HH:mm' }}</dd>
+              </div>
+            }
+          </dl>
+        </mat-card-content>
+      </mat-card>
 
-      </mat-card-content>
-    </mat-card>
+      @if (isEdgeGateway(device.deviceType)) {
+        <mat-card appearance="outlined" class="gateway-card">
+          <mat-card-content>
+            <div class="card-section-label">
+              <mat-icon class="section-icon">hub</mat-icon>
+              {{ 'tracking.devices.detail.gateway-info' | translate }}
+            </div>
+            <p class="gateway-note">{{ 'tracking.devices.detail.gateway-note' | translate }}</p>
+          </mat-card-content>
+        </mat-card>
+      } @else {
+        <mat-card appearance="outlined">
+          <mat-card-content>
+            <div class="card-section-label">
+              <mat-icon class="section-icon">person_pin</mat-icon>
+              {{ 'tracking.devices.detail.assigned-resident' | translate }}
+            </div>
 
-    <!-- Footer -->
-    <div class="detail-footer">
-      <button mat-stroked-button (click)="goBack()">
-        <mat-icon>close</mat-icon>
-        {{ 'tracking.devices.detail.cancel' | translate }}
-      </button>
-      <button mat-flat-button class="btn-edit" (click)="goToEdit()">
-        <mat-icon>edit</mat-icon>
-        {{ 'tracking.devices.detail.edit' | translate }}
-      </button>
+            @if (isResidentProfileLoading()) {
+              <div class="resident-row loading">
+                <mat-spinner diameter="24"></mat-spinner>
+                <span>{{ 'tracking.devices.detail.resident-loading' | translate }}</span>
+              </div>
+            } @else if (hasAssignedResident()) {
+              <div class="resident-row">
+                <div class="resident-avatar">
+                  <mat-icon>person</mat-icon>
+                </div>
+                <div class="resident-details">
+                  @if (residentName()) {
+                    <div class="resident-name">{{ residentName() }}</div>
+                  } @else {
+                    <div class="resident-name">
+                      {{ 'tracking.devices.detail.resident-id' | translate }}: {{ device.residentId }}
+                    </div>
+                  }
+                  @if (assignedRoomLabel()) {
+                    <div class="resident-meta">
+                      <mat-icon>meeting_room</mat-icon>
+                      <span>{{ 'tracking.devices.detail.room' | translate }} {{ assignedRoomLabel() }}</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            } @else {
+              <div class="unassigned-row">
+                <mat-icon>person_off</mat-icon>
+                <span>{{ 'tracking.devices.detail.not-assigned' | translate }}</span>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
     </div>
-
   }
 </div>

@@ -1,54 +1,48 @@
 <div class="page-wrapper" (window:resize)="onResize()">
 
-  <!-- Header -->
-  <div class="page-header">
-    <div>
-      <h2 class="page-title">{{ 'tracking.devices.title' | translate }}</h2>
-      <p class="page-subtitle">{{ 'tracking.devices.subtitle' | translate }}</p>
-    </div>
-    <button mat-flat-button class="btn-register" (click)="navigateToNew()">
-      <mat-icon>add_circle_outline</mat-icon>
-      <span class="btn-label">{{ 'tracking.devices.register-new' | translate }}</span>
-    </button>
-  </div>
-
-  <!-- Stats -->
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-top">
-        <div class="stat-icon total"><mat-icon>devices</mat-icon></div>
-        <span class="stat-chip total-chip">{{ 'tracking.devices.stats.total' | translate }}</span>
+      <div class="stat-icon total"><mat-icon>devices</mat-icon></div>
+      <div class="stat-body">
+        <div class="stat-line">
+          <span class="stat-number">{{ store.totalDevices() }}</span>
+          <span class="stat-chip total-chip">{{ 'tracking.devices.stats.total' | translate }}</span>
+        </div>
+        <span class="stat-label">{{ 'tracking.devices.stats.registered' | translate }}</span>
       </div>
-      <div class="stat-number">{{ store.totalDevices() }}</div>
-      <div class="stat-label">{{ 'tracking.devices.stats.registered' | translate }}</div>
     </div>
     <div class="stat-card">
-      <div class="stat-top">
-        <div class="stat-icon available"><mat-icon>wifi_tethering</mat-icon></div>
-        <span class="stat-chip available-chip">{{ 'tracking.devices.stats.available' | translate }}</span>
+      <div class="stat-icon available"><mat-icon>wifi_tethering</mat-icon></div>
+      <div class="stat-body">
+        <div class="stat-line">
+          <span class="stat-number">{{ store.availableDevices() }}</span>
+          <span class="stat-chip available-chip">{{ 'tracking.devices.stats.available' | translate }}</span>
+        </div>
+        <span class="stat-label">{{ 'tracking.devices.stats.ready' | translate }}</span>
       </div>
-      <div class="stat-number">{{ store.availableDevices() }}</div>
-      <div class="stat-label">{{ 'tracking.devices.stats.ready' | translate }}</div>
     </div>
     <div class="stat-card">
-      <div class="stat-top">
-        <div class="stat-icon assigned"><mat-icon>person_pin</mat-icon></div>
-        <span class="stat-chip assigned-chip">{{ 'tracking.devices.stats.assigned' | translate }}</span>
+      <div class="stat-icon assigned"><mat-icon>person_pin</mat-icon></div>
+      <div class="stat-body">
+        <div class="stat-line">
+          <span class="stat-number">{{ store.assignedDevices() }}</span>
+          <span class="stat-chip assigned-chip">{{ 'tracking.devices.stats.assigned' | translate }}</span>
+        </div>
+        <span class="stat-label">{{ 'tracking.devices.stats.in-use' | translate }}</span>
       </div>
-      <div class="stat-number">{{ store.assignedDevices() }}</div>
-      <div class="stat-label">{{ 'tracking.devices.stats.in-use' | translate }}</div>
     </div>
     <div class="stat-card">
-      <div class="stat-top">
-        <div class="stat-icon disabled"><mat-icon>wifi_off</mat-icon></div>
-        <span class="stat-chip disabled-chip">{{ 'tracking.devices.stats.disabled' | translate }}</span>
+      <div class="stat-icon gateway"><mat-icon>router</mat-icon></div>
+      <div class="stat-body">
+        <div class="stat-line">
+          <span class="stat-number">{{ store.gatewayDevice() ? 1 : 0 }}</span>
+          <span class="stat-chip gateway-chip">{{ 'tracking.devices.stats.gateway' | translate }}</span>
+        </div>
+        <span class="stat-label">{{ 'tracking.devices.stats.edge-gateway' | translate }}</span>
       </div>
-      <div class="stat-number">{{ store.disabledDevices() }}</div>
-      <div class="stat-label">{{ 'tracking.devices.stats.offline' | translate }}</div>
     </div>
   </div>
 
-  <!-- Loading / Error -->
   @if (store.loading()) {
     <div class="loading-wrap"><mat-spinner diameter="36"></mat-spinner></div>
   }
@@ -59,39 +53,49 @@
     </div>
   }
 
-  <!-- Tabla -->
   <div class="table-card">
     <div class="table-header-row">
       <span class="table-title">{{ 'tracking.devices.inventory-title' | translate }}</span>
+      <button mat-flat-button class="btn-register" (click)="navigateToNew()">
+        <mat-icon>add</mat-icon>
+        <span class="btn-label">{{ 'tracking.devices.register-new' | translate }}</span>
+      </button>
     </div>
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource()" matSort class="devices-table">
 
-        <!-- Categoría -->
         <ng-container matColumnDef="deviceType">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ 'tracking.devices.device-type' | translate }}
           </th>
           <td mat-cell *matCellDef="let device">
             <div class="device-cell">
-              <div class="device-icon"
-                   [class.icon-gps]="device.deviceType === 'GPS'"
-                   [class.icon-vital]="device.deviceType !== 'GPS'">
-                <mat-icon>{{ device.deviceType === 'GPS' ? 'location_on' : 'monitor_heart' }}</mat-icon>
+              <div class="device-icon" [class]="deviceTypeIconClass(device.deviceType)">
+                <mat-icon>{{ deviceTypeIcon(device.deviceType) }}</mat-icon>
               </div>
-              <span class="device-type-text">{{ device.deviceType }}</span>
+              <span class="device-type-text">{{ deviceTypeLabelKey(device.deviceType) | translate }}</span>
             </div>
           </td>
         </ng-container>
 
-        <!-- Residente -->
+        <ng-container matColumnDef="externalDeviceId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ 'tracking.devices.external-id' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <code class="external-id">{{ device.externalDeviceId }}</code>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="resident">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ 'tracking.devices.resident' | translate }}
           </th>
           <td mat-cell *matCellDef="let device">
-            @if (residentName(device.residentId)) {
+            @if (isEdgeGateway(device.deviceType)) {
+              <span class="na-text">{{ 'tracking.devices.not-applicable' | translate }}</span>
+            } @else if (residentName(device.residentId)) {
               <div class="resident-cell">
                 <mat-icon class="resident-icon">person</mat-icon>
                 <span>{{ residentName(device.residentId) }}</span>
@@ -114,6 +118,21 @@
             }
           </td>
         </ng-container>
+
+        <ng-container matColumnDef="iotStatus">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ 'tracking.devices.iot-status' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <mat-chip-set>
+              <mat-chip [class]="iotChipClass(device.iotStatus)" disableRipple>
+                <mat-icon matChipAvatar>{{ device.iotStatus === IotStatus.ACTIVE ? 'verified' : 'block' }}</mat-icon>
+                {{ 'tracking.devices.iot-options.' + device.iotStatus.toLowerCase() | translate }}
+              </mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>
             {{ 'tracking.devices.status' | translate }}
@@ -128,7 +147,6 @@
           </td>
         </ng-container>
 
-        <!-- Acciones -->
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>
             {{ 'tracking.devices.actions' | translate }}
@@ -141,27 +159,35 @@
             </button>
 
             <mat-menu #actionMenu="matMenu">
-
               <button mat-menu-item (click)="viewDevice(device.id)">
                 <mat-icon>visibility</mat-icon>
                 <span>{{ 'tracking.devices.detail.view' | translate }}</span>
               </button>
 
-              <button mat-menu-item (click)="editDevice(device.id)">
+              <button mat-menu-item (click)="editDevice(device)">
                 <mat-icon>edit</mat-icon>
                 <span>{{ 'tracking.devices.edit' | translate }}</span>
               </button>
 
+              @if (supportsTelemetry(device.deviceType)) {
+                <button mat-menu-item (click)="viewDevice(device.id)">
+                  <mat-icon>monitor_heart</mat-icon>
+                  <span>{{ 'tracking.devices.view-telemetry' | translate }}</span>
+                </button>
+              }
+
               <mat-divider />
 
-              @if (device.status === DeviceStatus.AVAILABLE && !residentName(device.residentId)) {
+              @if (device.status === DeviceStatus.AVAILABLE
+                && !residentName(device.residentId)
+                && isAssignableDeviceType(device.deviceType)) {
                 <button mat-menu-item (click)="assignDevice(device.id)">
                   <mat-icon>person_add</mat-icon>
                   <span>{{ 'tracking.devices.assign' | translate }}</span>
                 </button>
               }
 
-              @if (device.status === DeviceStatus.ASSIGNED) {
+              @if (device.status === DeviceStatus.ASSIGNED && isAssignableDeviceType(device.deviceType)) {
                 <button mat-menu-item class="menu-item-warn" (click)="unassignDevice(device)">
                   <mat-icon>person_remove</mat-icon>
                   <span>{{ 'tracking.devices.unassign' | translate }}</span>
@@ -175,6 +201,12 @@
                 </button>
               }
 
+              <button mat-menu-item (click)="toggleIotStatus(device)">
+                <mat-icon>{{ device.iotStatus === IotStatus.ACTIVE ? 'block' : 'verified' }}</mat-icon>
+                <span>{{ (device.iotStatus === IotStatus.ACTIVE
+                  ? 'tracking.devices.revoke-iot'
+                  : 'tracking.devices.activate-iot') | translate }}</span>
+              </button>
             </mat-menu>
           </td>
         </ng-container>
