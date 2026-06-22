@@ -56,42 +56,38 @@ export class IamStore {
   }
 
   /**
-   * Sesión simulada en desarrollo: llamar solo desde el shell autenticado (`MainLayout`),
-   * no al arrancar la app, para que rutas públicas como `/home` sigan mostrando SIGN-IN / registro.
+   * Auto sign-in en desarrollo desde `MainLayout` cuando hay credenciales configuradas.
    */
   tryApplyDevFallbackSession(): void {
-    if (environment.fallbackDevUserSession && !this.isSignedInSignal()) {
-      this.applyDefaultDevUserSession();
+    if (!environment.fallbackDevUserSession || this.isSignedInSignal()) {
+      return;
     }
+    const credentials = environment.devFallbackCredentials;
+    if (!credentials?.username || !credentials?.password) {
+      return;
+    }
+    this.iamApi.signIn(new SignInCommand({
+      username: credentials.username,
+      password: credentials.password
+    })).subscribe({
+      next: (signInResource) => this.applyAuthenticatedSession(signInResource),
+      error: (err) => console.warn('[IamStore] Dev fallback sign-in failed:', err)
+    });
   }
 
-  /** Valores por defecto solo desarrollo, si no hay login real ni datos en storage. */
-  private applyDefaultDevUserSession(): void {
-    const username = 'Usuario';
-    const userId = '1';
-    const roles = ['ROLE_USER'] as string[];
-    localStorage.setItem('token', 'dev');
-    localStorage.setItem('userId', userId);
-    localStorage.setItem('username', username);
-    localStorage.setItem('userRoles', JSON.stringify(roles));
-    this.isSignedInSignal.set(true);
-    this.currentUsernameSignal.set(username);
-    this.currentUserIdSignal.set(Number(userId));
-    this.currentRolesSignal.set(roles);
-  }
-
-  /** Restaura sesión en memoria si hay token guardado (p. ej. tras F5 o login stub). */
+  /** Restaura sesión en memoria si hay token guardado (p. ej. tras F5). */
   rehydrateSessionFromStorage(): void {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
     const userId = localStorage.getItem('userId');
     const rolesJson = localStorage.getItem('userRoles');
 
-    // LOG: inspección inicial de storage
     console.debug('[IamStore] rehydrateSessionFromStorage -> token:', token, 'username:', username, 'userId:', userId, 'roles:', rolesJson);
 
-    // tratar 'null' o cadena vacía como ausente
-    if (!token || token === 'null' || !username || !userId) {
+    if (!token || token === 'null' || token === 'dev' || !username || !userId) {
+      if (token === 'dev') {
+        this.clearStoredSession();
+      }
       console.debug('[IamStore] rehydrate aborted: token/username/userId missing or invalid');
       return;
     }
@@ -129,15 +125,7 @@ export class IamStore {
   signIn(signInCommand: SignInCommand, router: Router) {
     this.iamApi.signIn(signInCommand).subscribe({
       next: (signInResource) => {
-        localStorage.setItem('token', signInResource.token);
-        localStorage.setItem('userId', String(signInResource.entityId));
-        localStorage.setItem('username', signInResource.username);
-        localStorage.setItem('userRoles', JSON.stringify(signInResource.roles ?? []));
-
-        this.isSignedInSignal.set(true);
-        this.currentUsernameSignal.set(signInResource.username);
-        this.currentUserIdSignal.set(signInResource.id);
-        this.currentRolesSignal.set(signInResource.roles ?? []);
+        this.applyAuthenticatedSession(signInResource);
 
         if (signInResource.roles.includes('ROLE_ADMIN')) {
           void router.navigate(nursingNav.nursingHomeNew());
@@ -186,6 +174,28 @@ export class IamStore {
   }
 
   signOut(router: Router) {
+    this.clearStoredSession();
+    void router.navigate(appNav.home);
+  }
+
+  private applyAuthenticatedSession(signInResource: {
+    token: string;
+    id: number;
+    username: string;
+    roles?: string[];
+  }): void {
+    localStorage.setItem('token', signInResource.token);
+    localStorage.setItem('userId', signInResource.id.toString());
+    localStorage.setItem('username', signInResource.username);
+    localStorage.setItem('userRoles', JSON.stringify(signInResource.roles ?? []));
+
+    this.isSignedInSignal.set(true);
+    this.currentUsernameSignal.set(signInResource.username);
+    this.currentUserIdSignal.set(signInResource.id);
+    this.currentRolesSignal.set(signInResource.roles ?? []);
+  }
+
+  private clearStoredSession(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('username');
@@ -195,7 +205,6 @@ export class IamStore {
     this.currentUsernameSignal.set(null);
     this.currentUserIdSignal.set(null);
     this.currentRolesSignal.set([]);
-    void router.navigate(appNav.home);
   }
   setPassword(command: SetPasswordCommand, router: Router) {
     this._loadingSignal.set(true);

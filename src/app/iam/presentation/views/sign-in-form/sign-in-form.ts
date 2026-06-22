@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { iamNav } from '../../iam.routes';
-import { analyticsNav } from '../../../../analytics/presentation/analytics-routes';
 import { IamStore } from '../../../application/iam.store';
 import { Toolbar } from '../../../../shared/presentation/components/toolbar/toolbar';
-import { environment } from '../../../../../environments/environment';
 import {SignInCommand} from '../../../domain/model/sign-in.command';
 
 /**
@@ -40,24 +38,15 @@ export class SignInForm {
    * (nombre del formulario; si no pasas por aquí, `IamStore` puede aplicar usuario por defecto en dev).
    */
   onSubmit(): void {
-
-    if (this.form.valid) {
-      const signInCommand = new SignInCommand({
-        username: this.form.value.username!,
-        password: this.form.value.password!
-      });
-      this.store.signIn(signInCommand, this.router);
-    } else {
-      this.markFormGroupTouched(this.form);
-    }
     if (!this.form.valid) {
       this.markFormGroupTouched(this.form);
       return;
     }
-    if (!environment.production) {
-      this.store.rehydrateSessionFromStorage();
-    }
-    void this.router.navigate(analyticsNav.dashboard());
+    const signInCommand = new SignInCommand({
+      username: this.form.value.username!,
+      password: this.form.value.password!
+    });
+    this.store.signIn(signInCommand, this.router);
   }
 
   /**

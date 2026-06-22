@@ -9,6 +9,7 @@ toResourceFromResponse(response:DeviceResource ):DeviceResource{
 }
 toRequestFromCommand(command:CreateDeviceCommand):CreateDeviceRequest{
  return {
+   externalDeviceId: command.externalDeviceId,
    deviceType:command.deviceType,
    macAddress:command.macAddress
 

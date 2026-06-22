@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>
+  {{ (isEdit ? 'tracking.devices.form.edit-title' : 'tracking.devices.form.new-title') | translate }}
+</h2>
+
+<mat-dialog-content>
+  @if (!isEdit && store.gatewayDevice()) {
+    <p class="form-note">{{ 'tracking.devices.form.gateway-exists' | translate }}</p>
+  }
+
+  <form [formGroup]="form" id="deviceForm" class="device-form">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'tracking.devices.form.device-type' | translate }}</mat-label>
+      <mat-select formControlName="deviceType" required>
+        @for (type of availableDeviceTypes(); track type) {
+          <mat-option [value]="type">
+            {{ ('tracking.devices.device-types.' + type) | translate }}
+          </mat-option>
+        }
+      </mat-select>
+      @if (form.get('deviceType')?.touched && form.get('deviceType')?.hasError('required')) {
+        <mat-error>{{ 'tracking.devices.form.device-type-required' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'tracking.devices.form.external-id' | translate }}</mat-label>
+      <input
+        matInput
+        formControlName="externalDeviceId"
+        [placeholder]="isEdgeGateway(form.get('deviceType')?.value ?? '')
+          ? 'gateway-residence-01'
+          : 'band-001'">
+      <mat-hint>{{ selectedTypeHint() | translate }}</mat-hint>
+      @if (form.get('externalDeviceId')?.touched && form.get('externalDeviceId')?.hasError('required')) {
+        <mat-error>{{ 'tracking.devices.form.external-id-required' | translate }}</mat-error>
+      }
+      @if (form.get('externalDeviceId')?.touched && form.get('externalDeviceId')?.hasError('pattern')) {
+        <mat-error>{{ 'tracking.devices.form.external-id-invalid' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'tracking.devices.form.mac-address' | translate }}</mat-label>
+      <input matInput formControlName="macAddress" placeholder="AA:BB:CC:DD:EE:FF">
+      <mat-hint>{{ 'tracking.devices.form.mac-hint' | translate }}</mat-hint>
+      @if (form.get('macAddress')?.touched && form.get('macAddress')?.hasError('required')) {
+        <mat-error>{{ 'tracking.devices.form.mac-required' | translate }}</mat-error>
+      }
+      @if (form.get('macAddress')?.touched && form.get('macAddress')?.hasError('pattern')) {
+        <mat-error>{{ 'tracking.devices.form.mac-invalid' | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button type="button" (click)="cancel()">
+    {{ 'tracking.devices.form.cancel' | translate }}
+  </button>
+  <button mat-flat-button color="primary" type="submit" form="deviceForm" [disabled]="form.invalid" (click)="submit()">
+    {{ (isEdit ? 'tracking.devices.form.update' : 'tracking.devices.form.register') | translate }}
+  </button>
+</mat-dialog-actions>

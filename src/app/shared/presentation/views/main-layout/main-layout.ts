@@ -99,6 +99,7 @@ export class MainLayout implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.iamStore.tryApplyDevFallbackSession();
   }
 
   ngAfterViewInit(): void {

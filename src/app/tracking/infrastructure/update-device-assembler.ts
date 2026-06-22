@@ -8,6 +8,7 @@ export class UpdateDeviceAssembler {
   }
   toRequestFromCommand(command:UpdateDeviceCommand):UpdateDeviceRequest{
     return{
+      externalDeviceId: command.externalDeviceId,
       deviceType:command.deviceType,
       macAddress:command.macAddress
     }
