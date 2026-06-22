@@ -1,0 +1,5 @@
+# Cloudflare Pages — build output must match the Angular browser bundle root.
+# After `npm run build`, static assets (index.html, chunk-*.js, …) live here directly.
+name = "veyra-web-app"
+pages_build_output_dir = "dist/FrontendNovaPeruTech"
+compatibility_date = "2024-01-01"
