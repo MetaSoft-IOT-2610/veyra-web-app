@@ -29,7 +29,7 @@
         </div>
 
         <nav class="nav-menu">
-          @for (option of options; track option.link) {
+          @for (option of options(); track option.link) {
             <div
               class="nav-item"
               [class.active]="isActive(option.link)"
@@ -125,11 +125,11 @@
           </button>
         }
 
-        @if (routeToolbar.pageData(); as page) {
+        @if (routeToolbar.pageData()) {
           <div class="toolbar-page-info">
-            <h1 class="toolbar-page-module">{{ page.module }}</h1>
-            @if (page.description) {
-              <p class="toolbar-page-description">{{ page.description }}</p>
+            <h1 class="toolbar-page-module">{{ routeToolbar.module() }}</h1>
+            @if (routeToolbar.description()) {
+              <p class="toolbar-page-description">{{ routeToolbar.description() }}</p>
             }
           </div>
         }

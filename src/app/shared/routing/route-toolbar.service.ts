@@ -13,8 +13,24 @@ export class RouteToolbarService {
   readonly pageData = this.pageDataSignal.asReadonly();
   readonly showBackButton = computed(() => this.pageDataSignal()?.showBackButton ?? false);
   readonly title = computed(() => this.pageDataSignal()?.title ?? '');
-  readonly module = computed(() => this.pageDataSignal()?.module ?? '');
-  readonly description = computed(() => this.pageDataSignal()?.description ?? '');
+
+  private readonly dynamicContext = signal<{ module?: string; description?: string } | null>(null);
+
+  readonly module = computed(
+    () => this.dynamicContext()?.module ?? this.pageDataSignal()?.module ?? ''
+  );
+  readonly description = computed(
+    () => this.dynamicContext()?.description ?? this.pageDataSignal()?.description ?? ''
+  );
+
+  /** Override toolbar headings until navigation or {@link clearDynamicContext}. */
+  setDynamicContext(context: { module?: string; description?: string } | null): void {
+    this.dynamicContext.set(context);
+  }
+
+  clearDynamicContext(): void {
+    this.dynamicContext.set(null);
+  }
 
   constructor() {
     this.router.events
@@ -22,7 +38,10 @@ export class RouteToolbarService {
         filter((event): event is NavigationEnd => event instanceof NavigationEnd),
         map(() => this.readActivePageData())
       )
-      .subscribe((data) => this.pageDataSignal.set(data));
+      .subscribe((data) => {
+        this.dynamicContext.set(null);
+        this.pageDataSignal.set(data);
+      });
 
     this.pageDataSignal.set(this.readActivePageData());
   }

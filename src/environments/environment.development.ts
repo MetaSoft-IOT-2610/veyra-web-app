@@ -1,13 +1,14 @@
 export const environment = {
   production: false,
   /** Si es false, el `MainLayout` no muestra botones SIGN-IN / registro en toolbar; con sesión activa sí se muestra el menú de cuenta. */
-  showIamToolbar: false,
+  showIamToolbar: true,
   /**
    * Si no hay sesión válida en `localStorage`, aplica usuario de desarrollo **solo al entrar al layout
    * con sidebar** (`MainLayout`), no en `/home` ni otras rutas públicas.
    */
   fallbackDevUserSession: true,
-
+  /** Credenciales para auto sign-in en dev; null = login manual en /iam/sign-in */
+  devFallbackCredentials: { username: 'admin', password: 'admin123' } as { username: string; password: string } | null,
   platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
@@ -20,6 +21,7 @@ export const environment = {
   platformProviderStaffEndpointPath:'/staff',
   platformProviderStaffMemberContractsEndpointPath:'/staff/{staffMemberId}/contracts',
   platformProviderStaffMemberContractStatusEndpointPath:'/staff/{staffMemberId}/contracts/{contractId}',
+  platformProviderStaffNursingHomesEndpointPath: '/staff/by-user/{userId}/nursing-homes',
 
   //IAM Bounded Context
   platformProviderSignInEndpointPath: '/authentication/sign-in',
@@ -70,6 +72,8 @@ export const environment = {
   platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
   platformProviderDevicesEndpointPath: '/devices',
   platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
+  platformProviderDeviceMeasurementsEndpointPath: '/devices/{deviceId}/measurements',
+  platformProviderDeviceIotStatusEndpointPath: '/devices/{deviceId}/iot-status',
   platformProviderWsTrackingTopicPath: '/topic/tracking',
 
 

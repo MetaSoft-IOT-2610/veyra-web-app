@@ -16,7 +16,8 @@ export class SignInAssembler {
       id: response.id,
       username: response.username,
       roles: response.roles,
-      token: response.token
+      token: response.token,
+      entityId: response.entityId
     } as SignInResource;
   }
 

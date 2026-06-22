@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, Injector, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { nursingNav } from '../../nursing-routes';
@@ -13,8 +13,8 @@ import { ProfilesStore } from '../../../../profiles/application/profiles.store';
 
 export interface ResidentMonitoringRow {
   residentId: number;
-  doctorId: number;
-  healthId: number;
+  doctorId?: number;
+  healthId?: number;
   fullName: string;
   roomNumber: string | null;
   status: 'Stable' | 'Critical' | 'Observation' | null;
@@ -39,70 +39,61 @@ const PAGE_SIZE = 4;
   templateUrl: './resident-monitoring-page.html',
   styleUrl: './resident-monitoring-page.css'
 })
-export class ResidentMonitoringPage implements OnInit {
+export class ResidentMonitoringPage {
 
   private readonly nursingStore  = inject(NursingStore);
-  private readonly profilesStore = inject(ProfilesStore); // ← inyectar ProfilesStore
+  private readonly profilesStore = inject(ProfilesStore);
   private readonly router        = inject(Router);
-  private readonly injector      = inject(Injector);
 
   readonly displayedColumns = [
     'fullName', 'room', 'status',
     'heartRate', 'temperature', 'oxygen', 'actions'
   ];
 
-  readonly loading = this.nursingStore.loading;
+  // Unificamos el estado de carga de ambos stores para evitar inconsistencias
+  readonly loading = computed(() => this.nursingStore.loading() || this.profilesStore.loading());
   readonly error   = this.nursingStore.error;
 
-  readonly rows = signal<ResidentMonitoringRow[]>([]);
-
   readonly currentPage = signal(1);
+
+  constructor() {
+    const nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
+    this.nursingStore.loadResidentsByNursingHome(nursingHomeId);
+    this.nursingStore.loadRoomsByNursingHome(nursingHomeId);
+    this.profilesStore.loadPersonProfiles();
+  }
+
+  readonly rows = computed<ResidentMonitoringRow[]>(() => {
+    const residents  = this.nursingStore.residents();
+    const rooms      = this.nursingStore.rooms();
+    const profiles   = this.profilesStore.personProfiles();
+
+    // Si no hay residentes cargados, devolvemos lista vacía para no bloquear la UI
+    if (residents.length === 0) return [];
+
+    return residents.map(resident => {
+      const room = rooms.find(r => r.id === resident?.roomId);
+      const profile = profiles.find(p => p.id === resident?.personProfileId);
+
+      return {
+        residentId: resident.id,
+        // Usamos firstName y lastName como solicitaste
+        fullName:   profile ? `${profile.fullName}` : 'Loading...',
+        roomNumber: room?.roomNumber  ?? null,
+        status:     null,
+        heartRate:  null,
+        temperature: null,
+        oxygenLevel: null,
+      };
+    });
+  });
+
   readonly totalItems  = computed(() => this.rows().length);
   readonly totalPages  = computed(() => Math.max(1, Math.ceil(this.totalItems() / PAGE_SIZE)));
   readonly pages       = computed(() => Array.from({ length: this.totalPages() }, (_, i) => i + 1));
   readonly startIndex  = computed(() => (this.currentPage() - 1) * PAGE_SIZE);
   readonly endIndex    = computed(() => Math.min(this.startIndex() + PAGE_SIZE, this.totalItems()));
   readonly pagedRows   = computed(() => this.rows().slice(this.startIndex(), this.endIndex()));
-
-  ngOnInit(): void {
-    const nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
-    const doctorId      = Number(localStorage.getItem('doctorId'));
-    this.nursingStore.loadMonitoringResidentsByDoctor(nursingHomeId, doctorId);
-    this.nursingStore.loadResidentsByNursingHome(nursingHomeId);
-    this.nursingStore.loadRoomsByNursingHome(nursingHomeId);
-    this.profilesStore.loadPersonProfiles();
-
-    effect(() => {
-      const monitoring = this.nursingStore.monitoringResidents();
-      const residents  = this.nursingStore.residents();
-      const rooms      = this.nursingStore.rooms();
-      const profiles   = this.profilesStore.personProfiles();
-
-      if (!monitoring.length || !residents.length || !profiles.length) return;
-
-      const combined: ResidentMonitoringRow[] = monitoring.map(m => {
-        const resident = residents.find(r => r.id === m.residentId);
-
-        const room = rooms.find(r => r.id === resident?.roomId);
-
-        const profile = profiles.find(p => p.id === resident?.personProfileId);
-
-        return {
-          residentId: m.residentId,
-          doctorId:   m.doctorId,
-          healthId:   m.healthId,
-          fullName:   profile?.fullName ?? 'N/A', // ← fullName es el campo correcto
-          roomNumber: room?.roomNumber  ?? null,
-          status:     null,
-          heartRate:  null,
-          temperature: null,
-          oxygenLevel: null,
-        };
-      });
-
-      this.rows.set(combined);
-    }, { injector: this.injector });
-  }
 
   changePage(page: number): void {
     if (page < 1 || page > this.totalPages()) return;

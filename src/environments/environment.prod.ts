@@ -8,6 +8,7 @@ export const environment = {
   production: true,
   showIamToolbar: true,
   fallbackDevUserSession: false,
+  devFallbackCredentials: null as { username: string; password: string } | null,
   platformProviderApiBaseUrl: 'https://veyra-backend.redwave-e7e23e62.canadacentral.azurecontainerapps.io/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
@@ -20,6 +21,7 @@ export const environment = {
   platformProviderStaffEndpointPath: '/staff',
   platformProviderStaffMemberContractsEndpointPath: '/staff/{staffMemberId}/contracts',
   platformProviderStaffMemberContractStatusEndpointPath: '/staff/{staffMemberId}/contracts/{contractId}',
+  platformProviderStaffNursingHomesEndpointPath: '/staff/by-user/{userId}/nursing-homes',
 
   // IAM Bounded Context
   platformProviderSignInEndpointPath: '/authentication/sign-in',
@@ -71,6 +73,8 @@ export const environment = {
   platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
   platformProviderDevicesEndpointPath: '/devices',
   platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
+  platformProviderDeviceMeasurementsEndpointPath: '/devices/{deviceId}/measurements',
+  platformProviderDeviceIotStatusEndpointPath: '/devices/{deviceId}/iot-status',
 
 
 

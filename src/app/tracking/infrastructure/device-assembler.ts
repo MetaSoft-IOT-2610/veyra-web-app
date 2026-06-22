@@ -10,24 +10,28 @@ export class DeviceAssembler implements BaseAssembler<Device, DeviceResource, De
   toEntityFromResource(resource: DeviceResource): Device {
     return new Device({
       id: resource.id,
-      nursingHomeId:resource.nursingHomeId,
+      externalDeviceId: resource.externalDeviceId ?? '',
+      nursingHomeId: resource.nursingHomeId,
       deviceType: resource.deviceType,
-       status:resource.status,
-      macAddress:resource.macAddress,
-      residentId:resource.residentId,
-      assignedAt:resource.assignedAt,
+      status: resource.status,
+      iotStatus: resource.iotStatus ?? 'ACTIVE',
+      macAddress: resource.macAddress,
+      residentId: resource.residentId,
+      assignedAt: resource.assignedAt,
     });
   }
 
   toResourceFromEntity(entity: Device): DeviceResource {
     return {
       id: entity.id,
-      nursingHomeId:entity.nursingHomeId,
+      externalDeviceId: entity.externalDeviceId,
+      nursingHomeId: entity.nursingHomeId,
       deviceType: entity.deviceType,
       status: entity.status,
+      iotStatus: entity.iotStatus,
       macAddress: entity.macAddress,
-      residentId:entity.residentId,
-      assignedAt:entity.assignedAt,
+      residentId: entity.residentId,
+      assignedAt: entity.assignedAt,
     } as DeviceResource;
   }
 }

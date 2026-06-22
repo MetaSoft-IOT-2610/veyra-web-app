@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, computed, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { RouteToolbarService } from '../../../routing/route-toolbar.service';
 import { MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material/sidenav';
@@ -62,18 +62,24 @@ export class MainLayout implements OnInit, AfterViewInit {
    */
   readonly navCollapsed = signal(false);
 
-  options = [
-    { label: 'nav.dashboard', icon: 'home', link: `/analytics/${analyticsPaths.dashboard}`, color: '#5FC2BA' },
-    { label: 'nav.device', icon: 'assignment', link: `/tracking/${trackingPaths.devices}`, color: '#5FC2BA' },
-    { label: 'nav.resident', icon: 'person', link: `/nursing/${nursingPaths.residents}`, color: '#5FC2BA' },
-    { label: 'nav.staff', icon: 'group', link: `/hcm/${hcmPaths.staff}`, color: '#5FC2BA' },
-    { label: 'nav.room', icon: 'meeting_room', link: `/nursing/${nursingPaths.rooms}`, color: '#5FC2BA' },
-    { label: 'nav.activities', icon: 'event_note', link: `/activities${activitiesPaths.list}`, color: '#5FC2BA' },
-    { label: 'nav.alerts', icon: 'notifications_active', link: `/alerts${alertsPaths.list}`, color: '#5FC2BA' },
-    { label: 'nav.relatives', icon: 'people', link: `/nursing/${nursingPaths.relatives}`, color: '#5FC2BA' },
-    { label: 'my-patients', icon: 'favorite', link: `/nursing/${nursingPaths.myPatients}`, color: '#5FC2BA' },
-    { label: 'nav.payments', icon: 'credit_card', link: '/payments/choose', color: '#5FC2BA' },
-  ];
+  options = computed(() => {
+    const roles = this.iamStore.currentRoles();
+    const isAdmin = roles.includes('ROLE_ADMIN');
+
+    // Definimos qué opciones son visibles para cada rol
+    return [
+      { label: 'nav.dashboard',  icon: 'home',                 link: `/analytics/${analyticsPaths.dashboard}`,   color: '#5FC2BA', visible: isAdmin },
+      { label: 'nav.device',     icon: 'assignment',           link: `/tracking/${trackingPaths.devices}`,       color: '#5FC2BA', visible: isAdmin },
+      { label: 'nav.resident',   icon: 'person',               link: `/nursing/${nursingPaths.residents}`,       color: '#5FC2BA', visible: true },
+      { label: 'nav.staff',      icon: 'group',                link: `/hcm/${hcmPaths.staff}`,                   color: '#5FC2BA', visible: isAdmin },
+      { label: 'nav.room',       icon: 'meeting_room',         link: `/nursing/${nursingPaths.rooms}`,           color: '#5FC2BA', visible: isAdmin },
+      { label: 'nav.activities', icon: 'event_note',           link: `/activities${activitiesPaths.list}`,       color: '#5FC2BA', visible: isAdmin },
+      { label: 'nav.alerts',     icon: 'notifications_active', link: `/alerts${alertsPaths.list}`,               color: '#5FC2BA', visible: true },
+      { label: 'nav.relatives',  icon: 'people',               link: `/nursing/${nursingPaths.relatives}`,       color: '#5FC2BA', visible: isAdmin },
+      { label: 'my-patients',    icon: 'favorite',             link: `/nursing/${nursingPaths.myPatients}`,      color: '#5FC2BA', visible: !isAdmin },
+      { label: 'nav.payments', icon: 'credit_card', link: '/payments/choose', color: '#5FC2BA', visible: true },
+    ].filter(option => option.visible);
+  });
 
   constructor(
     private readonly router: Router,
@@ -93,6 +99,7 @@ export class MainLayout implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.iamStore.tryApplyDevFallbackSession();
   }
 
   ngAfterViewInit(): void {
