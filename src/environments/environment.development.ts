@@ -6,8 +6,9 @@ export const environment = {
    * Si no hay sesión válida en `localStorage`, aplica usuario de desarrollo **solo al entrar al layout
    * con sidebar** (`MainLayout`), no en `/home` ni otras rutas públicas.
    */
-  fallbackDevUserSession: false,
-
+  fallbackDevUserSession: true,
+  /** Credenciales para auto sign-in en dev; null = login manual en /iam/sign-in */
+  devFallbackCredentials: { username: 'admin', password: 'admin123' } as { username: string; password: string } | null,
   platformProviderApiBaseUrl: 'http://localhost:8080/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
@@ -71,6 +72,8 @@ export const environment = {
   platformProviderDeviceStatusEndpointPath: '/devices/{deviceId}/status',
   platformProviderDevicesEndpointPath: '/devices',
   platformProviderDeviceByIdEndpointPath: '/devices/{deviceId}',
+  platformProviderDeviceMeasurementsEndpointPath: '/devices/{deviceId}/measurements',
+  platformProviderDeviceIotStatusEndpointPath: '/devices/{deviceId}/iot-status',
   platformProviderWsTrackingTopicPath: '/topic/tracking',
 
 
