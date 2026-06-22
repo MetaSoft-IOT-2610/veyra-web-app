@@ -1,5 +1,6 @@
 import { Measurement } from '../domain/model/measurement.entity';
 import { MeasurementResource } from './measurements-response';
+import { parseUtcTimestamp } from '../../shared/utils/datetime';
 
 export class MeasurementAssembler {
   toEntityFromResource(resource: MeasurementResource): Measurement {
@@ -10,7 +11,7 @@ export class MeasurementAssembler {
       ambientTemperature: resource.ambientTemperature ?? null,
       heartRate: resource.heartRate,
       oxygenSaturation: resource.oxygenSaturation,
-      timestamp: new Date(resource.timestamp)
+      timestamp: parseUtcTimestamp(resource.timestamp)
     });
   }
 

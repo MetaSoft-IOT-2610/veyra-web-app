@@ -40,6 +40,7 @@ import {
 import {interval, Subscription} from 'rxjs';
 import {DeviceFormDialog} from '../../components/device-form-dialog/device-form-dialog';
 import {RouteToolbarService} from '../../../../shared/routing/route-toolbar.service';
+import {APP_DISPLAY_TIMEZONE} from '../../../../shared/utils/datetime';
 
 @Component({
   selector: 'app-device-detail',
@@ -77,6 +78,7 @@ export class DeviceDetail implements OnInit, OnDestroy {
   private readonly translate = inject(TranslateService);
   private readonly routeToolbar = inject(RouteToolbarService);
   private readonly locale = inject(LOCALE_ID);
+  readonly displayTimezone = APP_DISPLAY_TIMEZONE;
 
   deviceId: number | null = null;
   readonly IotStatus = IotStatus;
@@ -183,7 +185,12 @@ export class DeviceDetail implements OnInit, OnDestroy {
 
     const latest = this.store.latestMeasurement();
     if (latest) {
-      const formatted = formatDate(latest.timestamp, 'dd/MM/yyyy HH:mm:ss', this.locale);
+      const formatted = formatDate(
+        latest.timestamp,
+        'dd/MM/yyyy HH:mm:ss',
+        this.locale,
+        APP_DISPLAY_TIMEZONE,
+      );
       return this.translate.instant('tracking.devices.detail.last-update-subtitle', { date: formatted });
     }
 
