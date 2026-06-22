@@ -1,4 +1,4 @@
-import { computed, Injectable, Signal, signal } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable, Signal, signal } from '@angular/core';
 import { NursingHome } from '../domain/model/nursing-home.entity';
 import { NursingApi } from '../infrastructure/nursing-api';
 import {Observable, retry, tap, throwError} from 'rxjs';
@@ -30,6 +30,9 @@ import { CreateMedicalConditionCommand } from '../domain/model/create-medical-co
   providedIn: 'root'
 })
 export class NursingStore {
+  private readonly nursingApi = inject(NursingApi);
+  private readonly destroyRef = inject(DestroyRef);
+
   private readonly _medicationsSignal = signal<Medication[]>([]);
   private readonly _medicalConditionsSignal = signal<MedicalCondition[]>([]);
   private readonly _residentSignal = signal<Resident[]>([]);
@@ -54,8 +57,6 @@ export class NursingStore {
   readonly vitalSigns = this._vitalSignsSignal.asReadonly();
   readonly relatives = this._relativeSignal.asReadonly();
   readonly monitoringResidents = this._monitoringResidentsSignal.asReadonly();
-
-  constructor(private nursingApi: NursingApi) {}
 
   /*
 * @purpose: Add a new nursing home
@@ -119,7 +120,7 @@ export class NursingStore {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
 
-    this.nursingApi.getResidentsByNursingHome(nursingHomeId).pipe(takeUntilDestroyed()).subscribe({
+    this.nursingApi.getResidentsByNursingHome(nursingHomeId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: residents => {
         this._residentSignal.set(residents);
         this._loadingSignal.set(false);
@@ -135,7 +136,7 @@ export class NursingStore {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
 
-    this.nursingApi.getRoomsByNursingHome(nursingHomeId).pipe(takeUntilDestroyed()).subscribe({
+    this.nursingApi.getRoomsByNursingHome(nursingHomeId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: rooms => {
         this._roomsSignal.set(rooms);
         this._loadingSignal.set(false);
@@ -318,7 +319,7 @@ export class NursingStore {
   loadAllergies(residentId: number): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.nursingApi.getAllergies(residentId).pipe(takeUntilDestroyed()).subscribe({
+    this.nursingApi.getAllergies(residentId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: allergies => {
         this._allergiesSignal.set(allergies);
         this._loadingSignal.set(false);
@@ -333,7 +334,7 @@ export class NursingStore {
   loadDevices(): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.nursingApi.getDevices().pipe(takeUntilDestroyed()).subscribe({
+    this.nursingApi.getDevices().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: devices => {
         this._devicesSignal.set(devices);
         this._loadingSignal.set(false);
@@ -351,7 +352,7 @@ export class NursingStore {
   loadMedications(residentId: number): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.nursingApi.getMedications(residentId).pipe(takeUntilDestroyed()).subscribe({
+    this.nursingApi.getMedications(residentId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: medications => {
         this._medicationsSignal.set(medications);
         this._loadingSignal.set(false);
@@ -371,7 +372,7 @@ export class NursingStore {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
 
-    this.nursingApi.getMedicalConditions(residentId).pipe(takeUntilDestroyed()).subscribe({
+    this.nursingApi.getMedicalConditions(residentId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: medicalConditions => {
         this._medicalConditionsSignal.set(medicalConditions);
         this._loadingSignal.set(false);
@@ -386,7 +387,7 @@ export class NursingStore {
   loadVitalSigns(residentId: number): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.nursingApi.getVitalSigns(residentId).pipe(takeUntilDestroyed()).subscribe({
+    this.nursingApi.getVitalSigns(residentId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: vitalSigns => {
         this._vitalSignsSignal.set(vitalSigns);
         this._loadingSignal.set(false);

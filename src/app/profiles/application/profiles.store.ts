@@ -1,4 +1,4 @@
-import { computed, Injectable, Signal, signal } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable, Signal, signal } from '@angular/core';
 import { BusinessProfile } from '../domain/model/business-profile.entity';
 import { PersonProfile } from '../domain/model/person-profile.entity';
 import { ProfilesApi } from '../infrastructure/profiles-api';
@@ -7,6 +7,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class ProfilesStore {
+  private readonly profilesApi = inject(ProfilesApi);
+  private readonly destroyRef = inject(DestroyRef);
+
   // Signals
   private readonly _businessProfilesSignal = signal<BusinessProfile[]>([]);
   private readonly _personProfilesSignal = signal<PersonProfile[]>([]);
@@ -20,8 +23,6 @@ export class ProfilesStore {
   readonly error = this._errorSignal.asReadonly();
   readonly businessProfileCount = computed(() => this.businessProfiles().length);
   readonly personProfileCount = computed(() => this.personProfiles().length);
-
-  constructor(private profilesApi: ProfilesApi) {}
 
   getBusinessProfileById(id: number | null | undefined): Signal<BusinessProfile | undefined> {
     return computed(() => id
@@ -136,7 +137,7 @@ export class ProfilesStore {
   loadBusinessProfiles(): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.profilesApi.getBusinessProfiles().pipe(takeUntilDestroyed()).subscribe({
+    this.profilesApi.getBusinessProfiles().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: businessProfiles => {
         this._businessProfilesSignal.set(businessProfiles);
         this._loadingSignal.set(false);
@@ -151,7 +152,7 @@ export class ProfilesStore {
   loadPersonProfiles(): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.profilesApi.getPersonProfiles().pipe(takeUntilDestroyed()).subscribe({
+    this.profilesApi.getPersonProfiles().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: personProfiles => {
         this._personProfilesSignal.set(personProfiles);
         this._loadingSignal.set(false);
