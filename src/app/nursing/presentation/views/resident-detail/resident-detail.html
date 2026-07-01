@@ -93,6 +93,24 @@
           </div>
         </mat-card>
 
+        <mat-card class="medical-card thresholds-card">
+          <div class="medical-content">
+            <div class="medical-icon-wrapper threshold-icon">
+              <mat-icon>monitor_heart</mat-icon>
+            </div>
+            <div class="medical-text">
+              <h3>Umbrales de signos vitales</h3>
+              <p>Configura los rangos que activan alertas clínicas para este residente.</p>
+            </div>
+            <button mat-fab
+                    color="accent"
+                    (click)="editVitalSignThresholds()"
+                    class="medical-fab">
+              <mat-icon>tune</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+
         <div class="spacer"></div>
       </div>
     } @else {

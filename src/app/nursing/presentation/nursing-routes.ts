@@ -23,6 +23,8 @@ const medicalConditionList = () =>
   import('./views/medical-condition-list/medical-condition-list').then((m) => m.MedicalConditionList);
 const medicalConditionForm = () =>
   import('./views/medical-condition-form/medical-condition-form').then((m) => m.MedicalConditionForm);
+const vitalSignThresholdForm = () =>
+  import('./views/vital-sign-threshold-form/vital-sign-threshold-form').then((m) => m.VitalSignThresholdForm);
 const assignRoomForm = () =>
   import('./views/assign-room-form/assign-room-form').then((m) => m.AssignRoomForm);
 const deviceList = () => import('./views/device-list/device-list').then((m) => m.DeviceList);
@@ -43,6 +45,7 @@ export const nursingPaths = {
   residentEdit: 'residents/:id/edit',
   assignRoom: 'residents/:id/room-assignments/new',
   medicalRecords: 'residents/:id/medical-records',
+  vitalSignThresholds: 'residents/:id/vital-sign-thresholds',
   allergyNew: 'residents/:id/allergies/new',
   rooms: 'rooms',
   roomNew: 'rooms/new',
@@ -71,6 +74,7 @@ export const nursingNav = {
     'new',
   ],
   medicalRecords: (id: number | string) => ['/nursing', nursingPaths.residents, id, 'medical-records'],
+  vitalSignThresholds: (id: number | string) => ['/nursing', nursingPaths.residents, id, 'vital-sign-thresholds'],
   allergyNew: (id: number | string) => ['/nursing', nursingPaths.residents, id, 'allergies', 'new'],
   rooms: () => ['/nursing', nursingPaths.rooms],
   roomNew: () => ['/nursing', nursingPaths.rooms, 'new'],
@@ -177,6 +181,17 @@ const nursingRoutes: Routes = [
       title: 'Registros médicos',
       module: 'Enfermería',
       description: 'Historial clínico del residente',
+      showBackButton: true,
+    },
+  }),
+  definePageRoute({
+    path: nursingPaths.vitalSignThresholds,
+    name: 'nursing.residents.vital-sign-thresholds',
+    loadComponent: vitalSignThresholdForm,
+    page: {
+      title: 'Umbrales de signos vitales',
+      module: 'Enfermería',
+      description: 'Rangos clínicos del residente',
       showBackButton: true,
     },
   }),
