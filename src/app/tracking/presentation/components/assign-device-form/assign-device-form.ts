@@ -1,34 +1,36 @@
-import { Component, inject } from '@angular/core';
-import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Component, computed, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrackingStore } from '../../../application/tracking.store';
 import { NursingStore } from '../../../../nursing/application/nursing.store';
 import { ProfilesStore } from '../../../../profiles/application/profiles.store';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
-import { AsyncPipe } from '@angular/common';
 import { AssignDeviceCommand } from '../../../domain/model/assign-device.command';
 import { isAssignableDeviceType } from '../../../domain/model/device-type.helpers';
 import { trackingNav } from '../../tracking-routes';
 import { Resident } from '../../../../nursing/domain/model/resident.entity';
-import { map, startWith } from 'rxjs';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { combineLatest } from 'rxjs';
+import { PersonProfileDetail } from '../../../../profiles/presentation/components/person-profile-detail/person-profile-detail';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatError } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-assign-device-form',
   imports: [
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatAutocompleteModule,
     MatButtonModule,
     TranslatePipe,
-    AsyncPipe,
     FormsModule,
+    PersonProfileDetail,
+    MatCardModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatError,
   ],
   templateUrl: './assign-device-form.html',
   styleUrl: './assign-device-form.css'
@@ -37,39 +39,30 @@ export class AssignDeviceForm {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private trackingStore = inject(TrackingStore);
-  private nursingStore = inject(NursingStore);
+  protected nursingStore = inject(NursingStore);
   private profilesStore = inject(ProfilesStore);
 
   deviceId: number | null = null;
   nursingHomeId: number = 0;
 
-  searchControl = new FormControl<string | Resident>('', { validators: [Validators.required] });
-  selectedResident: Resident | null = null;
+  searchTerm = signal('');
+  selectedResident = signal<Resident | null>(null);
 
-  private residents$ = toObservable(this.nursingStore.residents);
-  private personProfiles$ = toObservable(this.profilesStore.personProfiles);
+  protected residents = computed(() => this.nursingStore.residents());
+  protected profiles = computed(() => this.profilesStore.personProfiles());
+  protected selectedResidentId = computed(() => this.selectedResident()?.id ?? null);
+  protected filteredResidents = computed(() => {
+    const term = this.removeAccents(this.searchTerm());
+    const profiles = this.profiles();
+    const residents = this.residents();
 
-  filteredResidents$ = combineLatest([
-    this.residents$,
-    this.personProfiles$,
-    this.searchControl.valueChanges.pipe(startWith(''))
-  ]).pipe(
-    map(([residents, profiles, search]) => {
-      if (typeof search === 'string') {
-        this.selectedResident = null;
-      }
-      const term = typeof search === 'string' ? search.toLowerCase() : '';
-      return residents
-        .map(resident => ({
-          resident,
-          profile: profiles.find(p => p.id === resident.personProfileId) ?? null
-        }))
-        .filter(({ profile }) =>
-          !term || (profile?.fullName.toLowerCase().includes(term) ?? false)
-        );
-    })
+    if (!term) return residents;
 
-  );
+    return residents.filter(resident => {
+      const profile = profiles.find(p => p.id === resident.personProfileId);
+      return profile ? this.removeAccents(profile.fullName).includes(term) : false;
+    });
+  });
 
   constructor() {
     this.nursingHomeId = Number(localStorage.getItem('nursingHomeId'));
@@ -89,26 +82,33 @@ export class AssignDeviceForm {
     this.profilesStore.loadPersonProfiles();
   }
 
-  displayFn(resident: Resident | null): string {
-    if (!resident) return '';
-    const profile = this.profilesStore.personProfiles()
-      .find(p => p.id === resident.personProfileId);
-    return profile?.fullName ?? '';
+  selectResident(resident: Resident): void {
+    const current = this.selectedResident();
+    this.selectedResident.set(current?.id === resident.id ? null : resident);
   }
 
-  onResidentSelected(resident: Resident): void {
-    this.selectedResident = resident;
+  residentRoomLabel(resident: Resident): string {
+    return resident.roomId != null ? resident.roomId.toString() : 'N/A';
   }
 
   submit(): void {
-    if (!this.selectedResident || !this.deviceId) return;
+    const resident = this.selectedResident();
+    if (!resident || !this.deviceId) return;
 
     const command = new AssignDeviceCommand({
       deviceId: this.deviceId,
-      residentId: this.selectedResident.id
+      residentId: resident.id
     });
 
     this.trackingStore.assignDevice(command);
     this.router.navigate(trackingNav.devices()).then();
+  }
+
+  goBack(): void {
+    this.router.navigate(trackingNav.devices()).then();
+  }
+
+  private removeAccents(word: string): string {
+    return word.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').trim();
   }
 }

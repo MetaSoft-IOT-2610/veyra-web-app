@@ -1,39 +1,86 @@
 <h1 class="title">{{ 'device.assign-title' | translate }}</h1>
 
-<form (ngSubmit)="submit()">
-
+<div class="search-container">
   <mat-form-field appearance="outline">
     <mat-label>{{ 'device.search-resident' | translate }}</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
     <input
       matInput
-      [formControl]="searchControl"
-      [matAutocomplete]="auto"
-      placeholder="{{ 'device.search-resident-placeholder' | translate }}"
-    />
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      [displayWith]="displayFn.bind(this)"
-      (optionSelected)="onResidentSelected($event.option.value)"
-    >
-      @for (item of filteredResidents$ | async; track item.resident.id) {
-        <mat-option [value]="item.resident">
-          {{ item.profile?.fullName ?? ('device.unknown-resident' | translate) }}
-        </mat-option>
-      }
-    </mat-autocomplete>
-
-    @if (searchControl.touched && searchControl.hasError('required')) {
-      <mat-error>{{ 'device.error.resident-required' | translate }}</mat-error>
+      [placeholder]="'device.search-resident-placeholder' | translate"
+      [ngModel]="searchTerm()"
+      (ngModelChange)="searchTerm.set($event)"
+      type="text"/>
+    @if (searchTerm()) {
+      <button matSuffix mat-icon-button type="button" (click)="searchTerm.set('')">
+        <mat-icon>close</mat-icon>
+      </button>
     }
   </mat-form-field>
+</div>
+
+@if (nursingStore.loading()) {
+  <mat-spinner diameter="40"></mat-spinner>
+}
+
+@if (nursingStore.error()) {
+  <mat-error class="error-message">{{ nursingStore.error() }}</mat-error>
+}
+
+<div class="cards-grid">
+  @for (resident of filteredResidents(); track resident.id) {
+    <mat-card
+      class="resident-card"
+      [class.selected]="selectedResidentId() === resident.id"
+      (click)="selectResident(resident)">
+
+      <div class="selection-indicator" [class.active]="selectedResidentId() === resident.id">
+        @if (selectedResidentId() === resident.id) {
+          <mat-icon>check</mat-icon>
+        }
+      </div>
+
+      <app-person-profile-detail
+        [personProfileCard]="true"
+        [personProfileId]="resident.personProfileId">
+      </app-person-profile-detail>
+
+      <div class="resident-meta">
+        <span>
+          <mat-icon>meeting_room</mat-icon>
+          {{ 'Room' | translate }}: {{ residentRoomLabel(resident) }}
+        </span>
+      </div>
+
+      <button
+        mat-raised-button
+        class="select-button"
+        type="button"
+        (click)="selectResident(resident); $event.stopPropagation()">
+        <mat-icon>{{ selectedResidentId() === resident.id ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
+        {{ selectedResidentId() === resident.id ? ('device.selected-resident' | translate) : ('device.select-resident' | translate) }}
+      </button>
+    </mat-card>
+  } @empty {
+    <div class="empty-state">
+      <mat-icon>person_search</mat-icon>
+      <p>{{ 'residents.error.no-residents' | translate }}</p>
+    </div>
+  }
+</div>
+
+<div class="action-buttons">
+  <button mat-raised-button color="primary" type="button" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+    {{ 'go-back' | translate }}
+  </button>
 
   <button
     mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="!selectedResident"
-  >
+    color="accent"
+    type="button"
+    [disabled]="!selectedResident()"
+    (click)="submit()">
+    <mat-icon>link</mat-icon>
     {{ 'device.assign' | translate }}
   </button>
-
-</form>
+</div>
