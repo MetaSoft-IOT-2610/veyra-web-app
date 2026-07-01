@@ -145,7 +145,11 @@
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="vitalSignsColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: vitalSignsColumns;"></tr>
+              <tr
+                mat-row
+                *matRowDef="let row; columns: vitalSignsColumns;"
+                [class.vital-alert-row]="isVitalSignAlert(row)">
+              </tr>
 
               <tr class="mat-row" *matNoDataRow>
                 <td class="mat-cell" [attr.colspan]="vitalSignsColumns.length">

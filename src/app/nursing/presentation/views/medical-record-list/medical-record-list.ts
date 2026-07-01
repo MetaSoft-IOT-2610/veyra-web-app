@@ -229,6 +229,11 @@ export class MedicalRecordList {
     }
   }
 
+  isVitalSignAlert(sign: { severityLevel?: string | null }): boolean {
+    const severity = sign.severityLevel?.toUpperCase();
+    return !!severity && severity !== 'NORMAL';
+  }
+
   navigateToNew(id: number): void {
     void this.router.navigate(nursingNav.allergyNew(id));
   }

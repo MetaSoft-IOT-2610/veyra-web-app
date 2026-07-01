@@ -135,6 +135,14 @@
   background-color: #f0f8ff;
 }
 
+::ng-deep .mat-mdc-row.vital-alert-row {
+  background-color: #ffebee;
+}
+
+::ng-deep .mat-mdc-row.vital-alert-row:hover {
+  background-color: #ffcdd2;
+}
+
 ::ng-deep .mat-mdc-cell {
   color: #333;
   font-size: 13px;
