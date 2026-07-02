@@ -8,6 +8,7 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { VitalSignThreshold } from '../../../../health/domain/model/vital-sign-threshold.entity';
 import { VitalSignThresholdService } from '../../../../health/infrastructure/vital-sign-threshold.service';
@@ -25,7 +26,8 @@ import { nursingNav } from '../../nursing-routes';
     MatIcon,
     MatInput,
     MatLabel,
-    MatProgressSpinner
+    MatProgressSpinner,
+    TranslatePipe
   ],
   templateUrl: './vital-sign-threshold-form.html',
   styleUrl: './vital-sign-threshold-form.css'
@@ -119,7 +121,7 @@ export class VitalSignThresholdForm {
       },
       error: () => {
         this.saving.set(false);
-        this.error.set('No se pudieron guardar los umbrales.');
+        this.error.set('vital-sign-thresholds.error.save');
       }
     });
   }
@@ -158,7 +160,7 @@ export class VitalSignThresholdForm {
       error: err => {
         this.loading.set(false);
         if (err?.status && err.status !== 404) {
-          this.error.set('No se pudieron cargar los umbrales actuales.');
+          this.error.set('vital-sign-thresholds.error.load');
         }
       }
     });
