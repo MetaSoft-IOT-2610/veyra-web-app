@@ -234,6 +234,14 @@ export class MedicalRecordList {
     return !!severity && severity !== 'NORMAL';
   }
 
+  formatVitalValue(value: number | string | null | undefined, unit = ''): string {
+    if (value == null || value === '') {
+      return '-';
+    }
+
+    return unit ? `${value} ${unit}` : `${value}`;
+  }
+
   navigateToNew(id: number): void {
     void this.router.navigate(nursingNav.allergyNew(id));
   }
