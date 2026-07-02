@@ -1,4 +1,4 @@
-import {VitalSignResource, VitalSignsResponse} from './vital-signs-response';
+import {VitalSignResource, VitalSignsPageResponse, VitalSignsResponse} from './vital-signs-response';
 import {VitalSign} from '../domain/model/vital-sign.entity';
 
 export class VitalSignAssembler {
@@ -6,14 +6,23 @@ export class VitalSignAssembler {
     return response.vitalSign.map(vitalSign => this.toEntityFromResource(vitalSign));
   }
 
+  toEntitiesFromPageResponse(response: VitalSignsPageResponse): VitalSign[] {
+    return response.content.map(vitalSign => this.toEntityFromResource(vitalSign));
+  }
+
   toEntityFromResource(resource: VitalSignResource): VitalSign {
+    const bloodPressure = resource.bloodPressure
+      ?? (resource.systolic != null && resource.diastolic != null
+        ? `${resource.systolic}/${resource.diastolic}`
+        : null);
+
     return new VitalSign({
       id: resource.id,
       residentId: resource.residentId,
       measurementId: resource.measurementId,
       temperature: resource.temperature,
       heartRate: resource.heartRate,
-      bloodPressure: resource.bloodPressure,
+      bloodPressure,
       oxygenSaturation: resource.oxygenSaturation,
       respiratoryRate: resource.respiratoryRate,
       registeredAt: resource.registeredAt,

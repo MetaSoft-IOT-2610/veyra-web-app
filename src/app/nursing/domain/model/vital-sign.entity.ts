@@ -1,25 +1,25 @@
 export class VitalSign {
   private _id: number;
   private _residentId: number;
-  private _measurementId: number;
-  private _temperature: number;
-  private _heartRate: number;
-  private _bloodPressure: string;
-  private _oxygenSaturation: number;
-  private _respiratoryRate: number;
-  private _registeredAt: string;
+  private _measurementId: string;
+  private _temperature: number | null;
+  private _heartRate: number | null;
+  private _bloodPressure: string | null;
+  private _oxygenSaturation: number | null;
+  private _respiratoryRate: number | null;
+  private _registeredAt: string | null;
   private _severityLevel: string;
 
   constructor(vitalSign: {
     id: number;
     residentId: number;
-    measurementId: number;
-    temperature: number;
-    heartRate: number;
-    bloodPressure: string;
-    oxygenSaturation: number;
-    respiratoryRate: number;
-    registeredAt: string;
+    measurementId: string;
+    temperature: number | null;
+    heartRate: number | null;
+    bloodPressure: string | null;
+    oxygenSaturation: number | null;
+    respiratoryRate: number | null;
+    registeredAt: string | null;
     severityLevel: string;
   }) {
     this._id = vitalSign.id;
@@ -40,26 +40,26 @@ export class VitalSign {
   get residentId(): number { return this._residentId; }
   set residentId(value: number) { this._residentId = value; }
 
-  get measurementId(): number { return this._measurementId; }
-  set measurementId(value: number) { this._measurementId = value; }
+  get measurementId(): string { return this._measurementId; }
+  set measurementId(value: string) { this._measurementId = value; }
 
-  get temperature(): number { return this._temperature; }
-  set temperature(value: number) { this._temperature = value; }
+  get temperature(): number | null { return this._temperature; }
+  set temperature(value: number | null) { this._temperature = value; }
 
-  get heartRate(): number { return this._heartRate; }
-  set heartRate(value: number) { this._heartRate = value; }
+  get heartRate(): number | null { return this._heartRate; }
+  set heartRate(value: number | null) { this._heartRate = value; }
 
-  get bloodPressure(): string { return this._bloodPressure; }
-  set bloodPressure(value: string) { this._bloodPressure = value; }
+  get bloodPressure(): string | null { return this._bloodPressure; }
+  set bloodPressure(value: string | null) { this._bloodPressure = value; }
 
-  get oxygenSaturation(): number { return this._oxygenSaturation; }
-  set oxygenSaturation(value: number) { this._oxygenSaturation = value; }
+  get oxygenSaturation(): number | null { return this._oxygenSaturation; }
+  set oxygenSaturation(value: number | null) { this._oxygenSaturation = value; }
 
-  get respiratoryRate(): number { return this._respiratoryRate; }
-  set respiratoryRate(value: number) { this._respiratoryRate = value; }
+  get respiratoryRate(): number | null { return this._respiratoryRate; }
+  set respiratoryRate(value: number | null) { this._respiratoryRate = value; }
 
-  get registeredAt(): string { return this._registeredAt; }
-  set registeredAt(value: string) { this._registeredAt = value; }
+  get registeredAt(): string | null { return this._registeredAt; }
+  set registeredAt(value: string | null) { this._registeredAt = value; }
 
   get severityLevel(): string { return this._severityLevel; }
   set severityLevel(value: string) { this._severityLevel = value; }
