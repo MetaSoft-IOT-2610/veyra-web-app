@@ -1,0 +1,98 @@
+.threshold-page {
+  display: grid;
+  gap: 24px;
+  padding: 0 40px 120px 0;
+}
+
+.threshold-card {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px !important;
+  overflow: hidden;
+  background: white;
+}
+
+.card-header-custom {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #f0f8ff;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.card-header-custom h2 {
+  margin: 0;
+  color: #0d2e73;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.card-header-custom p {
+  margin: 4px 0 0;
+  color: #666;
+}
+
+.icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 2px solid #70b1e6;
+  color: #70b1e6;
+  flex-shrink: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 18px;
+  padding: 24px;
+}
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.error-message {
+  display: block;
+  margin: 0 24px 16px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #ffebee;
+  color: #c62828;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0 24px 24px;
+}
+
+.action-buttons button {
+  border-radius: 8px !important;
+  min-width: 120px;
+}
+
+@media (max-width: 768px) {
+  .threshold-page {
+    padding: 0 16px 120px;
+  }
+
+  .card-header-custom {
+    align-items: flex-start;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}

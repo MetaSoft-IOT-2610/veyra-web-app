@@ -250,6 +250,15 @@
   color: white !important;
 }
 
+.thresholds-card {
+  margin-top: 0;
+}
+
+.threshold-icon {
+  border-color: #c62828;
+  color: #c62828;
+}
+
 .spacer{
   padding-bottom: 100px;
 }

@@ -4,7 +4,7 @@ import {VitalSignAssembler} from './vital-sign-assembler';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map, Observable} from 'rxjs';
 import {VitalSign} from '../domain/model/vital-sign.entity';
-import {VitalSignResource} from './vital-signs-response';
+import {VitalSignResource, VitalSignsPageResponse, VitalSignsResponse} from './vital-signs-response';
 
 const residentVitalSignsEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderResidentVitalSigsEndpointPath}`
 
@@ -17,12 +17,27 @@ export class VitalSignsApiEndpoint extends ErrorHandlingEnabledBaseType {
 
   getAll(residentId: number): Observable<VitalSign[]> {
     const url = residentVitalSignsEndpointUrl.replace('{residentId}', residentId.toString());
-    return this.http.get<VitalSignResource[]>(url).pipe(
+    const params = {
+      page: 0,
+      size: 100,
+      startDate: '1970-01-01T00:00:00'
+    };
+
+    return this.http.get<VitalSignResource[] | VitalSignsPageResponse | VitalSignsResponse>(url, { params }).pipe(
       map(response => {
         if(Array.isArray(response)) {
           return response.map(resource => this.vitalSignAssembler.toEntityFromResource(resource));
         }
-        return this.vitalSignAssembler.toEntitiesFromResponse(response);
+
+        if ('content' in response && Array.isArray(response.content)) {
+          return this.vitalSignAssembler.toEntitiesFromPageResponse(response);
+        }
+
+        if ('vitalSign' in response && Array.isArray(response.vitalSign)) {
+          return this.vitalSignAssembler.toEntitiesFromResponse(response);
+        }
+
+        return [];
       }),
       catchError(this.handleError('Failed to fetch vital signs'))
     )

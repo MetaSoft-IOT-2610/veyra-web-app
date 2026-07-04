@@ -75,4 +75,11 @@ export class ResidentDetail {
       void this.router.navigate(nursingNav.medicalRecords(id));
     }
   }
+
+  editVitalSignThresholds() {
+    const id = this.residentId();
+    if (id) {
+      void this.router.navigate(nursingNav.vitalSignThresholds(id));
+    }
+  }
 }
