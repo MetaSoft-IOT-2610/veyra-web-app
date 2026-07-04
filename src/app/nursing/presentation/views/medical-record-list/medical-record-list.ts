@@ -83,9 +83,7 @@ export class MedicalRecordList {
     'measurementId',
     'temperature',
     'heartRate',
-    'bloodPressure',
     'oxygenSaturation',
-    'respiratoryRate',
     'registeredAt',
     'severityLevel'
   ];
@@ -177,8 +175,7 @@ export class MedicalRecordList {
       result = signs.filter(sign => {
         const id = sign.measurementId?.toString() || '';
         const severity = sign.severityLevel?.toLowerCase() || '';
-        const bp = sign.bloodPressure?.toLowerCase() || '';
-        return id.includes(term) || severity.includes(term) || bp.includes(term);
+        return id.includes(term) || severity.includes(term);
       });
     }
 
