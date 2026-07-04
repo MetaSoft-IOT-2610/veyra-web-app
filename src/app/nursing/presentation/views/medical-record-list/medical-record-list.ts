@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { NursingStore } from '../../../application/nursing.store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { nursingNav } from '../../nursing-routes';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import {
   MatCell,
@@ -23,6 +23,7 @@ import { MatInput, MatLabel } from '@angular/material/input';
 import { MatError, MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
+import { APP_DISPLAY_TIMEZONE, parseUtcTimestamp } from '../../../../shared/utils/datetime';
 
 @Component({
   selector: 'app-medical-record-list',
@@ -105,6 +106,9 @@ export class MedicalRecordList {
   vitalSignsSearchTerm = signal('');
   vitalSignsSelectedColumn = signal<string>('measurementId');
   vitalSignsSortDirection = signal<'asc' | 'desc'>('asc');
+  vitalSignsPageIndex = signal(0);
+  vitalSignsPageSize = signal(10);
+  readonly displayTimezone = APP_DISPLAY_TIMEZONE;
 
   constructor() {
     this.route.params.subscribe(params => {
@@ -181,6 +185,11 @@ export class MedicalRecordList {
     return this.sortResult(result, this.vitalSignsSelectedColumn(), this.vitalSignsSortDirection());
   });
 
+  pagedVitalSigns = computed(() => {
+    const start = this.vitalSignsPageIndex() * this.vitalSignsPageSize();
+    return this.filteredVitalSigns().slice(start, start + this.vitalSignsPageSize());
+  });
+
   private sortResult<T>(result: T[], col: string, dir: 'asc' | 'desc'): T[] {
     return [...result].sort((a, b) => {
       let valA = (a as any)[col];
@@ -227,6 +236,17 @@ export class MedicalRecordList {
       this.vitalSignsSelectedColumn.set(col);
       this.vitalSignsSortDirection.set('asc');
     }
+    this.vitalSignsPageIndex.set(0);
+  }
+
+  updateVitalSignsSearchTerm(value: string): void {
+    this.vitalSignsSearchTerm.set(value);
+    this.vitalSignsPageIndex.set(0);
+  }
+
+  onVitalSignsPage(event: PageEvent): void {
+    this.vitalSignsPageIndex.set(event.pageIndex);
+    this.vitalSignsPageSize.set(event.pageSize);
   }
 
   isVitalSignAlert(sign: { severityLevel?: string | null }): boolean {
@@ -240,6 +260,10 @@ export class MedicalRecordList {
     }
 
     return unit ? `${value} ${unit}` : `${value}`;
+  }
+
+  parseRegisteredAt(value: string | null | undefined): Date | null {
+    return value ? parseUtcTimestamp(value) : null;
   }
 
   navigateToNew(id: number): void {

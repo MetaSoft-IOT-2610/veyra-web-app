@@ -15,11 +15,11 @@
           matInput
           [placeholder]="'Search by ID or severity' | translate"
           [value]="vitalSignsSearchTerm()"
-          (input)="vitalSignsSearchTerm.set($any($event.target).value)"
+          (input)="updateVitalSignsSearchTerm($any($event.target).value)"
           type="text"/>
 
         @if (vitalSignsSearchTerm()) {
-          <button matSuffix mat-icon-button (click)="vitalSignsSearchTerm.set('')">
+          <button matSuffix mat-icon-button (click)="updateVitalSignsSearchTerm('')">
             <mat-icon>close</mat-icon>
           </button>
         }
@@ -30,7 +30,7 @@
       <div class="list-container">
         <div class="table-container">
           <div class="table">
-            <table mat-table [dataSource]="filteredVitalSigns()" class="vital-signs-table">
+            <table mat-table [dataSource]="pagedVitalSigns()" class="vital-signs-table">
 
               <ng-container matColumnDef="measurementId">
                 <th mat-header-cell *matHeaderCellDef (click)="toggleVitalSignsSort('measurementId')">
@@ -127,7 +127,9 @@
                     </mat-icon>
                   </div>
                 </th>
-                <td mat-cell *matCellDef="let sign">{{ sign.registeredAt | date:'dd/MM/yyyy' }}</td>
+                <td mat-cell *matCellDef="let sign">
+                  {{ parseRegisteredAt(sign.registeredAt) | date:'dd/MM/yyyy HH:mm:ss':displayTimezone }}
+                </td>
               </ng-container>
 
               <ng-container matColumnDef="severityLevel">
@@ -172,8 +174,11 @@
           <div class="paginator">
             <mat-paginator
               #vitalSignsPaginator
+              [length]="filteredVitalSigns().length"
+              [pageIndex]="vitalSignsPageIndex()"
               [pageSizeOptions]="[5, 10, 25, 50]"
-              [pageSize]="10"
+              [pageSize]="vitalSignsPageSize()"
+              (page)="onVitalSignsPage($event)"
               showFirstLastButtons>
             </mat-paginator>
           </div>
