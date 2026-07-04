@@ -251,7 +251,7 @@ export class MedicalRecordList {
 
   isVitalSignAlert(sign: { severityLevel?: string | null }): boolean {
     const severity = sign.severityLevel?.toUpperCase();
-    return !!severity && severity !== 'NORMAL';
+    return severity === 'CRITICAL';
   }
 
   formatVitalValue(value: number | string | null | undefined, unit = ''): string {
