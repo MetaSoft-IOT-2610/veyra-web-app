@@ -1050,7 +1050,11 @@
     },
     "actions": {
       "back": "Back",
-      "save": "Save"
+      "save": "Save",
+      "close": "Close"
+    },
+    "success": {
+      "save": "Thresholds saved successfully."
     }
   }
 }

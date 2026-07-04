@@ -1051,7 +1051,11 @@
     },
     "actions": {
       "back": "Volver",
-      "save": "Guardar"
+      "save": "Guardar",
+      "close": "Cerrar"
+    },
+    "success": {
+      "save": "Umbrales guardados correctamente."
     }
   }
 }

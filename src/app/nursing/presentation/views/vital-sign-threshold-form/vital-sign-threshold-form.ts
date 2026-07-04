@@ -8,7 +8,8 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { TranslatePipe } from '@ngx-translate/core';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import { VitalSignThreshold } from '../../../../health/domain/model/vital-sign-threshold.entity';
 import { VitalSignThresholdService } from '../../../../health/infrastructure/vital-sign-threshold.service';
@@ -27,6 +28,7 @@ import { nursingNav } from '../../nursing-routes';
     MatInput,
     MatLabel,
     MatProgressSpinner,
+    MatSnackBarModule,
     TranslatePipe
   ],
   templateUrl: './vital-sign-threshold-form.html',
@@ -37,6 +39,8 @@ export class VitalSignThresholdForm {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly thresholdService = inject(VitalSignThresholdService);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly translate = inject(TranslateService);
 
   protected readonly loading = signal(false);
   protected readonly saving = signal(false);
@@ -117,11 +121,13 @@ export class VitalSignThresholdForm {
     this.thresholdService.saveThreshold(this.residentId, threshold).subscribe({
       next: () => {
         this.saving.set(false);
+        this.showMessage('vital-sign-thresholds.success.save');
         void this.router.navigate(nursingNav.residentDetail(this.residentId!));
       },
       error: () => {
         this.saving.set(false);
         this.error.set('vital-sign-thresholds.error.save');
+        this.showMessage('vital-sign-thresholds.error.save');
       }
     });
   }
@@ -164,5 +170,13 @@ export class VitalSignThresholdForm {
         }
       }
     });
+  }
+
+  private showMessage(messageKey: string): void {
+    this.snackBar.open(
+      this.translate.instant(messageKey),
+      this.translate.instant('vital-sign-thresholds.actions.close'),
+      { duration: 3500 }
+    );
   }
 }
