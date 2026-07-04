@@ -72,14 +72,6 @@ export class VitalSignThresholdForm {
     maxOxygenSaturation: new FormControl<number>(100, {
       nonNullable: true,
       validators: [Validators.required, Validators.min(0), Validators.max(100)]
-    }),
-    minRespiratoryRate: new FormControl<number>(12, {
-      nonNullable: true,
-      validators: [Validators.required, Validators.min(0), Validators.max(60)]
-    }),
-    maxRespiratoryRate: new FormControl<number>(20, {
-      nonNullable: true,
-      validators: [Validators.required, Validators.min(0), Validators.max(60)]
     })
   });
 
@@ -116,9 +108,7 @@ export class VitalSignThresholdForm {
       minTemperature: value.minTemperature,
       maxTemperature: value.maxTemperature,
       minOxygenSaturation: value.minOxygenSaturation,
-      maxOxygenSaturation: value.maxOxygenSaturation,
-      minRespiratoryRate: value.minRespiratoryRate,
-      maxRespiratoryRate: value.maxRespiratoryRate
+      maxOxygenSaturation: value.maxOxygenSaturation
     });
 
     this.saving.set(true);
@@ -149,8 +139,7 @@ export class VitalSignThresholdForm {
     const value = this.form.getRawValue();
     return value.minHeartRate <= value.maxHeartRate
       && value.minTemperature <= value.maxTemperature
-      && value.minOxygenSaturation <= value.maxOxygenSaturation
-      && value.minRespiratoryRate <= value.maxRespiratoryRate;
+      && value.minOxygenSaturation <= value.maxOxygenSaturation;
   }
 
   private loadThreshold(residentId: number): void {
@@ -164,9 +153,7 @@ export class VitalSignThresholdForm {
           minTemperature: threshold.minTemperature,
           maxTemperature: threshold.maxTemperature,
           minOxygenSaturation: threshold.minOxygenSaturation,
-          maxOxygenSaturation: threshold.maxOxygenSaturation,
-          minRespiratoryRate: threshold.minRespiratoryRate,
-          maxRespiratoryRate: threshold.maxRespiratoryRate
+          maxOxygenSaturation: threshold.maxOxygenSaturation
         });
         this.loading.set(false);
       },

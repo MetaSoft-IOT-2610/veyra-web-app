@@ -7,8 +7,6 @@ export class VitalSignThreshold {
   maxHeartRate: number;
   minOxygenSaturation: number;
   maxOxygenSaturation: number;
-  minRespiratoryRate: number;
-  maxRespiratoryRate: number;
 
   constructor(threshold?: Partial<VitalSignThreshold>) {
     this.id = threshold?.id ?? 0;
@@ -19,7 +17,5 @@ export class VitalSignThreshold {
     this.maxHeartRate = threshold?.maxHeartRate ?? 100;
     this.minOxygenSaturation = threshold?.minOxygenSaturation ?? 95;
     this.maxOxygenSaturation = threshold?.maxOxygenSaturation ?? 100;
-    this.minRespiratoryRate = threshold?.minRespiratoryRate ?? 12;
-    this.maxRespiratoryRate = threshold?.maxRespiratoryRate ?? 20;
   }
 }

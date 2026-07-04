@@ -58,17 +58,6 @@
           <span matTextSuffix>%</span>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'vital-sign-thresholds.fields.min-respiratory-rate' | translate }}</mat-label>
-          <input matInput type="number" formControlName="minRespiratoryRate">
-          <span matTextSuffix>rpm</span>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{ 'vital-sign-thresholds.fields.max-respiratory-rate' | translate }}</mat-label>
-          <input matInput type="number" formControlName="maxRespiratoryRate">
-          <span matTextSuffix>rpm</span>
-        </mat-form-field>
       </div>
 
       @if (!hasValidRanges()) {

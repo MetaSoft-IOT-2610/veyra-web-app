@@ -16,7 +16,6 @@ export interface ThresholdCheckResult {
     temperature?: { value: number; min: number; max: number };
     heartRate?: { value: number; min: number; max: number };
     oxygenSaturation?: { value: number; min: number; max: number };
-    respiratoryRate?: { value: number; min: number; max: number };
   };
 }
 
@@ -44,9 +43,6 @@ export class TrackingAcl {
     }
     if (reading.oxygenSaturation < threshold.minOxygenSaturation || reading.oxygenSaturation > threshold.maxOxygenSaturation) {
       violations.oxygenSaturation = { value: reading.oxygenSaturation, min: threshold.minOxygenSaturation, max: threshold.maxOxygenSaturation };
-    }
-    if (reading.respiratoryRate < threshold.minRespiratoryRate || reading.respiratoryRate > threshold.maxRespiratoryRate) {
-      violations.respiratoryRate = { value: reading.respiratoryRate, min: threshold.minRespiratoryRate, max: threshold.maxRespiratoryRate };
     }
 
     return { isAlert: Object.keys(violations).length > 0, violations };

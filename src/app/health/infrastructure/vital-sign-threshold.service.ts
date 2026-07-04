@@ -70,9 +70,7 @@ export class VitalSignThresholdService {
       minTemperature: resource.temperatureMin ?? 35.0,
       maxTemperature: resource.temperatureMax ?? 37.5,
       minOxygenSaturation: resource.oxygenSaturationMin ?? 95,
-      maxOxygenSaturation: resource.oxygenSaturationMax ?? 100,
-      minRespiratoryRate: resource.respiratoryRateMin ?? 12,
-      maxRespiratoryRate: resource.respiratoryRateMax ?? 20
+      maxOxygenSaturation: resource.oxygenSaturationMax ?? 100
     });
   }
 
@@ -86,8 +84,8 @@ export class VitalSignThresholdService {
       temperatureMax: threshold.maxTemperature,
       oxygenSaturationMin: threshold.minOxygenSaturation,
       oxygenSaturationMax: threshold.maxOxygenSaturation,
-      respiratoryRateMin: threshold.minRespiratoryRate,
-      respiratoryRateMax: threshold.maxRespiratoryRate
+      respiratoryRateMin: null,
+      respiratoryRateMax: null
     };
   }
 }
