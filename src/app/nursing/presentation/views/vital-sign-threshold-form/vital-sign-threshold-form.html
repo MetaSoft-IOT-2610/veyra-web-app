@@ -53,6 +53,12 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
+          <mat-label>{{ 'vital-sign-thresholds.fields.max-oxygen-saturation' | translate }}</mat-label>
+          <input matInput type="number" formControlName="maxOxygenSaturation">
+          <span matTextSuffix>%</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
           <mat-label>{{ 'vital-sign-thresholds.fields.min-respiratory-rate' | translate }}</mat-label>
           <input matInput type="number" formControlName="minRespiratoryRate">
           <span matTextSuffix>rpm</span>

@@ -69,6 +69,10 @@ export class VitalSignThresholdForm {
       nonNullable: true,
       validators: [Validators.required, Validators.min(0), Validators.max(100)]
     }),
+    maxOxygenSaturation: new FormControl<number>(100, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0), Validators.max(100)]
+    }),
     minRespiratoryRate: new FormControl<number>(12, {
       nonNullable: true,
       validators: [Validators.required, Validators.min(0), Validators.max(60)]
@@ -112,6 +116,7 @@ export class VitalSignThresholdForm {
       minTemperature: value.minTemperature,
       maxTemperature: value.maxTemperature,
       minOxygenSaturation: value.minOxygenSaturation,
+      maxOxygenSaturation: value.maxOxygenSaturation,
       minRespiratoryRate: value.minRespiratoryRate,
       maxRespiratoryRate: value.maxRespiratoryRate
     });
@@ -144,6 +149,7 @@ export class VitalSignThresholdForm {
     const value = this.form.getRawValue();
     return value.minHeartRate <= value.maxHeartRate
       && value.minTemperature <= value.maxTemperature
+      && value.minOxygenSaturation <= value.maxOxygenSaturation
       && value.minRespiratoryRate <= value.maxRespiratoryRate;
   }
 
@@ -158,6 +164,7 @@ export class VitalSignThresholdForm {
           minTemperature: threshold.minTemperature,
           maxTemperature: threshold.maxTemperature,
           minOxygenSaturation: threshold.minOxygenSaturation,
+          maxOxygenSaturation: threshold.maxOxygenSaturation,
           minRespiratoryRate: threshold.minRespiratoryRate,
           maxRespiratoryRate: threshold.maxRespiratoryRate
         });

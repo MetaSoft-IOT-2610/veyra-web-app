@@ -1041,6 +1041,7 @@
       "min-temperature": "Temperatura m?nima",
       "max-temperature": "Temperatura m?xima",
       "min-oxygen-saturation": "Ox?geno m?nimo",
+      "max-oxygen-saturation": "Ox?geno m?ximo",
       "min-respiratory-rate": "Respiraci?n m?nima",
       "max-respiratory-rate": "Respiraci?n m?xima"
     },

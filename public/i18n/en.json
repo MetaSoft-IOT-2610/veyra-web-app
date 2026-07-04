@@ -1040,6 +1040,7 @@
       "min-temperature": "Minimum temperature",
       "max-temperature": "Maximum temperature",
       "min-oxygen-saturation": "Minimum oxygen",
+      "max-oxygen-saturation": "Maximum oxygen",
       "min-respiratory-rate": "Minimum respiration",
       "max-respiratory-rate": "Maximum respiration"
     },

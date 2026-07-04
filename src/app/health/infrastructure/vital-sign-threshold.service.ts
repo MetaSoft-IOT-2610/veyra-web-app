@@ -16,6 +16,7 @@ interface VitalSignThresholdResource {
   temperatureMin: number | null;
   temperatureMax: number | null;
   oxygenSaturationMin: number | null;
+  oxygenSaturationMax: number | null;
   respiratoryRateMin: number | null;
   respiratoryRateMax: number | null;
 }
@@ -28,6 +29,7 @@ interface SaveVitalSignThresholdResource {
   temperatureMin: number | null;
   temperatureMax: number | null;
   oxygenSaturationMin: number | null;
+  oxygenSaturationMax: number | null;
   respiratoryRateMin: number | null;
   respiratoryRateMax: number | null;
 }
@@ -68,7 +70,7 @@ export class VitalSignThresholdService {
       minTemperature: resource.temperatureMin ?? 35.0,
       maxTemperature: resource.temperatureMax ?? 37.5,
       minOxygenSaturation: resource.oxygenSaturationMin ?? 95,
-      maxOxygenSaturation: 100,
+      maxOxygenSaturation: resource.oxygenSaturationMax ?? 100,
       minRespiratoryRate: resource.respiratoryRateMin ?? 12,
       maxRespiratoryRate: resource.respiratoryRateMax ?? 20
     });
@@ -83,6 +85,7 @@ export class VitalSignThresholdService {
       temperatureMin: threshold.minTemperature,
       temperatureMax: threshold.maxTemperature,
       oxygenSaturationMin: threshold.minOxygenSaturation,
+      oxygenSaturationMax: threshold.maxOxygenSaturation,
       respiratoryRateMin: threshold.minRespiratoryRate,
       respiratoryRateMax: threshold.maxRespiratoryRate
     };
