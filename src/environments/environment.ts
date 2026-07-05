@@ -5,7 +5,7 @@ export const environment = {
   /** Nunca aplicar sesión simulada en producción. */
   fallbackDevUserSession: false,
   devFallbackCredentials: null as { username: string; password: string } | null,
-  platformProviderApiBaseUrl: 'https://veyra-backend.whiteground-ce499065.canadacentral.azurecontainerapps.io/api/v1',
+  platformProviderApiBaseUrl: 'https://veyra-backend.redwave-e7e23e62.canadacentral.azurecontainerapps.io/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
@@ -51,9 +51,7 @@ export const environment = {
   platformProviderHealthRecordsEndpointPath: '/health-records',
   platformProviderHealthAlertsEndpointPath: '/health-alerts',
   platformProviderHealthResidentAllergiesEndpointPath: '/residents/{residentId}/allergies',
-  platformProviderHealthResidentVitalSignsEndpointPath: '/residents/{residentId}/vital-signs',
-  platformProviderHealthResidentHealthRecordsEndpointPath: '/residents/{residentId}/health-records',
-  platformProviderHealthResidentHealthAlertsEndpointPath: '/residents/{residentId}/health-alerts',
+  platformProviderHealthResidentVitalSignThresholdsEndpointPath: '/residents/{residentId}/vital-sign-thresholds',
 
   // Profiles Bounded Context
   platformProviderBusinessProfilesEndpointPath: '/business-profiles',
