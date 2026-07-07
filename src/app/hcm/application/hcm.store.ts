@@ -1,4 +1,5 @@
-import { computed, Injectable, Signal, signal } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable, Signal, signal } from '@angular/core';
+import { apiErrorKey } from '../../shared/utils/api-error-key';
 import { StaffMember } from '../domain/model/staff-member.entity';
 import { HcmApi } from '../infrastructure/hcm-api';
 import { retry } from 'rxjs';
@@ -12,6 +13,9 @@ import { UpdateContractStatusCommand } from '../domain/model/update-contract-sta
   providedIn: 'root'
 })
 export class HcmStore {
+  private readonly hcmApi = inject(HcmApi);
+  private readonly destroyRef = inject(DestroyRef);
+
   private readonly _staffMemberSignal = signal<StaffMember[]>([]);
   private readonly _contractSignal = signal<Contract[]>([]);
   private readonly _loadingSignal = signal<boolean>(false);
@@ -20,8 +24,6 @@ export class HcmStore {
   readonly loading = this._loadingSignal.asReadonly();
   readonly staff = this._staffMemberSignal.asReadonly();
   readonly contracts = this._contractSignal.asReadonly();
-
-  constructor(private hcmApi: HcmApi) {}
 
   addStaffMember(nursingHomeId: number, staffMemberCommand: CreateStaffMemberCommand) {
     this._loadingSignal.set(true);
@@ -32,7 +34,7 @@ export class HcmStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create staff member'));
+        this._errorSignal.set(apiErrorKey('errors.hcm.create-staff', err));
         this._loadingSignal.set(false);
       }
     });
@@ -50,7 +52,7 @@ export class HcmStore {
         this._staffMemberSignal.update(staffMembers => staffMembers.filter(s => s.id !== id));
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to delete staff member'));
+        this._errorSignal.set(apiErrorKey('errors.hcm.delete-staff', err));
         this._loadingSignal.set(false);
       }
     })
@@ -66,7 +68,7 @@ export class HcmStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to update staff member'));
+        this._errorSignal.set(apiErrorKey('errors.hcm.update-staff', err));
         this._loadingSignal.set(false);
       }
     });
@@ -81,7 +83,7 @@ export class HcmStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create contract'));
+        this._errorSignal.set(apiErrorKey('errors.hcm.create-contract', err));
         this._loadingSignal.set(false);
       }
     });
@@ -97,7 +99,7 @@ export class HcmStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to update contract status'));
+        this._errorSignal.set(apiErrorKey('errors.hcm.update-contract-status', err));
         this._loadingSignal.set(false);
       }
     });
@@ -106,13 +108,13 @@ export class HcmStore {
   loadStaff(nursingHomeId: number): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.hcmApi.getStaffMembers(nursingHomeId).pipe(takeUntilDestroyed()).subscribe({
+    this.hcmApi.getStaffMembers(nursingHomeId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: staff => {
         this._staffMemberSignal.set(staff);
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load staff'));
+        this._errorSignal.set(apiErrorKey('errors.hcm.load-staff', err));
         this._loadingSignal.set(false);
       }
     });
@@ -121,18 +123,11 @@ export class HcmStore {
   loadContracts(staffMemberId: number) {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.hcmApi.getContracts(staffMemberId).pipe(takeUntilDestroyed()).subscribe({
+    this.hcmApi.getContracts(staffMemberId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: contract => {
         this._contractSignal.set(contract);
         this._loadingSignal.set(false);
       }
     })
-  }
-
-  formatError(error: any, fallback: string): string {
-    if (error instanceof Error) {
-      return error.message.includes('Resource not found') ? `${fallback}: Not Found` : error.message;
-    }
-    return fallback;
   }
 }

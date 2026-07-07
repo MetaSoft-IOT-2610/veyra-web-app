@@ -1,4 +1,5 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { apiErrorKey } from '../../shared/utils/api-error-key';
 import { ActivitiesApi } from '../infrastructure/activities-api';
 import { Activity, ActivityStatus, ActivityType, WeekDay } from '../domain/model/activity.entity';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -21,6 +22,9 @@ import { retry } from 'rxjs';
  */
 @Injectable({ providedIn: 'root' })
 export class ActivitiesStore {
+
+  private readonly activitiesApi = inject(ActivitiesApi);
+  private readonly destroyRef = inject(DestroyRef);
 
   // ─── Private state ───────────────────────────────────────────────────────────
 
@@ -68,14 +72,9 @@ export class ActivitiesStore {
     this.activities().filter(a => a.isRecurring)
   );
 
-  /**
-   * @param activitiesApi - Injected API service for HTTP operations
-   */
-  constructor(private activitiesApi: ActivitiesApi) {
+  constructor() {
     this.loadActivities();
   }
-
-  // ─── Private helpers ─────────────────────────────────────────────────────────
 
   /**
    * Loads all activities from the backend on store initialization.
@@ -83,13 +82,13 @@ export class ActivitiesStore {
   private loadActivities(): void {
     this._loadingSignal.set(true);
     this._errorSignal.set(null);
-    this.activitiesApi.getAll().pipe(takeUntilDestroyed()).subscribe({
+    this.activitiesApi.getAll().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: activities => {
         this._activitiesSignal.set(activities);
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load activities'));
+        this._errorSignal.set(apiErrorKey('errors.activities.load', err));
         this._loadingSignal.set(false);
       }
     });
@@ -101,13 +100,7 @@ export class ActivitiesStore {
    * @param fallback - Default message if error cannot be parsed
    * @returns Formatted error string
    */
-  private formatError(error: any, fallback: string): string {
-    if (error instanceof Error)
-      return error.message.includes('Resource not found')
-        ? `${fallback}: Not found`
-        : error.message;
-    return fallback;
-  }
+
 
   // ─── Public methods ───────────────────────────────────────────────────────────
 
@@ -152,7 +145,7 @@ export class ActivitiesStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to log activity'));
+        this._errorSignal.set(apiErrorKey('errors.activities.log', err));
         this._loadingSignal.set(false);
       }
     });
@@ -177,7 +170,7 @@ export class ActivitiesStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, `Failed to update activity ${activity.id}`));
+        this._errorSignal.set(apiErrorKey('errors.activities.update', err));
         this._loadingSignal.set(false);
       }
     });
@@ -197,7 +190,7 @@ export class ActivitiesStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, `Failed to delete activity ${id}`));
+        this._errorSignal.set(apiErrorKey('errors.activities.delete', err));
         this._loadingSignal.set(false);
       }
     });
@@ -219,7 +212,7 @@ export class ActivitiesStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, `Failed to complete activity ${id}`));
+        this._errorSignal.set(apiErrorKey('errors.activities.complete', err));
         this._loadingSignal.set(false);
       }
     });

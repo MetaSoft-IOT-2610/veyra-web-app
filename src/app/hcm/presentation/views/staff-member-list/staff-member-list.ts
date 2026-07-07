@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -32,16 +32,12 @@ import { hcmNav } from '../../hcm-routes';
   templateUrl: './staff-member-list.html',
   styleUrl: './staff-member-list.css'
 })
-export class StaffMemberList {
+export class StaffMemberList implements OnInit {
   readonly store = inject(HcmStore);
   protected router = inject(Router);
   nursingHomeId: number = Number(localStorage.getItem('nursingHomeId'));
 
-  constructor() {
-    this.store.loadStaff(this.nursingHomeId);
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.store.loadStaff(this.nursingHomeId);
   }
 
