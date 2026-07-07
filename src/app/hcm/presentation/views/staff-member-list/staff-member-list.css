@@ -7,8 +7,19 @@
   margin-right: 40px;
 }
 
-.search-container {
+.list-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-right: 40px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  flex: 1 1 280px;
+  min-width: 0;
 }
 
 .search-container mat-form-field {
@@ -38,7 +49,6 @@ mat-spinner {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 24px;
-  padding-bottom: 140px;
   margin-right: 40px;
 }
 
@@ -156,17 +166,10 @@ mat-spinner {
 
 /* Action Buttons */
 .action-buttons {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
   display: flex;
   gap: 12px;
-  padding: 16px 24px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  z-index: 100;
-  border: 2px solid #e0e0e0;
+  flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .action-buttons button {
@@ -220,24 +223,18 @@ mat-spinner {
     font-size: 2rem;
   }
 
-  .cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-    gap: 16px;
-    padding-bottom: 180px;
+  .list-toolbar {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .action-buttons {
-    bottom: 16px;
-    right: 16px;
-    left: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 12px 16px;
+    justify-content: flex-end;
   }
 
-  .action-buttons button {
-    flex: 1 1 auto;
-    min-width: 120px;
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 16px;
   }
 }
 
@@ -261,12 +258,10 @@ mat-spinner {
 
   .action-buttons {
     flex-direction: column;
-    padding: 12px;
   }
 
   .action-buttons button {
     width: 100%;
-    min-width: unset;
   }
 }
 
@@ -282,12 +277,5 @@ mat-spinner {
   .staff-image {
     width: 100px;
     height: 100px;
-  }
-
-  .action-buttons {
-    bottom: 12px;
-    right: 12px;
-    left: 12px;
-    padding: 10px;
   }
 }
