@@ -127,9 +127,9 @@
 
         @if (routeToolbar.pageData()) {
           <div class="toolbar-page-info">
-            <h1 class="toolbar-page-module">{{ routeToolbar.module() }}</h1>
+            <h1 class="toolbar-page-module">{{ routeToolbar.module() | translate }}</h1>
             @if (routeToolbar.description()) {
-              <p class="toolbar-page-description">{{ routeToolbar.description() }}</p>
+              <p class="toolbar-page-description">{{ routeToolbar.description() | translate }}</p>
             }
           </div>
         }

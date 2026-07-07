@@ -1,4 +1,5 @@
 import { computed, DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { apiErrorKey } from '../../shared/utils/api-error-key';
 import { retry } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AlertsApi } from '../infrastructure/alerts-api';
@@ -56,7 +57,7 @@ export class AlertsStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, 'Failed to load alerts'));
+          this._errorSignal.set(apiErrorKey('errors.alerts.load', err));
           this._loadingSignal.set(false);
         }
       });
@@ -77,7 +78,7 @@ export class AlertsStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, 'Failed to load alerts'));
+          this._errorSignal.set(apiErrorKey('errors.alerts.load', err));
           this._loadingSignal.set(false);
         }
       });
@@ -99,7 +100,7 @@ export class AlertsStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, `Failed to load alerts for resident ${residentId}`));
+          this._errorSignal.set(apiErrorKey('errors.alerts.load-by-resident', err));
           this._loadingSignal.set(false);
         }
       });
@@ -121,7 +122,7 @@ export class AlertsStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, `Failed to load alerts with status ${status}`));
+          this._errorSignal.set(apiErrorKey('errors.alerts.load-by-status', err));
           this._loadingSignal.set(false);
         }
       });
@@ -142,7 +143,7 @@ export class AlertsStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create alert'));
+        this._errorSignal.set(apiErrorKey('errors.alerts.create', err));
         this._loadingSignal.set(false);
       }
     });
@@ -161,7 +162,7 @@ export class AlertsStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, `Failed to delete alert ${id}`));
+        this._errorSignal.set(apiErrorKey('errors.alerts.delete', err));
         this._loadingSignal.set(false);
       }
     });
@@ -239,9 +240,4 @@ export class AlertsStore {
     this._errorSignal.set(null);
   }
 
-  private formatError(error: any, fallback: string): string {
-    if (error instanceof Error)
-      return error.message.includes('Resource not found') ? `${fallback}: Not Found` : error.message;
-    return fallback;
-  }
 }

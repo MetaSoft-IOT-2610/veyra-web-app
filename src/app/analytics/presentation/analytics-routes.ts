@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
+import { routePageKeys } from '../../shared/routing/route-page-data';
 
 const analyticsDashboard = () =>
   import('./views/analytics-dashboard/analytics-dashboard').then((m) => m.AnalyticsDashboard);
@@ -18,9 +19,7 @@ const analyticsRoutes: Routes = [
     name: 'analytics.dashboard',
     loadComponent: analyticsDashboard,
     page: {
-      title: 'Tablero',
-      module: 'Analítica',
-      description: 'Indicadores y métricas de la residencia',
+      ...routePageKeys('analytics.dashboard'),
       showBackButton: false,
     },
   }),

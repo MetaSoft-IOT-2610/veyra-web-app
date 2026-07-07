@@ -18,7 +18,7 @@ export function definePageRoute(options: {
   return {
     path: options.path,
     loadComponent: options.loadComponent,
-    title: `${options.page.title} | ${APP_DOCUMENT_TITLE_SUFFIX}`,
+    title: options.page.title,
     data,
   };
 }

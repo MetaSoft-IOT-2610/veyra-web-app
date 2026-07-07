@@ -1,6 +1,7 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { applyDocumentLanguage, persistLanguage } from '../../../utils/language-preference';
 
 @Component({
   selector: 'app-language-switcher',
@@ -21,5 +22,7 @@ export class LanguageSwitcher {
   useLanguage(language: string): void {
     this.translate.use(language);
     this.currentLang = language;
+    persistLanguage(language);
+    applyDocumentLanguage(language);
   }
 }

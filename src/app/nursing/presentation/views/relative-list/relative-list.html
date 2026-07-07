@@ -14,7 +14,7 @@
     </mat-form-field>
   </div>
 
-  <mat-error *ngIf="store.error()" class="error-message">{{ store.error() }}</mat-error>
+  <mat-error *ngIf="store.error()" class="error-message">{{ store.error() | translate }}</mat-error>
 
   <mat-spinner *ngIf="store.loading()" diameter="40"></mat-spinner>
 

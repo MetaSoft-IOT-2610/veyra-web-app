@@ -1,4 +1,5 @@
 import { computed, DestroyRef, inject, Injectable, Signal, signal } from '@angular/core';
+import { apiErrorKey } from '../../shared/utils/api-error-key';
 import { BusinessProfile } from '../domain/model/business-profile.entity';
 import { PersonProfile } from '../domain/model/person-profile.entity';
 import { ProfilesApi } from '../infrastructure/profiles-api';
@@ -41,7 +42,7 @@ export class ProfilesStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, 'Failed to create business profile'));
+          this._errorSignal.set(apiErrorKey('errors.profiles.create-business', err));
           this._loadingSignal.set(false);
         }
       })
@@ -58,7 +59,7 @@ export class ProfilesStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, 'Failed to update business profile'));
+          this._errorSignal.set(apiErrorKey('errors.profiles.update-business', err));
           this._loadingSignal.set(false);
         }
       })
@@ -74,7 +75,7 @@ export class ProfilesStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to delete business profile'));
+        this._errorSignal.set(apiErrorKey('errors.profiles.delete-business', err));
         this._loadingSignal.set(false);
       }
     });
@@ -96,7 +97,7 @@ export class ProfilesStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, 'Failed to create person profile'));
+          this._errorSignal.set(apiErrorKey('errors.profiles.create-person', err));
           this._loadingSignal.set(false);
         }
       })
@@ -112,7 +113,7 @@ export class ProfilesStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, 'Failed to update person profile'));
+          this._errorSignal.set(apiErrorKey('errors.profiles.update-person', err));
           this._loadingSignal.set(false);
         }
       })
@@ -128,7 +129,7 @@ export class ProfilesStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to delete person profile'));
+        this._errorSignal.set(apiErrorKey('errors.profiles.delete-person', err));
         this._loadingSignal.set(false);
       }
     });
@@ -143,7 +144,7 @@ export class ProfilesStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load business profile list'));
+        this._errorSignal.set(apiErrorKey('errors.profiles.load-business-list', err));
         this._loadingSignal.set(false);
       }
     });
@@ -158,18 +159,9 @@ export class ProfilesStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load person profile list'));
+        this._errorSignal.set(apiErrorKey('errors.profiles.load-person-list', err));
         this._loadingSignal.set(false);
       }
     });
-  }
-
-  private formatError(error: any, fallback: string): string {
-    if (error instanceof Error) {
-      return error.message.includes('Resource not found')
-        ? `${fallback}: Not Found`
-        : error.message;
-    }
-    return fallback;
   }
 }

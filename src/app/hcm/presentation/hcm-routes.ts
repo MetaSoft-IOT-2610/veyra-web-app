@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
+import { routePageKeys } from '../../shared/routing/route-page-data';
 
 const staffMemberList = () =>
   import('./views/staff-member-list/staff-member-list').then((m) => m.StaffMemberList);
@@ -38,9 +39,7 @@ const hcmRoutes: Routes = [
     name: 'hcm.staff.list',
     loadComponent: staffMemberList,
     page: {
-      title: 'Personal',
-      module: 'Personal',
-      description: 'Gestión del personal de la residencia',
+      ...routePageKeys('hcm.staff.list'),
       showBackButton: false,
     },
   }),
@@ -49,9 +48,7 @@ const hcmRoutes: Routes = [
     name: 'hcm.staff.detail',
     loadComponent: staffMemberDetail,
     page: {
-      title: 'Detalle del personal',
-      module: 'Personal',
-      description: 'Información del miembro del equipo',
+      ...routePageKeys('hcm.staff.detail'),
       showBackButton: true,
     },
   }),
@@ -60,9 +57,7 @@ const hcmRoutes: Routes = [
     name: 'hcm.staff.new',
     loadComponent: staffMemberForm,
     page: {
-      title: 'Nuevo personal',
-      module: 'Personal',
-      description: 'Registrar un nuevo miembro del equipo',
+      ...routePageKeys('hcm.staff.new'),
       showBackButton: true,
     },
   }),
@@ -71,9 +66,7 @@ const hcmRoutes: Routes = [
     name: 'hcm.staff.edit',
     loadComponent: staffMemberForm,
     page: {
-      title: 'Editar personal',
-      module: 'Personal',
-      description: 'Actualizar datos del miembro del equipo',
+      ...routePageKeys('hcm.staff.edit'),
       showBackButton: true,
     },
   }),
@@ -82,9 +75,7 @@ const hcmRoutes: Routes = [
     name: 'hcm.contract.list',
     loadComponent: contractList,
     page: {
-      title: 'Contratos',
-      module: 'Personal',
-      description: 'Contratos asociados al personal',
+      ...routePageKeys('hcm.contract.list'),
       showBackButton: true,
     },
   }),
@@ -93,9 +84,7 @@ const hcmRoutes: Routes = [
     name: 'hcm.contract.new',
     loadComponent: contractForm,
     page: {
-      title: 'Nuevo contrato',
-      module: 'Personal',
-      description: 'Registrar un contrato para el personal',
+      ...routePageKeys('hcm.contract.new'),
       showBackButton: true,
     },
   }),

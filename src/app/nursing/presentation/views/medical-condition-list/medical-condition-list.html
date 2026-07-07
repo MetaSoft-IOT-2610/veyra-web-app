@@ -24,7 +24,7 @@
   <div class="list-container">
 
     @if (store.error()) {
-      <mat-error class="error-message">{{ store.error() }}</mat-error>
+      <mat-error class="error-message">{{ store.error() | translate }}</mat-error>
     }
 
     <div class="table-container">

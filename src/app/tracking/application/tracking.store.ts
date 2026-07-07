@@ -1,4 +1,5 @@
 import {computed, DestroyRef, inject, Injectable, Signal, signal} from '@angular/core';
+import { apiErrorKey } from '../../shared/utils/api-error-key';
 import {Device} from '../domain/model/device.entity';
 import {DeviceStatus} from '../domain/model/device-status.enum';
 import {TrackingApi} from '../infrastructure/tracking-api';
@@ -62,7 +63,7 @@ export class TrackingStore {
         },
         error: err => {
           this.loadingSignal.set(false);
-          this.errorSignal.set(this.formatError(err, 'Failed to load devices'));
+          this.errorSignal.set(apiErrorKey('errors.tracking.load-devices', err));
         }
       });
   }
@@ -84,7 +85,7 @@ export class TrackingStore {
         },
         error: err => {
           this.loadingSignal.set(false);
-          this.errorSignal.set(this.formatError(err, 'Failed to load device'));
+          this.errorSignal.set(apiErrorKey('errors.tracking.load-device', err));
         }
       });
   }
@@ -101,7 +102,7 @@ export class TrackingStore {
         },
         error: err => {
           this.measurementsLoadingSignal.set(false);
-          this.measurementsErrorSignal.set(this.formatError(err, 'Failed to load telemetry'));
+          this.measurementsErrorSignal.set(apiErrorKey('errors.tracking.load-telemetry', err));
         }
       });
   }
@@ -135,7 +136,7 @@ export class TrackingStore {
         this.loadingSignal.set(false);
       },
       error: (err: any) => {
-        this.errorSignal.set(this.formatError(err, 'Failed to add device'));
+        this.errorSignal.set(apiErrorKey('errors.tracking.add-device', err));
         this.loadingSignal.set(false);
       }
     });
@@ -152,7 +153,7 @@ export class TrackingStore {
         this.loadingSignal.set(false);
       },
       error: (err: any) => {
-        this.errorSignal.set(this.formatError(err, 'Failed to update device'));
+        this.errorSignal.set(apiErrorKey('errors.tracking.update-device', err));
         this.loadingSignal.set(false);
       }
     });
@@ -169,7 +170,7 @@ export class TrackingStore {
         this.loadingSignal.set(false);
       },
       error: (err: any) => {
-        this.errorSignal.set(this.formatError(err, 'Failed to assign device'));
+        this.errorSignal.set(apiErrorKey('errors.tracking.assign-device', err));
         this.loadingSignal.set(false);
       }
     });
@@ -199,7 +200,7 @@ export class TrackingStore {
         this.loadingSignal.set(false);
       },
       error: (err: any) => {
-        this.errorSignal.set(this.formatError(err, 'Failed to unassign device'));
+        this.errorSignal.set(apiErrorKey('errors.tracking.unassign-device', err));
         this.loadingSignal.set(false);
       }
     });
@@ -216,7 +217,7 @@ export class TrackingStore {
         this.loadingSignal.set(false);
       },
       error: (err: any) => {
-        this.errorSignal.set(this.formatError(err, 'Failed to change device status'));
+        this.errorSignal.set(apiErrorKey('errors.tracking.change-status', err));
         this.loadingSignal.set(false);
       }
     });
@@ -233,7 +234,7 @@ export class TrackingStore {
         this.loadingSignal.set(false);
       },
       error: (err: any) => {
-        this.errorSignal.set(this.formatError(err, 'Failed to change IoT status'));
+        this.errorSignal.set(apiErrorKey('errors.tracking.change-iot-status', err));
         this.loadingSignal.set(false);
       }
     });
@@ -242,14 +243,4 @@ export class TrackingStore {
   getDeviceById(id: number): Signal<Device | undefined> {
     return computed(() => id ? this.devices().find(d => d.id === id) : undefined);
   }
-
-  private formatError(error: any, fallback: string): string {
-    if (error instanceof Error) {
-      return error.message.includes('Resource not found')
-        ? `${fallback}: Not Found`
-        : error.message;
-    }
-    return fallback;
-  }
 }
-

@@ -1,1 +1,7 @@
-<p>payment-cancelled works!</p>
+<div class="cancelled-page">
+  <div class="cancelled-card">
+    <h1>{{ 'payments.cancelled.title' | translate }}</h1>
+    <p>{{ 'payments.cancelled.message' | translate }}</p>
+    <button type="button" (click)="goBack()">{{ 'payments.cancelled.back' | translate }}</button>
+  </div>
+</div>

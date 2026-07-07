@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, TitleStrategy } from '@angular/router';
+import { I18nTitleStrategy } from './shared/routing/i18n-title.strategy';
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
       loader: provideTranslateHttpLoader({prefix: './i18n/', suffix: '.json'}),
       fallbackLang: 'en'
     }),
-    provideCharts(withDefaultRegisterables())
+    provideCharts(withDefaultRegisterables()),
+    { provide: TitleStrategy, useClass: I18nTitleStrategy },
   ]
 };

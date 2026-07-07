@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
+import { routePageKeys } from '../../shared/routing/route-page-data';
 
 const residentForm = () =>
   import('./views/resident-form/resident-form').then((m) => m.ResidentForm);
@@ -112,9 +113,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.nursing-home.new',
     loadComponent: nursingHomeForm,
     page: {
-      title: 'Nueva residencia',
-      module: 'Enfermería',
-      description: 'Registro inicial de la residencia',
+      ...routePageKeys('nursing.nursing-home.new'),
       showBackButton: false,
     },
   }),
@@ -123,9 +122,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.list',
     loadComponent: residentList,
     page: {
-      title: 'Residentes',
-      module: 'Enfermería',
-      description: 'Listado y gestión de residentes',
+      ...routePageKeys('nursing.residents.list'),
       showBackButton: false,
     },
   }),
@@ -134,9 +131,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.detail',
     loadComponent: residentDetail,
     page: {
-      title: 'Detalle del residente',
-      module: 'Enfermería',
-      description: 'Información general del residente',
+      ...routePageKeys('nursing.residents.detail'),
       showBackButton: true,
     },
   }),
@@ -145,9 +140,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.new',
     loadComponent: residentForm,
     page: {
-      title: 'Nuevo residente',
-      module: 'Enfermería',
-      description: 'Registrar un nuevo residente',
+      ...routePageKeys('nursing.residents.new'),
       showBackButton: true,
     },
   }),
@@ -156,9 +149,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.edit',
     loadComponent: residentForm,
     page: {
-      title: 'Editar residente',
-      module: 'Enfermería',
-      description: 'Actualizar datos del residente',
+      ...routePageKeys('nursing.residents.edit'),
       showBackButton: true,
     },
   }),
@@ -167,9 +158,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.assign-room',
     loadComponent: assignRoomForm,
     page: {
-      title: 'Asignar habitación',
-      module: 'Enfermería',
-      description: 'Asigna una habitación al residente',
+      ...routePageKeys('nursing.residents.assign-room'),
       showBackButton: true,
     },
   }),
@@ -178,9 +167,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.medical-records',
     loadComponent: residentMedicalRecord,
     page: {
-      title: 'Registros médicos',
-      module: 'Enfermería',
-      description: 'Historial clínico del residente',
+      ...routePageKeys('nursing.residents.medical-records'),
       showBackButton: true,
     },
   }),
@@ -189,9 +176,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.vital-sign-thresholds',
     loadComponent: vitalSignThresholdForm,
     page: {
-      title: 'Umbrales de signos vitales',
-      module: 'Enfermería',
-      description: 'Rangos clínicos del residente',
+      ...routePageKeys('nursing.residents.vital-sign-thresholds'),
       showBackButton: true,
     },
   }),
@@ -200,9 +185,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.allergy-new',
     loadComponent: allergyForm,
     page: {
-      title: 'Nueva alergia',
-      module: 'Enfermería',
-      description: 'Registrar una alergia del residente',
+      ...routePageKeys('nursing.residents.allergy-new'),
       showBackButton: true,
     },
   }),
@@ -211,9 +194,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.rooms.list',
     loadComponent: roomList,
     page: {
-      title: 'Habitaciones',
-      module: 'Enfermería',
-      description: 'Gestión de habitaciones de la residencia',
+      ...routePageKeys('nursing.rooms.list'),
       showBackButton: false,
     },
   }),
@@ -222,9 +203,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.rooms.new',
     loadComponent: roomForm,
     page: {
-      title: 'Nueva habitación',
-      module: 'Enfermería',
-      description: 'Registrar una nueva habitación',
+      ...routePageKeys('nursing.rooms.new'),
       showBackButton: true,
     },
   }),
@@ -233,9 +212,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.rooms.edit',
     loadComponent: roomForm,
     page: {
-      title: 'Editar habitación',
-      module: 'Enfermería',
-      description: 'Actualizar datos de la habitación',
+      ...routePageKeys('nursing.rooms.edit'),
       showBackButton: true,
     },
   }),
@@ -244,9 +221,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.medications',
     loadComponent: medicationList,
     page: {
-      title: 'Medicación',
-      module: 'Enfermería',
-      description: 'Medicamentos del residente',
+      ...routePageKeys('nursing.residents.medications'),
       showBackButton: true,
     },
   }),
@@ -255,9 +230,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.medication-new',
     loadComponent: medicationForm,
     page: {
-      title: 'Nueva medicación',
-      module: 'Enfermería',
-      description: 'Registrar un medicamento',
+      ...routePageKeys('nursing.residents.medication-new'),
       showBackButton: true,
     },
   }),
@@ -266,9 +239,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.medical-conditions',
     loadComponent: medicalConditionList,
     page: {
-      title: 'Condiciones médicas',
-      module: 'Enfermería',
-      description: 'Condiciones médicas del residente',
+      ...routePageKeys('nursing.residents.medical-conditions'),
       showBackButton: true,
     },
   }),
@@ -277,9 +248,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.residents.medical-condition-new',
     loadComponent: medicalConditionForm,
     page: {
-      title: 'Nueva condición médica',
-      module: 'Enfermería',
-      description: 'Registrar una condición médica',
+      ...routePageKeys('nursing.residents.medical-condition-new'),
       showBackButton: true,
     },
   }),
@@ -288,9 +257,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.devices.list',
     loadComponent: deviceList,
     page: {
-      title: 'Dispositivos',
-      module: 'Enfermería',
-      description: 'Dispositivos asignados en la residencia',
+      ...routePageKeys('nursing.devices.list'),
       showBackButton: false,
     },
   }),
@@ -299,9 +266,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.relatives.list',
     loadComponent: relativeList,
     page: {
-      title: 'Familiares',
-      module: 'Enfermería',
-      description: 'Contactos familiares vinculados',
+      ...routePageKeys('nursing.relatives.list'),
       showBackButton: false,
     },
   }),
@@ -310,9 +275,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.relatives.new',
     loadComponent: relativeForm,
     page: {
-      title: 'Nuevo familiar',
-      module: 'Enfermería',
-      description: 'Registrar un familiar del residente',
+      ...routePageKeys('nursing.relatives.new'),
       showBackButton: true,
     },
   }),
@@ -321,9 +284,7 @@ const nursingRoutes: Routes = [
     name: 'nursing.my-patients',
     loadComponent: residentMonitoring,
     page: {
-      title: 'Mis pacientes',
-      module: 'Enfermería',
-      description: 'Monitoreo de residentes asignados',
+      ...routePageKeys('nursing.my-patients'),
       showBackButton: false,
     },
   }),

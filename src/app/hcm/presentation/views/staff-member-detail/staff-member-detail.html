@@ -10,7 +10,7 @@
     @if (store.error()) {
       <mat-error class="error-message">
         <mat-icon>error</mat-icon>
-        {{ store.error() }}
+        {{ store.error() | translate }}
       </mat-error>
     }
 

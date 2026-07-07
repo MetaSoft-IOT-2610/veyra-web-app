@@ -1,21 +1,30 @@
-import {Component, inject, signal} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {RouterOutlet} from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { RouterOutlet } from '@angular/router';
+import {
+  applyDocumentLanguage,
+  persistLanguage,
+  resolveInitialLanguage,
+} from './shared/utils/language-preference';
+
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet
-  ],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('FrontendNovaPeruTech');
-  private translate: TranslateService;
+  protected readonly title = signal('Veyra');
+  private readonly translate = inject(TranslateService);
 
   constructor() {
-    this.translate = inject(TranslateService);
     this.translate.addLangs(['en', 'es']);
-    this.translate.use('en');
+    const initialLang = resolveInitialLanguage();
+    applyDocumentLanguage(initialLang);
+    this.translate.use(initialLang);
+    this.translate.onLangChange.subscribe(({ lang }) => {
+      persistLanguage(lang);
+      applyDocumentLanguage(lang);
+    });
   }
 }

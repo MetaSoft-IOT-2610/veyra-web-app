@@ -11,6 +11,7 @@
  */
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
+import { routePageKeys } from '../../shared/routing/route-page-data';
 
 const activityList = () =>
   import('./views/activity-list/activity-list').then((m) => m.ActivityList);
@@ -31,9 +32,7 @@ const activitiesRoutes: Routes = [
     name: 'activities.list',
     loadComponent: activityList,
     page: {
-      title: 'Activities',
-      module: 'Activities',
-      description: 'Record and track resident care activities',
+      ...routePageKeys('activities.list'),
       showBackButton: false,
     },
   }),

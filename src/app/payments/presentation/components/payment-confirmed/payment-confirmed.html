@@ -1,23 +1,19 @@
 <div class="success-page">
   <div class="success-card">
     <div class="icon-container">
-      <div class="check-icon">
-        <i class="fa-solid fa-check"></i>
-      </div>
+      <div class="check-icon"><i class="fa-solid fa-check"></i></div>
     </div>
 
-    <h1 class="title">Payment Successful!</h1>
-    <p class="message">
-      Thank you for choosing <strong>Veyra</strong>. Your subscription has been activated successfully.
-      You can now log in to your account and start managing your care services.
-    </p>
+    <h1 class="title">{{ 'payments.confirmed.title' | translate }}</h1>
+    <p class="message">{{ 'payments.confirmed.message' | translate }}</p>
 
     <div class="action-section">
-      <button class="login-btn" (click)="goToLogin()">
-        Go to Login
+      <button class="login-btn" type="button" (click)="goToLogin()">
+        {{ 'payments.confirmed.login' | translate }}
       </button>
       <p class="support-text">
-        Having trouble? <a href="#">Contact Support</a>
+        {{ 'payments.confirmed.support' | translate }}
+        <a href="#">{{ 'payments.confirmed.contact' | translate }}</a>
       </p>
     </div>
   </div>

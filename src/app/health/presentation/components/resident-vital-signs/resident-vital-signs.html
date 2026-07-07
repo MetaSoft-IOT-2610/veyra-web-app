@@ -1,39 +1,39 @@
 ﻿<section class="health-section">
   <div class="health-section__header">
-    <h2>Vital Sign Thresholds</h2>
-    <span>Health BC</span>
+    <h2>{{ 'health.vitalThresholds.title' | translate }}</h2>
+    <span>{{ 'health.bcLabel' | translate }}</span>
   </div>
 
-  <div *ngIf="isLoading()" class="health-message">
-    Loading thresholds...
-  </div>
+  @if (isLoading()) {
+    <div class="health-message">{{ 'health.vitalThresholds.loading' | translate }}</div>
+  }
 
-  <div *ngIf="errorMessage()" class="health-message health-message--error">
-    {{ errorMessage() }}
-  </div>
+  @if (errorMessage()) {
+    <div class="health-message health-message--error">{{ errorMessage() | translate }}</div>
+  }
 
-  <div *ngIf="!isLoading() && !errorMessage() && !threshold()" class="health-message">
-    No thresholds configured for this resident.
-  </div>
+  @if (!isLoading() && !errorMessage() && !threshold()) {
+    <div class="health-message">{{ 'health.vitalThresholds.empty' | translate }}</div>
+  }
 
-  <div *ngIf="!isLoading() && threshold()" class="vital-sign-list">
-    <article class="vital-sign-card">
-      <div class="vital-grid">
-        <div class="vital-item">
-          <span>Temperature</span>
-          <strong>{{ threshold()!.minTemperature }} – {{ threshold()!.maxTemperature }} °C</strong>
+  @if (!isLoading() && threshold()) {
+    <div class="vital-sign-list">
+      <article class="vital-sign-card">
+        <div class="vital-grid">
+          <div class="vital-item">
+            <span>{{ 'health.vitalThresholds.temperature' | translate }}</span>
+            <strong>{{ threshold()!.minTemperature }} – {{ threshold()!.maxTemperature }} °C</strong>
+          </div>
+          <div class="vital-item">
+            <span>{{ 'health.vitalThresholds.heartRate' | translate }}</span>
+            <strong>{{ threshold()!.minHeartRate }} – {{ threshold()!.maxHeartRate }} bpm</strong>
+          </div>
+          <div class="vital-item">
+            <span>{{ 'health.vitalThresholds.oxygenSaturation' | translate }}</span>
+            <strong>{{ threshold()!.minOxygenSaturation }} – {{ threshold()!.maxOxygenSaturation }} %</strong>
+          </div>
         </div>
-
-        <div class="vital-item">
-          <span>Heart Rate</span>
-          <strong>{{ threshold()!.minHeartRate }} – {{ threshold()!.maxHeartRate }} bpm</strong>
-        </div>
-
-        <div class="vital-item">
-          <span>Oxygen Saturation</span>
-          <strong>{{ threshold()!.minOxygenSaturation }} – {{ threshold()!.maxOxygenSaturation }} %</strong>
-        </div>
-      </div>
-    </article>
-  </div>
+      </article>
+    </div>
+  }
 </section>

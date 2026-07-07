@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
+import { routePageKeys } from '../../shared/routing/route-page-data';
 
 const subscriptionChoose = () =>
   import('./views/subscription-choose/subscription-choose').then((m) => m.SubscriptionChoosePage);
@@ -37,9 +38,7 @@ export const paymentsRoutes: Routes = [
     name: 'payments.choose',
     loadComponent: subscriptionChoose,
     page: {
-      title: 'Elegir suscripción',
-      module: 'Pagos',
-      description: 'Selecciona el tipo de plan para continuar',
+      ...routePageKeys('payments.choose'),
       showBackButton: false,
     },
   }),
@@ -48,9 +47,7 @@ export const paymentsRoutes: Routes = [
     name: 'payments.plan.family',
     loadComponent: subscriptionPlanFamily,
     page: {
-      title: 'Plan familia',
-      module: 'Pagos',
-      description: 'Opciones de suscripción para familias',
+      ...routePageKeys('payments.plan.family'),
       showBackButton: true,
     },
   }),
@@ -59,9 +56,7 @@ export const paymentsRoutes: Routes = [
     name: 'payments.plan.nursing-home',
     loadComponent: subscriptionPlanNursing,
     page: {
-      title: 'Plan residencia',
-      module: 'Pagos',
-      description: 'Opciones de suscripción para residencias',
+      ...routePageKeys('payments.plan.nursing-home'),
       showBackButton: true,
     },
   }),
@@ -70,9 +65,7 @@ export const paymentsRoutes: Routes = [
     name: 'payments.checkout',
     loadComponent: paymentCheckout,
     page: {
-      title: 'Pago',
-      module: 'Pagos',
-      description: 'Completa el proceso de suscripción',
+      ...routePageKeys('payments.checkout'),
       showBackButton: true,
     },
   }),

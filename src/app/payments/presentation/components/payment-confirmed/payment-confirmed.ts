@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { iamNav } from '../../../../iam/presentation/iam.routes';
 
 @Component({
   selector: 'app-payment-confirmed',
   standalone: true,
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './payment-confirmed.html',
   styleUrl: './payment-confirmed.css'
 })

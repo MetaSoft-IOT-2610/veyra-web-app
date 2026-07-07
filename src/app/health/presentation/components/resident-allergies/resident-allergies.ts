@@ -1,14 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
-
+import { TranslatePipe } from '@ngx-translate/core';
 import { HealthStore } from '../../../application/health.store';
 
 @Component({
   selector: 'app-resident-allergies',
   standalone: true,
-  imports: [CommonModule],
+  imports: [TranslatePipe],
   templateUrl: './resident-allergies.html',
-  styleUrl: './resident-allergies.css'
+  styleUrl: './resident-allergies.css',
 })
 export class ResidentAllergies implements OnChanges {
   @Input() residentId = 0;

@@ -49,7 +49,7 @@
   @if (store.error()) {
     <div class="error-banner">
       <mat-icon>error_outline</mat-icon>
-      {{ store.error() }}
+      {{ store.error() | translate }}
     </div>
   }
 
