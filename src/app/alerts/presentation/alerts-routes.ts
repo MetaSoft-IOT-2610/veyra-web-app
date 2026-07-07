@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
+import { routePageKeys } from '../../shared/routing/route-page-data';
 
 const alertsList = () =>
   import('./views/alerts-list/alerts-list').then((m) => m.AlertsList);
@@ -18,9 +19,7 @@ const alertsRoutes: Routes = [
     name: 'alerts.list',
     loadComponent: alertsList,
     page: {
-      title: 'Alertas',
-      module: 'Alertas',
-      description: 'Notificaciones y eventos importantes',
+      ...routePageKeys('alerts.list'),
       showBackButton: false,
     },
   }),

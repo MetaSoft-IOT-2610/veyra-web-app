@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
 import { BaseChartDirective } from 'ng2-charts';
@@ -42,8 +42,10 @@ interface ExpandedChart {
   templateUrl: './analytics-dashboard.html',
   styleUrl: './analytics-dashboard.css'
 })
-export class AnalyticsDashboard {
+export class AnalyticsDashboard implements OnInit, OnDestroy {
   protected store = inject(AnalyticsStore);
+  private readonly translate = inject(TranslateService);
+  private langChangeSub?: { unsubscribe(): void };
 
   selectedYear = new Date().getFullYear();
   nursingHomeId: number = Number(localStorage.getItem('nursingHomeId'));
@@ -56,6 +58,16 @@ export class AnalyticsDashboard {
     this.store.getStaffTerminations(this.nursingHomeId, this.selectedYear);
     this.store.getStaffHires(this.nursingHomeId, this.selectedYear);
     this.store.getResidentsAdmissions(this.nursingHomeId, this.selectedYear);
+  }
+
+  ngOnInit(): void {
+    this.langChangeSub = this.translate.onLangChange.subscribe(() => {
+      this.expandedChart = null;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.langChangeSub?.unsubscribe();
   }
 
   onYearChange() {
@@ -102,8 +114,15 @@ export class AnalyticsDashboard {
   }
 
   private getMonthLabels(): string[] {
-    return this.staffTerminationsMetric?.labels ||
-      ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const fromApi = this.staffTerminationsMetric?.labels;
+    if (fromApi?.length) {
+      return fromApi;
+    }
+    return this.translate.instant('analytics.charts.months') as string[];
+  }
+
+  private chartTitle(key: string): string {
+    return this.translate.instant(key);
   }
 
   public lineTerminationsType: ChartType = 'line';
@@ -114,7 +133,7 @@ export class AnalyticsDashboard {
       labels,
       datasets: [
         {
-          label: 'Terminations',
+          label: this.chartTitle('analytics.charts.terminations'),
           data,
           fill: false,
           borderColor: '#ef5350',
@@ -127,17 +146,19 @@ export class AnalyticsDashboard {
     };
   }
 
-  public lineTerminationsOptions: ChartConfiguration['options'] = {
+  public get lineTerminationsOptions(): ChartConfiguration['options'] {
+    return {
     responsive: true,
     maintainAspectRatio: true,
     plugins: {
       legend: { display: false },
-      title: { display: true, text: 'Staff Terminations by Month', font: { size: 16 } }
+      title: { display: true, text: this.chartTitle('analytics.charts.terminationsTitle'), font: { size: 16 } }
     },
     scales: {
       y: { beginAtZero: true, ticks: { stepSize: 1 } }
     }
   };
+  }
 
   public barComparisonType: ChartType = 'bar';
   public get barComparisonData(): ChartConfiguration<'bar'>['data'] {
@@ -146,14 +167,14 @@ export class AnalyticsDashboard {
       labels,
       datasets: [
         {
-          label: 'Hires',
+          label: this.chartTitle('analytics.charts.hires'),
           data: this.getMonthlyHires(),
           backgroundColor: '#66bb6a',
           borderColor: '#66bb6a',
           borderWidth: 1
         },
         {
-          label: 'Terminations',
+          label: this.chartTitle('analytics.charts.terminations'),
           data: this.getMonthlyTerminations(),
           backgroundColor: '#ef5350',
           borderColor: '#ef5350',
@@ -163,17 +184,19 @@ export class AnalyticsDashboard {
     };
   }
 
-  public barComparisonOptions: ChartConfiguration['options'] = {
+  public get barComparisonOptions(): ChartConfiguration['options'] {
+    return {
     responsive: true,
     maintainAspectRatio: true,
     plugins: {
       legend: { display: true, position: 'bottom' },
-      title: { display: true, text: 'Staff Hires vs Terminations', font: { size: 16 } }
+      title: { display: true, text: this.chartTitle('analytics.charts.hiresVsTerminations'), font: { size: 16 } }
     },
     scales: {
       y: { beginAtZero: true, ticks: { stepSize: 2 } }
     }
   };
+  }
 
   public lineAdmissionsType: ChartType = 'line';
   public get lineAdmissionsData(): ChartConfiguration<'line'>['data'] {
@@ -183,7 +206,7 @@ export class AnalyticsDashboard {
       labels,
       datasets: [
         {
-          label: 'Admissions',
+          label: this.chartTitle('analytics.charts.admissions'),
           data,
           fill: true,
           borderColor: '#70b1e6',
@@ -196,17 +219,19 @@ export class AnalyticsDashboard {
     };
   }
 
-  public lineAdmissionsOptions: ChartConfiguration['options'] = {
+  public get lineAdmissionsOptions(): ChartConfiguration['options'] {
+    return {
     responsive: true,
     maintainAspectRatio: true,
     plugins: {
       legend: { display: false },
-      title: { display: true, text: 'Resident Admissions by Month', font: { size: 16 } }
+      title: { display: true, text: this.chartTitle('analytics.charts.admissionsTitle'), font: { size: 16 } }
     },
     scales: {
       y: { beginAtZero: true, ticks: { stepSize: 5 } }
     }
   };
+  }
 
   public barAdmissionsType: ChartType = 'bar';
   public get barAdmissionsData(): ChartConfiguration<'bar'>['data'] {
@@ -215,7 +240,7 @@ export class AnalyticsDashboard {
       labels,
       datasets: [
         {
-          label: 'Admissions',
+          label: this.chartTitle('analytics.charts.admissions'),
           data: this.getMonthlyAdmissions(),
           backgroundColor: '#66B3AD',
           borderColor: '#66B3AD',
@@ -225,17 +250,19 @@ export class AnalyticsDashboard {
     };
   }
 
-  public barAdmissionsOptions: ChartConfiguration['options'] = {
+  public get barAdmissionsOptions(): ChartConfiguration['options'] {
+    return {
     responsive: true,
     maintainAspectRatio: true,
     plugins: {
       legend: { display: false },
-      title: { display: true, text: 'Monthly Resident Admissions', font: { size: 16 } }
+      title: { display: true, text: this.chartTitle('analytics.charts.monthlyAdmissions'), font: { size: 16 } }
     },
     scales: {
       y: { beginAtZero: true, ticks: { stepSize: 5 } }
     }
   };
+  }
 
   get totalTerminations(): number {
     return this.staffTerminationsMetric?.total || 0;

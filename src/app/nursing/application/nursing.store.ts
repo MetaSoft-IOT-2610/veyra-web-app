@@ -1,4 +1,5 @@
 import { computed, DestroyRef, inject, Injectable, Signal, signal } from '@angular/core';
+import { apiErrorKey } from '../../shared/utils/api-error-key';
 import { NursingHome } from '../domain/model/nursing-home.entity';
 import { NursingApi } from '../infrastructure/nursing-api';
 import {Observable, retry, tap, throwError} from 'rxjs';
@@ -72,7 +73,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create nursing home'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.create-nursing-home', err));
         this._loadingSignal.set(false);
       }
     });
@@ -88,7 +89,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to get nursing home'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.get-nursing-home', err));
         this._loadingSignal.set(false);
       }
     });
@@ -110,7 +111,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create resident in nursing home'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.create-resident', err));
         this._loadingSignal.set(false);
       }
     });
@@ -126,7 +127,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load residents for nursing home'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-residents', err));
         this._loadingSignal.set(false);
       }
     });
@@ -142,7 +143,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load rooms for nursing home'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-rooms', err));
         this._loadingSignal.set(false);
       }
     });
@@ -161,7 +162,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create resident'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.create-resident', err));
         this._loadingSignal.set(false);
       }
     });
@@ -177,7 +178,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to update resident'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.update-resident', err));
         this._loadingSignal.set(false);
         return throwError(() => err);
       }
@@ -197,7 +198,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to delete resident'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.delete-resident', err));
         this._loadingSignal.set(false);
       }
     });
@@ -212,7 +213,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create room'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.create-room', err));
         this._loadingSignal.set(false);
       }
     });
@@ -227,7 +228,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create medication'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.create-medication', err));
         this._loadingSignal.set(false);
       }
     });
@@ -256,7 +257,7 @@ export class NursingStore {
           this._loadingSignal.set(false);
         },
         error: err => {
-          this._errorSignal.set(this.formatError(err, 'Failed to create medical condition'));
+          this._errorSignal.set(apiErrorKey('errors.nursing.create-medical-condition', err));
           this._loadingSignal.set(false);
         }
       })
@@ -273,7 +274,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to assign room to resident'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.assign-room', err));
         this._loadingSignal.set(false);
       }
     });
@@ -310,7 +311,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create allergy'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.create-allergy', err));
         this._loadingSignal.set(false);
       }
     });
@@ -325,7 +326,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to get allergies'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-allergies', err));
         this._loadingSignal.set(false);
       }
     });
@@ -340,7 +341,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to get devices'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-devices', err));
         this._loadingSignal.set(false);
       }
     });
@@ -358,7 +359,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load medications'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-medications', err));
         this._loadingSignal.set(false);
       }
     });
@@ -378,7 +379,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load medical conditions'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-medical-conditions', err));
         this._loadingSignal.set(false);
       }
     });
@@ -393,7 +394,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load vital signs'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-vital-signs', err));
         this._loadingSignal.set(false);
       }
     });
@@ -412,7 +413,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load relatives'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-relatives', err));
         this._loadingSignal.set(false);
       }
     });
@@ -427,7 +428,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to create relative'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.create-relative', err));
         this._loadingSignal.set(false);
       }
     });
@@ -443,7 +444,7 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to update relative'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.update-relative', err));
         this._loadingSignal.set(false);
       }
     });
@@ -458,22 +459,9 @@ export class NursingStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to load monitoring residents'));
+        this._errorSignal.set(apiErrorKey('errors.nursing.load-monitoring-residents', err));
         this._loadingSignal.set(false);
       }
     });
-  }
-
-  /**
-   *  @purpose: Format error messages
-   *  @description: This private method takes an error object and a fallback string.
-   *  If the error is an instance of Error, it checks if the message includes 'Resource not found' and returns a formatted message.
-   *  Otherwise, it returns the fallback string.
-   */
-  private formatError(error: any, fallback: string): string {
-    if (error instanceof Error) {
-      return error.message.includes('Resource not found ') ? `${fallback}:Not Found` : error.message;
-    }
-    return fallback;
   }
 }

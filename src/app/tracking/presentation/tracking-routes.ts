@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
+import { routePageKeys } from '../../shared/routing/route-page-data';
 
 const deviceList = () =>
   import('./views/device-list/device-list').then(m => m.DeviceList);
@@ -26,9 +27,7 @@ const trackingRoutes: Routes = [
     name: 'tracking.devices.list',
     loadComponent: deviceList,
     page: {
-      title: 'Dispositivos',
-      module: 'Tracking',
-      description: 'Listado y gestión de dispositivos',
+      ...routePageKeys('tracking.devices.list'),
       showBackButton: false,
     },
   }),
@@ -47,9 +46,7 @@ const trackingRoutes: Routes = [
     name: 'tracking.devices.assign',
     loadComponent: assignDeviceForm,
     page: {
-      title: 'Asignar dispositivo',
-      module: 'Tracking',
-      description: 'Asignar dispositivo a un residente',
+      ...routePageKeys('tracking.devices.assign'),
       showBackButton: true,
     },
   }),
@@ -58,9 +55,7 @@ const trackingRoutes: Routes = [
     name: 'tracking.devices.detail',
     loadComponent: deviceDetail,
     page: {
-      title: 'Detalle del dispositivo',
-      module: 'Detalle del dispositivo',
-      description: 'Cargando dispositivo…',
+      ...routePageKeys('tracking.devices.detail'),
       showBackButton: true,
     },
   }),

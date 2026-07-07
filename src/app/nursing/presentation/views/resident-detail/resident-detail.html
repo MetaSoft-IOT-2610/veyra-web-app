@@ -8,7 +8,7 @@
 
     @if (store.error()) {
       <mat-error class="error-message">
-        {{ store.error() }}
+        {{ store.error() | translate }}
       </mat-error>
     }
 

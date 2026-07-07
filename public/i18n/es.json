@@ -83,6 +83,67 @@
         "PASSWORD_MISMATCH": "Las contraseñas no coinciden",
         "INVALID_TOKEN": "Token inválido o expirado."
       }
+    },
+    "signIn": {
+      "welcome": "¡Bienvenido de nuevo! Inicia sesión en tu cuenta.",
+      "username": "Usuario",
+      "usernamePlaceholder": "Ingresa tu usuario",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Ingresa tu contraseña",
+      "togglePassword": "Toggle password visibility",
+      "submit": "Iniciar sesión",
+      "submitting": "Iniciando sesión...",
+      "noAccount": "¿No tienes cuenta?",
+      "signUp": "Registrarse",
+      "signUpUser": "Usuario",
+      "signUpAdmin": "Administrador",
+      "errors": {
+        "usernameRequired": "Username is required",
+        "usernameMinLength": "Username must be at least 3 characters",
+        "passwordRequired": "Password is required",
+        "passwordMinLength": "Password must be at least 6 characters"
+      }
+    },
+    "signUp": {
+      "adminBadge": "Administrator",
+      "username": "Username",
+      "usernamePlaceholder": "Choose a username",
+      "password": "Password",
+      "passwordPlaceholder": "Create a password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "togglePassword": "Toggle password visibility",
+      "toggleConfirmPassword": "Toggle confirm password visibility",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "signIn": "Sign In",
+      "creatingAdmin": "Creating administrator...",
+      "creatingAccount": "Creating account...",
+      "titleUser": "Create User Account",
+      "titleAdmin": "Create Administrator Account",
+      "subtitleUser": "Sign up to get started with your account.",
+      "subtitleAdmin": "Register a new administrator with full system access.",
+      "submitUser": "Create Account",
+      "submitAdmin": "Create Administrator",
+      "strength": {
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong"
+      },
+      "errors": {
+        "usernameRequired": "Username is required",
+        "usernameMinLength": "Username must be at least 3 characters",
+        "usernameMaxLength": "Username must not exceed 20 characters",
+        "passwordRequired": "Password is required",
+        "passwordMinLength": "Password must be at least 6 characters",
+        "passwordStrength": "Password must contain at least one letter and one number",
+        "confirmRequired": "Please confirm your password",
+        "passwordMismatch": "Passwords do not match"
+      }
+    },
+    "authSection": {
+      "signIn": "Iniciar sesión",
+      "createUser": "Crear usuario",
+      "createAdmin": "Crear administrador"
     }
   },
   "welcome": {
@@ -201,7 +262,7 @@
       "storageLocation-required": "La ubicación de almacenamiento es requerida",
       "administrationRoute-required": "La vía de administración es requerida"
     },
-    "add": "Agregar medicaci?n"
+    "add": "Agregar medicación"
   },
   "medications": {
     "list-title": "Lista de Medicamentos",
@@ -752,7 +813,7 @@
   "Activities": "Actividades",
   "Alertas": "Alertas",
   "Tablero": "Tablero",
-  "Select Year": "Seleccionar a?o",
+  "Select Year": "Seleccionar año",
   "Total Hires": "Total de contrataciones",
   "Total Terminations": "Total de ceses",
   "Net Staff Change": "Cambio neto de personal",
@@ -760,9 +821,9 @@
   "Total Admissions": "Total de admisiones",
   "Active Residents": "Residentes activos",
   "Current": "Actual",
-  "Staff Analysis": "An?lisis de personal",
+  "Staff Analysis": "Análisis de personal",
   "Click to expand": "Haz clic para expandir",
-  "Resident Analysis": "An?lisis de residentes",
+  "Resident Analysis": "Análisis de residentes",
   "Terminations": "Ceses",
   "Hires": "Contrataciones",
   "Admissions": "Admisiones",
@@ -792,7 +853,7 @@
   "Staff role is required": "El rol del personal es obligatorio",
   "Work Shift": "Turno de trabajo",
   "Select Shift": "Seleccionar turno",
-  "Morning (6:00 AM - 2:00 PM)": "Ma?ana (6:00 AM - 2:00 PM)",
+  "Morning (6:00 AM - 2:00 PM)": "Mañana (6:00 AM - 2:00 PM)",
   "Afternoon (2:00 PM - 10:00 PM)": "Tarde (2:00 PM - 10:00 PM)",
   "Night (10:00 PM - 6:00 AM)": "Noche (10:00 PM - 6:00 AM)",
   "Work shift is required": "El turno de trabajo es obligatorio",
@@ -808,7 +869,7 @@
   "No contracts": "No hay contratos",
   "emergencyContactFirstName": "Nombre del contacto de emergencia",
   "emergencyContactLastName": "Apellido del contacto de emergencia",
-  "emergencyContactPhoneNumber": "Tel?fono del contacto de emergencia",
+  "emergencyContactPhoneNumber": "Teléfono del contacto de emergencia",
   "required": "Obligatorio",
   "Emergency Contact Last Name": "Apellido del contacto de emergencia",
   "Add contract": "Agregar contrato",
@@ -820,9 +881,9 @@
       "pending": "Pendiente",
       "suspended": "Suspendido",
       "terminated": "Terminado",
-      "active-description": "El contrato est? activo y vigente.",
-      "pending-description": "El contrato est? pendiente de activaci?n.",
-      "suspended-description": "El contrato est? suspendido temporalmente.",
+      "active-description": "El contrato está activo y vigente.",
+      "pending-description": "El contrato está pendiente de activación.",
+      "suspended-description": "El contrato está suspendido temporalmente.",
       "terminated-description": "El contrato ha finalizado."
     },
     "new-status": "Nuevo estado",
@@ -831,47 +892,47 @@
       "status-required": "El estado es obligatorio"
     },
     "preview-status": "Vista previa del estado",
-    "status-information": "Informaci?n del estado",
+    "status-information": "Información del estado",
     "cancel": "Cancelar",
     "update-status": "Actualizar estado"
   },
-  "Iniciar sesión": "Iniciar SesióN",
+  "Iniciar sesión": "Iniciar sesión",
   "Registrarse": "Registrarse",
-  "Restablecer contraseña": "Restablecer ContraseñA",
+  "Restablecer contraseña": "Restablecer contraseña",
   "Nueva residencia": "Nueva residencia",
   "Residentes": "Residentes",
   "Detalle del residente": "Detalle del residente",
   "Nuevo residente": "Nuevo residente",
   "Editar residente": "Editar residente",
-  "Asignar habitación": "Asignar HabitacióN",
-  "Registros médicos": "Registros MéDicos",
+  "Asignar habitación": "Asignar habitación",
+  "Registros médicos": "Registros médicos",
   "Umbrales de signos vitales": "Umbrales de signos vitales",
   "Nueva alergia": "Nueva alergia",
   "Habitaciones": "Habitaciones",
-  "Nueva habitación": "Nueva HabitacióN",
-  "Editar habitación": "Editar HabitacióN",
-  "Medicación": "MedicacióN",
-  "Nueva medicación": "Nueva MedicacióN",
-  "Condiciones médicas": "Condiciones MéDicas",
-  "Nueva condición médica": "Nueva CondicióN MéDica",
+  "Nueva habitación": "Nueva habitación",
+  "Editar habitación": "Editar habitación",
+  "Medicación": "Medicación",
+  "Nueva medicación": "Nueva medicación",
+  "Condiciones médicas": "Condiciones médicas",
+  "Nueva condición médica": "Nueva condición médica",
   "Dispositivos": "Dispositivos",
   "Familiares": "Familiares",
   "Nuevo familiar": "Nuevo familiar",
   "Mis pacientes": "Mis pacientes",
   "allergy": {
-    "allergen-info": "Informaci?n del al?rgeno",
+    "allergen-info": "Información del alérgeno",
     "form": {
-      "allergenName": "Nombre del al?rgeno",
+      "allergenName": "Nombre del alérgeno",
       "typeOfAllergy": "Tipo de alergia",
-      "reaction": "Reacci?n",
+      "reaction": "Reacción",
       "severityLevel": "Nivel de severidad"
     },
     "error": {
-      "allergenName-required": "El nombre del al?rgeno es obligatorio",
-      "allergenName-minlength": "El nombre del al?rgeno es muy corto",
+      "allergenName-required": "El nombre del alérgeno es obligatorio",
+      "allergenName-minlength": "El nombre del alérgeno es muy corto",
       "typeOfAllergy-required": "El tipo de alergia es obligatorio",
-      "reaction-required": "La reacci?n es obligatoria",
-      "reaction-minlength": "La reacci?n es muy corta",
+      "reaction-required": "La reacción es obligatoria",
+      "reaction-minlength": "La reacción es muy corta",
       "severityLevel-required": "El nivel de severidad es obligatorio"
     },
     "type": {
@@ -879,107 +940,107 @@
       "drug": "Medicamento",
       "environmental": "Ambiental",
       "insect": "Insecto",
-      "latex": "L?tex",
-      "chemical": "Qu?mica",
+      "latex": "Látex",
+      "chemical": "Química",
       "other": "Otra"
     },
-    "reaction-details": "Detalles de la reacci?n",
-    "reaction-placeholder": "Describe la reacci?n",
+    "reaction-details": "Detalles de la reacción",
+    "reaction-placeholder": "Describe la reacción",
     "severity-level": "Nivel de severidad",
     "severity": {
       "normal": "Normal",
       "medium": "Media",
       "high": "Alta",
-      "critical": "Cr?tica"
+      "critical": "Crítica"
     },
     "selected-severity": "Severidad seleccionada",
     "cancel": "Cancelar",
     "add": "Agregar alergia"
   },
-  "Select Available Room": "Seleccionar habitaci?n disponible",
+  "Select Available Room": "Seleccionar habitación disponible",
   "No available rooms at the moment": "No hay habitaciones disponibles por el momento",
-  "Room Number": "N?mero de habitaci?n",
-  "Please select a room": "Selecciona una habitaci?n",
-  "Room Details": "Detalles de la habitaci?n",
+  "Room Number": "Número de habitación",
+  "Please select a room": "Selecciona una habitación",
+  "Room Details": "Detalles de la habitación",
   "Type": "Tipo",
   "Capacity": "Capacidad",
   "Status": "Estado",
   "Available": "Disponible",
-  "Assign Room": "Asignar habitaci?n",
-  "Basic Information": "Informaci?n b?sica",
-  "description": "Descripci?n",
-  "Medication description": "Descripci?n del medicamento",
-  "description-required": "La descripci?n es obligatoria",
-  "Presentation & Dosage": "Presentaci?n y dosis",
-  "Drug Presentation": "Presentaci?n del medicamento",
+  "Assign Room": "Asignar habitación",
+  "Basic Information": "Información básica",
+  "description": "Descripción",
+  "Medication description": "Descripción del medicamento",
+  "description-required": "La descripción es obligatoria",
+  "Presentation & Dosage": "Presentación y dosis",
+  "Drug Presentation": "Presentación del medicamento",
   "Tablet": "Tableta",
-  "Capsule": "C?psula",
+  "Capsule": "Cápsula",
   "Syrup": "Jarabe",
-  "Injection": "Inyecci?n",
+  "Injection": "Inyección",
   "Cream": "Crema",
-  "Ointment": "Ung?ento",
+  "Ointment": "Ungüento",
   "Drops": "Gotas",
   "Suppository": "Supositorio",
   "Inhaler": "Inhalador",
   "Patch": "Parche",
   "Powder": "Polvo",
   "Gel": "Gel",
-  "Solution": "Soluci?n",
-  "Suspension": "Suspensi?n",
+  "Solution": "Solución",
+  "Suspension": "Suspensión",
   "Spray": "Spray",
-  "drugPresentation-required": "La presentaci?n del medicamento es obligatoria",
+  "drugPresentation-required": "La presentación del medicamento es obligatoria",
   "dosage": "Dosis",
   "dosage-required": "La dosis es obligatoria",
-  "Stock Information": "Informaci?n de stock",
+  "Stock Information": "Información de stock",
   "amount": "Cantidad",
   "Available quantity": "Cantidad disponible",
   "amount-required": "La cantidad es obligatoria",
   "Amount must be at least 0": "La cantidad debe ser al menos 0",
   "Expiration Date": "Fecha de vencimiento",
   "Select expiration date": "Seleccionar fecha de vencimiento",
-  "Description": "Descripci?n",
+  "Description": "Descripción",
   "Amount": "Cantidad",
-  "drugPresentation": "Presentaci?n del medicamento",
+  "drugPresentation": "Presentación del medicamento",
   "Datos del negocio": "Datos del negocio",
   "Photo": "Foto",
   "form": {
     "select-image": "Seleccionar imagen",
-    "max-size": "Tama?o m?ximo: 5 MB"
+    "max-size": "Tamaño máximo: 5 MB"
   },
-  "businessName": "Raz?n social",
+  "businessName": "Razón social",
   "ruc": "RUC",
   "Datos de contacto": "Datos de contacto",
-  "phone number": "N?mero de tel?fono",
-  "email address": "Correo electr?nico",
-  "invalid": "Inv?lido",
-  "Datos de ubicación": "Datos De UbicacióN",
+  "phone number": "Número de teléfono",
+  "email address": "Correo electrónico",
+  "invalid": "Inválido",
+  "Datos de ubicación": "Datos de ubicación",
   "street": "Calle",
-  "number": "N?mero",
+  "number": "Número",
   "city": "Ciudad",
-  "postal code": "C?digo postal",
-  "country": "Pa?s",
+  "postal code": "Código postal",
+  "country": "País",
   "register": "Registrar",
   "legalRepresentativeFirstName": "Nombre del representante legal",
   "legalRepresentativeLastName": "Apellido del representante legal",
-  "legalRepresentativePhoneNumber": "Tel?fono del representante legal",
-  "Room": "Habitaci?n",
-  "View Medications": "Ver medicaci?n",
-  "Room Information": "Informaci?n de la habitaci?n",
-  "Room number is required": "El n?mero de habitaci?n es obligatorio",
-  "Room Type": "Tipo de habitaci?n",
+  "legalRepresentativePhoneNumber": "Teléfono del representante legal",
+  "Room": "Habitación",
+  "View Medications": "Ver medicación",
+  "Room Information": "Información de la habitación",
+  "Room number is required": "El número de habitación es obligatorio",
+  "Room Type": "Tipo de habitación",
   "Single": "Individual",
   "Double": "Doble",
   "Shared": "Compartida",
   "Suite": "Suite",
-  "Room type is required": "El tipo de habitaci?n es obligatorio",
-  "Max Capacity": "Capacidad m?xima",
-  "Number of residents": "N?mero de residentes",
-  "Max capacity is required": "La capacidad m?xima es obligatoria",
+  "Room type is required": "El tipo de habitación es obligatorio",
+  "Max Capacity": "Capacidad máxima",
+  "Number of residents": "Número de residentes",
+  "Max capacity is required": "La capacidad máxima es obligatoria",
   "Capacity must be at least 1": "La capacidad debe ser al menos 1",
   "Capacity cannot exceed 10": "La capacidad no puede exceder 10",
-  "Register Room": "Registrar habitaci?n",
-  "Enter the number": "Ingresa el n?mero",
-  "Number": "N?mero",
+  "Register Room": "Registrar habitación",
+  "Enter the number": "Ingresa el número",
+  "Number": "Número",
   "Occupied": "Ocupada",
   "No rooms registered": {
     "": "No hay habitaciones registradas."
@@ -992,12 +1053,12 @@
   "Datos personales": "Datos personales",
   "Name": "Nombre",
   "age": "Edad",
-  "Datos de verificación": "Datos De VerificacióN",
+  "Datos de verificación": "Datos de verificación",
   "Dni": "DNI",
   "Birthdate": "Fecha de nacimiento",
-  "phonenumber": "Tel?fono",
-  "email": "Correo electr?nico",
-  "street Address": "Direcci?n",
+  "phonenumber": "Teléfono",
+  "email": "Correo electrónico",
+  "street Address": "Dirección",
   "name": "Nombre",
   "last name": "Apellido",
   "dni": "DNI",
@@ -1006,7 +1067,7 @@
   "device": {
     "assign-title": "Asignar banda IoT",
     "search-resident": "Buscar residente",
-    "search-resident-placeholder": "Buscar por nombre, DNI o habitaci?n",
+    "search-resident-placeholder": "Buscar por nombre, DNI o habitación",
     "selected-resident": "Residente seleccionado",
     "select-resident": "Selecciona un residente",
     "assign": "Asignar dispositivo"
@@ -1014,39 +1075,27 @@
   "Asignar dispositivo": "Asignar dispositivo",
   "Detalle del dispositivo": "Detalle del dispositivo",
   "Loading...": "Cargando...",
-  "Loading analytics data...": "Cargando datos anal?ticos...",
+  "Loading analytics data...": "Cargando datos analíticos...",
   "e.g., 101, A-201": "ej., 101, A-201",
   "e.g., 500mg": "ej., 500 mg",
   "e.g., Aspirin": "ej., Aspirina",
-  "e.g., Peanuts, Penicillin": "ej., Man?, Penicilina",
-  "Iniciar sesi?n": "Iniciar sesi?n",
-  "Restablecer contrase?a": "Restablecer contrase?a",
-  "Asignar habitaci?n": "Asignar habitaci?n",
-  "Registros m?dicos": "Registros m?dicos",
-  "Nueva habitaci?n": "Nueva habitaci?n",
-  "Editar habitaci?n": "Editar habitaci?n",
-  "Medicaci?n": "Medicaci?n",
-  "Nueva medicaci?n": "Nueva medicaci?n",
-  "Condiciones m?dicas": "Condiciones m?dicas",
-  "Nueva condici?n m?dica": "Nueva condici?n m?dica",
-  "Datos de verificaci?n": "Datos de verificaci?n",
-  "Datos de ubicaci?n": "Datos de ubicaci?n",
+  "e.g., Peanuts, Penicillin": "ej., Maní, Penicilina",
   "vital-sign-thresholds": {
     "title": "Umbrales de signos vitales",
-    "subtitle": "Rangos cl?nicos del residente",
-    "card-description": "Configura los rangos que activan alertas cl?nicas para este residente.",
+    "subtitle": "Rangos clínicos del residente",
+    "card-description": "Configura los rangos que activan alertas clínicas para este residente.",
     "fields": {
-      "min-heart-rate": "Pulso m?nimo",
-      "max-heart-rate": "Pulso m?ximo",
-      "min-temperature": "Temperatura m?nima",
-      "max-temperature": "Temperatura m?xima",
-      "min-oxygen-saturation": "Ox?geno m?nimo",
-      "max-oxygen-saturation": "Ox?geno m?ximo"
+      "min-heart-rate": "Pulso mínimo",
+      "max-heart-rate": "Pulso máximo",
+      "min-temperature": "Temperatura mínima",
+      "max-temperature": "Temperatura máxima",
+      "min-oxygen-saturation": "Oxígeno mínimo",
+      "max-oxygen-saturation": "Oxígeno máximo"
     },
     "error": {
       "load": "No se pudieron cargar los umbrales actuales.",
       "save": "No se pudieron guardar los umbrales.",
-      "invalid-ranges": "Los m?nimos no pueden ser mayores que los m?ximos."
+      "invalid-ranges": "Los mínimos no pueden ser mayores que los máximos."
     },
     "actions": {
       "back": "Volver",
@@ -1055,6 +1104,487 @@
     },
     "success": {
       "save": "Umbrales guardados correctamente."
+    }
+  },
+  "errors": {
+    "unauthorized": "Tu sesión ha expirado. Vuelve a iniciar sesión.",
+    "not-found": "No se encontró el recurso solicitado.",
+    "nursing": {
+      "create-nursing-home": "No se pudo crear la residencia.",
+      "get-nursing-home": "No se pudo cargar la residencia.",
+      "create-resident": "No se pudo crear el residente.",
+      "load-residents": "No se pudieron cargar los residentes.",
+      "load-rooms": "No se pudieron cargar las habitaciones.",
+      "update-resident": "No se pudo actualizar el residente.",
+      "delete-resident": "No se pudo eliminar el residente.",
+      "create-room": "No se pudo crear la habitación.",
+      "create-medication": "No se pudo crear el medicamento.",
+      "create-medical-condition": "No se pudo crear la condición médica.",
+      "assign-room": "No se pudo asignar la habitación.",
+      "create-allergy": "No se pudo crear la alergia.",
+      "load-allergies": "No se pudieron cargar las alergias.",
+      "load-devices": "No se pudieron cargar los dispositivos.",
+      "load-medications": "No se pudieron cargar los medicamentos.",
+      "load-medical-conditions": "No se pudieron cargar las condiciones médicas.",
+      "load-vital-signs": "No se pudieron cargar los signos vitales.",
+      "load-relatives": "No se pudieron cargar los familiares.",
+      "create-relative": "No se pudo crear el familiar.",
+      "update-relative": "No se pudo actualizar el familiar.",
+      "load-monitoring-residents": "No se pudieron cargar los residentes en monitoreo."
+    },
+    "tracking": {
+      "load-devices": "Could not load devices.",
+      "load-device": "Could not load the device.",
+      "load-telemetry": "Could not load telemetry.",
+      "add-device": "Could not add the device.",
+      "update-device": "Could not update the device.",
+      "assign-device": "Could not assign the device.",
+      "unassign-device": "Could not unassign the device.",
+      "change-status": "Could not change device status.",
+      "change-iot-status": "Could not change IoT status."
+    },
+    "hcm": {
+      "create-staff": "Could not create staff member.",
+      "delete-staff": "Could not delete staff member.",
+      "update-staff": "Could not update staff member.",
+      "create-contract": "Could not create contract.",
+      "update-contract-status": "Could not update contract status.",
+      "load-staff": "Could not load staff."
+    },
+    "alerts": {
+      "load": "Could not load alerts.",
+      "load-by-resident": "Could not load alerts for this resident.",
+      "load-by-status": "Could not load alerts for this status.",
+      "create": "Could not create alert.",
+      "delete": "Could not delete alert."
+    },
+    "activities": {
+      "load": "Could not load activities.",
+      "log": "Could not log activity.",
+      "update": "Could not update activity.",
+      "delete": "Could not delete activity.",
+      "complete": "Could not complete activity."
+    },
+    "analytics": {
+      "staff-terminations": "Could not load staff terminations.",
+      "staff-hires": "Could not load staff hires.",
+      "residents-admissions": "Could not load resident admissions."
+    },
+    "profiles": {
+      "create-business": "Could not create business profile.",
+      "update-business": "Could not update business profile.",
+      "delete-business": "Could not delete business profile.",
+      "create-person": "Could not create person profile.",
+      "update-person": "Could not update person profile.",
+      "delete-person": "Could not delete person profile.",
+      "load-business-list": "Could not load business profiles.",
+      "load-person-list": "No se pudieron cargar los perfiles de persona."
+    },
+    "health": {
+      "load-allergies": "No se pudieron cargar las alergias.",
+      "load-thresholds": "No se pudieron cargar los umbrales de signos vitales."
+    }
+  },
+  "health": {
+    "bcLabel": "Health BC",
+    "allergies": {
+      "title": "Allergies",
+      "loading": "Loading allergies...",
+      "empty": "No allergies registered for this resident.",
+      "reaction": "Reaction:",
+      "diagnosedAt": "Diagnosed at:",
+      "notes": "Notes:"
+    },
+    "vitalThresholds": {
+      "title": "Vital Sign Thresholds",
+      "loading": "Loading thresholds...",
+      "empty": "No thresholds configured for this resident.",
+      "temperature": "Temperature",
+      "heartRate": "Heart Rate",
+      "oxygenSaturation": "Oxygen Saturation"
+    }
+  },
+  "monitoring": {
+    "subtitle": "Monitoreo de signos vitales en tiempo real",
+    "prescribe": "Prescribir",
+    "filter": "Filtrar",
+    "telemetryTitle": "Telemetría en tiempo real",
+    "columns": {
+      "resident": "Residente",
+      "room": "Habitación",
+      "status": "Estado",
+      "heartRate": "Frecuencia cardíaca",
+      "temperature": "Temperatura",
+      "oxygen": "Oxígeno",
+      "actions": "Acciones"
+    },
+    "statusUnknown": "Desconocido",
+    "see": "Ver",
+    "empty": "No hay residentes asignados a este médico.",
+    "pagination": "Mostrando {{from}} a {{to}} de {{total}} residentes",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "loadingName": "Cargando..."
+  },
+  "payments": {
+    "choose": {
+      "badge": "Pricing",
+      "subtitle": "Simple, transparent pricing. Cancel anytime.",
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "saveTag": "Save 15%",
+      "familyLabel": "Family",
+      "familyTitle": "Care at home, together.",
+      "familyDesc": "One account for the whole family. Full visibility, shared caregiving, zero chaos.",
+      "familyPeriod": "/ month",
+      "familyBilled": "Billed as $300/year",
+      "familyAria": "Select family plan",
+      "institutionalLabel": "Institutional",
+      "popularTag": "Most popular",
+      "institutionalTitle": "Built for care teams.",
+      "institutionalDesc": "Full clinical workflow, staff management, and reporting for nursing homes and care facilities.",
+      "institutionalBilled": "Billed as $900/year",
+      "getStarted": "Get started",
+      "trust": "Secure checkout · Cancel anytime · No hidden fees"
+    },
+    "family": {
+      "back": "Back to Plans",
+      "badge": "Family Plan",
+      "title": "Care at home, together.",
+      "subtitle": "One account for the whole family. Full visibility, shared caregiving, zero chaos.",
+      "monthlyLabel": "Monthly",
+      "monthlyTitle": "Flexible billing",
+      "monthlyDesc": "Full access, no commitment. Cancel anytime with no penalties.",
+      "annualLabel": "Annual",
+      "saveTag": "Save 15%",
+      "annualTitle": "Best value",
+      "annualDesc": "Everything in monthly, billed once a year. Save $60 compared to monthly.",
+      "billedAnnual": "Billed as $300/year",
+      "origPrice": "$30/mo",
+      "getStarted": "Get started",
+      "featuresTitle": "Everything included",
+      "features": [
+        "One family account with multiple caregiver access",
+        "Medication reminders & logging",
+        "Detailed daily care history",
+        "Mobile & web access",
+        "Caregiver notes & schedule viewing"
+      ],
+      "trust": "Secure checkout · Cancel anytime · No hidden fees",
+      "monthlyAria": "Choose monthly plan"
+    },
+    "nursing": {
+      "back": "Back to Plans",
+      "badge": "Institutional Plan",
+      "title": "Built for care teams.",
+      "subtitle": "A robust solution for care institutions looking to optimize management, communication, and elevate their standard of care.",
+      "monthlyLabel": "Monthly",
+      "monthlyTitle": "Flexible billing",
+      "monthlyDesc": "Full institutional access, no long-term commitment. Cancel anytime.",
+      "annualLabel": "Annual",
+      "saveTag": "Save 15%",
+      "annualTitle": "Best value",
+      "annualDesc": "Everything in monthly, billed once a year. Save $900 compared to monthly.",
+      "billedAnnual": "Billed as $3000/year",
+      "getStarted": "Get started",
+      "featuresTitle": "Everything included",
+      "trust": "Secure checkout · Cancel anytime · No hidden fees",
+      "monthlyAria": "Choose monthly plan"
+    },
+    "checkout": {
+      "back": "Back",
+      "paymentInfo": "Payment Information",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "john@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 (555) 000-0000",
+      "cardNumber": "Card Number",
+      "cardPlaceholder": "1234 5678 9012 3456",
+      "expMonth": "Exp. Month",
+      "expYear": "Exp. Year",
+      "cvc": "CVC",
+      "pay": "Pay",
+      "cancel": "Cancel",
+      "summary": "Order Summary",
+      "plan": "Plan:",
+      "billingCycle": "Billing Cycle:",
+      "total": "Total:",
+      "planFamily": "Family Plan",
+      "planNursing": "Nursing Home Plan",
+      "planGeneric": "Subscription",
+      "monthly": "monthly",
+      "annual": "annual",
+      "validationError": "Please fill out all required fields correctly."
+    },
+    "confirmed": {
+      "title": "Payment Successful!",
+      "message": "Thank you for choosing Veyra. Your subscription has been activated successfully. You can now log in to your account and start managing your care services.",
+      "login": "Go to Login",
+      "support": "Having trouble?",
+      "contact": "Contact Support"
+    },
+    "cancelled": {
+      "title": "Payment Cancelled",
+      "message": "Your payment was cancelled. You can try again whenever you are ready.",
+      "back": "Back to Plans"
+    }
+  },
+  "analytics": {
+    "charts": {
+      "months": [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+      ],
+      "terminations": "Bajas",
+      "terminationsTitle": "Bajas de personal por mes",
+      "hires": "Contrataciones",
+      "hiresVsTerminations": "Contrataciones vs bajas",
+      "admissions": "Admisiones",
+      "admissionsTitle": "Admisiones de residentes por mes",
+      "monthlyAdmissions": "Admisiones mensuales de residentes"
+    }
+  },
+  "routes": {
+    "iam": {
+      "sign-in": {
+        "title": "Iniciar sesión",
+        "module": "Acceso",
+        "description": "Accede a tu cuenta de Veyra"
+      },
+      "sign-up": {
+        "title": "Registrarse",
+        "module": "Acceso",
+        "description": "Crea una cuenta nueva en Veyra"
+      },
+      "set-password": {
+        "title": "Restablecer contraseña",
+        "module": "Acceso",
+        "description": "Define tu contraseña para activar tu cuenta"
+      }
+    },
+    "nursing": {
+      "nursing-home": {
+        "new": {
+          "title": "Nueva residencia",
+          "module": "Enfermería",
+          "description": "Registro inicial de la residencia"
+        }
+      },
+      "residents": {
+        "list": {
+          "title": "Residentes",
+          "module": "Enfermería",
+          "description": "Listado y gestión de residentes"
+        },
+        "detail": {
+          "title": "Detalle del residente",
+          "module": "Enfermería",
+          "description": "Información general del residente"
+        },
+        "new": {
+          "title": "Nuevo residente",
+          "module": "Enfermería",
+          "description": "Registrar un nuevo residente"
+        },
+        "edit": {
+          "title": "Editar residente",
+          "module": "Enfermería",
+          "description": "Actualizar datos del residente"
+        },
+        "assign-room": {
+          "title": "Asignar habitación",
+          "module": "Enfermería",
+          "description": "Asigna una habitación al residente"
+        },
+        "medical-records": {
+          "title": "Registros médicos",
+          "module": "Enfermería",
+          "description": "Historial clínico del residente"
+        },
+        "vital-sign-thresholds": {
+          "title": "Umbrales de signos vitales",
+          "module": "Enfermería",
+          "description": "Rangos clínicos del residente"
+        },
+        "allergy-new": {
+          "title": "Nueva alergia",
+          "module": "Enfermería",
+          "description": "Registrar una alergia del residente"
+        },
+        "medications": {
+          "title": "Medicación",
+          "module": "Enfermería",
+          "description": "Medicamentos del residente"
+        },
+        "medication-new": {
+          "title": "Nueva medicación",
+          "module": "Enfermería",
+          "description": "Registrar un medicamento"
+        },
+        "medical-conditions": {
+          "title": "Condiciones médicas",
+          "module": "Enfermería",
+          "description": "Condiciones médicas del residente"
+        },
+        "medical-condition-new": {
+          "title": "Nueva condición médica",
+          "module": "Enfermería",
+          "description": "Registrar una condición médica"
+        }
+      },
+      "rooms": {
+        "list": {
+          "title": "Habitaciones",
+          "module": "Enfermería",
+          "description": "Gestión de habitaciones de la residencia"
+        },
+        "new": {
+          "title": "Nueva habitación",
+          "module": "Enfermería",
+          "description": "Registrar una nueva habitación"
+        },
+        "edit": {
+          "title": "Editar habitación",
+          "module": "Enfermería",
+          "description": "Actualizar datos de la habitación"
+        }
+      },
+      "devices": {
+        "list": {
+          "title": "Dispositivos",
+          "module": "Enfermería",
+          "description": "Dispositivos asignados en la residencia"
+        }
+      },
+      "relatives": {
+        "list": {
+          "title": "Familiares",
+          "module": "Enfermería",
+          "description": "Contactos familiares vinculados"
+        },
+        "new": {
+          "title": "Nuevo familiar",
+          "module": "Enfermería",
+          "description": "Registrar un familiar del residente"
+        }
+      },
+      "my-patients": {
+        "title": "Mis pacientes",
+        "module": "Enfermería",
+        "description": "Monitoreo de residentes asignados"
+      }
+    },
+    "hcm": {
+      "staff": {
+        "list": {
+          "title": "Personal",
+          "module": "Personal",
+          "description": "Gestión del personal de la residencia"
+        },
+        "detail": {
+          "title": "Detalle del personal",
+          "module": "Personal",
+          "description": "Información del miembro del equipo"
+        },
+        "new": {
+          "title": "Nuevo personal",
+          "module": "Personal",
+          "description": "Registrar un nuevo miembro del equipo"
+        },
+        "edit": {
+          "title": "Editar personal",
+          "module": "Personal",
+          "description": "Actualizar datos del miembro del equipo"
+        }
+      },
+      "contract": {
+        "list": {
+          "title": "Contratos",
+          "module": "Personal",
+          "description": "Contratos asociados al personal"
+        },
+        "new": {
+          "title": "Nuevo contrato",
+          "module": "Personal",
+          "description": "Registrar un contrato para el personal"
+        }
+      }
+    },
+    "tracking": {
+      "devices": {
+        "list": {
+          "title": "Dispositivos",
+          "module": "Tracking",
+          "description": "Listado y gestión de dispositivos"
+        },
+        "assign": {
+          "title": "Asignar dispositivo",
+          "module": "Tracking",
+          "description": "Asignar dispositivo a un residente"
+        },
+        "detail": {
+          "title": "Detalle del dispositivo",
+          "module": "Tracking",
+          "description": "Información y telemetría del dispositivo"
+        }
+      }
+    },
+    "analytics": {
+      "dashboard": {
+        "title": "Tablero",
+        "module": "Analítica",
+        "description": "Indicadores y métricas de la residencia"
+      }
+    },
+    "activities": {
+      "list": {
+        "title": "Actividades",
+        "module": "Actividades",
+        "description": "Registro y seguimiento de actividades de cuidado"
+      }
+    },
+    "alerts": {
+      "list": {
+        "title": "Alertas",
+        "module": "Alertas",
+        "description": "Notificaciones y eventos importantes"
+      }
+    },
+    "payments": {
+      "choose": {
+        "title": "Elegir suscripción",
+        "module": "Pagos",
+        "description": "Selecciona el tipo de plan para continuar"
+      },
+      "plan": {
+        "family": {
+          "title": "Plan familia",
+          "module": "Pagos",
+          "description": "Opciones de suscripción para familias"
+        },
+        "nursing-home": {
+          "title": "Plan residencia",
+          "module": "Pagos",
+          "description": "Opciones de suscripción para residencias"
+        }
+      },
+      "checkout": {
+        "title": "Pago",
+        "module": "Pagos",
+        "description": "Completa el proceso de suscripción"
+      }
     }
   }
 }

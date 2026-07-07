@@ -1,44 +1,36 @@
 <section class="health-section">
   <div class="health-section__header">
-    <h2>Allergies</h2>
-    <span>Health BC</span>
+    <h2>{{ 'health.allergies.title' | translate }}</h2>
+    <span>{{ 'health.bcLabel' | translate }}</span>
   </div>
 
-  <div *ngIf="isLoading()" class="health-message">
-    Loading allergies...
-  </div>
+  @if (isLoading()) {
+    <div class="health-message">{{ 'health.allergies.loading' | translate }}</div>
+  }
 
-  <div *ngIf="errorMessage()" class="health-message health-message--error">
-    {{ errorMessage() }}
-  </div>
+  @if (errorMessage()) {
+    <div class="health-message health-message--error">{{ errorMessage() | translate }}</div>
+  }
 
-  <div *ngIf="!isLoading() && !errorMessage() && allergies().length === 0" class="health-message">
-    No allergies registered for this resident.
-  </div>
+  @if (!isLoading() && !errorMessage() && allergies().length === 0) {
+    <div class="health-message">{{ 'health.allergies.empty' | translate }}</div>
+  }
 
-  <div *ngIf="!isLoading() && allergies().length > 0" class="allergy-list">
-    <article *ngFor="let allergy of allergies()" class="allergy-card">
-      <div class="allergy-card__top">
-        <h3>{{ allergy.allergen }}</h3>
-        <span [class]="'severity severity--' + allergy.severity.toLowerCase()">
-          {{ allergy.severity }}
-        </span>
-      </div>
-
-      <p>
-        <strong>Reaction:</strong>
-        {{ allergy.reaction }}
-      </p>
-
-      <p>
-        <strong>Diagnosed at:</strong>
-        {{ allergy.diagnosedAt }}
-      </p>
-
-      <p>
-        <strong>Notes:</strong>
-        {{ allergy.notes }}
-      </p>
-    </article>
-  </div>
+  @if (!isLoading() && allergies().length > 0) {
+    <div class="allergy-list">
+      @for (allergy of allergies(); track allergy.id) {
+        <article class="allergy-card">
+          <div class="allergy-card__top">
+            <h3>{{ allergy.allergen }}</h3>
+            <span [class]="'severity severity--' + allergy.severity.toLowerCase()">
+              {{ allergy.severity }}
+            </span>
+          </div>
+          <p><strong>{{ 'health.allergies.reaction' | translate }}</strong> {{ allergy.reaction }}</p>
+          <p><strong>{{ 'health.allergies.diagnosedAt' | translate }}</strong> {{ allergy.diagnosedAt }}</p>
+          <p><strong>{{ 'health.allergies.notes' | translate }}</strong> {{ allergy.notes }}</p>
+        </article>
+      }
+    </div>
+  }
 </section>

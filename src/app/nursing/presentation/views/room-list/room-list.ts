@@ -121,4 +121,8 @@ export class RoomList {
   navigateToNew() {
     void this.router.navigate(nursingNav.roomNew());
   }
+
+  editRoom(id: number) {
+    void this.router.navigate(nursingNav.roomEdit(id));
+  }
 }

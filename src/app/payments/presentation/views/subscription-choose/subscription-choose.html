@@ -1,86 +1,74 @@
 <div class="choose-container">
-
-  <!-- Header -->
   <div class="header-section">
-    <span class="badge">Pricing</span>
-    <p class="main-subtitle">Simple, transparent pricing. Cancel anytime.</p>
+    <span class="badge">{{ 'payments.choose.badge' | translate }}</span>
+    <p class="main-subtitle">{{ 'payments.choose.subtitle' | translate }}</p>
 
     <div class="toggle-container">
-      <span [class.active]="!isAnnual">Monthly</span>
+      <span [class.active]="!isAnnual">{{ 'payments.choose.monthly' | translate }}</span>
       <label class="switch">
         <input type="checkbox" [(ngModel)]="isAnnual" />
         <span class="slider-toggle"></span>
       </label>
       <span [class.active]="isAnnual">
-        Annual <span class="save-tag">Save 15%</span>
+        {{ 'payments.choose.annual' | translate }}
+        <span class="save-tag">{{ 'payments.choose.saveTag' | translate }}</span>
       </span>
     </div>
   </div>
 
-  <!-- Bento Grid -->
   <div class="bento-grid">
-
-    <!-- Tarjeta Familiar -->
     <div class="bento-item family-card" (click)="goToFamilyPlan()">
       <div class="card-content">
         <div class="top-row">
-          <div class="icon-box">
-            <i class="fa-solid fa-house-chimney-user"></i>
-          </div>
-          <span class="plan-label">Family</span>
+          <div class="icon-box"><i class="fa-solid fa-house-chimney-user"></i></div>
+          <span class="plan-label">{{ 'payments.choose.familyLabel' | translate }}</span>
         </div>
-
         <div class="mid-row">
-          <h3>Care at home, together.</h3>
-          <p>One account for the whole family. Full visibility, shared caregiving, zero chaos.</p>
+          <h3>{{ 'payments.choose.familyTitle' | translate }}</h3>
+          <p>{{ 'payments.choose.familyDesc' | translate }}</p>
         </div>
-
         <div class="bottom-row">
           <div class="price-block">
             <span class="amount">${{ isAnnual ? '25' : '30' }}</span>
-            <span class="period">/ month</span>
-            <div class="billed-note" *ngIf="isAnnual">Billed as $300/year</div>
+            <span class="period">{{ 'payments.choose.familyPeriod' | translate }}</span>
+            @if (isAnnual) {
+              <div class="billed-note">{{ 'payments.choose.familyBilled' | translate }}</div>
+            }
           </div>
-          <button class="action-arrow" aria-label="Select family plan">
+          <button class="action-arrow" [attr.aria-label]="'payments.choose.familyAria' | translate">
             <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Tarjeta Institucional -->
     <div class="bento-item nursing-card" (click)="goToNursingPlan()">
       <div class="card-content">
         <div class="top-row">
-          <div class="icon-box">
-            <i class="fa-solid fa-hospital-user"></i>
-          </div>
-          <span class="plan-label">Institutional</span>
-          <span class="popular-tag">Most popular</span>
+          <div class="icon-box"><i class="fa-solid fa-hospital-user"></i></div>
+          <span class="plan-label">{{ 'payments.choose.institutionalLabel' | translate }}</span>
+          <span class="popular-tag">{{ 'payments.choose.popularTag' | translate }}</span>
         </div>
-
         <div class="mid-row">
-          <h3>Built for care teams.</h3>
-          <p>Full clinical workflow, staff management, and reporting for nursing homes and care facilities.</p>
+          <h3>{{ 'payments.choose.institutionalTitle' | translate }}</h3>
+          <p>{{ 'payments.choose.institutionalDesc' | translate }}</p>
         </div>
-
         <div class="bottom-row">
           <div class="price-block">
             <span class="amount">${{ isAnnual ? '75' : '90' }}</span>
-            <span class="period">/ month</span>
-            <div class="billed-note" *ngIf="isAnnual">Billed as $900/year</div>
+            <span class="period">{{ 'payments.choose.familyPeriod' | translate }}</span>
+            @if (isAnnual) {
+              <div class="billed-note">{{ 'payments.choose.institutionalBilled' | translate }}</div>
+            }
           </div>
-          <button class="cta-btn">Get started</button>
+          <button class="cta-btn">{{ 'payments.choose.getStarted' | translate }}</button>
         </div>
       </div>
     </div>
-
   </div>
 
-  <!-- Footer trust -->
   <p class="trust-note">
     <i class="fa-solid fa-shield-halved"></i>
-    Secure checkout &nbsp;·&nbsp; Cancel anytime &nbsp;·&nbsp; No hidden fees
+    {{ 'payments.choose.trust' | translate }}
   </p>
-
 </div>

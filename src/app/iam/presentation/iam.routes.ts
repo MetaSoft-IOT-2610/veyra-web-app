@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { definePageRoute } from '../../shared/routing/define-page-route';
+import { routePageKeys } from '../../shared/routing/route-page-data';
 
 const signInForm = () =>
   import('./views/sign-in-form/sign-in-form').then((m) => m.SignInForm);
@@ -26,9 +27,7 @@ const iamRoutes: Routes = [
     name: 'iam.sign-in',
     loadComponent: signInForm,
     page: {
-      title: 'Iniciar sesión',
-      module: 'Acceso',
-      description: 'Accede a tu cuenta de Veyra',
+      ...routePageKeys('iam.sign-in'),
       showBackButton: false,
     },
   }),
@@ -37,9 +36,7 @@ const iamRoutes: Routes = [
     name: 'iam.sign-up',
     loadComponent: signUpForm,
     page: {
-      title: 'Registrarse',
-      module: 'Acceso',
-      description: 'Crea una cuenta nueva en Veyra',
+      ...routePageKeys('iam.sign-up'),
       showBackButton: true,
     },
   }),
@@ -48,9 +45,7 @@ const iamRoutes: Routes = [
     name: 'iam.set-password',
     loadComponent: setPasswordForm,
     page: {
-      title: 'Restablecer contraseña',
-      module: 'Acceso',
-      description: 'Define tu contraseña para activar tu cuenta',
+      ...routePageKeys('iam.set-password'),
       showBackButton: false,
     },
   }),

@@ -1,14 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
-
+import { TranslatePipe } from '@ngx-translate/core';
 import { HealthStore } from '../../../application/health.store';
 
 @Component({
   selector: 'app-resident-vital-signs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [TranslatePipe],
   templateUrl: './resident-vital-signs.html',
-  styleUrl: './resident-vital-signs.css'
+  styleUrl: './resident-vital-signs.css',
 })
 export class ResidentVitalSigns implements OnChanges {
   @Input() residentId = 0;

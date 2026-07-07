@@ -23,7 +23,7 @@
 }
 
 @if (nursingStore.error()) {
-  <mat-error class="error-message">{{ nursingStore.error() }}</mat-error>
+  <mat-error class="error-message">{{ nursingStore.error() | translate }}</mat-error>
 }
 
 <div class="cards-grid">

@@ -37,7 +37,7 @@ export class HealthStore {
         this._loadingSignal.set(false);
       },
       error: () => {
-        this._errorSignal.set('Could not load allergies.');
+        this._errorSignal.set('errors.health.load-allergies');
         this._loadingSignal.set(false);
       }
     });
@@ -53,7 +53,7 @@ export class HealthStore {
         this._loadingSignal.set(false);
       },
       error: () => {
-        this._errorSignal.set('Could not load vital sign thresholds.');
+        this._errorSignal.set('errors.health.load-thresholds');
         this._loadingSignal.set(false);
       }
     });

@@ -69,7 +69,7 @@
   @if (store.error()) {
     <div class="state-row error-row">
       <mat-icon>error_outline</mat-icon>
-      <span>{{ store.error() }}</span>
+      <span>{{ store.error() | translate }}</span>
     </div>
   }
 

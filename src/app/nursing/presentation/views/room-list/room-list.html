@@ -1,24 +1,43 @@
-  <div class="search-container">
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'Search' | translate }}</mat-label>
-      <mat-icon matPrefix>search</mat-icon>
-      <input
-        matInput
-        [placeholder]="'Enter the number' | translate"
-        [value]="searchTerm()"
-        (input)="searchTerm.set($any($event.target).value)"
-        type="text"/>
-      @if (searchTerm()) {
-        <button matSuffix mat-icon-button (click)="searchTerm.set('')">
-          <mat-icon>close</mat-icon>
-        </button>
-      }
-    </mat-form-field>
+  <div class="list-toolbar">
+    <div class="search-container">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'Search' | translate }}</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          [placeholder]="'Enter the number' | translate"
+          [value]="searchTerm()"
+          (input)="searchTerm.set($any($event.target).value)"
+          type="text"/>
+        @if (searchTerm()) {
+          <button matSuffix mat-icon-button (click)="searchTerm.set('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="action-buttons">
+      <button mat-raised-button
+              color="primary"
+              [disabled]="!selectedId"
+              (click)="editRoom(selectedId!)">
+        <mat-icon>edit</mat-icon>
+        {{ 'residents.buttons.edit' | translate }}
+      </button>
+
+      <button mat-raised-button
+              color="accent"
+              (click)="navigateToNew()">
+        <mat-icon>add</mat-icon>
+        {{ 'residents.buttons.add' | translate }}
+      </button>
+    </div>
   </div>
 
   <!-- Error State -->
   @if (store.error()) {
-    <mat-error class="error-message">{{ store.error() }}</mat-error>
+    <mat-error class="error-message">{{ store.error() | translate }}</mat-error>
   }
 
   <div class="content-with-toolbar">
@@ -165,14 +184,6 @@
             aria-label="Select page of medications">
           </mat-paginator>
         </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="floating-actions">
-        <button mat-raised-button color="accent" (click)="navigateToNew()">
-          <mat-icon>add</mat-icon>
-          {{ 'medications.add' | translate }}
-        </button>
       </div>
     </div>
   </div>

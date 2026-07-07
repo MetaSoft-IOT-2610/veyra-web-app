@@ -186,7 +186,7 @@
     <div class="content-with-toolbar">
       <div class="list-container">
         @if (errorMessage()) {
-          <mat-error class="error-message">{{ errorMessage() }}</mat-error>
+          <mat-error class="error-message">{{ errorMessage() | translate }}</mat-error>
         }
 
         <div class="table-container">

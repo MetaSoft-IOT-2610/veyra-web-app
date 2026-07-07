@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { apiErrorKey } from '../../shared/utils/api-error-key';
 import { AnalyticsApi } from '../infrastructure/analytics-api';
 import { Metric } from '../domain/model/metric.entity';
 import { retry } from 'rxjs';
@@ -36,7 +37,7 @@ export class AnalyticsStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to fetch staff terminations'));
+        this._errorSignal.set(apiErrorKey('errors.analytics.staff-terminations', err));
         this._loadingSignal.set(false);
       }
     });
@@ -52,7 +53,7 @@ export class AnalyticsStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to fetch staff hires'));
+        this._errorSignal.set(apiErrorKey('errors.analytics.staff-hires', err));
         this._loadingSignal.set(false);
       }
     });
@@ -68,7 +69,7 @@ export class AnalyticsStore {
         this._loadingSignal.set(false);
       },
       error: err => {
-        this._errorSignal.set(this.formatError(err, 'Failed to fetch residents admissions'));
+        this._errorSignal.set(apiErrorKey('errors.analytics.residents-admissions', err));
         this._loadingSignal.set(false);
       }
     });
@@ -80,12 +81,5 @@ export class AnalyticsStore {
     this._residentsAdmissionsSignal.set(null);
     this._residentsActiveSignal.set(null);
     this._errorSignal.set(null);
-  }
-
-  private formatError(error: any, fallback: string): string {
-    if (error instanceof Error) {
-      return error.message.includes('Resource not found') ? `${fallback}: Not Found` : error.message;
-    }
-    return fallback;
   }
 }

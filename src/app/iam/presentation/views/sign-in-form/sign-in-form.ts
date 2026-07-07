@@ -1,42 +1,35 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { iamNav } from '../../iam.routes';
 import { IamStore } from '../../../application/iam.store';
 import { Toolbar } from '../../../../shared/presentation/components/toolbar/toolbar';
-import {SignInCommand} from '../../../domain/model/sign-in.command';
+import { SignInCommand } from '../../../domain/model/sign-in.command';
 
-/**
- * Component for user sign-in functionality.
- * Provides a form for users to authenticate with username and password.
- */
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    Toolbar
-  ],
+  imports: [ReactiveFormsModule, Toolbar, TranslatePipe],
   templateUrl: './sign-in-form.html',
-  styleUrls: ['./sign-in-form.css']
+  styleUrls: ['./sign-in-form.css'],
 })
 export class SignInForm {
   protected store = inject(IamStore);
   private router = inject(Router);
 
   form = new FormGroup({
-    username: new FormControl<string>('', {nonNullable: true, validators: [Validators.required, Validators.minLength(3)]}),
-    password: new FormControl<string>('', {nonNullable: true, validators: [Validators.required, Validators.minLength(6)]})
+    username: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(3)],
+    }),
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(6)],
+    }),
   });
   hidePassword = true;
 
-  /**
-   * Login real: descomenta `store.signIn(...)` y quita el stub.
-   * En no producción, si el formulario es válido, actualiza `localStorage` y rehidrata el store
-   * (nombre del formulario; si no pasas por aquí, `IamStore` puede aplicar usuario por defecto en dev).
-   */
   onSubmit(): void {
     if (!this.form.valid) {
       this.markFormGroupTouched(this.form);
@@ -44,65 +37,48 @@ export class SignInForm {
     }
     const signInCommand = new SignInCommand({
       username: this.form.value.username!,
-      password: this.form.value.password!
+      password: this.form.value.password!,
     });
     this.store.signIn(signInCommand, this.router);
   }
 
-  /**
-   * Toggles password visibility.
-   */
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
   }
 
-  /**
-   * Marks all form fields as touched to trigger validation messages.
-   */
   private markFormGroupTouched(formGroup: FormGroup): void {
-    Object.keys(formGroup.controls).forEach(key => {
-      const control = formGroup.get(key);
-      control?.markAsTouched();
+    Object.keys(formGroup.controls).forEach((key) => {
+      formGroup.get(key)?.markAsTouched();
     });
   }
 
-  /**
-   * Gets error message for username field.
-   */
   getUsernameError(): string {
     const control = this.form.get('username');
     if (control?.hasError('required')) {
-      return 'Username is required';
+      return 'iam.signIn.errors.usernameRequired';
     }
     if (control?.hasError('minlength')) {
-      return 'Username must be at least 3 characters';
+      return 'iam.signIn.errors.usernameMinLength';
     }
     return '';
   }
 
-  /**
-   * Gets error message for password field.
-   */
   getPasswordError(): string {
     const control = this.form.get('password');
     if (control?.hasError('required')) {
-      return 'Password is required';
+      return 'iam.signIn.errors.passwordRequired';
     }
     if (control?.hasError('minlength')) {
-      return 'Password must be at least 6 characters';
+      return 'iam.signIn.errors.passwordMinLength';
     }
     return '';
   }
 
   performSignUpUser(): void {
-    void this.router.navigate(iamNav.signUp(), {
-      queryParams: { role: 'user' }
-    });
+    void this.router.navigate(iamNav.signUp(), { queryParams: { role: 'user' } });
   }
 
   performSignUpAdmin(): void {
-    void this.router.navigate(iamNav.signUp(), {
-      queryParams: { role: 'admin' }
-    });
+    void this.router.navigate(iamNav.signUp(), { queryParams: { role: 'admin' } });
   }
 }

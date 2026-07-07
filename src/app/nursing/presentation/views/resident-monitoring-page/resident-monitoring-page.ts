@@ -1,6 +1,7 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
+import { NgClass, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { nursingNav } from '../../nursing-routes';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,15 +36,18 @@ const PAGE_SIZE = 4;
     MatDividerModule,
     MatProgressSpinnerModule,
     NgClass,
+    CommonModule,
+    TranslatePipe,
   ],
   templateUrl: './resident-monitoring-page.html',
   styleUrl: './resident-monitoring-page.css'
 })
 export class ResidentMonitoringPage {
 
-  private readonly nursingStore  = inject(NursingStore);
+  private readonly nursingStore = inject(NursingStore);
   private readonly profilesStore = inject(ProfilesStore);
-  private readonly router        = inject(Router);
+  private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
 
   readonly displayedColumns = [
     'fullName', 'room', 'status',
@@ -78,7 +82,7 @@ export class ResidentMonitoringPage {
       return {
         residentId: resident.id,
         // Usamos firstName y lastName como solicitaste
-        fullName:   profile ? `${profile.fullName}` : 'Loading...',
+        fullName: profile ? `${profile.fullName}` : this.translate.instant('monitoring.loadingName'),
         roomNumber: room?.roomNumber  ?? null,
         status:     null,
         heartRate:  null,

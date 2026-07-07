@@ -1,93 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { paymentsNav } from '../../payments-routes';
 
 @Component({
   selector: 'payment-checkout',
   templateUrl: './payment-checkout.html',
-  styleUrls: ['./payment-checkout.css'], // <-- ¡Aquí está la línea agregada para enlazar tu CSS!
+  styleUrls: ['./payment-checkout.css'],
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgIf,
-    CurrencyPipe
-  ]
+  imports: [ReactiveFormsModule, CurrencyPipe, TranslatePipe],
 })
 export class PaymentCheckoutPage {
-  /** Values passed from route */
-  planPrice: number = 0;
-  planTitle: string = 'Selected Plan';
-  period: string = 'monthly';
+  planPrice = 0;
+  planTitleKey = 'payments.checkout.planGeneric';
+  periodKey = 'payments.checkout.monthly';
 
   stripeForm: FormGroup;
   isLoading = false;
   error: string | null = null;
 
+  private readonly translate = inject(TranslateService);
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router // <-- Inyectamos el Router aquí
+    private router: Router,
   ) {
-
-    // Build form
     this.stripeForm = this.fb.group({
       fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]], // <-- Validación de email añadida
+      email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       cardNumber: ['', Validators.required],
       expMonth: ['', Validators.required],
       expYear: ['', Validators.required],
-      cvc: ['', Validators.required]
+      cvc: ['', Validators.required],
     });
 
-    // Get URL params dynamically
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       const type = p['type'];
-      this.period = p['cycle'] || 'monthly'; // Valor por defecto
+      this.periodKey = p['cycle'] === 'annual' ? 'payments.checkout.annual' : 'payments.checkout.monthly';
 
-      // Plan title
-      this.planTitle =
-        type === 'family'
-          ? 'Family Plan'
-          : type === 'nursing-home'
-            ? 'Nursing Home Plan'
-            : 'Subscription';
-
-      this.planPrice = this.getPrice(this.planTitle, this.period);
+      if (type === 'family') {
+        this.planTitleKey = 'payments.checkout.planFamily';
+        this.planPrice = p['cycle'] === 'annual' ? 300 : 30;
+      } else if (type === 'nursing-home') {
+        this.planTitleKey = 'payments.checkout.planNursing';
+        this.planPrice = p['cycle'] === 'annual' ? 3000 : 300;
+      } else {
+        this.planTitleKey = 'payments.checkout.planGeneric';
+        this.planPrice = 0;
+      }
     });
   }
 
-  /** Pricing logic */
-  getPrice(plan: string, period: string): number {
-    if (plan === 'Family Plan') {
-      return period === 'monthly' ? 30 : 300;
-    }
-    if (plan === 'Nursing Home Plan') {
-      return period === 'monthly' ? 300 : 3000;
-    }
-    return 0;
-  }
-
-  /** Cancel button */
   cancel() {
-    // Usar el Router en lugar de history.back() es mejor práctica en Angular (SPA)
     void this.router.navigate(paymentsNav.choose());
   }
 
-  /** Simulate payment */
   submitPayment() {
     if (this.stripeForm.invalid) {
-      this.error = 'Please fill out all required fields correctly.';
+      this.error = 'payments.checkout.validationError';
       return;
     }
 
     this.error = null;
     this.isLoading = true;
 
-    // Simula un pequeño retraso de red (1.5s) y luego navega a confirmación
     setTimeout(() => {
       this.isLoading = false;
       void this.router.navigate(['/payments/confirmed']);

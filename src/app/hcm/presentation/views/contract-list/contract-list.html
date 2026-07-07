@@ -2,7 +2,7 @@
     <div class="list-container">
       <!-- Error State -->
       @if (store.error()) {
-        <mat-error class="error-message">{{ store.error() }}</mat-error>
+        <mat-error class="error-message">{{ store.error() | translate }}</mat-error>
       }
 
       <!-- Table Container -->
