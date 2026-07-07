@@ -76,7 +76,7 @@ export class MainLayout implements OnInit, AfterViewInit {
       { label: 'nav.activities', icon: 'event_note',           link: `/activities${activitiesPaths.list}`,       color: '#5FC2BA', visible: isAdmin },
       { label: 'nav.alerts',     icon: 'notifications_active', link: `/alerts${alertsPaths.list}`,               color: '#5FC2BA', visible: true },
       { label: 'nav.relatives',  icon: 'people',               link: `/nursing/${nursingPaths.relatives}`,       color: '#5FC2BA', visible: isAdmin },
-      { label: 'my-patients',    icon: 'favorite',             link: `/nursing/${nursingPaths.myPatients}`,      color: '#5FC2BA', visible: !isAdmin },
+      { label: 'my-patients',    icon: 'favorite',             link: `/nursing/${nursingPaths.myPatients}`,      color: '#5FC2BA', visible: false },
       { label: 'nav.payments', icon: 'credit_card', link: '/payments/choose', color: '#5FC2BA', visible: true },
     ].filter(option => option.visible);
   });
