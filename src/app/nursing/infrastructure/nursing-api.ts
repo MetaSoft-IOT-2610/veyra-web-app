@@ -18,7 +18,7 @@ import { CreateMedicationCommandsApiEndpoint } from './create-medication-command
 import { CreateMedicationCommand } from '../domain/model/create-medication.command';
 import { AssignRoomCommandsApiEndpoint } from './assign-room-commands-api-endpoint';
 import { AssignRoomCommand } from '../domain/model/assign-room.command';
-import { CreateNursingHomeCommandsApiEndpoint } from './create-nursing-home-commands-api-endpoint';
+import { AdministratorByUserResponse, CreateNursingHomeCommandsApiEndpoint } from './create-nursing-home-commands-api-endpoint';
 import { CreateNursingHomeCommand } from '../domain/model/create-nursing-home.command';
 import { AllergiesApiEndpoint } from './allergies-api-endpoint';
 import { CreateAllergyCommandsApiEndpoint } from './create-allergy-commands-api-endpoint';
@@ -96,6 +96,10 @@ export class NursingApi extends BaseApi {
 
   createNursingHome(administratorId: number, createNursingHomeCommand: CreateNursingHomeCommand): Observable<NursingHome> {
     return this._createNursingHomeCommandsApiEndpoint.create(administratorId, createNursingHomeCommand);
+  }
+
+  getAdministratorByUserId(userId: number): Observable<AdministratorByUserResponse> {
+    return this._createNursingHomeCommandsApiEndpoint.getAdministratorByUserId(userId);
   }
 
   getNursingHome(administratorId: number): Observable<any> {

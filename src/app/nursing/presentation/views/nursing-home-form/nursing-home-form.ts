@@ -35,26 +35,36 @@ export class NursingHomeForm {
   protected store = inject(NursingStore);
   private router = inject(Router);
   private fb = inject(FormBuilder);
-  adminId: number = Number(localStorage.getItem('userId'));
+  adminId: number = 0;
   showForm: boolean = false;
 
   constructor() {
-    const adminId = Number(localStorage.getItem('userId'));
+    const userId = Number(localStorage.getItem('userId'));
 
-    if (!adminId) {
+    if (!userId) {
       void this.router.navigate(iamNav.signIn());
       return;
     }
 
-    this.store['nursingApi'].getNursingHome(adminId).pipe(retry(2)).subscribe({
-      next: nursingHome => {
-        this.store['_nursingHomesSignal'].set(nursingHome);
-        localStorage.setItem('nursingHomeId', nursingHome.id.toString());
-        void this.router.navigate(analyticsNav.dashboard());
+    this.store['nursingApi'].getAdministratorByUserId(userId).pipe(retry(2)).subscribe({
+      next: administrator => {
+        this.adminId = administrator.id;
+        localStorage.setItem('administratorId', administrator.id.toString());
+
+        this.store['nursingApi'].getNursingHome(administrator.id).pipe(retry(2)).subscribe({
+          next: nursingHome => {
+            this.store['_nursingHomesSignal'].set(nursingHome);
+            localStorage.setItem('nursingHomeId', nursingHome.id.toString());
+            void this.router.navigate(analyticsNav.dashboard());
+          },
+          error: () => {
+            this.showForm = true;
+            this.store['_errorSignal'].set('No nursing home found');
+          }
+        });
       },
-      error: err => {
-        this.showForm = true;
-        this.store['_errorSignal'].set('No nursing home found');
+      error: () => {
+        this.store['_errorSignal'].set('Administrator not found');
       }
     });
   }
@@ -76,6 +86,10 @@ export class NursingHomeForm {
   });
 
   submit() {
+    if (!this.adminId) {
+      alert("Administrador no encontrado");
+      return;
+    }
     if (this.form.invalid) {
       alert("Datos incompletos");
       this.form.markAllAsTouched();

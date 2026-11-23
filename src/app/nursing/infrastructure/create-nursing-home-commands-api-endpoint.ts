@@ -7,7 +7,13 @@ import { NursingHome } from '../domain/model/nursing-home.entity';
 import { CreateNursingHomeCommand } from '../domain/model/create-nursing-home.command';
 import { NursingHomeAssembler } from './nursing-home-assembler';
 
-const administratorNursingHomesEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderAdministratorNursingHomesEndpointPath}`
+const administratorNursingHomesEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderAdministratorNursingHomesEndpointPath}`;
+const administratorsEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderAdministratorsEndpointPath}`;
+
+export interface AdministratorByUserResponse {
+  id: number;
+  userId: number;
+}
 
 export class CreateNursingHomeCommandsApiEndpoint extends ErrorHandlingEnabledBaseType {
   private readonly createNursingHomeCommandAssembler = new CreateNursingHomeCommandAssembler();
@@ -38,6 +44,14 @@ export class CreateNursingHomeCommandsApiEndpoint extends ErrorHandlingEnabledBa
     return this.http.post<NursingHome>(url, formData).pipe(
       map(createdNursingHome => this.nursingHomeAssembler.toEntityFromResource(createdNursingHome)),
       catchError(this.handleError('Failed to create nursing home'))
+    );
+  }
+
+  /** GET: /api/v1/administrators/{userId} */
+  getAdministratorByUserId(userId: number): Observable<AdministratorByUserResponse> {
+    const url = `${administratorsEndpointUrl}/${userId}`;
+    return this.http.get<AdministratorByUserResponse>(url).pipe(
+      catchError(this.handleError(`Failed to fetch administrator for user with id ${userId}`))
     );
   }
 
