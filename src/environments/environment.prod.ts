@@ -9,7 +9,7 @@ export const environment = {
   showIamToolbar: true,
   fallbackDevUserSession: false,
   devFallbackCredentials: null as { username: string; password: string } | null,
-  platformProviderApiBaseUrl: 'https://veyra-backend.redwave-e7e23e62.canadacentral.azurecontainerapps.io/api/v1',
+  platformProviderApiBaseUrl: 'https://veyra-ac.kindmeadow-77bacb3b.canadacentral.azurecontainerapps.io/api/v1',
   platformProviderWsUrl: 'ws://localhost:8080/ws',
   // Analytics Bounded Context
   platformProviderAnalyticsStaffTerminationsEndpointPath: '/nursing-homes/{nursingHomeId}/staff-terminations',
